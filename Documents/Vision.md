@@ -4,4 +4,4 @@ Refrigerator Manager is a food inventory and grocery list manager for Android de
  
 Refrigerator Manager will have features that focus on assisting people in managing their inventory easily. The application will help users in managing their expenses, save time for users in making grocery lists automatically instead of writing down from scratch. The application will also be able to assist the users in tracking calories for health management. Users will also be able to use the application as a virtual cookbook, enabling them to write, copy, and share recipes to other users.
  
-Refrigerator Manager targets users who frequent the kitchen and make food on a regular basis. It is not focused on satisfying the needs of commercial establishments however, small scale restaurants may find benefit in using the application.
+Refrigerator Manager targets users who frequent the kitchen and make food on a regular basis. It is not focused on satisfying the needs of commercial establishments however, small scale restaurants may find benefit in using the application...
