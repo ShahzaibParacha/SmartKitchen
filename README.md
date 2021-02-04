@@ -1,4 +1,4 @@
-# Refrigator Tracker Group 10
+# SmartKitchen Group 10
 
 # SmartKitchen Vision Statement
 
