@@ -31,7 +31,7 @@ public class GroceryListActivity extends AppCompatActivity {
         btnToCurrentInventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GroceryListActivity.this, MainActivity.class);
+                Intent intent = new Intent(GroceryListActivity.this, CurrentInventoryActivity.class);
                 startActivity(intent);
             }
         });
