@@ -64,9 +64,9 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            parent = itemView.findViewById(R.id.parent);
-            name = itemView.findViewById(R.id.txtName);
-            quantity = itemView.findViewById(R.id.txtQuantity);
+            parent = itemView.findViewById(R.id.invItemCardView);
+            name = itemView.findViewById(R.id.txtInvItemName);
+            quantity = itemView.findViewById(R.id.txtInvQuantity);
         }
 
 

@@ -28,7 +28,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //Passes in the list item card view as the item to be placed in the list
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.grocery_list_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -62,9 +62,9 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            parent = itemView.findViewById(R.id.parent);
-            name = itemView.findViewById(R.id.txtName);
-            quantityToBuy = itemView.findViewById(R.id.txtQuantity);
+            parent = itemView.findViewById(R.id.groceryCardView);
+            name = itemView.findViewById(R.id.txtGroceryItemName);
+            quantityToBuy = itemView.findViewById(R.id.txtQuantityToBuy);
         }
     }
 }
