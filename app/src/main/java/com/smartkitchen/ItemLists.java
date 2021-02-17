@@ -31,7 +31,4 @@ public class ItemLists {
         return groceryList;
     }
 
-    public Object testing() {
-        return null;
-    }
 }
