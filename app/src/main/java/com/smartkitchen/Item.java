@@ -6,12 +6,14 @@ public class Item {
     private String name;
     private int quantity;
     private String units;
+    private int quantityToBuy;
 
     //Constructor
-    public Item(String name, int quantity, String units) {
+    public Item(String name, int quantity, String units, int quantityToBuy) {
         this.name = name;
         this.quantity = quantity;
         this.units = units;
+        this.quantityToBuy = quantityToBuy;
     }
 
     //Getters and Setters
@@ -43,4 +45,14 @@ public class Item {
     public void setUnits(String units) {
         this.units = units;
     }
+
+    public int getQuantityToBuy(){
+        return quantityToBuy;
+    }
+
+    public void setQuantityToBuy(int quantityToBuy){
+        this.quantityToBuy = quantityToBuy;
+    }
+
+    public String getQuantityToBuyString(){return "" + quantityToBuy + " " + units;}
 }
