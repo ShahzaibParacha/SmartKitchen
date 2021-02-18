@@ -1,9 +1,11 @@
 package com.smartkitchen;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import static com.smartkitchen.EditInventoryItemActivity.POSITION_KEY;
 
 public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListRecViewAdapter.ViewHolder> {
 
@@ -37,6 +41,15 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.name.setText(items.get(position).getName());
         holder.quantityToBuy.setText(items.get(position).getQuantityToBuyString());
+
+        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, EditGroceryListItemActivity.class);
+                intent.putExtra(POSITION_KEY, position);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -57,6 +70,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
         private CardView parent;
         private TextView name;
         private TextView quantityToBuy;
+        private Button btnEdit;
 
         //Finds and assigns the information
         public ViewHolder(@NonNull View itemView) {
@@ -65,6 +79,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
             parent = itemView.findViewById(R.id.groceryCardView);
             name = itemView.findViewById(R.id.txtGroceryItemName);
             quantityToBuy = itemView.findViewById(R.id.txtQuantityToBuy);
+            btnEdit = itemView.findViewById(R.id.btnEditGroceryItem);
         }
     }
 }
