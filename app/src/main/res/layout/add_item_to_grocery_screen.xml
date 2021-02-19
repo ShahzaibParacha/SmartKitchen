@@ -7,20 +7,20 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/additemscreentitle"
+        android:id="@+id/additemtogroceryscreentitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:text="Add New Item to Inventory"
+        android:text="Add New Item to Grocery List"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/additemtoinventorybutton"
+        android:id="@+id/additemtogrocerybutton"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -41,19 +41,19 @@
         android:text="Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/additemscreentitle" />
+        app:layout_constraintTop_toBottomOf="@+id/additemtogroceryscreentitle" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/inputinventoryitemname"
-        android:layout_width="0dp"
+        android:id="@+id/inputgroceryitemname"
+        android:layout_width="248dp"
         android:layout_height="40dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/additemscreentitle" />
+        app:layout_constraintTop_toBottomOf="@+id/additemtogroceryscreentitle" />
 
     <TextView
         android:id="@+id/textView2"
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/inputinventoryitemamount"
+        android:id="@+id/inputgroceryitemamount"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -76,8 +76,9 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/inputinventoryitemname" />
+        app:layout_constraintTop_toBottomOf="@+id/inputgroceryitemname" />
 
     <TextView
         android:id="@+id/textView3"
@@ -91,7 +92,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
-        android:id="@+id/inputinventoryitemquantity"
+        android:id="@+id/inputgroceryitemquantity"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="80dp"
@@ -101,10 +102,10 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/inputinventoryitemamount" />
+        app:layout_constraintTop_toBottomOf="@+id/inputgroceryitemamount" />
 
     <Button
-        android:id="@+id/additembacktoinventorybutton"
+        android:id="@+id/additembacktogrocerybutton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
