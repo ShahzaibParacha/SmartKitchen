@@ -42,6 +42,15 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
         holder.name.setText(items.get(position).getName());
         holder.quantityToBuy.setText(items.get(position).getQuantityToBuyString());
 
+        holder.btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Item item = ItemLists.getInstance().getGroceryList().get(position);
+                ItemLists.getInstance().removeFromGrocery(item);
+                notifyItemRemoved(position);
+            }
+        });
+
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +79,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
         private CardView parent;
         private TextView name;
         private TextView quantityToBuy;
-        private Button btnEdit;
+        private Button btnEdit, btnRemove;
 
         //Finds and assigns the information
         public ViewHolder(@NonNull View itemView) {
@@ -80,6 +89,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
             name = itemView.findViewById(R.id.txtGroceryItemName);
             quantityToBuy = itemView.findViewById(R.id.txtQuantityToBuy);
             btnEdit = itemView.findViewById(R.id.btnEditGroceryItem);
+            btnRemove = itemView.findViewById(R.id.btnRemoveGroceryItem);
         }
     }
 }
