@@ -1,9 +1,7 @@
 package com.smartkitchen.tests;
 
 import org.junit.Test;
-
 import com.smartkitchen.Item;
-
 import static org.junit.Assert.*;
 
 public class ItemTest{
@@ -72,14 +70,13 @@ public class ItemTest{
         //Assert
         assert(testItem.thresholdStatus());
 
-        //Act
+        //Act 2 -- update the quantity so it triggers false in the thresholdStatus method
         testItem.updateQuantity(50);
 
         //Assert
         assertFalse(testItem.thresholdStatus());
 
         System.out.println("Finished testThresholdStatus.");
-
     }
 }
 
