@@ -15,13 +15,13 @@ public class ItemLists {
     }
 
     private void initData(){
-        inventoryList.add(new Item("Milk", 4, "L", 0));
-        inventoryList.add(new Item("Sugar", 100, "g", 0));
-        inventoryList.add(new Item("Pizza", 10, "Boxes", 0));
+        inventoryList.add(new Item("Milk", 4, "L", 0, 2));
+        inventoryList.add(new Item("Sugar", 100, "g", 0, 2));
+        inventoryList.add(new Item("Pizza", 10, "Boxes", 0, 2));
 
-        groceryList.add(new Item("Milk", 4, "L", 8));
-        groceryList.add(new Item("Sugar", 100, "g", 200));
-        groceryList.add(new Item("Pizza", 10, "Boxes", 5));
+        groceryList.add(new Item("Milk", 4, "L", 8, 2));
+        groceryList.add(new Item("Sugar", 100, "g", 200, 2));
+        groceryList.add(new Item("Pizza", 10, "Boxes", 5, 2));
     }
 
     public static ItemLists getInstance(){
