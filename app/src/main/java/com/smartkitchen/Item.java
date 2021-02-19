@@ -32,7 +32,9 @@ public class Item {
         return quantity;
     }
 
-    public int getInitQuantity() { return initQuantity; }
+    public void setQuantity(int quantity){
+        this.quantity = quantity;
+    }
 
     //Returns a string of the quantity and units
     public String getQuantityString(){
@@ -56,6 +58,9 @@ public class Item {
     }
 
     public String getQuantityToBuyString(){return "" + quantityToBuy + " " + units;}
+
+    public int getInitQuantity() { return initQuantity; }
+
     public void setInitQuantity(int quantity) { this.initQuantity = quantity; }
 
     public void updateQuantity(int quantity) { this.quantity = quantity; }
