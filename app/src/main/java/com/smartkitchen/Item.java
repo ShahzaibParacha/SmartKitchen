@@ -32,6 +32,10 @@ public class Item {
         return quantity;
     }
 
+    public void setQuantity(int quantity){
+        this.quantity = quantity;
+    }
+
     //Returns a string of the quantity and units
     public String getQuantityString(){
         return "" + quantity + " " + units;
