@@ -1,6 +1,7 @@
 package com.smartkitchen;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,6 +39,8 @@ public class EditInventoryItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateData(item);
+                if (item.thresholdStatus())
+                    ItemLists.getInstance().addToGrocery(item);
                 Intent intent = new Intent(EditInventoryItemActivity.this, CurrentInventoryActivity.class);
                 startActivity(intent);
             }
