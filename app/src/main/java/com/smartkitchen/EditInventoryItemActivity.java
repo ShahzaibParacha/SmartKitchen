@@ -45,6 +45,7 @@ public class EditInventoryItemActivity extends AppCompatActivity {
                     if (item.getName().equals(groceryItem.getName()))
                         groceryItem.setQuantityToBuy(item.getQuantity());
                     else {
+                        item.setQuantityToBuy(item.getQuantity());
                         ItemLists.getInstance().addToGrocery(item);
                     }
                 }
