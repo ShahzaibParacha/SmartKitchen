@@ -7,7 +7,7 @@ import com.smartkitchen.ItemLists;
 import static org.junit.Assert.*;
 
 
-
+//NOTE: Right now, the get values are 3 because of considering the 3 items that are added to the lists in the initializer of the ItemLists (i.e. in initData()).
 public class ItemListsTest{
 
 //
@@ -16,7 +16,7 @@ public class ItemListsTest{
         System.out.println("\nStarting ItemLists Constructor test.");
 
         //Act
-        ItemLists testList = new ItemLists();
+        ItemLists testList = ItemLists.getInstance();
 
         //Assert
         assertNotNull(testList);
@@ -29,12 +29,12 @@ public class ItemListsTest{
         System.out.println("\nStarting addToInventoryTest.");
 
         //Act
-        ItemLists testList = new ItemLists();
-        Item testItem = new Item("sampleItem", 1, "sampleUnit");
+        ItemLists testList = ItemLists.getInstance();
+        Item testItem = new Item("sampleItem", 1, "sampleUnit", 1);
         testList.addToInventory(testItem);
 
         //Assert
-        assertEquals(testList.getInventoryList().get(0), testItem);
+        assertEquals(testList.getInventoryList().get(3), testItem);
 
         System.out.println("Finished addToInventoryTest.");
     }
@@ -44,14 +44,13 @@ public class ItemListsTest{
         System.out.println("\nStarting removeFromInventoryTest.");
 
         //Act
-        ItemLists testList = new ItemLists();
-        Item testItem = new Item("sampleItem", 1, "sampleUnit");
+        ItemLists testList = ItemLists.getInstance();
+        Item testItem = new Item("sampleItem", 1, "sampleUnit", 1);
         testList.addToInventory(testItem);
 
         //Assert
-        assertEquals(testList.getInventoryList().get(0), testItem);
+        assertEquals(testList.getInventoryList().get(3), testItem);
         assertEquals(testList.removeFromInventory(testItem), testItem);
-        assertTrue(testList.getInventoryList().isEmpty());
 
         System.out.println("Finished removeFromInventoryTest.");
     }
@@ -61,12 +60,12 @@ public class ItemListsTest{
         System.out.println("\nStarting addToGroceryTest.");
 
         //Act
-        ItemLists testList = new ItemLists();
-        Item testItem = new Item("sampleItem", 1, "sampleUnit");
+        ItemLists testList = ItemLists.getInstance();
+        Item testItem = new Item("sampleItem", 1, "sampleUnit", 1);
         testList.addToGrocery(testItem);
 
         //Assert
-        assertEquals(testList.getGroceryList().get(0), testItem);
+        assertEquals(testList.getGroceryList().get(3), testItem);
         testList.removeFromGrocery(testItem);
 
         System.out.println("Finished addToInventoryTest.");
@@ -77,14 +76,13 @@ public class ItemListsTest{
         System.out.println("\nStarting removeFromGroceryTest.");
 
         //Act
-        ItemLists testList = new ItemLists();
-        Item testItem = new Item("sampleItem", 1, "sampleUnit");
+        ItemLists testList = ItemLists.getInstance();
+        Item testItem = new Item("sampleItem", 1, "sampleUnit", 1);
         testList.addToGrocery(testItem);
 
         //Assert
-        assertEquals(testList.getGroceryList().get(0), testItem);
+        assertEquals(testList.getGroceryList().get(3), testItem);
         assertEquals(testList.removeFromGrocery(testItem), testItem);
-        assertTrue(testList.getGroceryList().isEmpty());
 
         System.out.println("Finished removeFromGroceryTest.");
     }
