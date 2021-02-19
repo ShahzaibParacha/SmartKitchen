@@ -59,6 +59,10 @@ public class Item {
 
     public String getQuantityToBuyString(){return "" + quantityToBuy + " " + units;}
 
+    public int getInitQuantity() { return initQuantity; }
+
+    public void setInitQuantity(int quantity) { this.initQuantity = quantity; }
+
     public int getThresholdQuantity() { return thresholdQuantity; }
 
     public void setThresholdQuantityQuantity(int thresholdQuantity) { this.thresholdQuantity = thresholdQuantity; }

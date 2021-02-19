@@ -11,3 +11,7 @@ Users who are keeping track of their diet will also see use in the application. 
 SmartKitchen targets users who frequent the kitchen and make food on a regular basis. It is not focused on satisfying the needs of huge commercial establishments such as big restaurants. However, small scale restaurants may find benefit in using the application as it can assist them in keeping track of their inventory. For regular users, the application will be useful because it will provide an easier way to manage their pantry and save time when planning what to cook for the day or the week. SmartKitchen will be the centralized hub for any productive kitchen.
  
 The main success criteria that we are looking at is the number of users that are accessing the app. Another measure of success is the number of total recipes that are being added to the app. This measure can give us an indication of the current state of the app’s progression. The number of times recipes are used and the total number of items that were added or removed from the pantry is another measure, as it lets us know that the users are using the app's features frequently. 
+
+### Branching Startegy
+
+Branches are created and implemented following a feature named after one of our user stories for each iteration. Wording may be minimized for ease of use but the essence should remain the same.
