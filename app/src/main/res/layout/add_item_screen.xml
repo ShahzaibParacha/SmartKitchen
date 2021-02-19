@@ -12,6 +12,7 @@
         android:layout_margin="20dp"
         android:text="Add New Item to Inventory"
         android:textSize="32dp"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -141,6 +142,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:hint="Default value is 0"
+        android:inputType="number"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/txtThreshold"
         app:layout_constraintEnd_toEndOf="parent"

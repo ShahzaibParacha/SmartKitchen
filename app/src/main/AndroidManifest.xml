@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartKitchen">
         <activity android:name=".AddInventoryItemActivity"/>
+        <activity android:name=".AddGroceryItemActivity"/>
         <activity android:name=".EditGroceryListItemActivity"/>
         <activity android:name=".EditInventoryItemActivity" />
         <activity android:name=".CurrentInventoryActivity" />
