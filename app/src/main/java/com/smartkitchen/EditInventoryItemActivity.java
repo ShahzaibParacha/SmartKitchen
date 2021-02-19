@@ -40,6 +40,7 @@ public class EditInventoryItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 updateData(item);
                 // get the grocery item and check if current item is already in grocery list
+                //TODO: I don't think this will work, should iterate through the grocery list; make search function in ItemLists
                 Item groceryItem = ItemLists.getInstance().getGroceryList().get(itemPosition);
                 if (item.thresholdStatus()) {   // check threshold
                     if (item.getName().equals(groceryItem.getName()))
