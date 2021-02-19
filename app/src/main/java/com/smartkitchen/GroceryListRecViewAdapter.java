@@ -12,20 +12,18 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import static com.smartkitchen.EditInventoryItemActivity.POSITION_KEY;
 
-public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.ViewHolder> {
+public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListRecViewAdapter.ViewHolder> {
 
     //List to be displayed
     private ArrayList<Item> items = new ArrayList<>();
     private Context mContext;
 
     //Constructor
-    public ItemRecViewAdapter(Context mContext){
+    public GroceryListRecViewAdapter(Context mContext){
         this.mContext = mContext;
     }
 
@@ -34,7 +32,7 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //Passes in the list item card view as the item to be placed in the list
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.grocery_list_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -42,12 +40,12 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.name.setText(items.get(position).getName());
-        holder.quantity.setText(items.get(position).getQuantityString());
+        holder.quantityToBuy.setText(items.get(position).getQuantityToBuyString());
 
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, EditInventoryItemActivity.class);
+                Intent intent = new Intent(mContext, EditGroceryListItemActivity.class);
                 intent.putExtra(POSITION_KEY, position);
                 mContext.startActivity(intent);
             }
@@ -71,19 +69,17 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
         //Basic fields
         private CardView parent;
         private TextView name;
-        private TextView quantity;
+        private TextView quantityToBuy;
         private Button btnEdit;
 
         //Finds and assigns the information
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            parent = itemView.findViewById(R.id.invItemCardView);
-            name = itemView.findViewById(R.id.txtInvItemName);
-            quantity = itemView.findViewById(R.id.txtInvQuantity);
-            btnEdit = itemView.findViewById(R.id.btnEditInvItem);
+            parent = itemView.findViewById(R.id.groceryCardView);
+            name = itemView.findViewById(R.id.txtGroceryItemName);
+            quantityToBuy = itemView.findViewById(R.id.txtQuantityToBuy);
+            btnEdit = itemView.findViewById(R.id.btnEditGroceryItem);
         }
-
-
     }
 }

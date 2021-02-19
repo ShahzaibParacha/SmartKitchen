@@ -6,7 +6,7 @@
     android:layout_margin="5dp"
     app:cardCornerRadius="7dp"
     app:cardElevation="7dp"
-    android:id="@+id/invItemCardView">
+    android:id="@+id/groceryCardView">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
 
 
         <TextView
-            android:id="@+id/txtInvItemName"
+            android:id="@+id/txtGroceryItemName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Item Name"
@@ -23,7 +23,7 @@
             android:layout_margin="5dp"/>
 
         <TextView
-            android:id="@+id/txtInvQuantity"
+            android:id="@+id/txtQuantityToBuy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quantity"
@@ -32,7 +32,7 @@
             android:layout_margin="5dp"/>
 
         <Button
-            android:id="@+id/btnEditInvItem"
+            android:id="@+id/btnEditGroceryItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit"

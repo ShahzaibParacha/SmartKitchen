@@ -7,14 +7,16 @@ public class Item {
     private String name;
     private int quantity;               // updates current quantity
     private String units;
+    private int quantityToBuy;
     private int initQuantity;           // initializes to store initial quantity
 
     //Constructor
-    public Item(String name, int quantity, String units) {
+    public Item(String name, int quantity, String units, int quantityToBuy) {
         this.name = name;
         this.initQuantity = quantity;
         this.quantity = quantity;
         this.units = units;
+        this.quantityToBuy = quantityToBuy;
     }
 
     //Getters and Setters
@@ -45,6 +47,15 @@ public class Item {
         this.units = units;
     }
 
+    public int getQuantityToBuy(){
+        return quantityToBuy;
+    }
+
+    public void setQuantityToBuy(int quantityToBuy){
+        this.quantityToBuy = quantityToBuy;
+    }
+
+    public String getQuantityToBuyString(){return "" + quantityToBuy + " " + units;}
     public void setInitQuantity(int quantity) { this.initQuantity = quantity; }
 
     public void updateQuantity(int quantity) { this.quantity = quantity; }

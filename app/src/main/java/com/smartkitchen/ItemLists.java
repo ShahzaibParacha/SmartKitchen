@@ -2,8 +2,34 @@ package com.smartkitchen;
 import java.util.ArrayList;
 
 public class ItemLists {
-    public static ArrayList<Item> inventoryList = new ArrayList<Item>();
-    public static ArrayList<Item> groceryList = new ArrayList<Item>();
+
+    private static ItemLists instance;
+
+    private static ArrayList<Item> inventoryList;
+    private static ArrayList<Item> groceryList;
+
+    private ItemLists(){
+        inventoryList = new ArrayList<>();
+        groceryList = new ArrayList<>();
+        initData();
+    }
+
+    private void initData(){
+        inventoryList.add(new Item("Milk", 4, "L", 0));
+        inventoryList.add(new Item("Sugar", 100, "g", 0));
+        inventoryList.add(new Item("Pizza", 10, "Boxes", 0));
+
+        groceryList.add(new Item("Milk", 4, "L", 8));
+        groceryList.add(new Item("Sugar", 100, "g", 200));
+        groceryList.add(new Item("Pizza", 10, "Boxes", 5));
+    }
+
+    public static ItemLists getInstance(){
+        if (instance == null) {
+            instance = new ItemLists();
+        }
+        return instance;
+    }
 
     public void addToInventory(Item item) {
         inventoryList.add(item);
