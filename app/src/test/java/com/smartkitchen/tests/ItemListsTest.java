@@ -28,7 +28,7 @@ public class ItemListsTest{
 
         //Act
         ItemLists testList = ItemLists.getInstance();
-        Item testItem = new Item("sampleItem", 1, "sampleUnit", 1);
+        Item testItem = new Item("sampleItem", 1, "sampleUnit", 1, 1);
         testList.addToInventory(testItem);
 
         //Assert
@@ -43,7 +43,7 @@ public class ItemListsTest{
 
         //Act
         ItemLists testList = ItemLists.getInstance();
-        Item testItem = new Item("sampleItem", 1, "sampleUnit", 1);
+        Item testItem = new Item("sampleItem", 1, "sampleUnit", 1, 1);
         testList.addToInventory(testItem);
 
         //Assert
@@ -59,7 +59,7 @@ public class ItemListsTest{
 
         //Act
         ItemLists testList = ItemLists.getInstance();
-        Item testItem = new Item("sampleItem", 1, "sampleUnit", 1);
+        Item testItem = new Item("sampleItem", 1, "sampleUnit", 1, 1);
         testList.addToGrocery(testItem);
 
         //Assert
@@ -75,7 +75,7 @@ public class ItemListsTest{
 
         //Act
         ItemLists testList = ItemLists.getInstance();
-        Item testItem = new Item("sampleItem", 1, "sampleUnit", 1);
+        Item testItem = new Item("sampleItem", 1, "sampleUnit", 1, 1);
         testList.addToGrocery(testItem);
 
         //Assert
