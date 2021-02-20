@@ -1,22 +1,22 @@
 package com.smartkitchen;
 
 public class Item {
-    private final double THRESHOLD_CONST = 0.2;
+    private final double DEFAULT_THRESHOLD_CONST = 0.2;
 
     //Basic fields
     private String name;
     private int quantity;               // updates current quantity
     private String units;
     private int quantityToBuy;
-    private int initQuantity;           // initializes to store initial quantity
+    private int thresholdQuantity;
 
     //Constructor
-    public Item(String name, int quantity, String units, int quantityToBuy) {
+    public Item(String name, int quantity, String units, int quantityToBuy, int thresholdQuantity) {
         this.name = name;
-        this.initQuantity = quantity;
         this.quantity = quantity;
         this.units = units;
         this.quantityToBuy = quantityToBuy;
+        this.thresholdQuantity = thresholdQuantity;
     }
 
     //Getters and Setters
@@ -63,10 +63,16 @@ public class Item {
 
     public void setInitQuantity(int quantity) { this.initQuantity = quantity; }
 
-    public void updateQuantity(int quantity) { this.quantity = quantity; }
+    public int getThresholdQuantity() { return thresholdQuantity; }
+
+    public void setThresholdQuantityQuantity(int thresholdQuantity) { this.thresholdQuantity = thresholdQuantity; }
+
+    public int calculateDefaultThreshold(){
+        return (int)(quantity*DEFAULT_THRESHOLD_CONST);
+    }
 
     public boolean thresholdStatus() {
-        if (quantity < initQuantity*THRESHOLD_CONST)
+        if (quantity < thresholdQuantity)
             return true;
         return false;
     }
