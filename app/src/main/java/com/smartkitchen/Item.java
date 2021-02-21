@@ -9,7 +9,6 @@ public class Item {
     private String units;
     private int quantityToBuy;
     private int thresholdQuantity;
-    private int initQuantity;
 
     //Constructor
     public Item(String name, int quantity, String units, int quantityToBuy, int thresholdQuantity) {
