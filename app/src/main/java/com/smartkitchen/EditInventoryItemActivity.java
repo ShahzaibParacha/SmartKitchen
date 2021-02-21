@@ -45,9 +45,7 @@ public class EditInventoryItemActivity extends AppCompatActivity {
                     if (groceryItem == null) {
                         item.setQuantityToBuy(item.getThresholdQuantity());
                         ItemLists.getInstance().addToGrocery(item);
-                    } else {
-                        groceryItem.setQuantityToBuy(groceryItem.getQuantityToBuy() + item.getThresholdQuantity());
-                    }
+                    } 
                 }
 
                 Intent intent = new Intent(EditInventoryItemActivity.this, CurrentInventoryActivity.class);
