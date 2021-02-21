@@ -19,7 +19,7 @@ public class ItemLists {
         inventoryList.add(new Item("Sugar", 100, "g", 0, 2));
         inventoryList.add(new Item("Pizza", 10, "Boxes", 0, 2));
 
-        groceryList.add(new Item("Milk", 4, "L", 8, 2));
+        //groceryList.add(new Item("Milk", 4, "L", 8, 2));
         groceryList.add(new Item("Sugar", 100, "g", 200, 2));
         groceryList.add(new Item("Pizza", 10, "Boxes", 5, 2));
     }
@@ -46,6 +46,16 @@ public class ItemLists {
 
     public Item removeFromGrocery(Item item) {
         groceryList.remove(item);
+        return item;
+    }
+
+    public Item getGroceryItemByName(String name){
+        Item item = null;
+        for (Item x:groceryList) {
+            if(x.getName().equals(name)){
+                item = x;
+            }
+        }
         return item;
     }
 
