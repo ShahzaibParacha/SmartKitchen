@@ -63,15 +63,32 @@ public class ItemListsTest{
         testList.addToGrocery(testItem);
 
         //Assert
-        assertEquals(testList.getGroceryList().get(3), testItem);
+        assertEquals(testList.getGroceryList().get(2), testItem);
         testList.removeFromGrocery(testItem);
 
         System.out.println("Finished addToInventoryTest.");
     }
 
     @Test
+    public void getGroceryItemByNameTest(){
+        System.out.println("\nStarting getGroceryItemByNameTest.");
+
+        //Act
+        ItemLists testList = ItemLists.getInstance();
+        Item testItem = new Item("sampleItem", 1, "sampleUnit", 1, 1);
+        testList.addToGrocery(testItem);
+
+        //Assert
+        assertEquals(testList.getGroceryItemByName("sampleItem"), testItem);
+
+
+        System.out.println("Finished getGroceryItemByNameTest.");
+
+    }
+
+    @Test
     public void removeFromGroceryTest(){
-        System.out.println("\nStarting removeFromGroceryTest.");
+        System.out.println("\nStarting getGroceryItemByNameTest.");
 
         //Act
         ItemLists testList = ItemLists.getInstance();
