@@ -19,7 +19,6 @@ public class ItemTest{
         assertEquals(testItem.getQuantity(), 1);
         assertEquals(testItem.getUnits(), "sampleUnit");
         assertEquals(testItem.getQuantityToBuy(), 1);
-        assertEquals(testItem.getInitQuantity(), 0);
         
         System.out.println("Finished testItemConstructor.");
     }
@@ -34,7 +33,7 @@ public class ItemTest{
         testItem.setQuantity(2);
         testItem.setUnits("sampleUnit2");
         testItem.setQuantityToBuy(2);
-        testItem.setThresholdQuantityQuantity(2);
+        testItem.setThresholdQuantity(2);
 
         //Assert
         assertEquals(testItem.getName(), "sample2");
@@ -45,20 +44,6 @@ public class ItemTest{
         assertEquals(testItem.getThresholdQuantity(), 2);
         
         System.out.println("Finished testItemSetters.");
-    }
-
-    @Test
-    public void testItemQuantity(){
-        System.out.println("\nStarting testItemQuantity.");
-
-        //Act
-        Item testItem = new Item("sample", 1, "sampleUnit", 1, 1);
-        testItem.setInitQuantity(2);
-
-        //Assert
-        assertEquals(testItem.getInitQuantity(), 2);
-
-        System.out.println("Finished testItemQuantity.");
     }
 
     @Test
