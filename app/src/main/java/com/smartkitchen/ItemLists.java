@@ -49,6 +49,16 @@ public class ItemLists {
         return item;
     }
 
+    public Item getGroceryItemByName(String name){
+        Item item = null;
+        for (Item x:groceryList) {
+            if(x.getName().equals(name)){
+                item = x;
+            }
+        }
+        return item;
+    }
+
     public ArrayList<Item> getInventoryList() {
         return inventoryList;
     }
