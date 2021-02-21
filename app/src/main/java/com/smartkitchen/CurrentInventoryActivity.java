@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 
 public class CurrentInventoryActivity extends AppCompatActivity {
@@ -17,6 +19,7 @@ public class CurrentInventoryActivity extends AppCompatActivity {
     private RecyclerView itemsRecView;
     private ItemRecViewAdapter adapter;
     private Button toGroceryList;
+    private FloatingActionButton btnAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +30,20 @@ public class CurrentInventoryActivity extends AppCompatActivity {
         adapter = new ItemRecViewAdapter(this);
         itemsRecView = findViewById(R.id.itemRecView);
         toGroceryList = findViewById(R.id.btnToGroceryList);
+        btnAdd = findViewById(R.id.btnGoToAddInvActivity);
 
         toGroceryList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CurrentInventoryActivity.this, GroceryListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CurrentInventoryActivity.this, AddInventoryItemActivity.class);
                 startActivity(intent);
             }
         });

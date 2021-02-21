@@ -44,6 +44,15 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
         holder.name.setText(items.get(position).getName());
         holder.quantity.setText(items.get(position).getQuantityString());
 
+        holder.btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Item item = ItemLists.getInstance().getInventoryList().get(position);
+                ItemLists.getInstance().removeFromInventory(item);
+                notifyItemRemoved(position);
+            }
+        });
+
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +81,7 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
         private CardView parent;
         private TextView name;
         private TextView quantity;
-        private Button btnEdit;
+        private Button btnEdit, btnRemove;
 
         //Finds and assigns the information
         public ViewHolder(@NonNull View itemView) {
@@ -82,6 +91,7 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
             name = itemView.findViewById(R.id.txtInvItemName);
             quantity = itemView.findViewById(R.id.txtInvQuantity);
             btnEdit = itemView.findViewById(R.id.btnEditInvItem);
+            btnRemove = itemView.findViewById(R.id.btnRemoveInvItem);
         }
 
 
