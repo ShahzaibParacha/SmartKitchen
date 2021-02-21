@@ -38,6 +38,15 @@ public class EditInventoryItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateData(item);
+                // get the grocery item and check if current item is already in grocery list
+                if(item.thresholdStatus()) {
+                    Item groceryItem = ItemLists.getInstance().getGroceryItemByName(item.getName());
+                    if (groceryItem == null) {
+                        item.setQuantityToBuy(item.getThresholdQuantity());
+                        ItemLists.getInstance().addToGrocery(item);
+                    } 
+                }
+
                 Intent intent = new Intent(EditInventoryItemActivity.this, CurrentInventoryActivity.class);
                 startActivity(intent);
             }
