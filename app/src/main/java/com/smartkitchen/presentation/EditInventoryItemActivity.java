@@ -1,13 +1,16 @@
-package com.smartkitchen;
+package com.smartkitchen.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.smartkitchen.objects.Item;
+import com.smartkitchen.objects.ItemLists;
+import com.smartkitchen.R;
 
 public class EditInventoryItemActivity extends AppCompatActivity {
 
