@@ -1,4 +1,4 @@
-package com.smartkitchen;
+package com.smartkitchen.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
+import com.smartkitchen.objects.ItemLists;
+import com.smartkitchen.R;
 
 public class CurrentInventoryActivity extends AppCompatActivity {
 
