@@ -1,10 +1,10 @@
 package com.smartkitchen.tests;
 
 import org.junit.Test;
-import com.smartkitchen.Item;
-import com.smartkitchen.ItemLists;
-import static org.junit.Assert.*;
+import com.smartkitchen.objects.Item;
+import com.smartkitchen.objects.ItemLists;
 
+import static org.junit.Assert.*;
 
 //NOTE: Right now, the get values are 3 because of considering the 3 items that are added to the lists in the initializer of the ItemLists (i.e. in initData()).
 public class ItemListsTest{

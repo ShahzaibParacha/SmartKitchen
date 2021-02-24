@@ -1,4 +1,5 @@
-package com.smartkitchen;
+package com.smartkitchen.objects;
+
 import java.util.ArrayList;
 
 public class ItemLists {

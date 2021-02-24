@@ -1,15 +1,12 @@
-package com.smartkitchen;
+package com.smartkitchen.application;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
-import java.util.ArrayList;
+import com.smartkitchen.R;
+import com.smartkitchen.presentation.CurrentInventoryActivity;
 
 public class MainActivity extends AppCompatActivity {
 

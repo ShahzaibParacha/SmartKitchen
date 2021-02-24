@@ -1,4 +1,4 @@
-package com.smartkitchen;
+package com.smartkitchen.objects;
 
 public class Item {
     private final double DEFAULT_THRESHOLD_CONST = 0.2;
