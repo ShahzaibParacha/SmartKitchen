@@ -46,6 +46,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
         holder.name.setText(items.get(position).getName());
         holder.quantityToBuy.setText(items.get(position).getQuantityToBuyString());
 
+        //Creates on click listener, removes the item from the list
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +56,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
             }
         });
 
+        //Creates on click listener, moves to the edit screen, passes the item identifier
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +67,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
         });
     }
 
+    //Returns size of the list
     @Override
     public int getItemCount() {
         return items.size();

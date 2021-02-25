@@ -46,6 +46,7 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
         holder.name.setText(items.get(position).getName());
         holder.quantity.setText(items.get(position).getQuantityString());
 
+        //Creates on click listener, removes the item from the list
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +56,7 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
             }
         });
 
+        //Creates on click listener, moves to edit item screen, passes the item identifier
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +67,7 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
         });
     }
 
+    //Returns the size of the list
     @Override
     public int getItemCount() {
         return items.size();

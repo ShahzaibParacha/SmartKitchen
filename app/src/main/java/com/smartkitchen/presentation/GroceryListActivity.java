@@ -32,6 +32,7 @@ public class GroceryListActivity extends AppCompatActivity {
         btnToCurrentInventory = findViewById(R.id.btnToCurrentInventory);
         btnAdd = findViewById(R.id.btnGoToAddGroceryActivity);
 
+        //Moves to add grocery item screen
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,6 +41,7 @@ public class GroceryListActivity extends AppCompatActivity {
             }
         });
 
+        //Moves to the current inventory screen
         btnToCurrentInventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
