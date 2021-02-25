@@ -19,6 +19,7 @@ public class CurrentInventoryActivity extends AppCompatActivity {
     //The list view of the current inventory and its adapter
     private RecyclerView itemsRecView;
     private ItemRecViewAdapter adapter;
+    //Navigation button to grocery list and to add screen
     private Button toGroceryList;
     private FloatingActionButton btnAdd;
 
@@ -33,6 +34,7 @@ public class CurrentInventoryActivity extends AppCompatActivity {
         toGroceryList = findViewById(R.id.btnToGroceryList);
         btnAdd = findViewById(R.id.btnGoToAddInvActivity);
 
+        //Create on click listener, navigates to grocery list screen
         toGroceryList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +43,7 @@ public class CurrentInventoryActivity extends AppCompatActivity {
             }
         });
 
+        //Create on click listener, navigates to add screen
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -15,16 +15,23 @@ import com.smartkitchen.persistence.DBManager;
 
 public class AddGroceryItemActivity extends AppCompatActivity {
 
+    //Input Fields for item information
     private EditText inputName, inputQuantityToBuy, inputUnits;
+    //Buttons to add an item and cancel add activity
     private Button btnCancel, btnAdd;
 
+
+    //Creates the Add Grocery View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_item_to_grocery_screen);
 
+
+        //Initializes the UI elements
         initViews();
 
+        //Creates on click listener for cancel button, just returns to grocery list screen
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,11 +40,14 @@ public class AddGroceryItemActivity extends AppCompatActivity {
             }
         });
 
+        //Creates on click listener for add button
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Creates item based on inputted values
                 Item newItem = initItem();
                 DBManager.getGroceryDB().addToGrocery(newItem);
+                //Once the item is added, return to grocery list screen
                 Intent intent = new Intent(AddGroceryItemActivity.this, GroceryListActivity.class);
                 startActivity(intent);
             }
@@ -45,6 +55,7 @@ public class AddGroceryItemActivity extends AppCompatActivity {
 
     }
 
+    //Initialize new item with the inputted information
     private Item initItem(){
         String name = inputName.getText().toString();
         int quantityToBuy = Integer.parseInt(inputQuantityToBuy.getText().toString());
@@ -52,6 +63,7 @@ public class AddGroceryItemActivity extends AppCompatActivity {
         return new Item(name, 0, units, quantityToBuy, 0);
     }
 
+    //Initialize the UI elements
     private void initViews(){
         inputName = findViewById(R.id.inputGroceryItemName);
         inputQuantityToBuy = findViewById(R.id.inputGroceryItemQuantity);
