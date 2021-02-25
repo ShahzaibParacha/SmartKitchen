@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.smartkitchen.R;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.ItemLists;
+import com.smartkitchen.persistence.DBManager;
 
 import java.util.ArrayList;
 
@@ -49,8 +50,8 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Item item = ItemLists.getInstance().getGroceryList().get(position);
-                ItemLists.getInstance().removeFromGrocery(item);
+                Item item = DBManager.getGroceryDB().getGroceryList().get(position);
+                DBManager.getGroceryDB().removeFromGrocery(item);
                 notifyItemRemoved(position);
             }
         });

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.ItemLists;
 import com.smartkitchen.R;
+import com.smartkitchen.persistence.DBManager;
 
 public class EditInventoryItemActivity extends AppCompatActivity {
 
@@ -26,7 +27,7 @@ public class EditInventoryItemActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int itemPosition = intent.getIntExtra(POSITION_KEY, -1);
-        Item item = ItemLists.getInstance().getInventoryList().get(itemPosition);
+        Item item = DBManager.getInventoryDB().getInventoryList().get(itemPosition);
         initViews();
         setData(item);
 
@@ -44,10 +45,10 @@ public class EditInventoryItemActivity extends AppCompatActivity {
                 updateData(item);
                 // get the grocery item and check if current item is already in grocery list
                 if(item.thresholdStatus()) {
-                    Item groceryItem = ItemLists.getInstance().getGroceryItemByName(item.getName());
+                    Item groceryItem = DBManager.getGroceryDB().getGroceryItemByName(item.getName());
                     if (groceryItem == null) {
                         item.setQuantityToBuy(item.getThresholdQuantity());
-                        ItemLists.getInstance().addToGrocery(item);
+                        DBManager.getGroceryDB().addToGrocery(item);
                     } 
                 }
 

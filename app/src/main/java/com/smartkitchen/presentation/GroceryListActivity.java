@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartkitchen.objects.ItemLists;
 import com.smartkitchen.R;
+import com.smartkitchen.persistence.DBManager;
 
 public class GroceryListActivity extends AppCompatActivity {
 
@@ -52,7 +53,8 @@ public class GroceryListActivity extends AppCompatActivity {
         groceryListRecView.setAdapter(adapter);
         groceryListRecView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter.setItems(ItemLists.getInstance().getGroceryList());
+        adapter.setItems(DBManager.getGroceryDB().getGroceryList());
+
 
     }
 }

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.ItemLists;
 import com.smartkitchen.R;
+import com.smartkitchen.persistence.DBManager;
 
 public class AddGroceryItemActivity extends AppCompatActivity {
 
@@ -36,7 +37,7 @@ public class AddGroceryItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Item newItem = initItem();
-                ItemLists.getInstance().addToGrocery(newItem);
+                DBManager.getGroceryDB().addToGrocery(newItem);
                 Intent intent = new Intent(AddGroceryItemActivity.this, GroceryListActivity.class);
                 startActivity(intent);
             }
