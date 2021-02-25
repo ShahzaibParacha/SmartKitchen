@@ -8,7 +8,7 @@ import com.smartkitchen.tests.*;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         ItemTest.class,
-        ItemListsTest.class,
+        ListValidationTest.class,
 
 })
 public class AllTests { }
