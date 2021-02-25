@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.smartkitchen.objects.ItemLists;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
 
