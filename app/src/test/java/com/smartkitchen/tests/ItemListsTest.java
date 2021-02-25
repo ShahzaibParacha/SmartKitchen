@@ -2,7 +2,7 @@ package com.smartkitchen.tests;
 
 import org.junit.Test;
 import com.smartkitchen.objects.Item;
-import com.smartkitchen.objects.ItemLists;
+
 import static org.junit.Assert.*;
 
 

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartkitchen.R;
 import com.smartkitchen.objects.Item;
-import com.smartkitchen.objects.ItemLists;
 import com.smartkitchen.persistence.DBManager;
 
 import java.util.ArrayList;
