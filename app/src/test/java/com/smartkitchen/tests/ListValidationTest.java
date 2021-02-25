@@ -100,7 +100,7 @@ public class ListValidationTest{
             System.out.println(e.getMessage());
         }
 
-        // Act 4 -- full true
+        // Act 5 -- full true
         Item testItem4 = new Item("sampleItem", 1, "sampleItem", 1, 1);
         ListValidation testListValidation4 = new ListValidation(testItem4);
         try {
