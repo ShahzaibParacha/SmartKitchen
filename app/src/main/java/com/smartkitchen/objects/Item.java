@@ -5,9 +5,9 @@ public class Item {
 
     //Basic fields
     private String name;
-    private int quantity;               // updates current quantity
+    private int quantity;               // quantity in inventory
     private String units;
-    private int quantityToBuy;
+    private int quantityToBuy;          // quantity in grocery
     private int thresholdQuantity;
 
     //Constructor
@@ -65,11 +65,5 @@ public class Item {
 
     public int calculateDefaultThreshold(){
         return (int)(quantity*DEFAULT_THRESHOLD_CONST);
-    }
-
-    public boolean thresholdStatus() {
-        if (quantity < thresholdQuantity)
-            return true;
-        return false;
     }
 }
