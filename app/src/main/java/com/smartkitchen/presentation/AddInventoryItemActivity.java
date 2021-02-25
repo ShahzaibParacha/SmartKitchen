@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.smartkitchen.objects.Item;
-import com.smartkitchen.objects.ItemLists;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
 

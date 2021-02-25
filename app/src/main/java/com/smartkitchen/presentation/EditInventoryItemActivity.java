@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Item;
-import com.smartkitchen.objects.ItemLists;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
 
@@ -43,8 +43,9 @@ public class EditInventoryItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateData(item);
+                ListValidation validation = new ListValidation(item);
                 // get the grocery item and check if current item is already in grocery list
-                if(item.thresholdStatus()) {
+                if (validation.thresholdStatus()) {
                     Item groceryItem = DBManager.getGroceryDB().getGroceryItemByName(item.getName());
                     if (groceryItem == null) {
                         item.setQuantityToBuy(item.getThresholdQuantity());

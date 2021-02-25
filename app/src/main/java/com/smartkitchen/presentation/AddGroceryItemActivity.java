@@ -9,7 +9,6 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.smartkitchen.objects.Item;
-import com.smartkitchen.objects.ItemLists;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
 
@@ -42,7 +41,6 @@ public class AddGroceryItemActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     private Item initItem(){
