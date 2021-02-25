@@ -12,6 +12,7 @@ import android.widget.Button;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartkitchen.objects.ItemLists;
 import com.smartkitchen.R;
+import com.smartkitchen.persistence.DBManager;
 
 public class CurrentInventoryActivity extends AppCompatActivity {
 
@@ -52,6 +53,6 @@ public class CurrentInventoryActivity extends AppCompatActivity {
         itemsRecView.setAdapter(adapter);
         itemsRecView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter.setItems(ItemLists.getInstance().getInventoryList());
+        adapter.setItems(DBManager.getInventoryDB().getInventoryList());
     }
 }

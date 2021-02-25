@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.ItemLists;
 import com.smartkitchen.R;
+import com.smartkitchen.persistence.DBManager;
 
 public class AddInventoryItemActivity extends AppCompatActivity {
 
@@ -22,12 +23,15 @@ public class AddInventoryItemActivity extends AppCompatActivity {
     private TextView txtThreshold;
     private Button btnCancel, btnAdd;
 
+    private boolean thresholdEnabled;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_item_screen);
 
         initViews();
+        thresholdEnabled = false;
 
         enableThreshold.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -35,11 +39,13 @@ public class AddInventoryItemActivity extends AppCompatActivity {
                 if(isChecked){
                     txtThreshold.setVisibility(View.VISIBLE);
                     inputThreshold.setVisibility(View.VISIBLE);
+                    thresholdEnabled = true;
                 }
                 else{
                     inputThreshold.setText("" + 0);
                     txtThreshold.setVisibility(View.GONE);
                     inputThreshold.setVisibility(View.GONE);
+                    thresholdEnabled = false;
                 }
             }
         });
@@ -56,7 +62,7 @@ public class AddInventoryItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Item newItem = initItem();
-                ItemLists.getInstance().addToInventory(newItem);
+                DBManager.getInventoryDB().addToInventory(newItem);
                 Intent intent = new Intent(AddInventoryItemActivity.this, CurrentInventoryActivity.class);
                 startActivity(intent);
             }
@@ -67,7 +73,9 @@ public class AddInventoryItemActivity extends AppCompatActivity {
         String name = inputName.getText().toString();
         int quantity = Integer.parseInt(inputQuantity.getText().toString());
         String units = inputUnits.getText().toString();
-        int threshold = Integer.parseInt(inputThreshold.getText().toString());
+        int threshold = 0;
+        if(thresholdEnabled)
+            threshold = Integer.parseInt(inputThreshold.getText().toString());
         return new Item(name, quantity, units, 0, threshold);
     }
 
