@@ -1,0 +1,514 @@
+* commit 96c6b24cf8c56568e3fb3f3db758f8f8cb798f36
+| Author: ShahzaibParacha <parachsa@myumanitoba.ca>
+| Date:   Mon Feb 22 10:43:23 2021 -0600
+| 
+|     This commit: Adds architecturediagram
+|   
+*   commit 330483f62c8e407461a5c9a9f69b15755e24f3e0
+|\  Merge: 3f3f674 6eaaa7f
+| | Author: Raven Mico Carencia <carencrm@myumanitoba.ca>
+| | Date:   Sat Feb 20 18:34:17 2021 -0600
+| | 
+| |     Merge branch 'testing' into 'master'
+| |     
+| |     Testing
+| |     
+| |     See merge request 3350-winter-2021-a01/refrigator-tracker-group-10!17
+| | 
+| * commit 6eaaa7f1ecfaf978255db57524e6407c5b336cca
+|/  Author: Raven Mico Carencia <carencrm@myumanitoba.ca>
+|   Date:   Sat Feb 20 18:34:17 2021 -0600
+|   
+|       Testing
+|   
+*   commit 3f3f674ba0fecbd2071b95bb0bea4ae61cc65fa7
+|\  Merge: 6901fce 652d79d
+| | Author: Reymel Eusebio <eusebior@myumanitoba.ca>
+| | Date:   Sat Feb 20 18:15:58 2021 -0600
+| | 
+| |     Merge branch 'Error-Fix' into 'master'
+| |     
+| |     Error fix
+| |     
+| |     See merge request 3350-winter-2021-a01/refrigator-tracker-group-10!15
+| |   
+| *   commit 652d79d0143983cb3d76ab138d2eb30f836525f4
+| |\  Merge: 95bd395 6901fce
+| |/  Author: joegodard <62049162+joegodard@users.noreply.github.com>
+|/|   Date:   Sat Feb 20 18:11:30 2021 -0600
+| |   
+| |       updated threshold error
+| |       
+| |       updated minor threshold error
+| |   
+* |   commit 6901fce20b4df6037d406bfb7a03a61711829454
+|\ \  Merge: 359fa64 59b3da0
+| | | Author: Reymel Eusebio <eusebior@myumanitoba.ca>
+| | | Date:   Sat Feb 20 18:00:58 2021 -0600
+| | | 
+| | |     Merge branch 'Add-Item-Functionality' into 'master'
+| | |     
+| | |     Add item functionality
+| | |     
+| | |     See merge request 3350-winter-2021-a01/refrigator-tracker-group-10!14
+| | |   
+| * |   commit 59b3da0d258cb4ecd75b039707b91c60d78c74b1
+| |\ \  Merge: 4597273 359fa64
+| |/ /  Author: Reymel Eusebio <eusebior@myumanitoba.ca>
+|/| |   Date:   Sat Feb 20 17:58:04 2021 -0600
+| | |   
+| | |       Merge branch 'master' into 'Add-Item-Functionality'
+| | |       
+| | |       # Conflicts:
+| | |       #   app/src/main/java/com/smartkitchen/EditInventoryItemActivity.java
+| | |   
+* | |   commit 359fa64a664692b40c25b3a2c82e87f72e835090
+|\ \ \  Merge: bc0de4a 44998f6
+| | | | Author: Joseph Godard <godardj1@myumanitoba.ca>
+| | | | Date:   Sat Feb 20 17:55:44 2021 -0600
+| | | | 
+| | | |     Merge branch 'Updated-Threshold' into 'master'
+| | | |     
+| | | |     Updated threshold, fixed small bugs with setting the quantity for grocery list
+| | | |     
+| | | |     See merge request 3350-winter-2021-a01/refrigator-tracker-group-10!13
+| | | | 
+| * | | commit 44998f6b92a53d9f90be22d3fd04a205b76eb9b8
+| | | | Author: reymele <eusebior@myumanitoba.ca>
+| | | | Date:   Fri Feb 19 11:31:04 2021 -0600
+| | | | 
+| | | |     Updated threshold, fixed small bugs with setting the quantity for grocery list
+| | | | 
+| | * | commit 4597273ca558059681e813540837547e620f86e7
+| | | | Author: joegodard <62049162+joegodard@users.noreply.github.com>
+| | | | Date:   Sat Feb 20 17:53:22 2021 -0600
+| | | | 
+| | | |     Fixed Threshold Error
+| | | |     
+| | | |     Fixed minor threshold error
+| | | | 
+| | * | commit 60fd9d2ba98fa65a39c3631b41b3f90a656ea4f0
+| | | | Author: joegodard <62049162+joegodard@users.noreply.github.com>
+| | | | Date:   Fri Feb 19 17:29:15 2021 -0600
+| | | | 
+| | | |     Add Grocery Item Functionality
+| | | |     
+| | | |     This Commit:
+| | | |     - Adds a plus button in bottom of grocery list activity
+| | | |     - Implements functionality of add screen
+| | | |     - Changes layout file to better adapt to different screen sizes
+| | | | 
+| | * | commit 34322d686309af95f091e1c407975b6b8c070280
+| | | | Author: joegodard <62049162+joegodard@users.noreply.github.com>
+| | | | Date:   Fri Feb 19 16:44:46 2021 -0600
+| | | | 
+| | | |     Fixed Threshold
+| | | |     
+| | | |     This Commit:
+| | | |     - Adds item to find grocery item by name
+| | | |     - Fixes error with the threshold function
+| | | | 
+| | * | commit fde8a4aa3f269d9676fd730b0b8a9364473e7f41
+| |/ /  Author: joegodard <62049162+joegodard@users.noreply.github.com>
+|/| |   Date:   Fri Feb 19 16:32:14 2021 -0600
+| | |   
+| | |       Add Inventory Item
+| | |       
+| | |       This Commit:
+| | |       - Changes layout files to adapt better to different screen sizes
+| | |       - Adds plus button in bottom right corner
+| | |       - Implements add item functionality
+| | |   
+* | |   commit bc0de4af7b918ed6360f38aad119bc19d109564b
+|\ \ \  Merge: 86b9011 1a2399f
+| | | | Author: Shahzaib Paracha <parachsa@myumanitoba.ca>
+| | | | Date:   Fri Feb 19 10:56:11 2021 -0600
+| | | | 
+| | | |     Merge branch 'Threshold' into 'master'
+| | | |     
+| | | |     Threshold
+| | | |     
+| | | |     See merge request 3350-winter-2021-a01/refrigator-tracker-group-10!11
+| | | |   
+| * | |   commit 1a2399fdcb7190c4d178c05dad4d73a7e69b0b0a
+| |\ \ \  Merge: fc91a9f 86b9011
+| |/ / /  Author: Reymel Eusebio <eusebior@myumanitoba.ca>
+|/| / /   Date:   Fri Feb 19 10:55:09 2021 -0600
+| |/ /    
+| | |         Merge branch 'master' into 'Threshold'
+| | |         
+| | |         # Conflicts:
+| | |         #   app/src/main/java/com/smartkitchen/Item.java
+| | | 
+* | | commit 86b901189e53565e8142120a997a60c1a2490d28
+| | | Author: Shahzaib Paracha <parachsa@myumanitoba.ca>
+| | | Date:   Fri Feb 19 10:35:57 2021 -0600
+| | | 
+| | |     Update README.md: Added branching strategy
+| | |   
+* | |   commit f12edf61ba99f7969ed7652665fbd9560c073a00
+|\ \ \  Merge: 6d39313 a21a251
+| | | | Author: Shahzaib Paracha <parachsa@myumanitoba.ca>
+| | | | Date:   Fri Feb 19 10:04:44 2021 -0600
+| | | | 
+| | | |     Merge branch 'Remove-Items' into 'master'
+| | | |     
+| | | |     Add Remove Functionality
+| | | |     
+| | | |     See merge request 3350-winter-2021-a01/refrigator-tracker-group-10!10
+| | | | 
+| * | | commit a21a251f6b72ceead18677e84910508fa4fd7f19
+| | | | Author: joegodard <62049162+joegodard@users.noreply.github.com>
+| | | | Date:   Thu Feb 18 21:07:15 2021 -0600
+| | | | 
+| | | |     Add Remove Functionality
+| | | |     
+| | | |     This Commit:
+| | | |     - Adds remove buttons to UI
+| | | |     - Adds the remove functionality to the buttons
+| | | |   
+* | | |   commit 6d39313463cf8f9d97acba6377bcdb5488f43a70
+|\ \ \ \  Merge: 075e5a5 b67e195
+| |/ / /  Author: Joseph Godard <godardj1@myumanitoba.ca>
+|/| | |   Date:   Fri Feb 19 09:54:44 2021 -0600
+| | | |   
+| | | |       Merge branch 'additemscreen' into 'master'
+| | | |       
+| | | |       Add the Additemscreens for Grocery list and Inventory list to Master
+| | | |       
+| | | |       See merge request 3350-winter-2021-a01/refrigator-tracker-group-10!9
+| | | |   
+| * | |   commit b67e1951d66e90435c2c04c145317b5a61ad0978
+| |\ \ \  Merge: 9e0487a 075e5a5
+| |/ / /  Author: Reymel Eusebio <eusebior@myumanitoba.ca>
+|/| | |   Date:   Fri Feb 19 09:51:16 2021 -0600
+| | | |   
+| | | |       Merge branch 'master' into 'additemscreen'
+| | | |       
+| | | |       # Conflicts:
+| | | |       #   app/src/main/res/layout/activity_main.xml
+| | | |   
+* | | |   commit 075e5a59a66365e9edaf66e4a3cd5dd58081316f
+|\ \ \ \  Merge: 2bead61 aeaf3b7
+| | | | | Author: Joseph Godard <godardj1@myumanitoba.ca>
+| | | | | Date:   Thu Feb 18 19:49:57 2021 -0600
+| | | | | 
+| | | | |     Merge branch 'Error-Fix' into 'master'
+| | | | |     
+| | | | |     Fixed Error
+| | | | |     
+| | | | |     See merge request 3350-winter-2021-a01/refrigator-tracker-group-10!8
+| | | | | 
+| | * | | commit 9e0487ad30146735289bdf6ee2a912ec6251af9c
+| | | | | Author: Tyler Brown <brownt38@myumanitoba.ca>
+| | | | | Date:   Thu Feb 18 21:02:06 2021 -0600
+| | | | | 
+| | | | |     Fixed the checkbox text.
+| | | | | 
+| | * | | commit 27c0538d6283d4dd78357496db62250af0fca6c9
+| | | | | Author: Tyler Brown <brownt38@myumanitoba.ca>
+| | | | | Date:   Thu Feb 18 20:51:37 2021 -0600
+| | | | | 
+| | | | |     Added thresholds support to add_item_screen.xml layout.
+| | | | | 
+| | * | | commit 3bdd78e5d7a3acd41bac338081a7e29bf4de16dc
+| | | | | Author: Tyler Brown <brownt38@myumanitoba.ca>
+| | | | | Date:   Thu Feb 18 19:55:50 2021 -0600
+| | | | | 
+| | | | |     Improved layout for add-item-screen and made it explicitly for the inventory list.
+| | | | |     Made a copy to use for the grocery list.
+| | | | |     Note: Once we get the backend ready we need to change to test to non-hardcoded values.
+| | | | | 
+| | * | | commit c32a4a4a875276d58c556dcb47124136710a9039
+| | | | | Author: Tyler Brown <brownt38@myumanitoba.ca>
+| | | | | Date:   Wed Feb 17 10:05:49 2021 -0600
+| | | | | 
+| | | | |     Made initial layout for the add new items screen
+| | | | | 
+| | | * | commit fc91a9f43e6c213d8c7aa58afdd3fa9ce43113f8
+| | | | | Author: reymele <eusebior@myumanitoba.ca>
+| | | | | Date:   Fri Feb 19 10:31:46 2021 -0600
+| | | | | 
+| | | | |     Updated threshold, fixed duplications in grocery list if threshold is true
+| | | | | 
+| | | * | commit faaf703f370d9040fef0d91725f7e50c973f42eb
+| | | | | Author: reymele <eusebior@myumanitoba.ca>
+| | | | | Date:   Thu Feb 18 21:22:11 2021 -0600
+| | | | | 
+| | | | |     After submitting changes in edit screen, threshold check will be done and will add item to grocery list if requirements are met.
+| | | | | 
+| | | * | commit f6d8564645d7f1fe0f62629c068ffb66e6310394
+| | | | | Author: joegodard <62049162+joegodard@users.noreply.github.com>
+| | | | | Date:   Thu Feb 18 20:40:23 2021 -0600
+| | | | | 
+| | | | |     Fixed Error
+| | | | |     
+| | | | |     Added the setQuantity method back in
+| | | | | 
+| | | * | commit 582fa22f5e5c2e6dd0827d667346c25c97bfada0
+| |_|/ /  Author: joegodard <62049162+joegodard@users.noreply.github.com>
+|/| | |   Date:   Thu Feb 18 20:32:43 2021 -0600
+| | | |   
+| | | |       Clarify Threshold
+| | | |       
+| | | |       This Commit:
+| | | |       - Changed the variable name for threshold quantity
+| | | |       - Added it to constructor
+| | | |       - Added method to calculate default value
+| | | | 
+| | | * commit 95bd395e738acbfcbb78d958a78f7cfaa1e936ca
+| | |/  Author: joegodard <62049162+joegodard@users.noreply.github.com>
+| |/|   Date:   Sat Feb 20 18:08:57 2021 -0600
+| | |   
+| | |       Update EditInventoryItemActivity.java
+| | | 
+| * | commit aeaf3b7da5f1b5d085f13fd34222db5d35122411
+|/ /  Author: joegodard <62049162+joegodard@users.noreply.github.com>
+| |   Date:   Thu Feb 18 19:48:51 2021 -0600
+| |   
+| |       Fixed Error
+| |       
+| |       Adds the setQuantity method back
+| |   
+* |   commit 2bead61f4f640c822369866828da8fac3424c9e5
+|\ \  Merge: 4a49660 f6f13ac
+| | | Author: Tyler John Brown <brownt38@myumanitoba.ca>
+| | | Date:   Thu Feb 18 19:36:11 2021 -0600
+| | | 
+| | |     Merge branch 'Edit-Items' into 'master'
+| | |     
+| | |     Edit items
+| | |     
+| | |     See merge request 3350-winter-2021-a01/refrigator-tracker-group-10!6
+| | |   
+| * |   commit f6f13ac412eb9e4dab03aa567299d8f6547994b5
+| |\ \  Merge: 46522ce 4a49660
+| |/ /  Author: Tyler John Brown <brownt38@myumanitoba.ca>
+|/| |   Date:   Thu Feb 18 19:34:23 2021 -0600
+| | |   
+| | |       Merge branch 'master' into 'Edit-Items'
+| | |       
+| | |       # Conflicts:
+| | |       #   app/src/main/java/com/smartkitchen/Item.java
+| | |   
+* | |   commit 4a496602032bd913526cb3c8d36dabb7af9f7558
+|\ \ \  Merge: 660a575 0cc7ca5
+| | | | Author: Shahzaib Paracha <parachsa@myumanitoba.ca>
+| | | | Date:   Thu Feb 18 19:22:30 2021 -0600
+| | | | 
+| | | |     Merge branch 'View-Current-Inventory' into 'master'
+| | | |     
+| | | |     Added functions and variables to Item Class, basically dealing with quantity and threshold check
+| | | |     
+| | | |     See merge request 3350-winter-2021-a01/refrigator-tracker-group-10!5
+| | | | 
+| * | | commit 0cc7ca59d3be018fa5ad9eb7beb50f60da8ff3a1
+| | | | Author: reymele <eusebior@myumanitoba.ca>
+| | | | Date:   Wed Feb 17 10:49:46 2021 -0600
+| | | | 
+| | | |     Added functions and variables to Item Class, basically dealing with quantity and threshold check
+| | | | 
+* | | | commit 660a575c024fa962fb2256f37a94510610ffda16
+| | | | Author: Raven Mico Carencia <carencrm@myumanitoba.ca>
+| | | | Date:   Wed Feb 17 11:52:54 2021 -0600
+| | | | 
+| | | |     Delete ExampleUnitTest.java
+| | | |   
+* | | |   commit 174625375145077a0b973583b3ae4c7aa80942fc
+|\ \ \ \  Merge: 9f41ddc a0e7f04
+| | | | | Author: Raven Mico Carencia <carencrm@myumanitoba.ca>
+| | | | | Date:   Wed Feb 17 11:52:23 2021 -0600
+| | | | | 
+| | | | |     Merge branch 'testing' into 'master'
+| | | | |     
+| | | | |     add initial testing code
+| | | | |     
+| | | | |     See merge request 3350-winter-2021-a01/refrigator-tracker-group-10!3
+| | | | | 
+| * | | | commit a0e7f04dd0af38cd918fd75ac0ad72142d6847d2
+|/ / / /  Author: Raven Carencia <carencrm@myumanitoba.ca>
+| | | |   Date:   Wed Feb 17 11:38:52 2021 -0600
+| | | |   
+| | | |       add initial testing code
+| | | | 
+| | * | commit 46522ce97e712eb87083177d0c0843227a9528af
+| | | | Author: joegodard <62049162+joegodard@users.noreply.github.com>
+| | | | Date:   Wed Feb 17 19:25:25 2021 -0600
+| | | | 
+| | | |     Added Edit Grocery Item Functionality
+| | | |     
+| | | |     This Commit:
+| | | |     - Adds the Edit Grocery Item Activity
+| | | |     - Implements editing functionality
+| | | | 
+| | * | commit 409fea5601f40e2e2cb01bb202c3bc1af2da6262
+| | | | Author: joegodard <62049162+joegodard@users.noreply.github.com>
+| | | | Date:   Wed Feb 17 16:55:47 2021 -0600
+| | | | 
+| | | |     Created Edit Feature
+| | | |     
+| | | |     This Commit:
+| | | |     - Adds an edit activity
+| | | |     - Adds functionality to the edit button
+| | | |     - Implements edit functionality
+| | | | 
+| | * | commit b740a6a14f03f5ce0e89835e2e2da46258e79204
+| | | | Author: joegodard <62049162+joegodard@users.noreply.github.com>
+| | | | Date:   Wed Feb 17 15:21:21 2021 -0600
+| | | | 
+| | | |     Access Data from ItemLists class
+| | | |     
+| | | |     This Commit:
+| | | |     - Moves creating initial data into ItemLists class
+| | | |     - Accesses the lists from ItemLists in the two activities
+| | | | 
+| | * | commit 9cb57522a54f130b946da5b94ab1a7a31f255660
+| | | | Author: joegodard <62049162+joegodard@users.noreply.github.com>
+| | | | Date:   Wed Feb 17 15:05:41 2021 -0600
+| | | | 
+| | | |     Create Separate Inv Activity
+| | | |     
+| | | |     This Commit:
+| | | |     - Creates a separate activity for current inventory
+| | | |     - Automatically directs from main to current inventory when app is opened
+| | | | 
+| | * | commit 19595def1611265b1e62b24e60e3e494599ff6f8
+| | | | Author: joegodard <62049162+joegodard@users.noreply.github.com>
+| | | | Date:   Wed Feb 17 14:57:49 2021 -0600
+| | | | 
+| | | |     Navigation and CardView change
+| | | |     
+| | | |     This Commit:
+| | | |     - Added navigation button to grocery page
+| | | |     - Created separate file for grocery item cardView, in case we want separate functionality later
+| | | | 
+| | * | commit 5b7b0d0087316cd19912cb6fde59e3c73fd4379e
+| |/ /  Author: joegodard <62049162+joegodard@users.noreply.github.com>
+|/| |   Date:   Wed Feb 17 12:45:41 2021 -0600
+| | |   
+| | |       Created Grocery List View
+| | |       
+| | |       This commit:
+| | |       - Adds the grocery list activity
+| | |       - Adds the adapter to display the list
+| | |       - Adds a quantityToBuy variable to Item
+| | |       - Adds relevant getters and setters
+| | |       - Adds button on main page to get to grocery list
+| | |   
+* | |   commit 9f41ddc53ede66bc6ecefbf2293b99e3b68f9119
+|\ \ \  Merge: fa2a058 39c4620
+| |/ /  Author: Shahzaib Paracha <parachsa@myumanitoba.ca>
+| | /   Date:   Wed Feb 17 10:27:45 2021 -0600
+| |/    
+|/|         Merge branch 'View-Current-Inventory' into 'master'
+| |         
+| |         Created Current Inventory View
+| |         
+| |         See merge request 3350-winter-2021-a01/refrigator-tracker-group-10!2
+| | 
+| * commit 39c4620096efb4cb7d18f9438496d387ca78ed7a
+| | Author: reymele <eusebior@myumanitoba.ca>
+| | Date:   Mon Feb 15 20:37:47 2021 -0600
+| | 
+| |     testing
+| | 
+| * commit 3a5b56bed91ae5d695a5361893adaf5f2dc3537b
+|/  Author: joegodard <62049162+joegodard@users.noreply.github.com>
+|   Date:   Mon Feb 15 12:35:27 2021 -0600
+|   
+|       Created Current Inventory View
+|       
+|       This Commit:
+|       - Adds an Item object with getters/setters
+|       - Adds a cardview layout to display items
+|       - Adds an adapter to display list of cardviews
+|       - The list is displayed in the main activity
+|   
+*   commit fa2a058f0bce40b53146e3b970f283258ce9185f
+|\  Merge: c28ddbb b884291
+| | Author: Joseph Godard <godardj1@myumanitoba.ca>
+| | Date:   Mon Feb 15 09:52:23 2021 -0600
+| | 
+| |     Merge branch 'init-app' into 'master'
+| |     
+| |     Setting up android app
+| |     
+| |     See merge request 3350-winter-2021-a01/refrigator-tracker-group-10!1
+| | 
+| * commit b88429130d235c7d56b33e69bd4a9f1c412d5d22
+|   Author: ShahzaibParacha <parachsa@myumanitoba.ca>
+|   Date:   Mon Feb 15 08:33:03 2021 -0600
+|   
+|       setting up android app
+| 
+* commit c28ddbbeae384f8fba6753092922a6c6ab2baca1
+| Author: Tyler John Brown <brownt38@myumanitoba.ca>
+| Date:   Fri Feb 5 09:43:49 2021 -0600
+| 
+|     Delete Vision.md
+| 
+* commit 1d2f326820f3c0e5b9722428d93c738060b24efc
+| Author: Raven Mico Carencia <carencrm@myumanitoba.ca>
+| Date:   Thu Feb 4 12:54:20 2021 -0600
+| 
+|     updated group name
+| 
+* commit 10fa5637dcf13e5db24eb20e4a27a1e3fd251523
+| Author: Raven Mico Carencia <carencrm@myumanitoba.ca>
+| Date:   Thu Feb 4 12:44:06 2021 -0600
+| 
+|     finished Vision Statement
+| 
+* commit 1a2292672b4a4f621ad3920b13e21720aff0ddb9
+| Author: Raven Mico Carencia <carencrm@myumanitoba.ca>
+| Date:   Thu Feb 4 12:43:26 2021 -0600
+| 
+|     finished vision statement
+| 
+* commit 4c771947f99a99986d625c394c5723f9bb392ba1
+| Author: Raven Mico Carencia <carencrm@myumanitoba.ca>
+| Date:   Wed Feb 3 10:10:13 2021 -0600
+| 
+|     Update README.md
+| 
+* commit 2fac187acc0a4b589c80c06c0a9cd14833794e9a
+| Author: Raven Mico Carencia <carencrm@myumanitoba.ca>
+| Date:   Wed Feb 3 09:33:07 2021 -0600
+| 
+|     Update Vision.md
+| 
+* commit 82b6f993b5379c30b80d3015d200d199db4dad8b
+| Author: Raven Carencia <carencrm@myumanitoba.ca>
+| Date:   Tue Feb 2 04:36:10 2021 -0600
+| 
+|     update vision statement
+| 
+* commit bfacb3ad294987f884243d848195f5aeb620b476
+| Author: Raven Mico Carencia <carencrm@myumanitoba.ca>
+| Date:   Tue Feb 2 04:20:46 2021 -0600
+| 
+|     Upload New File
+| 
+* commit 2a88b2513c8184cf06ac011f123cd47210aab845
+| Author: Raven Mico Carencia <carencrm@myumanitoba.ca>
+| Date:   Tue Feb 2 04:15:12 2021 -0600
+| 
+|     Delete Vision.md
+| 
+* commit 65a506335877786e149fb5b1d034c3144b6c5395
+| Author: Raven Mico Carencia <carencrm@myumanitoba.ca>
+| Date:   Tue Feb 2 04:14:55 2021 -0600
+| 
+|     Add new file
+| 
+* commit b52898ef794aa494d8174204393fa5d115784dd2
+| Author: Raven Mico Carencia <carencrm@myumanitoba.ca>
+| Date:   Tue Feb 2 04:12:55 2021 -0600
+| 
+|     Add new directory
+| 
+* commit e0c3cfebec6164294f948adfc68389bfe7cac94d
+  Author: Raven Mico Carencia <carencrm@myumanitoba.ca>
+  Date:   Fri Jan 29 09:53:19 2021 -0600
+  
+      Initial commit
