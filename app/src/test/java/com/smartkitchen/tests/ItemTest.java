@@ -49,25 +49,6 @@ public class ItemTest{
         System.out.println("Finished testItemSetters.");
     }
 
-    @Test
-    public void testThresholdStatus(){
-        System.out.println("\nStarting testThresholdStatus.");
-
-        //Act
-        Item testItem = new Item("sample", 1, "sampleUnit", 1, 1);
-        testItem.setQuantity(0);
-
-        //Assert
-        assert(testItem.thresholdStatus());
-
-        //Act 2 -- update the quantity so it triggers false in the thresholdStatus method
-        testItem.setQuantity(50);
-
-        //Assert
-        assertFalse(testItem.thresholdStatus());
-
-        System.out.println("Finished testThresholdStatus.");
-    }
 
     @Test
     public void testCalculateDefaultThreshold(){

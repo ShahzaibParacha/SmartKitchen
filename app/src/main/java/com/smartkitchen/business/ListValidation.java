@@ -31,6 +31,6 @@ public class ListValidation {
         if (item.getUnits().length() <= 0)
             throw new Exception("Need a string input for units.");
         if (item.getThresholdQuantity() < 0)
-            throw new Exception(("Need a valid threshold quantity input"));
+            throw new Exception("Need a valid threshold quantity input.");
     }
 }
