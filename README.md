@@ -12,7 +12,7 @@ SmartKitchen targets users who frequent the kitchen and make food on a regular b
  
 The main success criteria that we are looking at is the number of users that are accessing the app. Another measure of success is the number of total recipes that are being added to the app. This measure can give us an indication of the current state of the app’s progression. The number of times recipes are used and the total number of items that were added or removed from the pantry is another measure, as it lets us know that the users are using the app's features frequently. 
 
-### Branching Startegy
+### Branching Strategy
 
 Branches are created and implemented following a feature named after one of our user stories for each iteration. Wording may be minimized for ease of use but the essence should remain the same.
 
@@ -20,4 +20,4 @@ Branches are created and implemented following a feature named after one of our 
 ![Architecure](architecture.png "Architecture")
 
 ### Worksheet
-The worksheet to the current iteation can be found [here](worksheet.md).
+The worksheet to the current iteration can be found [here](worksheet.md).
