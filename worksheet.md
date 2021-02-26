@@ -22,13 +22,13 @@ The merge commits that were used to complete the feature is found [here](https:/
 
 ## Exceptional code
 
-[Here](https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/blob/master/app/src/test/java/com/smartkitchen/tests/ListValidationTest.java) is the link to test exceptional code. This exception is handled because we do not want the users to be able to add items to their lists with the space for name and unit left blank, and quantity set to 0 or less. So in case something of that nature is attempted, we throw an exception. We do not show a pop-up warning with the erro message at this point however that will be added in the later iterations. But the exception does not let any invalid entires in either lists.
+[Here](https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/blob/master/app/src/test/java/com/smartkitchen/tests/ListValidationTest.java) is the link to test exceptional code. This exception is handled because we do not want the users to be able to add items to their lists with the space for name and unit left blank, and quantity set to 0 or less. So in case something of that nature is attempted, we throw an exception. We do not show a pop-up warning with the error message at this point however that will be added in the later iterations. But the exception does not let any invalid entries in either list.
 
 ## Branching
 
 Our branching strategy is mentioned in our README file. This can be found [here](README.md).
 
-Following that strategy, we can observe in the screenshot below that the View-Current-Inventory branch is created as a separete branch to implement the feature, worked on it till its completion, and then merged back to the master branch.
+Following that strategy, we can observe in the screenshot below that the View-Current-Inventory branch is created as a separate branch to implement the feature, worked on it till its completion, and then merged back to the master branch.
 
 ![Branching](branch.png "Branching")
 
@@ -38,6 +38,6 @@ Group 11 had a SOLID Violation in their code where they had a class in UI folder
 
 ## Agile Planning
 
-We were able to wrap up all of our storues except for one in this iteration. This story can be found [here](https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/22). This issue has been moved to iteration 2, and can be found under that milestone on GitLab.
+We were able to wrap up all of our stories except for one in this iteration. This story can be found [here](https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/22). This issue has been moved to iteration 2, and can be found under that milestone on GitLab.
 
-We did change the way we handle thresholds. The thresholds were initially supposed to be a rpedetermined value, so to paint a picture if the quantity of an item in the current invntory drops below 20%, we will add it to the grocery list automatically. But we instead changed and let the user decide the quantity they think is the minimum and twhenver the quanity dips below that number, the equivalent amount gets added to the grocery list. [This](https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/21) is the story relevant to that.
+We did change the way we handle thresholds. The thresholds were initially supposed to be a predetermined value, so to paint a picture if the quantity of an item in the current invntory drops below 20%, we will add it to the grocery list automatically. But we instead changed and let the user decide the quantity they think is the minimum and whenever the quanity dips below that number, the equivalent amount gets added to the grocery list. [This](https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/21) is the story relevant to that.
