@@ -14,7 +14,7 @@ The main success criteria that we are looking at is the number of users that are
 
 ### Branching Startegy
 
-Branches are created and implemented following a feature named after one of our user stories for each iteration. Wording may be minimized for ease of use but the essence should remain the same.
+The branching strategy for the iteration can be found [here](BRANCHING_STRATEGY.MD).
 
 ### Architecture
 ![Architecure](architecture.png "Architecture")
