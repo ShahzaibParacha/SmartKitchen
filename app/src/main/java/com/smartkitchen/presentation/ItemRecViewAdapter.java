@@ -2,10 +2,14 @@ package com.smartkitchen.presentation;
 
 import android.content.Context;
 import android.content.Intent;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -65,6 +69,26 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
                 mContext.startActivity(intent);
             }
         });
+
+        //On click listeners to expand/collapse the cardview
+        holder.downArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.expandedLayout.setVisibility(View.VISIBLE);
+                holder.downArrow.setVisibility(View.GONE);
+                holder.upArrow.setVisibility(View.VISIBLE);
+            }
+        });
+
+        holder.upArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.expandedLayout.setVisibility(View.GONE);
+                holder.downArrow.setVisibility(View.VISIBLE);
+                holder.upArrow.setVisibility(View.GONE);
+            }
+        });
+
     }
 
     //Returns the size of the list
@@ -86,7 +110,9 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
         private CardView parent;
         private TextView name;
         private TextView quantity;
-        private Button btnEdit, btnRemove;
+        private ImageView upArrow, downArrow;
+        private LinearLayout expandedLayout;
+        private Button btnEdit, btnRemove, btnAddToGrocery;
 
         //Finds and assigns the information
         public ViewHolder(@NonNull View itemView) {
@@ -95,10 +121,15 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
             parent = itemView.findViewById(R.id.invItemCardView);
             name = itemView.findViewById(R.id.txtInvItemName);
             quantity = itemView.findViewById(R.id.txtInvQuantity);
+
+            expandedLayout = itemView.findViewById(R.id.itemViewExpanded);
+
+            upArrow = itemView.findViewById(R.id.itemUpArrow);
+            downArrow = itemView.findViewById(R.id.itemDownArrow);
+
             btnEdit = itemView.findViewById(R.id.btnEditInvItem);
             btnRemove = itemView.findViewById(R.id.btnRemoveInvItem);
+            btnAddToGrocery = itemView.findViewById(R.id.btnAddInvItemToGrocery);
         }
-
-
     }
 }
