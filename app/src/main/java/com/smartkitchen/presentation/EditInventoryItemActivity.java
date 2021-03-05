@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.ListActions;
 import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
@@ -15,6 +17,7 @@ import com.smartkitchen.persistence.DBManager;
 
 public class EditInventoryItemActivity extends AppCompatActivity {
 
+    IListActions listActions = new ListActions();
     public static final String POSITION_KEY = "position";
 
     //Fields for user input
@@ -31,7 +34,7 @@ public class EditInventoryItemActivity extends AppCompatActivity {
         //Gets the item that has been selected to be edited
         Intent intent = getIntent();
         int itemPosition = intent.getIntExtra(POSITION_KEY, -1);
-        Item item = DBManager.getInventoryDB().getInventoryList().get(itemPosition);
+        Item item = listActions.getInventoryItem(itemPosition);
 
         //Initializes the UI elements
         initViews();
@@ -52,16 +55,7 @@ public class EditInventoryItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Updates the item information
                 updateData(item);
-                ListValidation validation = new ListValidation(item);
-                // get the grocery item and check if current item is already in grocery list
-                if (validation.thresholdStatus()) {
-                    Item groceryItem = DBManager.getGroceryDB().getGroceryItemByName(item.getName());
-                    //If not already in grocery list, add to the grocery list
-                    if (groceryItem == null) {
-                        item.setQuantityToBuy(item.getThresholdQuantity());
-                        DBManager.getGroceryDB().addToGrocery(item);
-                    } 
-                }
+                listActions.thresholdAddToGrocery(item);
 
                 Intent intent = new Intent(EditInventoryItemActivity.this, CurrentInventoryActivity.class);
                 startActivity(intent);
