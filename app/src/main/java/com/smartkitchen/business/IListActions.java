@@ -14,7 +14,7 @@ public interface IListActions {
 
     Item getGroceryItemByName(String name);
 
-    boolean thresholdAddToGrocery(Item item, Context context);
+    boolean thresholdAddToGrocery(Item item, Context context, boolean returnToMain);
 
     void buyItem(Item item);
 

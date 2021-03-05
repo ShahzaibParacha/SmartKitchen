@@ -10,6 +10,9 @@ public class Item {
     private int quantityToBuy;          // quantity in grocery
     private int thresholdQuantity;
 
+    private boolean invIsExpanded = false;
+    private boolean groceryIsExpanded = false;
+
     //Constructor
     public Item(String name, int quantity, String units, int quantityToBuy, int thresholdQuantity) {
         this.name = name;
@@ -65,5 +68,21 @@ public class Item {
 
     public int calculateDefaultThreshold(){
         return (int)(quantity*DEFAULT_THRESHOLD_CONST);
+    }
+
+    public boolean invIsExpanded() {
+        return invIsExpanded;
+    }
+
+    public void setInvIsExpanded(boolean invIsExpanded) {
+        this.invIsExpanded = invIsExpanded;
+    }
+
+    public boolean groceryIsExpanded() {
+        return groceryIsExpanded;
+    }
+
+    public void setGroceryIsExpanded(boolean groceryIsExpanded) {
+        this.groceryIsExpanded = groceryIsExpanded;
     }
 }

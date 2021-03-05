@@ -83,20 +83,29 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
         holder.downArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.expandedLayout.setVisibility(View.VISIBLE);
-                holder.downArrow.setVisibility(View.GONE);
-                holder.upArrow.setVisibility(View.VISIBLE);
+                items.get(position).setGroceryIsExpanded(true);
+                notifyItemChanged(position);
             }
         });
 
         holder.upArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.expandedLayout.setVisibility(View.GONE);
-                holder.downArrow.setVisibility(View.VISIBLE);
-                holder.upArrow.setVisibility(View.GONE);
+                items.get(position).setGroceryIsExpanded(false);
+                notifyItemChanged(position);
             }
         });
+
+        if(items.get(position).groceryIsExpanded()){
+            holder.expandedLayout.setVisibility(View.VISIBLE);
+            holder.downArrow.setVisibility(View.GONE);
+            holder.upArrow.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.expandedLayout.setVisibility(View.GONE);
+            holder.downArrow.setVisibility(View.VISIBLE);
+            holder.upArrow.setVisibility(View.GONE);
+        }
     }
 
     //Returns size of the list

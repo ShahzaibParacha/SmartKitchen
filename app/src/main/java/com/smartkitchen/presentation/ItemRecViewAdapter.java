@@ -76,28 +76,37 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
         holder.btnAddToGrocery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertMessage.showDialog(mContext, listActions.getInventoryItem(position));
+                AlertMessage.showDialog(mContext, listActions.getInventoryItem(position), false);
             }
         });
 
-        //On click listeners to expand/collapse the cardview
+        //On Click Listeners to expand/collapse the cardview
         holder.downArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.expandedLayout.setVisibility(View.VISIBLE);
-                holder.downArrow.setVisibility(View.GONE);
-                holder.upArrow.setVisibility(View.VISIBLE);
+                items.get(position).setInvIsExpanded(true);
+                notifyItemChanged(position);
             }
         });
 
         holder.upArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.expandedLayout.setVisibility(View.GONE);
-                holder.downArrow.setVisibility(View.VISIBLE);
-                holder.upArrow.setVisibility(View.GONE);
+                items.get(position).setInvIsExpanded(false);
+                notifyItemChanged(position);
             }
         });
+
+        if(items.get(position).invIsExpanded()){
+            holder.expandedLayout.setVisibility(View.VISIBLE);
+            holder.downArrow.setVisibility(View.GONE);
+            holder.upArrow.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.expandedLayout.setVisibility(View.GONE);
+            holder.downArrow.setVisibility(View.VISIBLE);
+            holder.upArrow.setVisibility(View.GONE);
+        }
 
     }
 

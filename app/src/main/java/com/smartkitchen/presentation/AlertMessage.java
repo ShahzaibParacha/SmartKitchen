@@ -15,7 +15,7 @@ import com.smartkitchen.objects.Item;
 public class AlertMessage {
     private static IListActions listActions = new ListActions();
 
-    public static void showDialog(Context context, Item item){
+    public static void showDialog(Context context, Item item, boolean returnToMain){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Adding item to grocery list, please set quantity you wish to buy:");
@@ -29,8 +29,10 @@ public class AlertMessage {
             public void onClick(DialogInterface dialog, int which) {
                 item.setQuantityToBuy(Integer.parseInt(input.getText().toString()));
                 listActions.addToGrocery(item);
-                Intent intent = new Intent(context, CurrentInventoryActivity.class);
-                context.startActivity(intent);
+                if(returnToMain) {
+                    Intent intent = new Intent(context, CurrentInventoryActivity.class);
+                    context.startActivity(intent);
+                }
             }
         });
 

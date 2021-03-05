@@ -45,7 +45,7 @@ public class ListActions implements IListActions {
     }
 
     @Override
-    public boolean thresholdAddToGrocery(Item item, Context context) {
+    public boolean thresholdAddToGrocery(Item item, Context context, boolean returnToMain) {
         boolean enteredThreshold = false;
         ListValidation validation = new ListValidation(item);
         // get the grocery item and check if current item is already in grocery list
@@ -53,7 +53,7 @@ public class ListActions implements IListActions {
             Item groceryItem = DBManager.getGroceryDB().getGroceryItemByName(item.getName());
             //If not already in grocery list, add to the grocery list
             if (groceryItem == null) {
-                AlertMessage.showDialog(context, item);
+                AlertMessage.showDialog(context, item, returnToMain);
                 enteredThreshold = true;
             }
         }
