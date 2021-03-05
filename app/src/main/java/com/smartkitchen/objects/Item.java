@@ -10,6 +10,7 @@ public class Item {
     private int quantityToBuy;          // quantity in grocery
     private int thresholdQuantity;
 
+    //Flags for if the cardview should be expanded in either list
     private boolean invIsExpanded = false;
     private boolean groceryIsExpanded = false;
 

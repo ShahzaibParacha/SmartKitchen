@@ -73,9 +73,11 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
             }
         });
 
+        //Button to quickly add items to the grocery list
         holder.btnAddToGrocery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Calls the prompt for user to enter quantity to buy (doesn't need to return to main because it is already on main)
                 AlertMessage.showDialog(mContext, listActions.getInventoryItem(position), false);
             }
         });
@@ -97,6 +99,7 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
             }
         });
 
+        //Set up expanded/collapsed view
         if(items.get(position).invIsExpanded()){
             holder.expandedLayout.setVisibility(View.VISIBLE);
             holder.downArrow.setVisibility(View.GONE);

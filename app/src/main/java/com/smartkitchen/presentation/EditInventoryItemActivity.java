@@ -55,8 +55,9 @@ public class EditInventoryItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Updates the item information
                 updateData(item);
-
+                //Checks if the item needed to be added to grocery list because quantity<threshold
                 boolean enteredThreshold = listActions.thresholdAddToGrocery(item, EditInventoryItemActivity.this, true);
+                //If not, return to the inventory screen as usual
                 if(!enteredThreshold){
                     Intent intent = new Intent(EditInventoryItemActivity.this, CurrentInventoryActivity.class);
                     startActivity(intent);

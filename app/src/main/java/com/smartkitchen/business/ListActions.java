@@ -8,7 +8,7 @@ import com.smartkitchen.presentation.AlertMessage;
 
 public class ListActions implements IListActions {
 
-
+    //Simple adds to either list
     @Override
     public void addToGrocery(Item item) {
         DBManager.getGroceryDB().addToGrocery(item);
@@ -19,6 +19,7 @@ public class ListActions implements IListActions {
         DBManager.getInventoryDB().addToInventory(item);
     }
 
+    //Simple gets from either list
     @Override
     public Item getGroceryItem(int position) {
         Item item = DBManager.getGroceryDB().getGroceryList().get(position);
@@ -31,6 +32,7 @@ public class ListActions implements IListActions {
         return item;
     }
 
+    //Get an item via their name string
     @Override
     public Item getGroceryItemByName(String name) {
         Item item = DBManager.getGroceryDB().getGroceryItemByName(name);
@@ -43,26 +45,32 @@ public class ListActions implements IListActions {
         return item;
     }
 
+    //"Buys" an item, i.e. moves it into inventory
     @Override
     public void buyItem(Item item) {
+        //If the item is already in inventory, sum current quantity and quantity to buy
         if(isInInventory(item)){
             item.setQuantity(item.getQuantity()+item.getQuantityToBuy());
         }
+        //If not, set the quantity as quantity to buy and add it
         else {
             item.setQuantity(item.getQuantityToBuy());
             addToInventory(item);
         }
+        //Remove the item from the grocery list
         removeFromGrocery(item);
     }
 
+    //Deals with adding an item to the grocery list via the threshold method
     @Override
     public boolean thresholdAddToGrocery(Item item, Context context, boolean returnToMain) {
         boolean enteredThreshold = false;
         ListValidation validation = new ListValidation(item);
-        // get the grocery item and check if current item is already in grocery list
+        // Check if quantity<threshold
         if (validation.thresholdStatus()) {
             //If not already in grocery list, add to the grocery list
             if (!isInGrocery(item)) {
+                //Pull up prompt for quantity to buy
                 AlertMessage.showDialog(context, item, returnToMain);
                 enteredThreshold = true;
             }
@@ -70,6 +78,7 @@ public class ListActions implements IListActions {
         return enteredThreshold;
     }
 
+    //Simple removes from either list
     @Override
     public void removeFromGrocery(Item item) {
         DBManager.getGroceryDB().removeFromGrocery(item);
@@ -80,6 +89,7 @@ public class ListActions implements IListActions {
         DBManager.getInventoryDB().removeFromInventory(item);
     }
 
+    //Checks for if an item is in the inventory/grocery list
     @Override
     public boolean isInInventory(Item item) {
         boolean exists = false;

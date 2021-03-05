@@ -71,6 +71,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
             }
         });
 
+        //Buy button for quickly adding an item to the inventory
         holder.btnBuyItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +97,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
             }
         });
 
+        //Set up expanded/collapsed view
         if(items.get(position).groceryIsExpanded()){
             holder.expandedLayout.setVisibility(View.VISIBLE);
             holder.downArrow.setVisibility(View.GONE);
