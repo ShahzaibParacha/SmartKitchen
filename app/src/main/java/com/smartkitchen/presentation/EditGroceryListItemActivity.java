@@ -8,13 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
 
 public class EditGroceryListItemActivity extends AppCompatActivity {
 
-
+    IListActions listActions = new ListActions();
     public static final String POSITION_KEY = "position";
 
     //Fields for user input
@@ -31,7 +33,7 @@ public class EditGroceryListItemActivity extends AppCompatActivity {
         //Gets the item that has been selected to be edited
         Intent intent = getIntent();
         int itemPosition = intent.getIntExtra(POSITION_KEY, -1);
-        Item item = DBManager.getGroceryDB().getGroceryList().get(itemPosition);
+        Item item = listActions.getGroceryItem(itemPosition);
 
         //Initializes the UI views
         initViews();

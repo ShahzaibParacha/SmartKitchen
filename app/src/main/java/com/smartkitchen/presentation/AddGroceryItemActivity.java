@@ -8,12 +8,15 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
 
 public class AddGroceryItemActivity extends AppCompatActivity {
 
+    IListActions listActions = new ListActions();
     //Input Fields for item information
     private EditText inputName, inputQuantityToBuy, inputUnits;
     //Buttons to add an item and cancel add activity
@@ -45,7 +48,7 @@ public class AddGroceryItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Creates item based on inputted values
                 Item newItem = initItem();
-                DBManager.getGroceryDB().addToGrocery(newItem);
+                listActions.addToGrocery(newItem);
                 //Once the item is added, return to grocery list screen
                 Intent intent = new Intent(AddGroceryItemActivity.this, GroceryListActivity.class);
                 startActivity(intent);

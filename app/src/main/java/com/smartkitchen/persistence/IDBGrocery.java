@@ -7,11 +7,11 @@ public interface IDBGrocery {
     // Interface of Grocery (parent class)
 
     // Signature for methods is set here
-    public void addToGrocery(Item item);
+    void addToGrocery(Item item);
 
-    public Item removeFromGrocery(Item item);
+    Item removeFromGrocery(Item item);
 
-    public ArrayList<Item> getGroceryList();
+    ArrayList<Item> getGroceryList();
 
-    public Item getGroceryItemByName(String name);
+    Item getGroceryItemByName(String name);
 }

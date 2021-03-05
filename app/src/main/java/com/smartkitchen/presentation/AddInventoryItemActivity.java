@@ -11,12 +11,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
 
 public class AddInventoryItemActivity extends AppCompatActivity {
 
+    IListActions listActions = new ListActions();
     //Input Fields for item information
     private EditText inputName, inputQuantity, inputUnits, inputThreshold;
     //Checkbox to enable/disable threshold
@@ -74,7 +77,7 @@ public class AddInventoryItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Initializes new item based on inputted information
                 Item newItem = initItem();
-                DBManager.getInventoryDB().addToInventory(newItem);
+                listActions.addToInventory(newItem);
                 //Return to the inventory screen
                 Intent intent = new Intent(AddInventoryItemActivity.this, CurrentInventoryActivity.class);
                 startActivity(intent);

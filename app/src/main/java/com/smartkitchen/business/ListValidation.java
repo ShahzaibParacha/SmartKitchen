@@ -26,7 +26,7 @@ public class ListValidation {
     public void containsItemInputs() throws Exception {
         if (item.getName().length() <= 0)
             throw new Exception("Need a valid string input for name.");
-        if (item.getQuantity() <= 0)
+        if (item.getQuantity() < 0)
             throw new Exception("Need a valid quantity input.");
         if (item.getUnits().length() <= 0)
             throw new Exception("Need a string input for units.");
