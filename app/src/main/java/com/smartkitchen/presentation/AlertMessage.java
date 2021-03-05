@@ -28,7 +28,8 @@ public class AlertMessage {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 item.setQuantityToBuy(Integer.parseInt(input.getText().toString()));
-                listActions.addToGrocery(item);
+                if(!listActions.isInGrocery(item))
+                    listActions.addToGrocery(item);
                 if(returnToMain) {
                     Intent intent = new Intent(context, CurrentInventoryActivity.class);
                     context.startActivity(intent);

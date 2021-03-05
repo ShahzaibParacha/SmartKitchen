@@ -43,4 +43,15 @@ public class FakeDBInventory implements IDBInventory{
     public ArrayList<Item> getInventoryList() {
         return inventoryList;
     }
+
+    @Override
+    public Item getInventoryItemByName(String name) {
+        Item item = null;
+        for (Item x:inventoryList) {
+            if(x.getName().equals(name)){
+                item = x;
+            }
+        }
+        return item;
+    }
 }

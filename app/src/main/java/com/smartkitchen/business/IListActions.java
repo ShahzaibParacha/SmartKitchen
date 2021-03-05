@@ -13,6 +13,7 @@ public interface IListActions {
     Item getInventoryItem(int position);
 
     Item getGroceryItemByName(String name);
+    Item getInventoryItemByName(String name);
 
     boolean thresholdAddToGrocery(Item item, Context context, boolean returnToMain);
 
@@ -20,4 +21,7 @@ public interface IListActions {
 
     void removeFromGrocery(Item item);
     void removeFromInventory(Item item);
+
+    boolean isInInventory(Item item);
+    boolean isInGrocery(Item item);
 }

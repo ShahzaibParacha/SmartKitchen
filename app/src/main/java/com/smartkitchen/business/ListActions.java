@@ -38,9 +38,20 @@ public class ListActions implements IListActions {
     }
 
     @Override
+    public Item getInventoryItemByName(String name) {
+        Item item = DBManager.getInventoryDB().getInventoryItemByName(name);
+        return item;
+    }
+
+    @Override
     public void buyItem(Item item) {
-        item.setQuantity(item.getQuantityToBuy());
-        addToInventory(item);
+        if(isInInventory(item)){
+            item.setQuantity(item.getQuantity()+item.getQuantityToBuy());
+        }
+        else {
+            item.setQuantity(item.getQuantityToBuy());
+            addToInventory(item);
+        }
         removeFromGrocery(item);
     }
 
@@ -50,9 +61,8 @@ public class ListActions implements IListActions {
         ListValidation validation = new ListValidation(item);
         // get the grocery item and check if current item is already in grocery list
         if (validation.thresholdStatus()) {
-            Item groceryItem = DBManager.getGroceryDB().getGroceryItemByName(item.getName());
             //If not already in grocery list, add to the grocery list
-            if (groceryItem == null) {
+            if (!isInGrocery(item)) {
                 AlertMessage.showDialog(context, item, returnToMain);
                 enteredThreshold = true;
             }
@@ -68,5 +78,27 @@ public class ListActions implements IListActions {
     @Override
     public void removeFromInventory(Item item) {
         DBManager.getInventoryDB().removeFromInventory(item);
+    }
+
+    @Override
+    public boolean isInInventory(Item item) {
+        boolean exists = false;
+        for(Item x:DBManager.getInventoryDB().getInventoryList()){
+            if(x.equals(item)){
+                exists = true;
+            }
+        }
+        return exists;
+    }
+
+    @Override
+    public boolean isInGrocery(Item item) {
+        boolean exists = false;
+        for(Item x:DBManager.getGroceryDB().getGroceryList()){
+            if(x.equals(item)){
+                exists = true;
+            }
+        }
+        return exists;
     }
 }
