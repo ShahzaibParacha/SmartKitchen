@@ -1,7 +1,10 @@
 package com.smartkitchen.business;
 
+import android.content.Context;
+
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.persistence.DBManager;
+import com.smartkitchen.presentation.AlertMessage;
 
 public class ListActions implements IListActions {
 
@@ -12,9 +15,9 @@ public class ListActions implements IListActions {
     }
 
     @Override
-    public void addToInventory(Item item) {
+    public boolean addToInventory(Item item, Context context) {
         DBManager.getInventoryDB().addToInventory(item);
-        thresholdAddToGrocery(item);
+        return thresholdAddToGrocery(item, context);
     }
 
     @Override
@@ -36,17 +39,19 @@ public class ListActions implements IListActions {
     }
 
     @Override
-    public void thresholdAddToGrocery(Item item) {
+    public boolean thresholdAddToGrocery(Item item, Context context) {
+        boolean enteredThreshold = false;
         ListValidation validation = new ListValidation(item);
         // get the grocery item and check if current item is already in grocery list
         if (validation.thresholdStatus()) {
             Item groceryItem = DBManager.getGroceryDB().getGroceryItemByName(item.getName());
             //If not already in grocery list, add to the grocery list
             if (groceryItem == null) {
-                item.setQuantityToBuy(item.getThresholdQuantity());
-                DBManager.getGroceryDB().addToGrocery(item);
+                AlertMessage.showDialog(context, item);
+                enteredThreshold = true;
             }
         }
+        return enteredThreshold;
     }
 
     @Override

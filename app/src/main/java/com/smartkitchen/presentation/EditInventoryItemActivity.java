@@ -55,10 +55,12 @@ public class EditInventoryItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Updates the item information
                 updateData(item);
-                listActions.thresholdAddToGrocery(item);
 
-                Intent intent = new Intent(EditInventoryItemActivity.this, CurrentInventoryActivity.class);
-                startActivity(intent);
+                boolean enteredThreshold = listActions.thresholdAddToGrocery(item, EditInventoryItemActivity.this);
+                if(!enteredThreshold){
+                    Intent intent = new Intent(EditInventoryItemActivity.this, CurrentInventoryActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
