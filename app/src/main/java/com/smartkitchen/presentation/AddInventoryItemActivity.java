@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
@@ -74,10 +75,18 @@ public class AddInventoryItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Initializes new item based on inputted information
                 Item newItem = initItem();
-                DBManager.getInventoryDB().addToInventory(newItem);
-                //Return to the inventory screen
-                Intent intent = new Intent(AddInventoryItemActivity.this, CurrentInventoryActivity.class);
-                startActivity(intent);
+                ListValidation validation = new ListValidation(newItem);
+                try {
+                    validation.containsItemInputs();
+                    DBManager.getInventoryDB().addToInventory(newItem);
+                    //Return to the inventory screen
+                    Intent intent = new Intent(AddInventoryItemActivity.this, CurrentInventoryActivity.class);
+                    startActivity(intent);
+                }
+                catch (Exception e) {
+                    // This is where UI can pop a new layer which notifies user of error input
+                    System.out.println(e.getMessage());
+                }
             }
         });
     }

@@ -50,21 +50,27 @@ public class EditInventoryItemActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Updates the item information
-                updateData(item);
-                ListValidation validation = new ListValidation(item);
-                // get the grocery item and check if current item is already in grocery list
-                if (validation.thresholdStatus()) {
-                    Item groceryItem = DBManager.getGroceryDB().getGroceryItemByName(item.getName());
-                    //If not already in grocery list, add to the grocery list
-                    if (groceryItem == null) {
-                        item.setQuantityToBuy(item.getThresholdQuantity());
-                        DBManager.getGroceryDB().addToGrocery(item);
-                    } 
+                // ERROR HERE SINCE THRESHOLD VALUE IS 0 FOR THE FUNCTION
+                ListValidation validation = new ListValidation(checkData(item));
+                try {
+                    //Updates the item information
+                    validation.containsItemInputs();
+                    updateData(item);
+                    // get the grocery item and check if current item is already in grocery list
+                    if (validation.thresholdStatus()) {
+                        Item groceryItem = DBManager.getGroceryDB().getGroceryItemByName(item.getName());
+                        //If not already in grocery list, add to the grocery list
+                        if (groceryItem == null) {
+                            item.setQuantityToBuy(item.getThresholdQuantity());
+                            DBManager.getGroceryDB().addToGrocery(item);
+                        }
+                    }
+                    Intent intent = new Intent(EditInventoryItemActivity.this, CurrentInventoryActivity.class);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    // This is where UI can pop a new layer which notifies user of error input
+                    System.out.println(e.getMessage());
                 }
-
-                Intent intent = new Intent(EditInventoryItemActivity.this, CurrentInventoryActivity.class);
-                startActivity(intent);
             }
         });
     }
@@ -81,6 +87,16 @@ public class EditInventoryItemActivity extends AppCompatActivity {
         item.setName(editName.getText().toString());
         item.setQuantity(Integer.parseInt(editQuantity.getText().toString()));
         item.setUnits(editUnits.getText().toString());
+    }
+
+    //Grabs the info from the text field and stores in an Item object
+    private Item checkData(Item item) {
+        //Temporary parameter until edit button is created
+        String checkName = editName.getText().toString();
+        int checkQuantity = Integer.parseInt(editQuantity.getText().toString());
+        String checkUnit = editUnits.getText().toString();
+        Item checkItem = new Item(checkName, checkQuantity, checkUnit, item.getQuantityToBuy(), item.getThresholdQuantity());
+        return checkItem;
     }
 
     //Initializes the views

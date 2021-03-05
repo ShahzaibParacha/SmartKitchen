@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
@@ -50,9 +51,18 @@ public class EditGroceryListItemActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateData(item);
-                Intent intent = new Intent(EditGroceryListItemActivity.this, GroceryListActivity.class);
-                startActivity(intent);
+                ListValidation validation = new ListValidation(checkData());
+                try {
+                    //Updates the item information
+                    validation.containsItemInputs();
+                    updateData(item);
+                    Intent intent = new Intent(EditGroceryListItemActivity.this, GroceryListActivity.class);
+                    startActivity(intent);
+                }
+                catch (Exception e) {
+                    // This is where UI can pop a new layer which notifies user of error input
+                    System.out.println(e.getMessage());
+                }
             }
         });
     }
@@ -69,6 +79,15 @@ public class EditGroceryListItemActivity extends AppCompatActivity {
         item.setName(editName.getText().toString());
         item.setQuantityToBuy(Integer.parseInt(editQuantity.getText().toString()));
         item.setUnits(editUnits.getText().toString());
+    }
+
+    //Grabs the info from the text field and stores in an Item object
+    private Item checkData() {
+        String checkName = editName.getText().toString();
+        int checkQuantity = Integer.parseInt(editQuantity.getText().toString());
+        String checkUnit = editUnits.getText().toString();
+        Item checkItem = new Item(checkName, checkQuantity, checkUnit, 0,0);
+        return checkItem;
     }
 
     //Initializes the UI elements

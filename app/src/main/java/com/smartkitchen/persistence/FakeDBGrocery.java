@@ -1,6 +1,5 @@
 package com.smartkitchen.persistence;
 
-import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Item;
 
 import java.util.ArrayList;
@@ -8,7 +7,7 @@ import java.util.ArrayList;
 public class FakeDBGrocery implements IDBGrocery {
 
     private ArrayList<Item> groceryList;
-    private ListValidation validation;
+    //private ListValidation validation;
 
     // Constructor instantiating grocery list
     public FakeDBGrocery(){
@@ -20,17 +19,7 @@ public class FakeDBGrocery implements IDBGrocery {
     // Method instantiates validation object and checks whether the items contains proper parameters
     // If proper parameters are in place, add item to the grocery list
     @Override
-    public void addToGrocery(Item item) {
-        validation = new ListValidation(item);
-        try {
-            validation.containsItemInputs();
-            groceryList.add(item);
-        }
-        catch (Exception e) {
-            // This is where UI can pop a new layer which notifies user of error input
-            System.out.println(e.getMessage());
-        }
-    }
+    public void addToGrocery(Item item) { groceryList.add(item); }
 
     // Method removes specified item from grocery list
     @Override

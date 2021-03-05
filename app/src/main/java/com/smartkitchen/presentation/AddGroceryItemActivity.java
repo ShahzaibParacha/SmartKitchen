@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
@@ -45,10 +46,18 @@ public class AddGroceryItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Creates item based on inputted values
                 Item newItem = initItem();
-                DBManager.getGroceryDB().addToGrocery(newItem);
-                //Once the item is added, return to grocery list screen
-                Intent intent = new Intent(AddGroceryItemActivity.this, GroceryListActivity.class);
-                startActivity(intent);
+                ListValidation validation = new ListValidation(newItem);
+                try {
+                    validation.containsItemInputs();
+                    DBManager.getGroceryDB().addToGrocery(newItem);
+                    //Once the item is added, return to grocery list screen
+                    Intent intent = new Intent(AddGroceryItemActivity.this, GroceryListActivity.class);
+                    startActivity(intent);
+                }
+                catch (Exception e) {
+                    // This is where UI can pop a new layer which notifies user of error input
+                    System.out.println(e.getMessage());
+                }
             }
         });
     }
