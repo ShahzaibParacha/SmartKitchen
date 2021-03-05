@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -65,6 +67,25 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
                 mContext.startActivity(intent);
             }
         });
+
+        //On Click Listeners to expand/collapse the cardview
+        holder.downArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.expandedLayout.setVisibility(View.VISIBLE);
+                holder.downArrow.setVisibility(View.GONE);
+                holder.upArrow.setVisibility(View.VISIBLE);
+            }
+        });
+
+        holder.upArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.expandedLayout.setVisibility(View.GONE);
+                holder.downArrow.setVisibility(View.VISIBLE);
+                holder.upArrow.setVisibility(View.GONE);
+            }
+        });
     }
 
     //Returns size of the list
@@ -86,7 +107,9 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
         private CardView parent;
         private TextView name;
         private TextView quantityToBuy;
-        private Button btnEdit, btnRemove;
+        private ImageView downArrow, upArrow;
+        private LinearLayout expandedLayout;
+        private Button btnEdit, btnRemove, btnBuyItem;
 
         //Finds and assigns the information
         public ViewHolder(@NonNull View itemView) {
@@ -95,8 +118,15 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
             parent = itemView.findViewById(R.id.groceryCardView);
             name = itemView.findViewById(R.id.txtGroceryItemName);
             quantityToBuy = itemView.findViewById(R.id.txtQuantityToBuy);
+
+            expandedLayout = itemView.findViewById(R.id.groceryViewExpanded);
+
+            upArrow = itemView.findViewById(R.id.groceryUpArrow);
+            downArrow = itemView.findViewById(R.id.groceryDownArrow);
+
             btnEdit = itemView.findViewById(R.id.btnEditGroceryItem);
             btnRemove = itemView.findViewById(R.id.btnRemoveGroceryItem);
+            btnBuyItem = itemView.findViewById(R.id.btnBuyItem);
         }
     }
 }
