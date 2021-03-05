@@ -7,7 +7,7 @@ import com.smartkitchen.objects.Item;
 public interface IListActions {
 
     void addToGrocery(Item item);
-    boolean addToInventory(Item item, Context context);
+    void addToInventory(Item item);
 
     Item getGroceryItem(int position);
     Item getInventoryItem(int position);
@@ -15,6 +15,8 @@ public interface IListActions {
     Item getGroceryItemByName(String name);
 
     boolean thresholdAddToGrocery(Item item, Context context);
+
+    void buyItem(Item item);
 
     void removeFromGrocery(Item item);
     void removeFromInventory(Item item);

@@ -77,7 +77,8 @@ public class AddInventoryItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Initializes new item based on inputted information
                 Item newItem = initItem();
-                boolean enteredThreshold = listActions.addToInventory(newItem, AddInventoryItemActivity.this);
+                listActions.addToInventory(newItem);
+                boolean enteredThreshold = listActions.thresholdAddToGrocery(newItem, AddInventoryItemActivity.this);
 
                 if(!enteredThreshold){
                     Intent intent = new Intent(AddInventoryItemActivity.this, CurrentInventoryActivity.class);

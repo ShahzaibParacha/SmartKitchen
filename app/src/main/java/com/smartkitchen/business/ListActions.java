@@ -15,9 +15,8 @@ public class ListActions implements IListActions {
     }
 
     @Override
-    public boolean addToInventory(Item item, Context context) {
+    public void addToInventory(Item item) {
         DBManager.getInventoryDB().addToInventory(item);
-        return thresholdAddToGrocery(item, context);
     }
 
     @Override
@@ -36,6 +35,13 @@ public class ListActions implements IListActions {
     public Item getGroceryItemByName(String name) {
         Item item = DBManager.getGroceryDB().getGroceryItemByName(name);
         return item;
+    }
+
+    @Override
+    public void buyItem(Item item) {
+        item.setQuantity(item.getQuantityToBuy());
+        addToInventory(item);
+        removeFromGrocery(item);
     }
 
     @Override

@@ -24,7 +24,6 @@ public class AlertMessage {
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         builder.setView(input);
 
-
         builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

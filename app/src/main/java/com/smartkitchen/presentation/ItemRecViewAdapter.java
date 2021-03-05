@@ -73,6 +73,13 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
             }
         });
 
+        holder.btnAddToGrocery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertMessage.showDialog(mContext, listActions.getInventoryItem(position));
+            }
+        });
+
         //On click listeners to expand/collapse the cardview
         holder.downArrow.setOnClickListener(new View.OnClickListener() {
             @Override
