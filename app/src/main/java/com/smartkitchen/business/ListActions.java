@@ -11,12 +11,28 @@ public class ListActions implements IListActions {
     //Simple adds to either list
     @Override
     public void addToGrocery(Item item) {
-        DBManager.getGroceryDB().addToGrocery(item);
+        try{
+            ListValidation validation = new ListValidation(item);
+            validation.containsItemInputs();
+            DBManager.getGroceryDB().addToGrocery(item);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     @Override
     public void addToInventory(Item item) {
-        DBManager.getInventoryDB().addToInventory(item);
+        try{
+            ListValidation validation = new ListValidation(item);
+            validation.containsItemInputs();
+            DBManager.getInventoryDB().addToInventory(item);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     //Simple gets from either list
