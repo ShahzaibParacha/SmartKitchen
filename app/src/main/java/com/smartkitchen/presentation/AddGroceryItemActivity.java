@@ -14,7 +14,7 @@ import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
 
-public class AddGroceryItemActivity extends AppCompatActivity {
+public class AddGroceryItemActivity extends ParentActivity {
 
     IListActions listActions = new ListActions();
     //Input Fields for item information
@@ -28,6 +28,7 @@ public class AddGroceryItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_item_to_grocery_screen);
+        setTitle("Add New Grocery List Item");
 
 
         //Initializes the UI elements
