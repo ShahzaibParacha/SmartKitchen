@@ -1,5 +1,8 @@
 package com.smartkitchen.objects;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Item {
     private final double DEFAULT_THRESHOLD_CONST = 0.2;
 
@@ -10,17 +13,33 @@ public class Item {
     private int quantityToBuy;          // quantity in grocery
     private int thresholdQuantity;
 
+    //ADDITIONS
+    private ArrayList<String> allergies;
+    private int caloriesPerUnit;
+    private double pricePerUnit;
+
     //Flags for if the cardview should be expanded in either list
     private boolean invIsExpanded = false;
     private boolean groceryIsExpanded = false;
 
     //Constructor
-    public Item(String name, int quantity, String units, int quantityToBuy, int thresholdQuantity) {
+    public Item(String name, int quantity, String units, int quantityToBuy, int thresholdQuantity,
+                ArrayList<String> allergies, int caloriesPerUnit, double pricePerUnit) {
         this.name = name;
         this.quantity = quantity;
         this.units = units;
         this.quantityToBuy = quantityToBuy;
         this.thresholdQuantity = thresholdQuantity;
+        this.allergies = allergies;
+        this.caloriesPerUnit = caloriesPerUnit;
+        this.pricePerUnit = pricePerUnit;
+    }
+
+    //Secondary Constructor
+    public Item(String name, int quantity, String units) {
+        this.name = name;
+        this.quantity = quantity;
+        this.units = units;
     }
 
     //Getters and Setters
@@ -41,10 +60,10 @@ public class Item {
     }
 
     //Returns a string of the quantity and units
+
     public String getQuantityString(){
         return "" + quantity + " " + units;
     }
-
     public String getUnits() {
         return units;
     }
@@ -66,6 +85,30 @@ public class Item {
     public int getThresholdQuantity() { return thresholdQuantity; }
 
     public void setThresholdQuantity(int thresholdQuantity) { this.thresholdQuantity = thresholdQuantity; }
+
+    public ArrayList<String> getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(ArrayList<String> allergies) {
+        this.allergies = allergies;
+    }
+
+    public int getCaloriesPerUnit() {
+        return caloriesPerUnit;
+    }
+
+    public void setCaloriesPerUnit(int caloriesPerUnit) {
+        this.caloriesPerUnit = caloriesPerUnit;
+    }
+
+    public double getPricePerUnit() {
+        return pricePerUnit;
+    }
+
+    public void setPricePerUnit(double pricePerUnit) {
+        this.pricePerUnit = pricePerUnit;
+    }
 
     public int calculateDefaultThreshold(){
         return (int)(quantity*DEFAULT_THRESHOLD_CONST);
