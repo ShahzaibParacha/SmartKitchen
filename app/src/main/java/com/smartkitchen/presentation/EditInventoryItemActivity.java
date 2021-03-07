@@ -54,13 +54,18 @@ public class EditInventoryItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Updates the item information
-                updateData(item);
-                //Checks if the item needed to be added to grocery list because quantity<threshold
-                boolean enteredThreshold = listActions.thresholdAddToGrocery(item, EditInventoryItemActivity.this, true);
-                //If not, return to the inventory screen as usual
-                if(!enteredThreshold){
-                    Intent intent = new Intent(EditInventoryItemActivity.this, CurrentInventoryActivity.class);
-                    startActivity(intent);
+                try {
+                    listActions.editValidation(checkData(item));
+                    updateData(item);
+                    //Checks if the item needed to be added to grocery list because quantity<threshold
+                    boolean enteredThreshold = listActions.thresholdAddToGrocery(item, EditInventoryItemActivity.this, true);
+                    //If not, return to the inventory screen as usual
+                    if(!enteredThreshold){
+                        Intent intent = new Intent(EditInventoryItemActivity.this, CurrentInventoryActivity.class);
+                        startActivity(intent);
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
                 }
             }
         });
@@ -78,6 +83,16 @@ public class EditInventoryItemActivity extends AppCompatActivity {
         item.setName(editName.getText().toString());
         item.setQuantity(Integer.parseInt(editQuantity.getText().toString()));
         item.setUnits(editUnits.getText().toString());
+    }
+
+    //Grabs the info from the text field and stores in an Item object
+    private Item checkData(Item item) {
+        //Temporary parameter until edit button is created
+        String checkName = editName.getText().toString();
+        int checkQuantity = Integer.parseInt(editQuantity.getText().toString());
+        String checkUnit = editUnits.getText().toString();
+        Item checkItem = new Item(checkName, checkQuantity, checkUnit, item.getQuantityToBuy(), item.getThresholdQuantity());
+        return checkItem;
     }
 
     //Initializes the views
