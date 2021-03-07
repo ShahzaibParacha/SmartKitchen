@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.ListActions;
@@ -65,7 +66,7 @@ public class EditInventoryItemActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                    Toast.makeText(EditInventoryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -89,7 +90,9 @@ public class EditInventoryItemActivity extends AppCompatActivity {
     private Item checkData(Item item) {
         //Temporary parameter until edit button is created
         String checkName = editName.getText().toString();
-        int checkQuantity = Integer.parseInt(editQuantity.getText().toString());
+        int checkQuantity = -1;
+        if(!editQuantity.getText().toString().equals(""))
+            checkQuantity = Integer.parseInt(editQuantity.getText().toString());
         String checkUnit = editUnits.getText().toString();
         Item checkItem = new Item(checkName, checkQuantity, checkUnit, item.getQuantityToBuy(), item.getThresholdQuantity());
         return checkItem;

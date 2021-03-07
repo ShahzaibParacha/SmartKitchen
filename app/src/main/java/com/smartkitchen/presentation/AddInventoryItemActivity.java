@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -87,7 +88,7 @@ public class AddInventoryItemActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                    Toast.makeText(AddInventoryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -97,10 +98,12 @@ public class AddInventoryItemActivity extends AppCompatActivity {
     //Initializes item based on inputted information
     private Item initItem(){
         String name = inputName.getText().toString();
-        int quantity = Integer.parseInt(inputQuantity.getText().toString());
+        int quantity = -1;
+        if(!inputQuantity.getText().toString().equals(""))
+            quantity = Integer.parseInt(inputQuantity.getText().toString());
         String units = inputUnits.getText().toString();
         //Defaults threshold to 0, takes inputted number if enabled
-        int threshold = 0;
+        int threshold = -1;
         if(thresholdEnabled && !inputThreshold.getText().toString().equals(""))
             threshold = Integer.parseInt(inputThreshold.getText().toString());
         return new Item(name, quantity, units, 0, threshold);

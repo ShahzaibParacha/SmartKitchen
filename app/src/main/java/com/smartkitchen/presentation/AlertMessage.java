@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.InputType;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.ListActions;
@@ -26,29 +28,41 @@ public class AlertMessage {
         final EditText input = new EditText(context);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         builder.setView(input);
+        //Create the submit button, the on click listener will be overrided later
+        builder.setPositiveButton("Submit", null);
+        //Create and show the dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
         //Implements the submit button
-        builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //Take the input and modify item object
-                item.setQuantityToBuy(Integer.parseInt(input.getText().toString()));
-                //If the item is not in the grocery list yet, add it in
-                if(!listActions.isInGrocery(item)) {
-                    try {
-                        listActions.addToGrocery(item);
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
+            public void onClick(View v) {
+                //Checks for valid input before continuing
+                if(!input.getText().toString().equals("")) {
+                    //Take the input and modify item object
+                    item.setQuantityToBuy(Integer.parseInt(input.getText().toString()));
+                    //If the item is not in the grocery list yet, add it in
+                    if (!listActions.isInGrocery(item)) {
+                        try {
+                            listActions.addToGrocery(item);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
                     }
+                    //If the function needs to return to the inventory screen, do that here
+                    if (returnToMain) {
+                        Intent intent = new Intent(context, CurrentInventoryActivity.class);
+                        context.startActivity(intent);
+                    }
+                    //Closes the dialog
+                    dialog.dismiss();
                 }
-                //If the function needs to return to the inventory screen, do that here
-                if(returnToMain) {
-                    Intent intent = new Intent(context, CurrentInventoryActivity.class);
-                    context.startActivity(intent);
+                //If not valid input, show toast message
+                else{
+                    Toast.makeText(context, "Please enter valid quantity", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-        builder.show();
     }
 }

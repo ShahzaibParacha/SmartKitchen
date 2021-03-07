@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -80,7 +81,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
                     notifyItemRemoved(position);
                     notifyDataSetChanged();
                 } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                    Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
