@@ -52,9 +52,14 @@ public class EditGroceryListItemActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateData(item);
-                Intent intent = new Intent(EditGroceryListItemActivity.this, GroceryListActivity.class);
-                startActivity(intent);
+                try {
+                    listActions.editValidation(checkData(item));
+                    updateData(item);
+                    Intent intent = new Intent(EditGroceryListItemActivity.this, GroceryListActivity.class);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
         });
     }
@@ -71,6 +76,16 @@ public class EditGroceryListItemActivity extends AppCompatActivity {
         item.setName(editName.getText().toString());
         item.setQuantityToBuy(Integer.parseInt(editQuantity.getText().toString()));
         item.setUnits(editUnits.getText().toString());
+    }
+
+    //Grabs the info from the text field and stores in an Item object
+    private Item checkData(Item item) {
+        //Temporary parameter until edit button is created
+        String checkName = editName.getText().toString();
+        int checkQuantity = Integer.parseInt(editQuantity.getText().toString());
+        String checkUnit = editUnits.getText().toString();
+        Item checkItem = new Item(checkName, checkQuantity, checkUnit, item.getQuantityToBuy(), item.getThresholdQuantity());
+        return checkItem;
     }
 
     //Initializes the UI elements

@@ -20,7 +20,7 @@ public class AlertMessage {
 
         //Creates the object and sets the text
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Adding item to grocery list, please set quantity you wish to buy:");
+        builder.setTitle("Adding " + item.getName() + " to grocery list, please set quantity you wish to buy:");
 
         //Creates the input field and assigns it to the object
         final EditText input = new EditText(context);
@@ -34,8 +34,13 @@ public class AlertMessage {
                 //Take the input and modify item object
                 item.setQuantityToBuy(Integer.parseInt(input.getText().toString()));
                 //If the item is not in the grocery list yet, add it in
-                if(!listActions.isInGrocery(item))
-                    listActions.addToGrocery(item);
+                if(!listActions.isInGrocery(item)) {
+                    try {
+                        listActions.addToGrocery(item);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
                 //If the function needs to return to the inventory screen, do that here
                 if(returnToMain) {
                     Intent intent = new Intent(context, CurrentInventoryActivity.class);

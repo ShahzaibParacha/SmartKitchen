@@ -10,29 +10,39 @@ public class ListActions implements IListActions {
 
     //Simple adds to either list
     @Override
-    public void addToGrocery(Item item) {
+    public void addToGrocery(Item item) throws Exception {
         try{
             ListValidation validation = new ListValidation(item);
             validation.containsItemInputs();
             DBManager.getGroceryDB().addToGrocery(item);
         }
         catch(Exception e){
-            System.out.println(e.getMessage());
+            throw e;
         }
 
     }
 
     @Override
-    public void addToInventory(Item item) {
+    public void addToInventory(Item item) throws Exception {
         try{
             ListValidation validation = new ListValidation(item);
             validation.containsItemInputs();
             DBManager.getInventoryDB().addToInventory(item);
         }
         catch(Exception e){
-            System.out.println(e.getMessage());
+            throw e;
         }
+    }
 
+    @Override
+    public void editValidation(Item item) throws Exception {
+        try{
+            ListValidation validation = new ListValidation(item);
+            validation.containsItemInputs();
+        }
+        catch(Exception e){
+            throw e;
+        }
     }
 
     //Simple gets from either list
@@ -63,7 +73,7 @@ public class ListActions implements IListActions {
 
     //"Buys" an item, i.e. moves it into inventory
     @Override
-    public void buyItem(Item item) {
+    public void buyItem(Item item) throws Exception {
         //If the item is already in inventory, sum current quantity and quantity to buy
         if(isInInventory(item)){
             item.setQuantity(item.getQuantity()+item.getQuantityToBuy());
@@ -71,7 +81,11 @@ public class ListActions implements IListActions {
         //If not, set the quantity as quantity to buy and add it
         else {
             item.setQuantity(item.getQuantityToBuy());
-            addToInventory(item);
+            try {
+                addToInventory(item);
+            } catch (Exception e) {
+                throw e;
+            }
         }
         //Remove the item from the grocery list
         removeFromGrocery(item);

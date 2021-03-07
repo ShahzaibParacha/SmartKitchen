@@ -48,10 +48,14 @@ public class AddGroceryItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Creates item based on inputted values and adds
                 Item newItem = initItem();
-                listActions.addToGrocery(newItem);
-                //Once the item is added, return to grocery list screen
-                Intent intent = new Intent(AddGroceryItemActivity.this, GroceryListActivity.class);
-                startActivity(intent);
+                try {
+                    listActions.addToGrocery(newItem);
+                    //Once the item is added, return to grocery list screen
+                    Intent intent = new Intent(AddGroceryItemActivity.this, GroceryListActivity.class);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
         });
     }
