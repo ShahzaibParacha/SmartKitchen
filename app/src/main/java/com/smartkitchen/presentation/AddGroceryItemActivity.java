@@ -46,7 +46,7 @@ public class AddGroceryItemActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Creates item based on inputted values
+                //Creates item based on inputted values and adds
                 Item newItem = initItem();
                 listActions.addToGrocery(newItem);
                 //Once the item is added, return to grocery list screen

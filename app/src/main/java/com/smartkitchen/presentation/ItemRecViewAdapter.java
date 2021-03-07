@@ -73,24 +73,43 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
             }
         });
 
-        //On click listeners to expand/collapse the cardview
+        //Button to quickly add items to the grocery list
+        holder.btnAddToGrocery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Calls the prompt for user to enter quantity to buy (doesn't need to return to main because it is already on main)
+                AlertMessage.showDialog(mContext, listActions.getInventoryItem(position), false);
+            }
+        });
+
+        //On Click Listeners to expand/collapse the cardview
         holder.downArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.expandedLayout.setVisibility(View.VISIBLE);
-                holder.downArrow.setVisibility(View.GONE);
-                holder.upArrow.setVisibility(View.VISIBLE);
+                items.get(position).setInvIsExpanded(true);
+                notifyItemChanged(position);
             }
         });
 
         holder.upArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.expandedLayout.setVisibility(View.GONE);
-                holder.downArrow.setVisibility(View.VISIBLE);
-                holder.upArrow.setVisibility(View.GONE);
+                items.get(position).setInvIsExpanded(false);
+                notifyItemChanged(position);
             }
         });
+
+        //Set up expanded/collapsed view
+        if(items.get(position).invIsExpanded()){
+            holder.expandedLayout.setVisibility(View.VISIBLE);
+            holder.downArrow.setVisibility(View.GONE);
+            holder.upArrow.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.expandedLayout.setVisibility(View.GONE);
+            holder.downArrow.setVisibility(View.VISIBLE);
+            holder.upArrow.setVisibility(View.GONE);
+        }
 
     }
 

@@ -1,5 +1,7 @@
 package com.smartkitchen.business;
 
+import android.content.Context;
+
 import com.smartkitchen.objects.Item;
 
 public interface IListActions {
@@ -11,9 +13,15 @@ public interface IListActions {
     Item getInventoryItem(int position);
 
     Item getGroceryItemByName(String name);
+    Item getInventoryItemByName(String name);
 
-    void thresholdAddToGrocery(Item item);
+    boolean thresholdAddToGrocery(Item item, Context context, boolean returnToMain);
+
+    void buyItem(Item item);
 
     void removeFromGrocery(Item item);
     void removeFromInventory(Item item);
+
+    boolean isInInventory(Item item);
+    boolean isInGrocery(Item item);
 }
