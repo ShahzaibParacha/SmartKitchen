@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +15,7 @@ import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
 
-public class AddGroceryItemActivity extends AppCompatActivity {
+public class AddGroceryItemActivity extends ParentActivity {
 
     IListActions listActions = new ListActions();
     //Input Fields for item information
@@ -28,6 +29,7 @@ public class AddGroceryItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_item_to_grocery_screen);
+        setTitle("Add New Grocery List Item");
 
 
         //Initializes the UI elements
@@ -54,7 +56,7 @@ public class AddGroceryItemActivity extends AppCompatActivity {
                     Intent intent = new Intent(AddGroceryItemActivity.this, GroceryListActivity.class);
                     startActivity(intent);
                 } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                    Toast.makeText(AddGroceryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -63,7 +65,9 @@ public class AddGroceryItemActivity extends AppCompatActivity {
     //Initialize new item with the inputted information
     private Item initItem(){
         String name = inputName.getText().toString();
-        int quantityToBuy = Integer.parseInt(inputQuantityToBuy.getText().toString());
+        int quantityToBuy = -1;
+        if(!inputQuantityToBuy.getText().toString().equals(""))
+            quantityToBuy = Integer.parseInt(inputQuantityToBuy.getText().toString());
         String units = inputUnits.getText().toString();
         return new Item(name, 0, units, quantityToBuy, 0, null, 0, 0);
     }

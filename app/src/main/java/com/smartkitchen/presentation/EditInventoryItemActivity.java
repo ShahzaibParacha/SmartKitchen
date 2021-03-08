@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.ListActions;
@@ -15,7 +16,7 @@ import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
 
-public class EditInventoryItemActivity extends AppCompatActivity {
+public class EditInventoryItemActivity extends ParentActivity {
 
     IListActions listActions = new ListActions();
     public static final String POSITION_KEY = "position";
@@ -31,10 +32,13 @@ public class EditInventoryItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_inventory_item);
 
+
         //Gets the item that has been selected to be edited
         Intent intent = getIntent();
         int itemPosition = intent.getIntExtra(POSITION_KEY, -1);
         Item item = listActions.getInventoryItem(itemPosition);
+
+        setTitle("Edit " + item.getName());
 
         //Initializes the UI elements
         initViews();
@@ -65,7 +69,7 @@ public class EditInventoryItemActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                    Toast.makeText(EditInventoryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -89,7 +93,9 @@ public class EditInventoryItemActivity extends AppCompatActivity {
     private Item checkData(Item item) {
         //Temporary parameter until edit button is created
         String checkName = editName.getText().toString();
-        int checkQuantity = Integer.parseInt(editQuantity.getText().toString());
+        int checkQuantity = -1;
+        if(!editQuantity.getText().toString().equals(""))
+            checkQuantity = Integer.parseInt(editQuantity.getText().toString());
         String checkUnit = editUnits.getText().toString();
         Item checkItem = new Item(checkName, checkQuantity, checkUnit,
                 item.getQuantityToBuy(), item.getThresholdQuantity(),

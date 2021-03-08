@@ -25,12 +25,14 @@ public class ListValidation {
     // logic to check if entry for items are valid (name, quantity, units, threshold)
     public void containsItemInputs() throws Exception {
         if (item.getName().length() <= 0)
-            throw new Exception("Need a valid string input for name.");
+            throw new Exception("Please enter a valid input for name.");
         if (item.getQuantity() < 0)
-            throw new Exception("Need a valid quantity input.");
+            throw new Exception("Please enter a valid input for quantity.");
+        if(item.getQuantityToBuy() < 0)
+            throw new Exception("Please enter a valid input for quantity to buy.");
         if (item.getUnits().length() <= 0)
-            throw new Exception("Need a string input for units.");
+            throw new Exception("Please enter a valid input for units.");
         if (item.getThresholdQuantity() < 0)
-            throw new Exception("Need a valid threshold quantity input.");
+            throw new Exception("Please enter a valid input for threshold quantity.");
     }
 }
