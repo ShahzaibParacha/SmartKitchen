@@ -37,6 +37,14 @@ public class ListActions implements IListActions {
     }
 
     @Override
+    public void updateItem(Item item) {
+        if(isInInventory(item))
+            DBManager.getInventoryDB().updateItem(item);
+        if(isInGrocery(item))
+            DBManager.getGroceryDB().updateItem(item);
+    }
+
+    @Override
     public void editValidation(Item item) throws Exception {
         try{
             ListValidation validation = new ListValidation(item);

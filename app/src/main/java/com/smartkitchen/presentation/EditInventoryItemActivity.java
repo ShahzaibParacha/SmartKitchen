@@ -102,6 +102,7 @@ public class EditInventoryItemActivity extends ParentActivity {
         item.setPricePerUnit(Double.parseDouble(editPrice.getText().toString()));
         item.setCaloriesPerUnit(Integer.parseInt(editCalories.getText().toString()));
         item.setAllergies(getAllergies());
+        listActions.updateItem(item);
     }
 
     //Grabs the info from the text field and stores in an Item object

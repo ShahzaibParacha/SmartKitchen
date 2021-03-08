@@ -11,6 +11,8 @@ public interface IListActions {
     void addToGrocery(Item item) throws Exception;
     void addToInventory(Item item) throws Exception;
 
+    void updateItem(Item item);
+
     void editValidation(Item item) throws Exception;
 
     Item getGroceryItem(int position);
