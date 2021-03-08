@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,9 +14,12 @@ import android.widget.Toast;
 import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.business.ListValidation;
+import com.smartkitchen.objects.Allergies;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
+
+import java.util.ArrayList;
 
 public class EditInventoryItemActivity extends ParentActivity {
 
@@ -25,6 +29,7 @@ public class EditInventoryItemActivity extends ParentActivity {
     //Fields for user input
     private EditText editName, editQuantity, editUnits, editPrice, editCalories;
     private TextView title;
+    private CheckBox checkLactose, checkGluten, checkNuts, checkFish, checkEgg, checkSoy;
     //Buttons to cancel edit screen and submit changes
     private Button btnCancel, btnSubmit;
 
@@ -86,6 +91,7 @@ public class EditInventoryItemActivity extends ParentActivity {
         editUnits.setText(item.getUnits());
         editPrice.setText("" + item.getPricePerUnit());
         editCalories.setText("" + item.getCaloriesPerUnit());
+        setAllergies(item);
     }
 
     //Updates the information in the item
@@ -95,6 +101,7 @@ public class EditInventoryItemActivity extends ParentActivity {
         item.setUnits(editUnits.getText().toString());
         item.setPricePerUnit(Double.parseDouble(editPrice.getText().toString()));
         item.setCaloriesPerUnit(Integer.parseInt(editCalories.getText().toString()));
+        item.setAllergies(getAllergies());
     }
 
     //Grabs the info from the text field and stores in an Item object
@@ -117,6 +124,41 @@ public class EditInventoryItemActivity extends ParentActivity {
         return checkItem;
     }
 
+    private void setAllergies(Item item){
+        ArrayList<String> allergies = item.getAllergies();
+        if(allergies != null) {
+            if (listActions.isInList(allergies, Allergies.NUTS))
+                checkNuts.setChecked(true);
+            if (listActions.isInList(allergies, Allergies.SOY))
+                checkSoy.setChecked(true);
+            if (listActions.isInList(allergies, Allergies.LACTOSE))
+                checkLactose.setChecked(true);
+            if (listActions.isInList(allergies, Allergies.GLUTEN))
+                checkGluten.setChecked(true);
+            if (listActions.isInList(allergies, Allergies.FISH))
+                checkFish.setChecked(true);
+            if (listActions.isInList(allergies, Allergies.EGGS))
+                checkEgg.setChecked(true);
+        }
+    }
+
+    private ArrayList<String> getAllergies(){
+        ArrayList<String> allergies = new ArrayList<String>();
+        if(checkNuts.isChecked())
+            allergies.add(Allergies.NUTS);
+        if(checkSoy.isChecked())
+            allergies.add(Allergies.SOY);
+        if(checkLactose.isChecked())
+            allergies.add(Allergies.LACTOSE);
+        if(checkGluten.isChecked())
+            allergies.add(Allergies.GLUTEN);
+        if(checkFish.isChecked())
+            allergies.add(Allergies.FISH);
+        if(checkEgg.isChecked())
+            allergies.add(Allergies.EGGS);
+        return allergies;
+    }
+
     //Initializes the views
     private void initViews(){
         editName = findViewById(R.id.editInvItemName);
@@ -129,5 +171,12 @@ public class EditInventoryItemActivity extends ParentActivity {
 
         btnCancel = findViewById(R.id.btnInvEditCancel);
         btnSubmit = findViewById(R.id.btnEditInvSubmit);
+
+        checkEgg = findViewById(R.id.checkInvEggs);
+        checkFish = findViewById(R.id.checkInvFish);
+        checkGluten = findViewById(R.id.checkInvGluten);
+        checkLactose = findViewById(R.id.checkInvLactose);
+        checkSoy = findViewById(R.id.checkInvSoy);
+        checkNuts = findViewById(R.id.checkInvNuts);
     }
 }

@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.smartkitchen.objects.Item;
 
+import java.util.ArrayList;
+
 public interface IListActions {
 
     void addToGrocery(Item item) throws Exception;
@@ -26,4 +28,6 @@ public interface IListActions {
 
     boolean isInInventory(Item item);
     boolean isInGrocery(Item item);
+
+    boolean isInList(ArrayList<String> list, String s);
 }

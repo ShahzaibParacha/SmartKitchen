@@ -6,6 +6,8 @@ import com.smartkitchen.objects.Item;
 import com.smartkitchen.persistence.DBManager;
 import com.smartkitchen.presentation.AlertMessage;
 
+import java.util.ArrayList;
+
 public class ListActions implements IListActions {
 
     //Simple adds to either list
@@ -140,5 +142,15 @@ public class ListActions implements IListActions {
             }
         }
         return exists;
+    }
+
+    @Override
+    public boolean isInList(ArrayList<String> list, String s){
+        boolean inList = false;
+        for (String x:list) {
+            if(x.equals(s))
+                inList = true;
+        }
+        return inList;
     }
 }
