@@ -27,7 +27,7 @@ public class EditInventoryItemActivity extends ParentActivity {
     public static final String POSITION_KEY = "position";
 
     //Fields for user input
-    private EditText editName, editQuantity, editUnits, editPrice, editCalories;
+    private EditText editName, editQuantity, editUnits, editThreshold, editPrice, editCalories;
     private TextView title;
     private CheckBox checkLactose, checkGluten, checkNuts, checkFish, checkEgg, checkSoy;
     //Buttons to cancel edit screen and submit changes
@@ -89,6 +89,7 @@ public class EditInventoryItemActivity extends ParentActivity {
         editName.setText(item.getName());
         editQuantity.setText("" + item.getQuantity());
         editUnits.setText(item.getUnits());
+        editThreshold.setText("" + item.getThresholdQuantity());
         editPrice.setText("" + item.getPricePerUnit());
         editCalories.setText("" + item.getCaloriesPerUnit());
         setAllergies(item);
@@ -99,6 +100,7 @@ public class EditInventoryItemActivity extends ParentActivity {
         item.setName(editName.getText().toString());
         item.setQuantity(Integer.parseInt(editQuantity.getText().toString()));
         item.setUnits(editUnits.getText().toString());
+        item.setThresholdQuantity(Integer.parseInt(editThreshold.getText().toString()));
         item.setPricePerUnit(Double.parseDouble(editPrice.getText().toString()));
         item.setCaloriesPerUnit(Integer.parseInt(editCalories.getText().toString()));
         item.setAllergies(getAllergies());
@@ -113,6 +115,9 @@ public class EditInventoryItemActivity extends ParentActivity {
         if(!editQuantity.getText().toString().equals(""))
             checkQuantity = Integer.parseInt(editQuantity.getText().toString());
         String checkUnit = editUnits.getText().toString();
+        int checkThreshold = -1;
+        if(!editThreshold.getText().toString().equals(""))
+            checkThreshold = Integer.parseInt(editThreshold.getText().toString());
         double checkPrice = -1;
         if(!editPrice.getText().toString().equals(""))
             checkPrice = Double.parseDouble(editPrice.getText().toString());
@@ -120,7 +125,7 @@ public class EditInventoryItemActivity extends ParentActivity {
         if(!editCalories.getText().toString().equals(""))
             checkCalories = Integer.parseInt(editCalories.getText().toString());
         Item checkItem = new Item(checkName, checkQuantity, checkUnit,
-                item.getQuantityToBuy(), item.getThresholdQuantity(),
+                item.getQuantityToBuy(), checkThreshold,
                 item.getAllergies(), checkCalories, checkPrice);
         return checkItem;
     }
@@ -165,6 +170,7 @@ public class EditInventoryItemActivity extends ParentActivity {
         editName = findViewById(R.id.editInvItemName);
         editQuantity = findViewById(R.id.editInvQuantity);
         editUnits = findViewById(R.id.editInvUnits);
+        editThreshold = findViewById(R.id.editInvThreshold);
         editPrice = findViewById(R.id.editInvPrice);
         editCalories = findViewById(R.id.editInvCalories);
 
