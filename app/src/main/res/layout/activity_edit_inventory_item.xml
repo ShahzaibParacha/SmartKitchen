@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/checkInvLactose"
         android:layout_marginTop="16dp"
-        android:text="Lactose Intolerant"
+        android:text="Contains Lactose"
         app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@id/textView7"/>
 
@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/checkInvEggs"
         android:layout_marginTop="8dp"
-        android:text="Eggs"
+        android:text="Contains Eggs"
         app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@id/checkInvLactose"/>
 
@@ -93,7 +93,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/checkInvFish"
         android:layout_marginTop="8dp"
-        android:text="Fish"
+        android:text="Contains Fish"
         app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@id/checkInvEggs"/>
 
@@ -102,7 +102,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/checkInvGluten"
         android:layout_marginTop="16dp"
-        android:text="Gluten Free"
+        android:text="Contains Gluten"
         app:layout_constraintStart_toStartOf="@id/guideline4"
         app:layout_constraintTop_toBottomOf="@id/textView7"/>
 
@@ -111,7 +111,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/checkInvNuts"
         android:layout_marginTop="8dp"
-        android:text="Nuts"
+        android:text="Contains Nuts"
         app:layout_constraintStart_toStartOf="@id/guideline4"
         app:layout_constraintTop_toBottomOf="@id/checkInvGluten"/>
 
@@ -120,7 +120,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/checkInvSoy"
         android:layout_marginTop="8dp"
-        android:text="Soy"
+        android:text="Contains Soy"
         app:layout_constraintStart_toStartOf="@id/guideline4"
         app:layout_constraintTop_toBottomOf="@id/checkInvNuts"/>
 
