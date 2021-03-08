@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
@@ -27,6 +28,8 @@ public class AlertMessage {
         //Creates the input field and assigns it to the object
         final EditText input = new EditText(context);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        int maxInputLength = 9;
+        input.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxInputLength)});
         builder.setView(input);
         //Create the submit button, the on click listener will be overrided later
         builder.setPositiveButton("Submit", null);

@@ -103,9 +103,13 @@ public class AddInventoryItemActivity extends AppCompatActivity {
             quantity = Integer.parseInt(inputQuantity.getText().toString());
         String units = inputUnits.getText().toString();
         //Defaults threshold to 0, takes inputted number if enabled
-        int threshold = -1;
-        if(thresholdEnabled && !inputThreshold.getText().toString().equals(""))
-            threshold = Integer.parseInt(inputThreshold.getText().toString());
+        int threshold = 0;
+        if(thresholdEnabled) {
+            threshold = -1;
+            if (!inputThreshold.getText().toString().equals("")) {
+                threshold = Integer.parseInt(inputThreshold.getText().toString());
+            }
+        }
         return new Item(name, quantity, units, 0, threshold);
     }
 
