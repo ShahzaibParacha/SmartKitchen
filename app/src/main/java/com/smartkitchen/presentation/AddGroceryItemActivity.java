@@ -69,7 +69,7 @@ public class AddGroceryItemActivity extends ParentActivity {
         if(!inputQuantityToBuy.getText().toString().equals(""))
             quantityToBuy = Integer.parseInt(inputQuantityToBuy.getText().toString());
         String units = inputUnits.getText().toString();
-        return new Item(name, 0, units, quantityToBuy, 0);
+        return new Item(name, 0, units, quantityToBuy, 0, null, 0, 0);
     }
 
     //Initialize the UI elements

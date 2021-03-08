@@ -89,7 +89,9 @@ public class EditGroceryListItemActivity extends ParentActivity {
         if(!editQuantity.getText().toString().equals(""))
             checkQuantity = Integer.parseInt(editQuantity.getText().toString());
         String checkUnit = editUnits.getText().toString();
-        Item checkItem = new Item(checkName, checkQuantity, checkUnit, item.getQuantityToBuy(), item.getThresholdQuantity());
+        Item checkItem = new Item(checkName, checkQuantity, checkUnit,
+                item.getQuantityToBuy(), item.getThresholdQuantity(),
+                item.getAllergies(), item.getCaloriesPerUnit(), item.getPricePerUnit());
         return checkItem;
     }
 

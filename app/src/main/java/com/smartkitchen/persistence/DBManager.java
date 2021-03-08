@@ -10,12 +10,12 @@ public class DBManager {
 
     //Initial items to test
     public static void initialize(){
-        inventoryDB.addToInventory(new Item("Milk", 4, "L", 0, 2));
-        inventoryDB.addToInventory(new Item("Sugar", 100, "g", 0, 2));
-        inventoryDB.addToInventory(new Item("Pizza", 10, "Boxes", 0, 2));
+        inventoryDB.addToInventory(new Item("Milk", 4, "L", 0, 2, null, 0, 0));
+        inventoryDB.addToInventory(new Item("Sugar", 100, "g", 0, 2, null, 0, 0));
+        inventoryDB.addToInventory(new Item("Pizza", 10, "Boxes", 0, 2, null, 0, 0));
 
-        groceryDB.addToGrocery(new Item("Sugar", 100, "g", 200, 2));
-        groceryDB.addToGrocery(new Item("Pizza", 10, "Boxes", 5, 2));
+        groceryDB.addToGrocery(new Item("Sugar", 100, "g", 200, 2, null, 0, 0));
+        groceryDB.addToGrocery(new Item("Pizza", 10, "Boxes", 5, 2, null, 0, 0));
     }
 
     //Getters
