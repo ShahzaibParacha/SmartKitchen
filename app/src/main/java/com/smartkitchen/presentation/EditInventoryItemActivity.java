@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smartkitchen.business.IListActions;
@@ -23,6 +24,8 @@ public class EditInventoryItemActivity extends ParentActivity {
 
     //Fields for user input
     private EditText editName, editQuantity, editUnits;
+
+    private TextView title;
     //Buttons to cancel edit screen and submit changes
     private Button btnCancel, btnSubmit;
 
@@ -43,6 +46,8 @@ public class EditInventoryItemActivity extends ParentActivity {
         //Initializes the UI elements
         initViews();
         setData(item);
+
+        title.setText("Edit " + item.getName());
 
         //Creates on click listener, just returns to inventory list screen
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +113,8 @@ public class EditInventoryItemActivity extends ParentActivity {
         editName = findViewById(R.id.editInvItemName);
         editQuantity = findViewById(R.id.editInvQuantity);
         editUnits = findViewById(R.id.editInvUnits);
+
+        title = findViewById(R.id.txtEditInvTitle);
 
         btnCancel = findViewById(R.id.btnInvEditCancel);
         btnSubmit = findViewById(R.id.btnEditInvSubmit);

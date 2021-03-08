@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smartkitchen.business.IListActions;
@@ -22,6 +23,8 @@ public class EditGroceryListItemActivity extends ParentActivity {
 
     //Fields for user input
     private EditText editName, editQuantity, editUnits;
+
+    private TextView title;
     //Button to cancel edit activity and submit edits
     private Button btnCancel, btnSubmit;
 
@@ -41,6 +44,8 @@ public class EditGroceryListItemActivity extends ParentActivity {
         //Initializes the UI views
         initViews();
         setData(item);
+
+        title.setText("Edit " + item.getName());
 
         //Creates on click listener, just return to grocery list screen
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +105,8 @@ public class EditGroceryListItemActivity extends ParentActivity {
         editName = findViewById(R.id.editGroceryItemName);
         editQuantity = findViewById(R.id.editGroceryQuantity);
         editUnits = findViewById(R.id.editGroceryUnits);
+
+        title = findViewById(R.id.txtEditGroceryTitle);
 
         btnCancel = findViewById(R.id.btnGroceryEditCancel);
         btnSubmit = findViewById(R.id.btnEditGrocerySubmit);
