@@ -13,23 +13,22 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
 
-public class GroceryListActivity extends AppCompatActivity {
+public class GroceryListActivity extends ParentActivity {
 
     //The list view of the grocery list and its adapter
     private RecyclerView groceryListRecView;
     private GroceryListRecViewAdapter adapter;
-    private Button btnToCurrentInventory;
     private FloatingActionButton btnAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grocery_list_activity);
+        setTitle("Grocery List");
 
         //Create the adapter and find the list view
         adapter = new GroceryListRecViewAdapter(this);
         groceryListRecView = findViewById(R.id.groceryListRecView);
-        btnToCurrentInventory = findViewById(R.id.btnToCurrentInventory);
         btnAdd = findViewById(R.id.btnGoToAddGroceryActivity);
 
         //Moves to add grocery item screen
@@ -37,15 +36,6 @@ public class GroceryListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(GroceryListActivity.this, AddGroceryItemActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //Moves to the current inventory screen
-        btnToCurrentInventory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(GroceryListActivity.this, CurrentInventoryActivity.class);
                 startActivity(intent);
             }
         });

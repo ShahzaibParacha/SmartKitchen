@@ -14,7 +14,7 @@ import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
 
-public class EditGroceryListItemActivity extends AppCompatActivity {
+public class EditGroceryListItemActivity extends ParentActivity {
 
     IListActions listActions = new ListActions();
     public static final String POSITION_KEY = "position";
@@ -34,6 +34,8 @@ public class EditGroceryListItemActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int itemPosition = intent.getIntExtra(POSITION_KEY, -1);
         Item item = listActions.getGroceryItem(itemPosition);
+
+        setTitle("Edit " + item.getName());
 
         //Initializes the UI views
         initViews();

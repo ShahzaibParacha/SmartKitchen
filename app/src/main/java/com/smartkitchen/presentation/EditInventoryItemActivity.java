@@ -15,7 +15,7 @@ import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
 
-public class EditInventoryItemActivity extends AppCompatActivity {
+public class EditInventoryItemActivity extends ParentActivity {
 
     IListActions listActions = new ListActions();
     public static final String POSITION_KEY = "position";
@@ -31,10 +31,13 @@ public class EditInventoryItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_inventory_item);
 
+
         //Gets the item that has been selected to be edited
         Intent intent = getIntent();
         int itemPosition = intent.getIntExtra(POSITION_KEY, -1);
         Item item = listActions.getInventoryItem(itemPosition);
+
+        setTitle("Edit " + item.getName());
 
         //Initializes the UI elements
         initViews();

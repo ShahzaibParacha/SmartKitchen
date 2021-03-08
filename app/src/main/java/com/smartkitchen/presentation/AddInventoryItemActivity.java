@@ -17,7 +17,7 @@ import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
 
-public class AddInventoryItemActivity extends AppCompatActivity {
+public class AddInventoryItemActivity extends ParentActivity {
 
     IListActions listActions = new ListActions();
     //Input Fields for item information
@@ -37,6 +37,7 @@ public class AddInventoryItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_item_screen);
+        setTitle("Add New Inventory Item");
 
         //Initializes the views, defaults threshold to false
         initViews();

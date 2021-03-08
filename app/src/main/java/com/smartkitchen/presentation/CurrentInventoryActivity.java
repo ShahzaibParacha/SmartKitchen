@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,34 +15,25 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
 
-public class CurrentInventoryActivity extends AppCompatActivity {
+public class CurrentInventoryActivity extends ParentActivity {
 
     //The list view of the current inventory and its adapter
     private RecyclerView itemsRecView;
     private ItemRecViewAdapter adapter;
-    //Navigation button to grocery list and to add screen
-    private Button toGroceryList;
+    //Navigation button to add screen
     private FloatingActionButton btnAdd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_inventory);
+        setTitle("Current Inventory");
 
         //Create the adapter and find the list view
         adapter = new ItemRecViewAdapter(this);
         itemsRecView = findViewById(R.id.itemRecView);
-        toGroceryList = findViewById(R.id.btnToGroceryList);
         btnAdd = findViewById(R.id.btnGoToAddInvActivity);
-
-        //Create on click listener, navigates to grocery list screen
-        toGroceryList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CurrentInventoryActivity.this, GroceryListActivity.class);
-                startActivity(intent);
-            }
-        });
 
         //Create on click listener, navigates to add screen
         btnAdd.setOnClickListener(new View.OnClickListener() {
