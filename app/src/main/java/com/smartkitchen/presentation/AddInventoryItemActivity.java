@@ -111,7 +111,7 @@ public class AddInventoryItemActivity extends ParentActivity {
                 threshold = Integer.parseInt(inputThreshold.getText().toString());
             }
         }
-        return new Item(name, quantity, units, 0, threshold);
+        return new Item(name, quantity, units, 0, threshold, null, 0, 0);
     }
 
     //Initializes the UI elements
