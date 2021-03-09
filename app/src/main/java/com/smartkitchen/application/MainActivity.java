@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
+import com.smartkitchen.persistence.utils.DBCopier;
 import com.smartkitchen.presentation.CurrentInventoryActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DBManager.initialize();
+        //DBManager.initialize();
+        DBCopier.copyDatabaseToDevice(MainActivity.this);
 
         Intent intent = new Intent(MainActivity.this, CurrentInventoryActivity.class);
         startActivity(intent);
