@@ -14,9 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.ListActions;
+import com.smartkitchen.objects.Allergies;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
+
+import java.util.ArrayList;
 
 public class AddInventoryItemActivity extends ParentActivity {
 
@@ -118,7 +121,25 @@ public class AddInventoryItemActivity extends ParentActivity {
         int calories = -1;
         if(!inputCalories.getText().toString().equals(""))
             calories = Integer.parseInt(inputCalories.getText().toString());
-        return new Item(name, quantity, units, 0, threshold, null, calories, price);
+        ArrayList<String> allergies = getAllergies();
+        return new Item(name, quantity, units, 0, threshold, allergies, calories, price);
+    }
+
+    private ArrayList<String> getAllergies(){
+        ArrayList<String> allergies = new ArrayList<String>();
+        if(checkNuts.isChecked())
+            allergies.add(Allergies.NUTS);
+        if(checkSoy.isChecked())
+            allergies.add(Allergies.SOY);
+        if(checkLactose.isChecked())
+            allergies.add(Allergies.LACTOSE);
+        if(checkGluten.isChecked())
+            allergies.add(Allergies.GLUTEN);
+        if(checkFish.isChecked())
+            allergies.add(Allergies.FISH);
+        if(checkEgg.isChecked())
+            allergies.add(Allergies.EGGS);
+        return allergies;
     }
 
     //Initializes the UI elements
