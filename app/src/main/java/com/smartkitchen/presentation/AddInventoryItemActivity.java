@@ -22,9 +22,10 @@ public class AddInventoryItemActivity extends ParentActivity {
 
     IListActions listActions = new ListActions();
     //Input Fields for item information
-    private EditText inputName, inputQuantity, inputUnits, inputThreshold;
+    private EditText inputName, inputQuantity, inputUnits, inputThreshold, inputPrice, inputCalories;
     //Checkbox to enable/disable threshold
     private CheckBox enableThreshold;
+    private CheckBox checkLactose, checkGluten, checkNuts, checkFish, checkEgg, checkSoy;
     //text with information about threshold, visibility changes if enabled/disabled
     private TextView txtThreshold;
     //Buttons for adding an item or cancelling the add activity
@@ -111,7 +112,13 @@ public class AddInventoryItemActivity extends ParentActivity {
                 threshold = Integer.parseInt(inputThreshold.getText().toString());
             }
         }
-        return new Item(name, quantity, units, 0, threshold, null, 0, 0);
+        double price = -1;
+        if(!inputPrice.getText().toString().equals(""))
+            price = Double.parseDouble(inputPrice.getText().toString());
+        int calories = -1;
+        if(!inputCalories.getText().toString().equals(""))
+            calories = Integer.parseInt(inputCalories.getText().toString());
+        return new Item(name, quantity, units, 0, threshold, null, calories, price);
     }
 
     //Initializes the UI elements
@@ -120,11 +127,20 @@ public class AddInventoryItemActivity extends ParentActivity {
         inputQuantity = findViewById(R.id.inputInventoryItemQuantity);
         inputUnits = findViewById(R.id.inputInventoryItemUnits);
         inputThreshold = findViewById(R.id.inputInventoryItemThreshold);
+        inputPrice = findViewById(R.id.inputInventoryItemPrice);
+        inputCalories = findViewById(R.id.inputInventoryItemCalories);
 
         enableThreshold = findViewById(R.id.enableThresholdCheckBox);
         txtThreshold = findViewById(R.id.txtThreshold);
 
         btnCancel = findViewById(R.id.btnCancelAddInventory);
         btnAdd = findViewById(R.id.btnAddInventoryItem);
+
+        checkEgg = findViewById(R.id.inputCheckInvEggs);
+        checkFish = findViewById(R.id.inputCheckInvFish);
+        checkGluten = findViewById(R.id.inputCheckInvGluten);
+        checkLactose = findViewById(R.id.inputCheckInvLactose);
+        checkSoy = findViewById(R.id.inputCheckInvSoy);
+        checkNuts = findViewById(R.id.inputCheckInvNuts);
     }
 }
