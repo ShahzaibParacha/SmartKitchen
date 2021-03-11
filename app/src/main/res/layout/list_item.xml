@@ -24,16 +24,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="50"
-            android:text="Item Name"/>
+            android:text="@string/defaultName"/>
 
         <TextView
             android:id="@+id/txtInvQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_marginLeft="10dp"
             android:layout_weight="20"
-            android:text="Quantity"/>
+            android:text="@string/defaultQuantity"/>
 
         <TextView
             android:id="@+id/txtInvPrice"
@@ -41,24 +40,26 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="20"
-            android:text="Item Price"/>
+            android:text="@string/defaultPrice"/>
 
         <ImageView
             android:id="@+id/itemDownArrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:contentDescription="@string/expandArrow"
             android:padding="5dp"
-            android:src="@drawable/ic_down_arrow"/>
+            android:src="@drawable/ic_down_arrow" />
 
         <ImageView
             android:id="@+id/itemUpArrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:contentDescription="@string/collapseArrow"
             android:padding="5dp"
             android:src="@drawable/ic_up_arrow"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </LinearLayout>
 
@@ -76,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="33"
-            android:text="Add to Grocery List"/>
+            android:text="@string/btnAddToGrocery"/>
 
         <Button
             android:id="@+id/btnEditInvItem"
@@ -84,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="33"
-            android:text="Edit"/>
+            android:text="@string/btnEdit"/>
 
         <Button
             android:id="@+id/btnRemoveInvItem"
@@ -92,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="33"
-            android:text="Remove"/>
+            android:text="@string/btnRemove"/>
     </LinearLayout>
 
     </RelativeLayout>
