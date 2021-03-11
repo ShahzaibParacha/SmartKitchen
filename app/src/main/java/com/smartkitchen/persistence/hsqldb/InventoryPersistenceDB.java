@@ -75,14 +75,15 @@ public class InventoryPersistenceDB implements IDBInventory {
         final ArrayList<Item> inventoryList = new ArrayList<>();
         System.out.println("Test 1");
         try (final Connection c = connection()) {
+            System.out.println("Test 2");
             //the following query needs to be modified for the final db implementation
             final PreparedStatement st = c.prepareStatement("SELECT * FROM INVENTORY_ITEMS");
-
+            System.out.println("Test 3");
             final ResultSet rs = st.executeQuery();
-            System.out.println("Test 2");
+            System.out.println("Test 4");
             while (rs.next())
             {
-                System.out.println("Test 3");
+                System.out.println("Test 5");
                 final Item item = constructItem(rs);
                 inventoryList.add(item);
             }
@@ -93,11 +94,11 @@ public class InventoryPersistenceDB implements IDBInventory {
         }
         catch (final SQLException e)
         {
-            System.out.println("Test 4");
+            System.out.println("Test 6");
             //throw new PersistenceException(e);
             System.out.println(e.getMessage());
         }
-        System.out.println("Test 5");
+        System.out.println("Test 7");
         return inventoryList;
     }
 
