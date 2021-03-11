@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent">
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -16,22 +16,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:gravity="center"
         android:text="Add New Item to Grocery List"
         android:textSize="32dp"
-        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnCancelAddGrocery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="Cancel"
-        app:layout_constraintEnd_toStartOf="@+id/guideline11"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputCheckGroceryFish" />
 
     <TextView
         android:id="@+id/textView"
@@ -48,8 +38,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:maxLength="20"
         android:hint="Name"
+        android:maxLength="20"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline10"
@@ -70,9 +60,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:maxLength="9"
         android:hint="Quantity To Buy"
         android:inputType="number"
+        android:maxLength="9"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline10"
@@ -93,18 +83,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:maxLength="20"
         android:hint="Units"
         android:inputType="textPersonName"
+        android:maxLength="20"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline10"
         app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <TextView
+        android:id="@+id/txtAddGroceryPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtAddGroceryPrice"
         android:layout_marginTop="64dp"
         android:text="Price per Unit:"
         android:textSize="18sp"
@@ -112,22 +102,22 @@
         app:layout_constraintTop_toBottomOf="@id/textView3"/>
 
     <EditText
+        android:id="@+id/inputGroceryItemPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/inputGroceryItemPrice"
         android:ems="10"
-        android:maxLength="9"
         android:hint="Price per Unit"
         android:inputType="numberDecimal"
+        android:maxLength="9"
         app:layout_constraintBottom_toBottomOf="@id/txtAddGroceryPrice"
-        app:layout_constraintTop_toTopOf="@id/txtAddGroceryPrice"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline10"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/txtAddGroceryPrice"/>
 
     <TextView
+        android:id="@+id/txtAddGroceryCalories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtAddGroceryCalories"
         android:layout_marginTop="64dp"
         android:text="Calories per Unit:"
         android:textSize="18sp"
@@ -135,22 +125,22 @@
         app:layout_constraintTop_toBottomOf="@id/txtAddGroceryPrice"/>
 
     <EditText
+        android:id="@+id/inputGroceryItemCalories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/inputGroceryItemCalories"
         android:ems="10"
-        android:maxLength="9"
         android:hint="Calories per Unit"
         android:inputType="number"
+        android:maxLength="9"
         app:layout_constraintBottom_toBottomOf="@id/txtAddGroceryCalories"
-        app:layout_constraintTop_toTopOf="@id/txtAddGroceryCalories"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline10"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/txtAddGroceryCalories"/>
 
     <TextView
+        android:id="@+id/txtAllergies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtAllergies"
         android:layout_marginTop="64dp"
         android:text="Allergies:"
         android:textSize="18sp"
@@ -158,58 +148,68 @@
         app:layout_constraintTop_toBottomOf="@id/txtAddGroceryCalories"/>
 
     <CheckBox
+        android:id="@+id/inputCheckGroceryLactose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/inputCheckGroceryLactose"
-        android:text="Contains Lactose"
         android:layout_marginTop="16dp"
+        android:text="Contains Lactose"
         app:layout_constraintStart_toStartOf="@id/guideline9"
         app:layout_constraintTop_toBottomOf="@id/txtAllergies"/>
 
     <CheckBox
+        android:id="@+id/inputCheckGroceryEggs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/inputCheckGroceryEggs"
-        android:text="Contains Eggs"
         android:layout_marginTop="8dp"
+        android:text="Contains Eggs"
         app:layout_constraintStart_toStartOf="@id/guideline9"
         app:layout_constraintTop_toBottomOf="@id/inputCheckGroceryLactose"/>
 
     <CheckBox
+        android:id="@+id/inputCheckGroceryFish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/inputCheckGroceryFish"
-        android:text="Contains Fish"
         android:layout_marginTop="8dp"
+        android:text="Contains Fish"
         app:layout_constraintStart_toStartOf="@id/guideline9"
         app:layout_constraintTop_toBottomOf="@id/inputCheckGroceryEggs"/>
 
     <CheckBox
+        android:id="@+id/inputCheckGroceryGluten"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/inputCheckGroceryGluten"
-        android:text="Contains Gluten"
         android:layout_marginTop="16dp"
+        android:text="Contains Gluten"
         app:layout_constraintStart_toStartOf="@id/guideline11"
         app:layout_constraintTop_toBottomOf="@id/txtAllergies"/>
 
     <CheckBox
+        android:id="@+id/inputCheckGroceryNuts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/inputCheckGroceryNuts"
-        android:text="Contains Nuts"
         android:layout_marginTop="8dp"
+        android:text="Contains Nuts"
         app:layout_constraintStart_toStartOf="@id/guideline11"
         app:layout_constraintTop_toBottomOf="@id/inputCheckGroceryGluten"/>
 
     <CheckBox
+        android:id="@+id/inputCheckGrocerySoy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/inputCheckGrocerySoy"
-        android:text="Contains Soy"
         android:layout_marginTop="8dp"
+        android:text="Contains Soy"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
         app:layout_constraintTop_toBottomOf="@+id/inputCheckGroceryNuts"/>
+
+    <Button
+        android:id="@+id/btnCancelAddGrocery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Cancel"
+        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputCheckGroceryFish" />
 
     <Button
         android:id="@+id/btnAddGroceryItem"

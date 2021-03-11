@@ -16,7 +16,11 @@ public class ListActions implements IListActions {
         try{
             ListValidation validation = new ListValidation(item);
             validation.containsItemInputs();
-            DBManager.getGroceryDB().addToGrocery(item);
+            Item existingItem = getDuplicateByName(item, DBManager.getGroceryDB().getGroceryList());
+            if(existingItem == null)
+                DBManager.getGroceryDB().addToGrocery(item);
+            else
+                existingItem.setQuantityToBuy(existingItem.getQuantityToBuy()+item.getQuantityToBuy());
         }
         catch(Exception e){
             throw e;
@@ -29,7 +33,11 @@ public class ListActions implements IListActions {
         try{
             ListValidation validation = new ListValidation(item);
             validation.containsItemInputs();
-            DBManager.getInventoryDB().addToInventory(item);
+            Item existingItem = getDuplicateByName(item, DBManager.getInventoryDB().getInventoryList());
+            if(existingItem == null)
+                DBManager.getInventoryDB().addToInventory(item);
+            else
+                existingItem.setQuantity(existingItem.getQuantity()+item.getQuantity());
         }
         catch(Exception e){
             throw e;
@@ -66,6 +74,16 @@ public class ListActions implements IListActions {
     public Item getInventoryItem(int position) {
         Item item = DBManager.getInventoryDB().getInventoryList().get(position);
         return item;
+    }
+
+    @Override
+    public ArrayList<Item> getGroceryList() {
+        return DBManager.getGroceryDB().getGroceryList();
+    }
+
+    @Override
+    public ArrayList<Item> getInventoryList() {
+        return DBManager.getInventoryDB().getInventoryList();
     }
 
     //Get an item via their name string
@@ -150,6 +168,16 @@ public class ListActions implements IListActions {
             }
         }
         return exists;
+    }
+
+    @Override
+    public Item getDuplicateByName(Item item, ArrayList<Item> items) {
+        Item existingItem = null;
+        for (Item x:items) {
+            if(existingItem == null && x.getName().equals(item.getName()))
+                existingItem = x;
+        }
+        return existingItem;
     }
 
     @Override

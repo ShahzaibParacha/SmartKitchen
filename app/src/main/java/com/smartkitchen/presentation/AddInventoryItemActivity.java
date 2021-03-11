@@ -84,13 +84,18 @@ public class AddInventoryItemActivity extends ParentActivity {
                 //Initializes new item based on inputted information
                 Item newItem = initItem();
                 try {
-                    listActions.addToInventory(newItem);
-                    //Checks if the item will be added to grocery because of quantity<threshold
-                    boolean enteredThreshold = listActions.thresholdAddToGrocery(newItem, AddInventoryItemActivity.this, true);
-                    //If not, just return to the main list as usual
-                    if(!enteredThreshold){
-                        Intent intent = new Intent(AddInventoryItemActivity.this, CurrentInventoryActivity.class);
-                        startActivity(intent);
+                    if(listActions.getDuplicateByName(newItem, listActions.getInventoryList()) == null) {
+                        listActions.addToInventory(newItem);
+                        //Checks if the item will be added to grocery because of quantity<threshold
+                        boolean enteredThreshold = listActions.thresholdAddToGrocery(newItem, AddInventoryItemActivity.this, true);
+                        //If not, just return to the main list as usual
+                        if (!enteredThreshold) {
+                            Intent intent = new Intent(AddInventoryItemActivity.this, CurrentInventoryActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                    else{
+                        Toast.makeText(AddInventoryItemActivity.this, "An Item with this name already exists in Inventory.", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     Toast.makeText(AddInventoryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();

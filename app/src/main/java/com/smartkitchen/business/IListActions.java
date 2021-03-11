@@ -18,6 +18,9 @@ public interface IListActions {
     Item getGroceryItem(int position);
     Item getInventoryItem(int position);
 
+    ArrayList<Item> getGroceryList();
+    ArrayList<Item> getInventoryList();
+
     Item getGroceryItemByName(String name);
     Item getInventoryItemByName(String name);
 
@@ -30,6 +33,8 @@ public interface IListActions {
 
     boolean isInInventory(Item item);
     boolean isInGrocery(Item item);
+
+    Item getDuplicateByName(Item item, ArrayList<Item> items);
 
     boolean isInList(ArrayList<String> list, String s);
 }

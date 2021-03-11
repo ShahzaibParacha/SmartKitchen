@@ -57,10 +57,15 @@ public class AddGroceryItemActivity extends ParentActivity {
                 //Creates item based on inputted values and adds
                 Item newItem = initItem();
                 try {
-                    listActions.addToGrocery(newItem);
-                    //Once the item is added, return to grocery list screen
-                    Intent intent = new Intent(AddGroceryItemActivity.this, GroceryListActivity.class);
-                    startActivity(intent);
+                    if(listActions.getDuplicateByName(newItem, listActions.getGroceryList()) == null) {
+                        listActions.addToGrocery(newItem);
+                        //Once the item is added, return to grocery list screen
+                        Intent intent = new Intent(AddGroceryItemActivity.this, GroceryListActivity.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(AddGroceryItemActivity.this, "An item with this name already exists in Grocery List.", Toast.LENGTH_SHORT).show();
+                    }
                 } catch (Exception e) {
                     Toast.makeText(AddGroceryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
