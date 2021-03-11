@@ -75,10 +75,10 @@ public class AddGroceryItemActivity extends ParentActivity {
         if(!inputQuantityToBuy.getText().toString().equals(""))
             quantityToBuy = Integer.parseInt(inputQuantityToBuy.getText().toString());
         String units = inputUnits.getText().toString();
-        double price = -1;
+        double price = 0;
         if(!inputPrice.getText().toString().equals(""))
             price = Double.parseDouble(inputPrice.getText().toString());
-        int calories = -1;
+        int calories = 0;
         if(!inputCalories.getText().toString().equals(""))
             calories = Integer.parseInt(inputCalories.getText().toString());
         ArrayList<String> allergies = getAllergies();

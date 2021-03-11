@@ -115,10 +115,10 @@ public class AddInventoryItemActivity extends ParentActivity {
                 threshold = Integer.parseInt(inputThreshold.getText().toString());
             }
         }
-        double price = -1;
+        double price = 0;
         if(!inputPrice.getText().toString().equals(""))
             price = Double.parseDouble(inputPrice.getText().toString());
-        int calories = -1;
+        int calories = 0;
         if(!inputCalories.getText().toString().equals(""))
             calories = Integer.parseInt(inputCalories.getText().toString());
         ArrayList<String> allergies = getAllergies();

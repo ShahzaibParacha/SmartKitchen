@@ -91,8 +91,14 @@ public class EditGroceryListItemActivity extends ParentActivity {
         item.setName(editName.getText().toString());
         item.setQuantityToBuy(Integer.parseInt(editQuantity.getText().toString()));
         item.setUnits(editUnits.getText().toString());
-        item.setPricePerUnit(Double.parseDouble(editPrice.getText().toString()));
-        item.setCaloriesPerUnit(Integer.parseInt(editCalories.getText().toString()));
+        if(!editPrice.getText().toString().equals(""))
+            item.setPricePerUnit(Double.parseDouble(editPrice.getText().toString()));
+        else
+            item.setPricePerUnit(0);
+        if(!editCalories.getText().toString().equals(""))
+            item.setCaloriesPerUnit(Integer.parseInt(editCalories.getText().toString()));
+        else
+            item.setCaloriesPerUnit(0);
         item.setAllergies(getAllergies());
         listActions.updateItem(item);
     }
@@ -105,10 +111,10 @@ public class EditGroceryListItemActivity extends ParentActivity {
         if(!editQuantity.getText().toString().equals(""))
             checkQuantity = Integer.parseInt(editQuantity.getText().toString());
         String checkUnit = editUnits.getText().toString();
-        double checkPrice = -1;
+        double checkPrice = 0;
         if(!editPrice.getText().toString().equals(""))
             checkPrice = Double.parseDouble(editPrice.getText().toString());
-        int checkCalories = -1;
+        int checkCalories = 0;
         if(!editCalories.getText().toString().equals(""))
             checkCalories = Integer.parseInt(editCalories.getText().toString());
         Item checkItem = new Item(checkName, item.getQuantity(), checkUnit,
