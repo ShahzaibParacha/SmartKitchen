@@ -74,7 +74,7 @@ public class InventoryPersistenceDB implements IDBInventory {
     public ArrayList<Item> getInventoryList() {
         final ArrayList<Item> inventoryList = new ArrayList<>();
         System.out.println("Test 1");
-        try (final Connection c = connection()) {
+        try (Connection c = connection()) {
             System.out.println("Test 2");
             //the following query needs to be modified for the final db implementation
             final PreparedStatement st = c.prepareStatement("SELECT * FROM INVENTORY_ITEMS");

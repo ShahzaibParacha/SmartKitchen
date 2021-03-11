@@ -75,7 +75,7 @@ public class GroceryPersistenceDB implements IDBGrocery {
         final ArrayList<Item> groceryList = new ArrayList<>();
 
         try (final Connection c = connection()) {
-            //the follo2ing query needs to be modified for the final db implementation
+            //the following query needs to be modified for the final db implementation
             final PreparedStatement st = c.prepareStatement("SELECT * FROM GROCERY_ITEMS");
 
             final ResultSet rs = st.executeQuery();

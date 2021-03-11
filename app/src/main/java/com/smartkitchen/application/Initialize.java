@@ -1,7 +1,7 @@
 package com.smartkitchen.application;
 
 public class Initialize {
-    private static String dbName="SmartKitchenDB";
+    private static String dbName="SC";
 
     public static void main(String[] args)
     {
