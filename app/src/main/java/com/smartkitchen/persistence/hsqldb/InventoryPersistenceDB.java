@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Item;
@@ -15,10 +16,12 @@ public class InventoryPersistenceDB implements IDBInventory {
 
     private final String dbPath;
     private ListValidation validation;
+    private static List<Item> inventory;
 
 
     public InventoryPersistenceDB(final String dbPath) {
         this.dbPath = dbPath;
+        this.inventory = new ArrayList<>();
     }
 
     private Connection connection() throws SQLException {
@@ -29,7 +32,9 @@ public class InventoryPersistenceDB implements IDBInventory {
         final String itemName = rs.getString("NAME");
         final int itemQuantity = rs.getInt("QUANTITY");
         final String itemUnits = rs.getString("UNIT");
-        return new Item(itemName, itemQuantity, itemUnits);
+        final int itemQuantityToBuy = rs.getInt("QUANTITY_TO_BUY");
+        final int itemThresholdQuantity = rs.getInt("THRESHOLD_QUANTITY");
+        return new Item(itemName, itemQuantity, itemUnits, itemQuantityToBuy, itemThresholdQuantity);
     }
 
     @Override
@@ -38,12 +43,15 @@ public class InventoryPersistenceDB implements IDBInventory {
         try {
             validation.containsItemInputs();
             try (final Connection c = connection()) {
-                final PreparedStatement st = c.prepareStatement("INSERT INTO INVENTORY_ITEMS VALUES(?, ?, ?)");
+                final PreparedStatement st = c.prepareStatement("INSERT INTO INVENTORY_ITEMS VALUES(?, ?, ?, ?, ?)");
                 st.setString(1, item.getName());
-                st.setString(2, item.getQuantityString());
+                st.setInt(2, item.getQuantity());
                 st.setString(3, item.getUnits());
+                st.setInt(4, item.getQuantityToBuy());
+                st.setInt(5, item.getThresholdQuantity());
 
                 st.executeUpdate();
+                inventory.add(item);
 
                 //this should return a boolean or the object it self so we can display the result of the operation in a toast
             } catch (final SQLException e) {
@@ -59,9 +67,12 @@ public class InventoryPersistenceDB implements IDBInventory {
     @Override
     public Item removeFromInventory(Item item) {
         try (final Connection c = connection()) {
-            final PreparedStatement sc = c.prepareStatement("DELETE FROM INVENTORY_ITEMS WHERE itemName = ?");
+            final PreparedStatement sc = c.prepareStatement("DELETE FROM INVENTORY_ITEMS WHERE NAME = ?");
             sc.setString(1, item.getName());
             sc.executeUpdate();
+
+            inventory.remove(item);
+
             return item;
         } catch (final SQLException e) {
             //throw new PersistenceException(e);
@@ -73,17 +84,14 @@ public class InventoryPersistenceDB implements IDBInventory {
     @Override
     public ArrayList<Item> getInventoryList() {
         final ArrayList<Item> inventoryList = new ArrayList<>();
-        System.out.println("Test 1");
+
         try (Connection c = connection()) {
-            System.out.println("Test 2");
             //the following query needs to be modified for the final db implementation
             final PreparedStatement st = c.prepareStatement("SELECT * FROM INVENTORY_ITEMS");
-            System.out.println("Test 3");
+
             final ResultSet rs = st.executeQuery();
-            System.out.println("Test 4");
             while (rs.next())
             {
-                System.out.println("Test 5");
                 final Item item = constructItem(rs);
                 inventoryList.add(item);
             }
@@ -94,11 +102,9 @@ public class InventoryPersistenceDB implements IDBInventory {
         }
         catch (final SQLException e)
         {
-            System.out.println("Test 6");
             //throw new PersistenceException(e);
             System.out.println(e.getMessage());
         }
-        System.out.println("Test 7");
         return inventoryList;
     }
 

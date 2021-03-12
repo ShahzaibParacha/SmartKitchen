@@ -36,10 +36,12 @@ public class Item {
     }
 
     //Secondary Constructor
-    public Item(String name, int quantity, String units) {
+    public Item(String name, int quantity, String units, int quantityToBuy, int thresholdQuantity) {
         this.name = name;
         this.quantity = quantity;
         this.units = units;
+        this.quantityToBuy = quantityToBuy;
+        this.thresholdQuantity = thresholdQuantity;
     }
 
     //Getters and Setters
@@ -80,11 +82,9 @@ public class Item {
         this.quantityToBuy = quantityToBuy;
     }
 
-    public String getQuantityToBuyString(){return "" + quantityToBuy + " " + units;}
+    public String getQuantityToBuyString() { return "" + quantityToBuy + " " + units; }
 
     public int getThresholdQuantity() { return thresholdQuantity; }
-
-    public void setThresholdQuantity(int thresholdQuantity) { this.thresholdQuantity = thresholdQuantity; }
 
     public ArrayList<String> getAllergies() {
         return allergies;

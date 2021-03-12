@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Item;
@@ -15,10 +16,12 @@ public class GroceryPersistenceDB implements IDBGrocery {
 
     private final String dbPath;
     private ListValidation validation;
+    private static List<Item> grocery;
 
 
     public GroceryPersistenceDB(final String dbPath) {
         this.dbPath = dbPath;
+        grocery = new ArrayList<>();
     }
 
     private Connection connection() throws SQLException {
@@ -29,7 +32,9 @@ public class GroceryPersistenceDB implements IDBGrocery {
         final String itemName = rs.getString("NAME");
         final int itemQuantity = rs.getInt("QUANTITY");
         final String itemUnits = rs.getString("UNIT");
-        return new Item(itemName, itemQuantity, itemUnits);
+        final int itemQuantityToBuy = rs.getInt("QUANTITY_TO_BUY");
+        final int itemThresholdQuantity = rs.getInt("THRESHOLD_QUANTITY");
+        return new Item(itemName, itemQuantity, itemUnits, itemQuantityToBuy, itemThresholdQuantity);
     }
 
     @Override
@@ -38,12 +43,15 @@ public class GroceryPersistenceDB implements IDBGrocery {
         try {
             validation.containsItemInputs();
             try (final Connection c = connection()) {
-                final PreparedStatement st = c.prepareStatement("INSERT INTO GROCERY_ITEMS VALUES(?, ?, ?)");
+                final PreparedStatement st = c.prepareStatement("INSERT INTO GROCERY_ITEMS VALUES(?, ?, ?, ?, ?)");
                 st.setString(1, item.getName());
-                st.setString(2, item.getQuantityString());
+                st.setInt(2, item.getQuantity());
                 st.setString(3, item.getUnits());
+                st.setInt(4, item.getQuantityToBuy());
+                st.setInt(5, item.getThresholdQuantity());
 
                 st.executeUpdate();
+                grocery.add(item);
 
                 //this should return a boolean or the object it self so we can display the result of the operation in a toast
             } catch (final SQLException e) {
@@ -59,9 +67,12 @@ public class GroceryPersistenceDB implements IDBGrocery {
     @Override
     public Item removeFromGrocery(Item item) {
         try (final Connection c = connection()) {
-            final PreparedStatement sc = c.prepareStatement("DELETE FROM GROCERY_ITEMS WHERE itemName = ?");
+            final PreparedStatement sc = c.prepareStatement("DELETE FROM GROCERY_ITEMS WHERE NAME = ?");
             sc.setString(1, item.getName());
             sc.executeUpdate();
+
+            grocery.remove(item);
+
             return item;
         } catch (final SQLException e) {
             //throw new PersistenceException(e);
@@ -74,7 +85,7 @@ public class GroceryPersistenceDB implements IDBGrocery {
     public ArrayList<Item> getGroceryList() {
         final ArrayList<Item> groceryList = new ArrayList<>();
 
-        try (final Connection c = connection()) {
+        try (Connection c = connection()) {
             //the following query needs to be modified for the final db implementation
             final PreparedStatement st = c.prepareStatement("SELECT * FROM GROCERY_ITEMS");
 

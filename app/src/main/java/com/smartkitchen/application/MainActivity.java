@@ -3,9 +3,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import com.smartkitchen.R;
-import com.smartkitchen.persistence.DBManager;
 import com.smartkitchen.persistence.utils.DBCopier;
-import com.smartkitchen.persistence.utils.DBCreator;
 import com.smartkitchen.presentation.CurrentInventoryActivity;
 public class MainActivity extends AppCompatActivity {
     @Override
