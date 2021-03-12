@@ -1,3 +1,58 @@
 <resources>
     <string name="app_name">SmartKitchen</string>
+
+    <!--Content Descriptions-->
+    <string name="contentDescAddInv">Add Item to Inventory</string>
+    <string name="contentDescAddGrocery">Add Item to Grocery</string>
+    <string name="expandArrow">Expand List Item</string>
+    <string name="collapseArrow">Collapse List Item</string>
+
+    <!--Titles-->
+    <string name="defaultEditTitle">Edit Item</string>
+    <string name="titleAddToInv">Add New Item to Inventory</string>
+    <string name="titleAddToGrocery">Add New Item to Grocery List</string>
+
+    <!--Default List Values-->
+    <string name="defaultName">Item Name</string>
+    <string name="defaultQuantity">Quantity</string>
+    <string name="defaultPrice">Item Price</string>
+
+    <!--Field Labels-->
+    <string name="labelName">Name:</string>
+    <string name="labelQuantity">Quantity:</string>
+    <string name="labelUnits">Units:</string>
+    <string name="labelThreshold">Threshold Amount:</string>
+    <string name="labelQuantityToBuy">Quantity to Buy:</string>
+    <string name="labelPrice">Price per Unit:</string>
+    <string name="labelCalories">Calories per Unit:</string>
+    <string name="labelAllergies">Allergies:</string>
+
+    <!--Checkbox Labels-->
+    <string name="checkLactose">Contains Lactose</string>
+    <string name="checkFish">Contains Fish</string>
+    <string name="checkEggs">Contains Eggs</string>
+    <string name="checkGluten">Contains Gluten</string>
+    <string name="checkNuts">Contains Nuts</string>
+    <string name="checkSoy">Contains Soy</string>
+
+    <!--Edit Text Hints-->
+    <string name="hintName">Name</string>
+    <string name="hintQuantity">Quantity</string>
+    <string name="hintUnits">Units</string>
+    <string name="hintQuantityToBuy">Quantity to Buy</string>
+    <string name="hintThreshold">Threshold Amount</string>
+    <string name="hintPrice">Price per Unit</string>
+    <string name="hintCalories">Calories per Unit</string>
+
+    <!--Button Text-->
+    <string name="btnCancel">Cancel</string>
+    <string name="btnSubmit">Submit</string>
+    <string name="btnAdd">Add</string>
+    <string name="btnBuy">Buy Item</string>
+    <string name="btnEdit">Edit</string>
+    <string name="btnRemove">Remove</string>
+    <string name="btnAddToGrocery">Add to Grocery List</string>
+
+    <!--Other-->
+    <string name="enableThresholdText">Enable automatic adding of item to grocery list below given threshold?</string>
 </resources>

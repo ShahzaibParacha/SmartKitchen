@@ -14,17 +14,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.ListActions;
+import com.smartkitchen.objects.Allergies;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.DBManager;
+
+import java.util.ArrayList;
 
 public class AddInventoryItemActivity extends ParentActivity {
 
     IListActions listActions = new ListActions();
     //Input Fields for item information
-    private EditText inputName, inputQuantity, inputUnits, inputThreshold;
+    private EditText inputName, inputQuantity, inputUnits, inputThreshold, inputPrice, inputCalories;
     //Checkbox to enable/disable threshold
     private CheckBox enableThreshold;
+    private CheckBox checkLactose, checkGluten, checkNuts, checkFish, checkEgg, checkSoy;
     //text with information about threshold, visibility changes if enabled/disabled
     private TextView txtThreshold;
     //Buttons for adding an item or cancelling the add activity
@@ -80,13 +84,18 @@ public class AddInventoryItemActivity extends ParentActivity {
                 //Initializes new item based on inputted information
                 Item newItem = initItem();
                 try {
-                    listActions.addToInventory(newItem);
-                    //Checks if the item will be added to grocery because of quantity<threshold
-                    boolean enteredThreshold = listActions.thresholdAddToGrocery(newItem, AddInventoryItemActivity.this, true);
-                    //If not, just return to the main list as usual
-                    if(!enteredThreshold){
-                        Intent intent = new Intent(AddInventoryItemActivity.this, CurrentInventoryActivity.class);
-                        startActivity(intent);
+                    if(listActions.getDuplicateByName(newItem, listActions.getInventoryList()) == null) {
+                        listActions.addToInventory(newItem);
+                        //Checks if the item will be added to grocery because of quantity<threshold
+                        boolean enteredThreshold = listActions.thresholdAddToGrocery(newItem, AddInventoryItemActivity.this, true);
+                        //If not, just return to the main list as usual
+                        if (!enteredThreshold) {
+                            Intent intent = new Intent(AddInventoryItemActivity.this, CurrentInventoryActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                    else{
+                        Toast.makeText(AddInventoryItemActivity.this, "An Item with this name already exists in Inventory.", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     Toast.makeText(AddInventoryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -111,7 +120,31 @@ public class AddInventoryItemActivity extends ParentActivity {
                 threshold = Integer.parseInt(inputThreshold.getText().toString());
             }
         }
-        return new Item(name, quantity, units, 0, threshold, null, 0, 0);
+        double price = 0;
+        if(!inputPrice.getText().toString().equals(""))
+            price = Double.parseDouble(inputPrice.getText().toString());
+        int calories = 0;
+        if(!inputCalories.getText().toString().equals(""))
+            calories = Integer.parseInt(inputCalories.getText().toString());
+        ArrayList<String> allergies = getAllergies();
+        return new Item(name, quantity, units, 0, threshold, allergies, calories, price);
+    }
+
+    private ArrayList<String> getAllergies(){
+        ArrayList<String> allergies = new ArrayList<String>();
+        if(checkNuts.isChecked())
+            allergies.add(Allergies.NUTS);
+        if(checkSoy.isChecked())
+            allergies.add(Allergies.SOY);
+        if(checkLactose.isChecked())
+            allergies.add(Allergies.LACTOSE);
+        if(checkGluten.isChecked())
+            allergies.add(Allergies.GLUTEN);
+        if(checkFish.isChecked())
+            allergies.add(Allergies.FISH);
+        if(checkEgg.isChecked())
+            allergies.add(Allergies.EGGS);
+        return allergies;
     }
 
     //Initializes the UI elements
@@ -120,11 +153,20 @@ public class AddInventoryItemActivity extends ParentActivity {
         inputQuantity = findViewById(R.id.inputInventoryItemQuantity);
         inputUnits = findViewById(R.id.inputInventoryItemUnits);
         inputThreshold = findViewById(R.id.inputInventoryItemThreshold);
+        inputPrice = findViewById(R.id.inputInventoryItemPrice);
+        inputCalories = findViewById(R.id.inputInventoryItemCalories);
 
         enableThreshold = findViewById(R.id.enableThresholdCheckBox);
         txtThreshold = findViewById(R.id.txtThreshold);
 
         btnCancel = findViewById(R.id.btnCancelAddInventory);
         btnAdd = findViewById(R.id.btnAddInventoryItem);
+
+        checkEgg = findViewById(R.id.inputCheckInvEggs);
+        checkFish = findViewById(R.id.inputCheckInvFish);
+        checkGluten = findViewById(R.id.inputCheckInvGluten);
+        checkLactose = findViewById(R.id.inputCheckInvLactose);
+        checkSoy = findViewById(R.id.inputCheckInvSoy);
+        checkNuts = findViewById(R.id.inputCheckInvNuts);
     }
 }

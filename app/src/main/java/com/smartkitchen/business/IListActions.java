@@ -4,15 +4,22 @@ import android.content.Context;
 
 import com.smartkitchen.objects.Item;
 
+import java.util.ArrayList;
+
 public interface IListActions {
 
     void addToGrocery(Item item) throws Exception;
     void addToInventory(Item item) throws Exception;
 
+    void updateItem(Item item);
+
     void editValidation(Item item) throws Exception;
 
     Item getGroceryItem(int position);
     Item getInventoryItem(int position);
+
+    ArrayList<Item> getGroceryList();
+    ArrayList<Item> getInventoryList();
 
     Item getGroceryItemByName(String name);
     Item getInventoryItemByName(String name);
@@ -26,4 +33,8 @@ public interface IListActions {
 
     boolean isInInventory(Item item);
     boolean isInGrocery(Item item);
+
+    Item getDuplicateByName(Item item, ArrayList<Item> items);
+
+    boolean isInList(ArrayList<String> list, String s);
 }

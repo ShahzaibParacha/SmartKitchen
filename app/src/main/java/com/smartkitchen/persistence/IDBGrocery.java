@@ -11,6 +11,8 @@ public interface IDBGrocery {
 
     Item removeFromGrocery(Item item);
 
+    void updateItem(Item item);
+
     ArrayList<Item> getGroceryList();
 
     Item getGroceryItemByName(String name);
