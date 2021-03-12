@@ -29,17 +29,41 @@ public class InventoryPersistenceDB implements IDBInventory {
     }
 
     private Item constructItem(final ResultSet rs) throws SQLException {
-        final String itemName = rs.getString("NAME");
-        final int itemQuantity = rs.getInt("QUANTITY");
-        final String itemUnits = rs.getString("UNIT");
-        final int itemQuantityToBuy = rs.getInt("QUANTITY_TO_BUY");
-        final int itemThresholdQuantity = rs.getInt("THRESHOLD_QUANTITY");
-        final int
-        final int itemID = rs.getInt("ITEM_ID")
-        return new Item(itemName, itemQuantity, itemUnits, itemQuantityToBuy, itemThresholdQuantity, itemID);
+        String itemName = rs.getString("NAME");
+        int itemQuantity = rs.getInt("QUANTITY");
+        String itemUnits = rs.getString("UNIT");
+        int itemQuantityToBuy = rs.getInt("QUANTITY_TO_BUY");
+        int itemThresholdQuantity = rs.getInt("THRESHOLD_QUANTITY");
+        ArrayList<String> itemAllergies = stringToList(rs.getString("ALLERGIES"));
+        int itemCaloriesPerUnit = rs.getInt("CALORIES_PER_UNIT");
+        double itemPricePerUnit = rs.getDouble("PRICE_PER_UNIT");
+        final int itemID = rs.getInt("ITEM_ID");
+        Item item = new Item(itemName, itemQuantity, itemUnits, itemQuantityToBuy, itemThresholdQuantity, itemAllergies, itemCaloriesPerUnit, itemPricePerUnit);
+        item.setId(itemID);
+        return item;
     }
 
-    private ArrayList<String>
+    private ArrayList<String> stringToList(String allergies) {
+        ArrayList<String> allergiesList = new ArrayList<>();
+        if (!allergies.equals("")) {
+            String[] parsedAllergies = allergies.split(",");
+            for (String s : parsedAllergies) {
+                allergiesList.add(s);
+            }
+        }
+        return allergiesList;
+    }
+
+    private String listToString(ArrayList<String> allergiesList) {
+        String allergies = "";
+        for (int i = 0; i < allergiesList.size(); i++) {
+            if (i < allergiesList.size()-1)
+                allergies += allergiesList.get(i) + ",";
+            else
+                allergies += allergiesList.get(i);
+        }
+        return allergies;
+    }
 
     @Override
     public void addToInventory(Item item) {
@@ -47,12 +71,15 @@ public class InventoryPersistenceDB implements IDBInventory {
         try {
             validation.containsItemInputs();
             try (final Connection c = connection()) {
-                final PreparedStatement st = c.prepareStatement("INSERT INTO INVENTORY_ITEMS VALUES(?, ?, ?, ?, ?)");
+                final PreparedStatement st = c.prepareStatement("INSERT INTO INVENTORY_ITEMS VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?)");
                 st.setString(1, item.getName());
                 st.setInt(2, item.getQuantity());
                 st.setString(3, item.getUnits());
                 st.setInt(4, item.getQuantityToBuy());
                 st.setInt(5, item.getThresholdQuantity());
+                st.setString(6, listToString(item.getAllergies()));
+                st.setInt(7, item.getCaloriesPerUnit());
+                st.setDouble(8, item.getPricePerUnit());
 
                 st.executeUpdate();
                 inventory.add(item);
@@ -71,8 +98,8 @@ public class InventoryPersistenceDB implements IDBInventory {
     @Override
     public Item removeFromInventory(Item item) {
         try (final Connection c = connection()) {
-            final PreparedStatement sc = c.prepareStatement("DELETE FROM INVENTORY_ITEMS WHERE NAME = ?");
-            sc.setString(1, item.getName());
+            final PreparedStatement sc = c.prepareStatement("DELETE FROM INVENTORY_ITEMS WHERE ITEM_ID = ?");
+            sc.setInt(1, item.getId());
             sc.executeUpdate();
 
             inventory.remove(item);
@@ -113,8 +140,8 @@ public class InventoryPersistenceDB implements IDBInventory {
     }
 
     @Override
-    public Item getInventoryItemByName(String name) {
-        return null;
+    public void updateItem(Item item) {
+
     }
 }
 
