@@ -1,4 +1,4 @@
-package com.smartkitchen.tests;
+package com.smartkitchen.tests.objects;
 
 import org.junit.Test;
 
@@ -36,7 +36,7 @@ public class ItemTest{
         testItem.setQuantity(2);
         testItem.setUnits("sampleUnit2");
         testItem.setQuantityToBuy(2);
-        testItem.setThresholdQuantity(2);
+        //testItem.setThresholdQuantity(2);
 
         //Assert
         assertEquals(testItem.getName(), "sample2");
