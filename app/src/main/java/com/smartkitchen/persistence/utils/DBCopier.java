@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DBCopier {
 
@@ -64,4 +67,9 @@ public class DBCopier {
             }
         }
     }
+    public static String getSQLDateString(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        return dateFormat.format(date);
+    }
+
 }

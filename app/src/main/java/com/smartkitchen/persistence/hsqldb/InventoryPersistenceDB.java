@@ -34,8 +34,12 @@ public class InventoryPersistenceDB implements IDBInventory {
         final String itemUnits = rs.getString("UNIT");
         final int itemQuantityToBuy = rs.getInt("QUANTITY_TO_BUY");
         final int itemThresholdQuantity = rs.getInt("THRESHOLD_QUANTITY");
-        return new Item(itemName, itemQuantity, itemUnits, itemQuantityToBuy, itemThresholdQuantity);
+        final int
+        final int itemID = rs.getInt("ITEM_ID")
+        return new Item(itemName, itemQuantity, itemUnits, itemQuantityToBuy, itemThresholdQuantity, itemID);
     }
+
+    private ArrayList<String>
 
     @Override
     public void addToInventory(Item item) {
