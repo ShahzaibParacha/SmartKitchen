@@ -34,7 +34,9 @@ public class InventoryPersistenceDB implements IDBInventory {
         String itemUnits = rs.getString("UNIT");
         int itemQuantityToBuy = rs.getInt("QUANTITY_TO_BUY");
         int itemThresholdQuantity = rs.getInt("THRESHOLD_QUANTITY");
-        ArrayList<String> itemAllergies = stringToList(rs.getString("ALLERGIES"));
+        ArrayList<String> itemAllergies = new ArrayList<>();
+        if(rs.getString("ALLERGIES") != null)
+            itemAllergies = stringToList(rs.getString("ALLERGIES"));
         int itemCaloriesPerUnit = rs.getInt("CALORIES_PER_UNIT");
         double itemPricePerUnit = rs.getDouble("PRICE_PER_UNIT");
         final int itemID = rs.getInt("ITEM_ID");
@@ -115,7 +117,6 @@ public class InventoryPersistenceDB implements IDBInventory {
     @Override
     public ArrayList<Item> getInventoryList() {
         final ArrayList<Item> inventoryList = new ArrayList<>();
-
         try (Connection c = connection()) {
             //the following query needs to be modified for the final db implementation
             final PreparedStatement st = c.prepareStatement("SELECT * FROM INVENTORY_ITEMS");
