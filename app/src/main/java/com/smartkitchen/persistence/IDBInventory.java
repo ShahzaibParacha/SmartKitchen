@@ -12,6 +12,8 @@ public interface IDBInventory {
 
     Item removeFromInventory(Item item);
 
+    void updateItem(Item item);
+
     ArrayList<Item> getInventoryList();
 
     Item getInventoryItemByName(String name);

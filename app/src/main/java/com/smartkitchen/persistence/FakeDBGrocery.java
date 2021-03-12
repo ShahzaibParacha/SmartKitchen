@@ -39,6 +39,11 @@ public class FakeDBGrocery implements IDBGrocery {
         return item;
     }
 
+    @Override
+    public void updateItem(Item item) {
+        //Doesn't do anything, only for actual db implementation
+    }
+
     // Getter
     @Override
     public ArrayList<Item> getGroceryList() {

@@ -52,6 +52,7 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.name.setText(items.get(position).getName());
         holder.quantity.setText(items.get(position).getQuantityString());
+        holder.price.setText("$" + items.get(position).getPricePerUnit() + "/" + items.get(position).getUnits());
 
         //Creates on click listener, removes the item from the list
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
@@ -132,6 +133,7 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
         private CardView parent;
         private TextView name;
         private TextView quantity;
+        private TextView price;
         private ImageView upArrow, downArrow;
         private LinearLayout expandedLayout;
         private Button btnEdit, btnRemove, btnAddToGrocery;
@@ -143,6 +145,7 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
             parent = itemView.findViewById(R.id.invItemCardView);
             name = itemView.findViewById(R.id.txtInvItemName);
             quantity = itemView.findViewById(R.id.txtInvQuantity);
+            price = itemView.findViewById(R.id.txtInvPrice);
 
             expandedLayout = itemView.findViewById(R.id.itemViewExpanded);
 

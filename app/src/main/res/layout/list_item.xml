@@ -1,56 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/invItemCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
     app:cardCornerRadius="7dp"
-    app:cardElevation="7dp"
-    android:id="@+id/invItemCardView">
+    app:cardElevation="7dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/itemViewCollapsed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="100"
-        android:id="@+id/itemViewCollapsed">
+        android:weightSum="100">
 
         <TextView
             android:id="@+id/txtInvItemName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Item Name"
-            android:layout_weight="60"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:layout_weight="50"
+            android:text="@string/defaultName"/>
 
         <TextView
             android:id="@+id/txtInvQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quantity"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="30"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:layout_weight="20"
+            android:text="@string/defaultQuantity"/>
+
+        <TextView
+            android:id="@+id/txtInvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="20"
+            android:text="@string/defaultPrice"/>
 
         <ImageView
             android:id="@+id/itemDownArrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:contentDescription="@string/expandArrow"
             android:padding="5dp"
-            android:src="@drawable/ic_down_arrow"/>
+            android:src="@drawable/ic_down_arrow" />
 
         <ImageView
             android:id="@+id/itemUpArrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:contentDescription="@string/collapseArrow"
             android:padding="5dp"
             android:src="@drawable/ic_up_arrow"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </LinearLayout>
 
@@ -59,32 +68,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/itemViewCollapsed"
-        android:weightSum="100"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:weightSum="100">
 
         <Button
             android:id="@+id/btnAddInvItemToGrocery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add to Grocery List"
+            android:layout_margin="5dp"
             android:layout_weight="33"
-            android:layout_margin="5dp"/>
+            android:text="@string/btnAddToGrocery"/>
 
         <Button
             android:id="@+id/btnEditInvItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit"
+            android:layout_margin="5dp"
             android:layout_weight="33"
-            android:layout_margin="5dp"/>
+            android:text="@string/btnEdit"/>
 
         <Button
+            android:id="@+id/btnRemoveInvItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btnRemoveInvItem"
-            android:text="Remove"
+            android:layout_margin="5dp"
             android:layout_weight="33"
-            android:layout_margin="5dp"/>
+            android:text="@string/btnRemove"/>
     </LinearLayout>
 
     </RelativeLayout>
