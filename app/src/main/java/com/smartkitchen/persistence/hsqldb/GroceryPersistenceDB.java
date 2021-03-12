@@ -34,7 +34,9 @@ public class GroceryPersistenceDB implements IDBGrocery {
         String itemUnits = rs.getString("UNIT");
         int itemQuantityToBuy = rs.getInt("QUANTITY_TO_BUY");
         int itemThresholdQuantity = rs.getInt("THRESHOLD_QUANTITY");
-        ArrayList<String> itemAllergies = stringToList(rs.getString("ALLERGIES"));
+        ArrayList<String> itemAllergies = new ArrayList<>();
+        if(rs.getString("ALLERGIES") != null)
+            itemAllergies = stringToList(rs.getString("ALLERGIES"));
         int itemCaloriesPerUnit = rs.getInt("CALORIES_PER_UNIT");
         double itemPricePerUnit = rs.getDouble("PRICE_PER_UNIT");
         final int itemID = rs.getInt("ITEM_ID");
@@ -44,10 +46,12 @@ public class GroceryPersistenceDB implements IDBGrocery {
     }
 
     private ArrayList<String> stringToList(String allergies) {
-        String[] parsedAllergies = allergies.split(",");
         ArrayList<String> allergiesList = new ArrayList<>();
-        for (String s : parsedAllergies) {
-            allergiesList.add(s);
+        if (!allergies.equals("")) {
+            String[] parsedAllergies = allergies.split(",");
+            for (String s : parsedAllergies) {
+                allergiesList.add(s);
+            }
         }
         return allergiesList;
     }
