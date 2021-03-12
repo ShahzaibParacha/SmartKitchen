@@ -34,5 +34,9 @@ public class ListValidation {
             throw new Exception("Please enter a valid input for units.");
         if (item.getThresholdQuantity() < 0)
             throw new Exception("Please enter a valid input for threshold quantity.");
+        if (item.getPricePerUnit() < 0)
+            throw new Exception("Please enter a valid input for price per unit.");
+        if (item.getCaloriesPerUnit() < 0)
+            throw new Exception("Please enter a valid input for calories per unit.");
     }
 }

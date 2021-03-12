@@ -51,6 +51,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.name.setText(items.get(position).getName());
         holder.quantityToBuy.setText(items.get(position).getQuantityToBuyString());
+        holder.price.setText("$" + items.get(position).getPricePerUnit() + "/" + items.get(position).getUnits());
 
         //Creates on click listener, removes the item from the list
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +136,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
         private CardView parent;
         private TextView name;
         private TextView quantityToBuy;
+        private TextView price;
         private ImageView downArrow, upArrow;
         private LinearLayout expandedLayout;
         private Button btnEdit, btnRemove, btnBuyItem;
@@ -146,6 +148,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
             parent = itemView.findViewById(R.id.groceryCardView);
             name = itemView.findViewById(R.id.txtGroceryItemName);
             quantityToBuy = itemView.findViewById(R.id.txtQuantityToBuy);
+            price = itemView.findViewById(R.id.txtGroceryPrice);
 
             expandedLayout = itemView.findViewById(R.id.groceryViewExpanded);
 

@@ -1,39 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="32dp">
 
     <TextView
         android:id="@+id/addItemScreenTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Add New Item to Inventory"
-        android:textSize="32dp"
         android:gravity="center"
+        android:text="@string/titleAddToInv"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnCancelAddInventory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Name:"
+        android:layout_marginTop="64dp"
+        android:text="@string/labelName"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toBottomOf="@+id/addItemScreenTitle" />
@@ -44,8 +36,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:ems="10"
+        android:hint="@string/hintName"
+        android:importantForAutofill="no"
+        android:inputType="text"
         android:maxLength="20"
-        android:hint="Name"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
@@ -56,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:text="Quantity:"
+        android:text="@string/labelQuantity"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -67,9 +61,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:ems="10"
-        android:maxLength="9"
-        android:hint="Quantity"
+        android:hint="@string/hintQuantity"
+        android:importantForAutofill="no"
         android:inputType="number"
+        android:maxLength="9"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
@@ -80,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:text="Units:"
+        android:text="@string/labelUnits"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -91,30 +86,22 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:ems="10"
+        android:hint="@string/hintUnits"
+        android:importantForAutofill="no"
+        android:inputType="text"
         android:maxLength="20"
-        android:hint="Units"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toTopOf="@+id/textView3" />
-
-    <Button
-        android:id="@+id/btnAddInventoryItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add"
-        app:layout_constraintBottom_toBottomOf="@+id/btnCancelAddInventory"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toTopOf="@+id/btnCancelAddInventory" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:text="@string/enableThresholdText"
         android:textSize="18sp"
-        android:text="Enable automatic adding of item to grocery list below given threshold?"
         app:layout_constraintBottom_toBottomOf="@+id/enableThresholdCheckBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/enableThresholdCheckBox"
@@ -133,25 +120,157 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:text="Threshold Quantity:"
+        android:text="@string/labelThreshold"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toBottomOf="@+id/enableThresholdCheckBox"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toBottomOf="@+id/enableThresholdCheckBox"/>
 
     <EditText
         android:id="@+id/inputInventoryItemThreshold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:hint="Default value is 0"
-        android:maxLength="9"
+        android:hint="@string/hintThreshold"
+        android:importantForAutofill="no"
         android:inputType="number"
+        android:maxLength="9"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/txtThreshold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="@+id/txtThreshold" />
+
+    <TextView
+        android:id="@+id/txtPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/labelPrice"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/txtThreshold"/>
+
+    <EditText
+        android:id="@+id/inputInventoryItemPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/hintPrice"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:maxLength="9"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPrice"
+        app:layout_constraintStart_toStartOf="@id/guideline7"
+        app:layout_constraintTop_toTopOf="@+id/txtPrice" />
+
+    <TextView
+        android:id="@+id/txtCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/labelCalories"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/txtPrice"/>
+
+    <EditText
+        android:id="@+id/inputInventoryItemCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/hintCalories"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:maxLength="9"
+        app:layout_constraintBottom_toBottomOf="@id/txtCalories"
+        app:layout_constraintStart_toStartOf="@id/guideline7"
+        app:layout_constraintTop_toTopOf="@id/txtCalories" />
+
+    <TextView
+        android:id="@+id/txtAllergies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/labelAllergies"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/guideline8"
+        app:layout_constraintTop_toBottomOf="@id/txtCalories"/>
+
+    <CheckBox
+        android:id="@+id/inputCheckInvLactose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/checkLactose"
+        app:layout_constraintStart_toStartOf="@id/guideline8"
+        app:layout_constraintTop_toBottomOf="@id/txtAllergies"/>
+
+    <CheckBox
+        android:id="@+id/inputCheckInvEggs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/checkEggs"
+        app:layout_constraintStart_toStartOf="@id/guideline8"
+        app:layout_constraintTop_toBottomOf="@id/inputCheckInvLactose"/>
+
+    <CheckBox
+        android:id="@+id/inputCheckInvFish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/checkFish"
+        app:layout_constraintStart_toStartOf="@id/guideline8"
+        app:layout_constraintTop_toBottomOf="@id/inputCheckInvEggs"/>
+
+    <CheckBox
+        android:id="@+id/inputCheckInvGluten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/checkGluten"
+        app:layout_constraintStart_toStartOf="@id/guideline7"
+        app:layout_constraintTop_toBottomOf="@id/txtAllergies"/>
+
+    <CheckBox
+        android:id="@+id/inputCheckInvNuts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/checkNuts"
+        app:layout_constraintStart_toStartOf="@id/guideline7"
+        app:layout_constraintTop_toBottomOf="@id/inputCheckInvGluten"/>
+
+    <CheckBox
+        android:id="@+id/inputCheckInvSoy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/checkSoy"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/inputCheckInvNuts"/>
+
+    <Button
+        android:id="@+id/btnCancelAddInventory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/btnCancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputCheckInvFish" />
+
+    <Button
+        android:id="@+id/btnAddInventoryItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnAdd"
+        app:layout_constraintBottom_toBottomOf="@+id/btnCancelAddInventory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toTopOf="@+id/btnCancelAddInventory" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
@@ -184,3 +303,4 @@
         app:layout_constraintGuide_percent="0.1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

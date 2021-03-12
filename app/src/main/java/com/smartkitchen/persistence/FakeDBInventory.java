@@ -38,6 +38,11 @@ public class FakeDBInventory implements IDBInventory{
         return item;
     }
 
+    @Override
+    public void updateItem(Item item) {
+        //Doesn't do anything, only for actual db implementation
+    }
+
     // Getter
     @Override
     public ArrayList<Item> getInventoryList() {
