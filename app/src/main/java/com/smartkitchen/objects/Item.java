@@ -17,6 +17,7 @@ public class Item {
     private ArrayList<String> allergies;
     private int caloriesPerUnit;
     private double pricePerUnit;
+    private int id;
 
     //Flags for if the cardview should be expanded in either list
     private boolean invIsExpanded = false;
@@ -24,7 +25,7 @@ public class Item {
 
     //Constructor
     public Item(String name, int quantity, String units, int quantityToBuy, int thresholdQuantity,
-                ArrayList<String> allergies, int caloriesPerUnit, double pricePerUnit) {
+                ArrayList<String> allergies, int caloriesPerUnit, double pricePerUnit, int id) {
         this.name = name;
         this.quantity = quantity;
         this.units = units;
@@ -33,13 +34,16 @@ public class Item {
         this.allergies = allergies;
         this.caloriesPerUnit = caloriesPerUnit;
         this.pricePerUnit = pricePerUnit;
+        this.id = id;
     }
 
     //Secondary Constructor
-    public Item(String name, int quantity, String units) {
+    public Item(String name, int quantity, String units, int quantityToBuy, int thresholdQuantity) {
         this.name = name;
         this.quantity = quantity;
         this.units = units;
+        this.quantityToBuy = quantityToBuy;
+        this.thresholdQuantity = thresholdQuantity;
     }
 
     //Getters and Setters
@@ -80,11 +84,9 @@ public class Item {
         this.quantityToBuy = quantityToBuy;
     }
 
-    public String getQuantityToBuyString(){return "" + quantityToBuy + " " + units;}
+    public String getQuantityToBuyString() { return "" + quantityToBuy + " " + units; }
 
     public int getThresholdQuantity() { return thresholdQuantity; }
-
-    public void setThresholdQuantity(int thresholdQuantity) { this.thresholdQuantity = thresholdQuantity; }
 
     public ArrayList<String> getAllergies() {
         return allergies;
