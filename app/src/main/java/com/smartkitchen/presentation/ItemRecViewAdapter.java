@@ -58,8 +58,9 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Item item = listActions.getInventoryItem(position);
+                Item item = items.get(position);
                 listActions.removeFromInventory(item);
+                items.remove(item);
                 notifyItemRemoved(position);
             }
         });

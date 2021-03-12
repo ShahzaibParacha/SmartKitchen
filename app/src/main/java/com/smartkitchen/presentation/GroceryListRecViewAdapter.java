@@ -57,8 +57,9 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Item item = listActions.getGroceryItem(position);
+                Item item = items.get(position);
                 listActions.removeFromGrocery(item);
+                items.remove(item);
                 notifyItemRemoved(position);
             }
         });

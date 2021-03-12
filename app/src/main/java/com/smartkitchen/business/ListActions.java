@@ -127,7 +127,7 @@ public class ListActions implements IListActions {
         // Check if quantity<threshold
         if (validation.thresholdStatus()) {
             //If not already in grocery list, add to the grocery list
-            if (!isInGrocery(item)) {
+            if (getDuplicateByName(item, DBManager.getGroceryDB().getGroceryList()) == null) {
                 //Pull up prompt for quantity to buy
                 AlertMessage.showDialog(context, item, returnToMain);
                 enteredThreshold = true;
