@@ -119,6 +119,14 @@ public class ListActions implements IListActions {
         removeFromGrocery(item);
     }
 
+    @Override
+    public void buyAll() throws Exception {
+        ArrayList<Item> groceryList = DBManager.getGroceryDB().getGroceryList();
+        for (Item item : groceryList) {
+            buyItem(item);
+        }
+    }
+
     //Deals with adding an item to the grocery list via the threshold method
     @Override
     public boolean thresholdAddToGrocery(Item item, Context context, boolean returnToMain) {
@@ -188,5 +196,15 @@ public class ListActions implements IListActions {
                 inList = true;
         }
         return inList;
+    }
+
+    @Override
+    public double getGroceryListTotal() {
+        ArrayList<Item> groceryList = DBManager.getGroceryDB().getGroceryList();
+        double total = 0.0;
+        for (Item item : groceryList) {
+            total += item.getPricePerUnit() * (double)item.getQuantityToBuy();
+        }
+        return total;
     }
 }

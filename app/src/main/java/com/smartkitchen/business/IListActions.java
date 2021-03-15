@@ -27,6 +27,7 @@ public interface IListActions {
     boolean thresholdAddToGrocery(Item item, Context context, boolean returnToMain);
 
     void buyItem(Item item) throws Exception;
+    void buyAll() throws Exception;
 
     void removeFromGrocery(Item item);
     void removeFromInventory(Item item);
@@ -37,4 +38,6 @@ public interface IListActions {
     Item getDuplicateByName(Item item, ArrayList<Item> items);
 
     boolean isInList(ArrayList<String> list, String s);
+
+    double getGroceryListTotal();
 }

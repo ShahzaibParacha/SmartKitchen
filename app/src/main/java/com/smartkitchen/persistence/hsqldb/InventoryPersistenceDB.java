@@ -164,5 +164,25 @@ public class InventoryPersistenceDB implements IDBInventory {
             System.out.println(e.getMessage());
         }
     }
+
+    @Override
+    public Item getInventoryItemById(int itemId) {
+        Item item = null;
+        try (Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM INVENTORY_ITEMS WHERE INVENTORY_ITEMS.ITEM_ID = ?");
+            st.setInt(1, itemId);
+            final ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                item = constructItem(rs);
+            }
+
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            System.out.println(e.getMessage());
+        }
+        return item;
+    }
+
 }
 
