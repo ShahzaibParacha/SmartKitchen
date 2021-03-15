@@ -3,8 +3,7 @@ package com.smartkitchen.tests.objects;
 import org.junit.Test;
 
 import com.smartkitchen.objects.Item;
-
-
+import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class ItemTest{
@@ -26,6 +25,47 @@ public class ItemTest{
         System.out.println("Finished testItemConstructor.");
     }
 
+    @Test
+    public void testItemConstructor2(){
+
+        System.out.println("\nStarting testItemConstructor2.");
+
+        //Act
+        ArrayList<String> testAllergies = new ArrayList<String>();
+        testAllergies.add("testAllergy");
+        Item testItem = new Item("sampleItem", 1, "sampleUnit", 1, 1, testAllergies, 1, 1);
+        testItem.setId(1);
+
+        //Assert
+        assertNotNull(testItem);
+        assertEquals(testItem.getName(), "sampleItem");
+        assertEquals(testItem.getQuantity(), 1);
+        assertEquals(testItem.getUnits(), "sampleUnit");
+        assertEquals(testItem.getQuantityToBuy(), 1);
+        assertEquals(testItem.getId(), 1);
+        assertEquals(testItem.getAllergies(), testAllergies);
+
+        //test setters & getters
+        ArrayList<String> testAllergies2 = new ArrayList<String>();
+        testAllergies.add("testAllergy2");
+
+        testItem.setAllergies(testAllergies2);
+        testItem.setCaloriesPerUnit(2);
+        testItem.setPricePerUnit(2);
+        testItem.setInvIsExpanded(false);
+        testItem.setGroceryIsExpanded(false);
+
+        assertEquals(testItem.getAllergies(), testAllergies2);
+        assertEquals(testItem.getCaloriesPerUnit(), 2);
+        assertTrue(testItem.getPricePerUnit() == 2);
+        assertFalse(testItem.invIsExpanded());
+        assertFalse(testItem.groceryIsExpanded());
+
+
+        System.out.println("Finished testItemConstructor2.");
+
+    }
+
     @Test 
     public void testItemSetters(){
         System.out.println("\nStarting testItemSetters.");
@@ -36,7 +76,7 @@ public class ItemTest{
         testItem.setQuantity(2);
         testItem.setUnits("sampleUnit2");
         testItem.setQuantityToBuy(2);
-        //testItem.setThresholdQuantity(2);
+        testItem.setThresholdQuantity(2);
 
         //Assert
         assertEquals(testItem.getName(), "sample2");
