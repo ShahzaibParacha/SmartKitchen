@@ -102,10 +102,16 @@ public class ViewInformationActivity extends ParentActivity {
         btnBackToList = findViewById(R.id.btnBackToList);
 
         checkEgg = findViewById(R.id.viewEggs);
+        checkEgg.setEnabled(false);
         checkFish = findViewById(R.id.viewFish);
+        checkFish.setEnabled(false);
         checkGluten = findViewById(R.id.viewGluten);
+        checkGluten.setEnabled(false);
         checkLactose = findViewById(R.id.viewLactose);
+        checkLactose.setEnabled(false);
         checkSoy = findViewById(R.id.viewSoy);
+        checkSoy.setEnabled(false);
         checkNuts = findViewById(R.id.viewNuts);
+        checkNuts.setEnabled(false);
     }
 }
