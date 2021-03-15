@@ -3,6 +3,7 @@ package com.smartkitchen.business;
 import android.content.Context;
 
 import com.smartkitchen.objects.Item;
+import com.smartkitchen.persistence.DBManager;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,9 @@ public interface IListActions {
 
     ArrayList<Item> getGroceryList();
     ArrayList<Item> getInventoryList();
+
+    Item getInventoryItemById(int itemId);
+    Item getGroceryItemById(int itemId);
 
 //    Item getGroceryItemByName(String name);
 //    Item getInventoryItemByName(String name);

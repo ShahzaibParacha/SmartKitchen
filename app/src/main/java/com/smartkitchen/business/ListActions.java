@@ -86,6 +86,16 @@ public class ListActions implements IListActions {
         return DBManager.getInventoryDB().getInventoryList();
     }
 
+    @Override
+    public Item getInventoryItemById(int itemId) {
+        return DBManager.getInventoryDB().getInventoryItemById(itemId);
+    }
+
+    @Override
+    public Item getGroceryItemById(int itemId) {
+        return DBManager.getGroceryDB().getGroceryItemById(itemId);
+    }
+
 //    //Get an item via their name string
 //    @Override
 //    public Item getGroceryItemByName(String name) {
