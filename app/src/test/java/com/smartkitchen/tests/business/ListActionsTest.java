@@ -65,7 +65,8 @@ public class ListActionsTest {
             listActions.addToInventory(testItem);
         }catch(Exception e){System.out.println(e.getMessage());}
 
-        listActions.updateItem(testItem);
+        listActions.updateGroceryItem(testItem);
+        listActions.updateInventoryItem(testItem);
 
         System.out.println("Finished updateItemTest");
     }
@@ -107,6 +108,26 @@ public class ListActionsTest {
     }
 
     @Test
+    public void getItemByIdTest(){
+        System.out.println("\nStarting getItemByIdTest");
+
+        ArrayList<String> testAllergies = new ArrayList<String>();
+        testAllergies.add("testAllergy");
+        Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 1);
+        testItem.setId(1);
+
+        try {
+            listActions.addToGrocery(testItem);
+            listActions.addToInventory(testItem);
+        }catch(Exception e){System.out.println(e.getMessage());}
+
+        assertEquals(listActions.getGroceryItemById(1), null);
+        assertEquals(listActions.getInventoryItemById(1), null);
+
+        System.out.println("Finished getItemByIdTest");
+    }
+
+    @Test
     public void buyItemTest(){
         ListActions testmp = new ListActions();
         System.out.println("\nStarting buyItemTest");
@@ -125,6 +146,25 @@ public class ListActionsTest {
         }catch(Exception e){System.out.println(e.getMessage());}
 
         System.out.println("Starting buyItemTest");
+    }
+
+    @Test
+    public void buyAllTest(){
+        System.out.println("\nStarting buyAllTest");
+
+        ArrayList<String> testAllergies = new ArrayList<String>();
+        testAllergies.add("testAllergy");
+        Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 1);
+
+        try {
+            listActions.addToGrocery(testItem);
+            listActions.buyAll();
+        }catch(Exception e){System.out.println(e.getMessage());}
+
+        assertEquals(listActions.getInventoryItem(0), testItem);
+
+
+        System.out.println("Finished buyAllTest");
     }
 
     @Test
@@ -174,6 +214,23 @@ public class ListActionsTest {
         assertTrue(listActions.isInList(testAllergies, "testAllergy"));
 
         System.out.println("Finished isInListTest");
+    }
+
+    @Test
+    public void getGroceryListTotalTest(){
+        System.out.println("\nStarting getGroceryListTotal");
+        ArrayList<String> testAllergies = new ArrayList<String>();
+        testAllergies.add("testAllergy");
+        Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 50);
+
+        try {
+            listActions.addToGrocery(testItem);
+            listActions.addToInventory(testItem);
+        }catch(Exception e){System.out.println(e.getMessage());}
+
+        assertTrue(listActions.getGroceryListTotal() == 50);
+
+        System.out.println("Finished getGroceryListTotal");
     }
 }
 
