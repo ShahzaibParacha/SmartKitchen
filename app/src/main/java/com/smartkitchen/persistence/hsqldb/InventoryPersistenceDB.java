@@ -1,5 +1,7 @@
 package com.smartkitchen.persistence.hsqldb;
 
+import android.util.Log;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -142,7 +144,45 @@ public class InventoryPersistenceDB implements IDBInventory {
 
     @Override
     public void updateItem(Item item) {
+        try (Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("UPDATE INVENTORY_ITEMS set NAME = ?, QUANTITY = ?, UNIT = ?, QUANTITY_TO_BUY = ?, THRESHOLD_QUANTITY = ?, ALLERGIES = ?, CALORIES_PER_UNIT = ?, PRICE_PER_UNIT = ? WHERE ITEM_ID = ?");
+            st.setString(1, item.getName());
+            st.setInt(2, item.getQuantity());
+            st.setString(3, item.getUnits());
+            st.setInt(4, item.getQuantityToBuy());
+            st.setInt(5, item.getThresholdQuantity());
+            st.setString(6, listToString(item.getAllergies()));
+            st.setInt(7, item.getCaloriesPerUnit());
+            st.setDouble(8, item.getPricePerUnit());
+            st.setInt(9, item.getId());
 
+            st.executeUpdate();
+            st.close();
+
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            System.out.println(e.getMessage());
+        }
     }
+
+    @Override
+    public Item getInventoryItemById(int itemId) {
+        Item item = null;
+        try (Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM INVENTORY_ITEMS WHERE INVENTORY_ITEMS.ITEM_ID = ?");
+            st.setInt(1, itemId);
+            final ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                item = constructItem(rs);
+            }
+
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            System.out.println(e.getMessage());
+        }
+        return item;
+    }
+
 }
 

@@ -53,6 +53,16 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
         holder.quantityToBuy.setText(items.get(position).getQuantityToBuyString());
         holder.price.setText("$" + items.get(position).getPricePerUnit() + "/" + items.get(position).getUnits());
 
+        holder.parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ViewInformationActivity.class);
+                intent.putExtra("Position", position);
+                intent.putExtra("Origin", "Grocery");
+                mContext.startActivity(intent);
+            }
+        });
+
         //Creates on click listener, removes the item from the list
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +90,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
             public void onClick(View v) {
                 try {
                     listActions.buyItem(listActions.getGroceryItem(position));
+                    items.remove(items.get(position));
                     notifyItemRemoved(position);
                     notifyDataSetChanged();
                 } catch (Exception e) {

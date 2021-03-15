@@ -113,7 +113,7 @@ public class EditInventoryItemActivity extends ParentActivity {
         else
             item.setCaloriesPerUnit(0);
         item.setAllergies(getAllergies());
-        listActions.updateItem(item);
+        listActions.updateInventoryItem(item);
     }
 
     //Grabs the info from the text field and stores in an Item object

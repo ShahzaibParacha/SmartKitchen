@@ -49,4 +49,9 @@ public class FakeDBGrocery implements IDBGrocery {
     public ArrayList<Item> getGroceryList() {
         return groceryList;
     }
+
+    @Override
+    public Item getGroceryItemById(int itemId) {
+        return null;
+    }
 }

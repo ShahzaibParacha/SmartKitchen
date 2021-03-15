@@ -48,4 +48,9 @@ public class FakeDBInventory implements IDBInventory{
     public ArrayList<Item> getInventoryList() {
         return inventoryList;
     }
+
+    @Override
+    public Item getInventoryItemById(int itemId) {
+        return null;
+    }
 }

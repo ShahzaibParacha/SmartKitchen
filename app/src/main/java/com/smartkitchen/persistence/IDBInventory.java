@@ -16,4 +16,6 @@ public interface IDBInventory {
 
     ArrayList<Item> getInventoryList();
 
+    Item getInventoryItemById(int itemId);
+
 }
