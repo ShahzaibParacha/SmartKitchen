@@ -54,6 +54,16 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
         holder.quantity.setText(items.get(position).getQuantityString());
         holder.price.setText("$" + items.get(position).getPricePerUnit() + "/" + items.get(position).getUnits());
 
+        holder.parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ViewInformationActivity.class);
+                intent.putExtra("Position", position);
+                intent.putExtra("Origin", "Inventory");
+                mContext.startActivity(intent);
+            }
+        });
+
         //Creates on click listener, removes the item from the list
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override

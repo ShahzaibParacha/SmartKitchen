@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartKitchen">
-        <activity android:name=".presentation.AddInventoryItemActivity"/>
-        <activity android:name=".presentation.AddGroceryItemActivity"/>
-        <activity android:name=".presentation.EditGroceryListItemActivity"/>
+        <activity android:name=".presentation.ViewInformationActivity"></activity>
+        <activity android:name=".presentation.AddInventoryItemActivity" />
+        <activity android:name=".presentation.AddGroceryItemActivity" />
+        <activity android:name=".presentation.EditGroceryListItemActivity" />
         <activity android:name=".presentation.EditInventoryItemActivity" />
         <activity android:name=".presentation.CurrentInventoryActivity" />
         <activity android:name=".presentation.GroceryListActivity" />

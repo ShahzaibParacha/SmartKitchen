@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".presentation.ViewInformationActivity"
+    android:padding="32dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/defaultViewInfoTitle"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="32dp"
+        android:id="@+id/txtViewInfoTitle"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Item ID"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/txtViewInfoTitle"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        android:id="@+id/idLabel"
+        android:layout_marginTop="32dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/labelName"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/idLabel"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        android:layout_marginTop="32dp"
+        android:id="@+id/txtNameLabel"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hintName"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/txtNameLabel"
+        app:layout_constraintBottom_toBottomOf="@id/txtNameLabel"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        android:id="@+id/txtViewName"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/labelQuantity"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/txtNameLabel"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        android:layout_marginTop="32dp"
+        android:id="@+id/txtQuantityLabel"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hintQuantity"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/txtQuantityLabel"
+        app:layout_constraintBottom_toBottomOf="@id/txtQuantityLabel"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        android:id="@+id/txtViewQuantity"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/labelQuantityToBuy"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/txtQuantityLabel"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        android:layout_marginTop="32dp"
+        android:id="@+id/txtQuantityToBuyLabel"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hintQuantityToBuy"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/txtQuantityToBuyLabel"
+        app:layout_constraintBottom_toBottomOf="@id/txtQuantityToBuyLabel"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        android:id="@+id/txtViewQuantityToBuy"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/labelUnits"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/txtQuantityToBuyLabel"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        android:layout_marginTop="32dp"
+        android:id="@+id/txtUnitsLabel"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hintUnits"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/txtUnitsLabel"
+        app:layout_constraintBottom_toBottomOf="@id/txtUnitsLabel"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        android:id="@+id/txtViewUnits"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/labelThreshold"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/txtUnitsLabel"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        android:layout_marginTop="32dp"
+        android:id="@+id/txtThresholdLabel"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hintThreshold"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/txtThresholdLabel"
+        app:layout_constraintBottom_toBottomOf="@id/txtThresholdLabel"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        android:id="@+id/txtViewThreshold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/labelPrice"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/txtThresholdLabel"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        android:layout_marginTop="32dp"
+        android:id="@+id/txtPriceLabel"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hintPrice"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/txtPriceLabel"
+        app:layout_constraintBottom_toBottomOf="@id/txtPriceLabel"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        android:id="@+id/txtViewPrice"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/labelCalories"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/txtPriceLabel"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        android:layout_marginTop="32dp"
+        android:id="@+id/txtCaloriesLabel"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hintCalories"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/txtCaloriesLabel"
+        app:layout_constraintBottom_toBottomOf="@id/txtCaloriesLabel"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        android:id="@+id/txtViewCalories"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/labelAllergies"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/txtCaloriesLabel"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        android:layout_marginTop="32dp"
+        android:id="@+id/txtAllergiesLabel"/>
+
+    <CheckBox
+        android:id="@+id/viewLactose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/checkLactose"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/txtAllergiesLabel"/>
+
+    <CheckBox
+        android:id="@+id/viewEggs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/checkEggs"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/viewLactose"/>
+
+    <CheckBox
+        android:id="@+id/viewFish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/checkFish"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/viewEggs"/>
+
+    <CheckBox
+        android:id="@+id/viewGluten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/checkGluten"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/txtAllergiesLabel"/>
+
+    <CheckBox
+        android:id="@+id/viewNuts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/checkNuts"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/viewGluten"/>
+
+    <CheckBox
+        android:id="@+id/viewSoy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/checkSoy"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/viewNuts"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnBackToList"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewFish"
+        android:layout_marginTop="32dp"
+        android:id="@+id/btnBackToList"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
