@@ -16,10 +16,4 @@ public class ListActionsIT{
     private DBManager testTarget;
     private File tempDB;
 
-    @Before
-    public void setup() throws IOException{
-
-    }
-
-
 }
