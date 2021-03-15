@@ -25,7 +25,7 @@ public class Item {
 
     //Constructor
     public Item(String name, int quantity, String units, int quantityToBuy, int thresholdQuantity,
-                ArrayList<String> allergies, int caloriesPerUnit, double pricePerUnit, int id) {
+                ArrayList<String> allergies, int caloriesPerUnit, double pricePerUnit) {
         this.name = name;
         this.quantity = quantity;
         this.units = units;
@@ -34,7 +34,6 @@ public class Item {
         this.allergies = allergies;
         this.caloriesPerUnit = caloriesPerUnit;
         this.pricePerUnit = pricePerUnit;
-        this.id = id;
     }
 
     //Secondary Constructor
@@ -63,11 +62,20 @@ public class Item {
         this.quantity = quantity;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     //Returns a string of the quantity and units
 
     public String getQuantityString(){
         return "" + quantity + " " + units;
     }
+
     public String getUnits() {
         return units;
     }
@@ -87,6 +95,8 @@ public class Item {
     public String getQuantityToBuyString() { return "" + quantityToBuy + " " + units; }
 
     public int getThresholdQuantity() { return thresholdQuantity; }
+
+    public void setThresholdQuantity(int thresholdQuantity) { this.thresholdQuantity = thresholdQuantity; }
 
     public ArrayList<String> getAllergies() {
         return allergies;

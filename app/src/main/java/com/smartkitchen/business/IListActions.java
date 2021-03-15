@@ -21,8 +21,8 @@ public interface IListActions {
     ArrayList<Item> getGroceryList();
     ArrayList<Item> getInventoryList();
 
-    Item getGroceryItemByName(String name);
-    Item getInventoryItemByName(String name);
+//    Item getGroceryItemByName(String name);
+//    Item getInventoryItemByName(String name);
 
     boolean thresholdAddToGrocery(Item item, Context context, boolean returnToMain);
 

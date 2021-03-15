@@ -86,18 +86,18 @@ public class ListActions implements IListActions {
         return DBManager.getInventoryDB().getInventoryList();
     }
 
-    //Get an item via their name string
-    @Override
-    public Item getGroceryItemByName(String name) {
-        Item item = DBManager.getGroceryDB().getGroceryItemByName(name);
-        return item;
-    }
-
-    @Override
-    public Item getInventoryItemByName(String name) {
-        Item item = DBManager.getInventoryDB().getInventoryItemByName(name);
-        return item;
-    }
+//    //Get an item via their name string
+//    @Override
+//    public Item getGroceryItemByName(String name) {
+//        Item item = DBManager.getGroceryDB().getGroceryItemByName(name);
+//        return item;
+//    }
+//
+//    @Override
+//    public Item getInventoryItemByName(String name) {
+//        Item item = DBManager.getInventoryDB().getInventoryItemByName(name);
+//        return item;
+//    }
 
     //"Buys" an item, i.e. moves it into inventory
     @Override
@@ -127,7 +127,7 @@ public class ListActions implements IListActions {
         // Check if quantity<threshold
         if (validation.thresholdStatus()) {
             //If not already in grocery list, add to the grocery list
-            if (!isInGrocery(item)) {
+            if (getDuplicateByName(item, DBManager.getGroceryDB().getGroceryList()) == null) {
                 //Pull up prompt for quantity to buy
                 AlertMessage.showDialog(context, item, returnToMain);
                 enteredThreshold = true;
