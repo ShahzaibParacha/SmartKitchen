@@ -117,6 +117,7 @@ public class ListActionsIT{
         System.out.println("Finished getListTest");
     }
 
+    /*
     @Test
     public void getItemByIdTest(){
         System.out.println("\nStarting getItemByIdTest");
@@ -126,6 +127,7 @@ public class ListActionsIT{
 
         System.out.println("Finished getItemByIdTest");
     }
+     */
 
     @Test
     public void buyItemTest(){

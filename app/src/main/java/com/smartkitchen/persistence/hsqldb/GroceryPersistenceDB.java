@@ -166,23 +166,23 @@ public class GroceryPersistenceDB implements IDBGrocery {
         }
     }
 
-    @Override
-    public Item getGroceryItemById(int itemId) {
-        Item item = null;
-        try (Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM GROCERY_ITEMS WHERE GROCERY_ITEMS.ITEM_ID = ?");
-            st.setInt(1, itemId);
-            final ResultSet rs = st.executeQuery();
-
-            if (rs.next()) {
-                item = constructItem(rs);
-            }
-
-        } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
-            System.out.println(e.getMessage());
-        }
-        return item;
-    }
+//    @Override
+//    public Item getGroceryItemById(int itemId) {
+//        Item item = null;
+//        try (Connection c = connection()) {
+//            final PreparedStatement st = c.prepareStatement("SELECT * FROM GROCERY_ITEMS WHERE GROCERY_ITEMS.ITEM_ID = ?");
+//            st.setInt(1, itemId);
+//            final ResultSet rs = st.executeQuery();
+//
+//            if (rs.next()) {
+//                item = constructItem(rs);
+//            }
+//
+//        } catch (final SQLException e) {
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            System.out.println(e.getMessage());
+//        }
+//        return item;
+//    }
 }
 

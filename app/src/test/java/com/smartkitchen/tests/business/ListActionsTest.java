@@ -107,6 +107,7 @@ public class ListActionsTest {
         System.out.println("Finished getListTest");
     }
 
+    /*
     @Test
     public void getItemByIdTest(){
         System.out.println("\nStarting getItemByIdTest");
@@ -126,6 +127,7 @@ public class ListActionsTest {
 
         System.out.println("Finished getItemByIdTest");
     }
+     */
 
     @Test
     public void buyItemTest(){
@@ -185,7 +187,7 @@ public class ListActionsTest {
 
         System.out.println("Finished removeTest");
     }
-
+/*
     @Test
     public void isInTest(){
         System.out.println("\nStarting isInTest");
@@ -203,6 +205,7 @@ public class ListActionsTest {
 
         System.out.println("Finished isInTest");
     }
+ */
 
     @Test
     public void isInListTest(){

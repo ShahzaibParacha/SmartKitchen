@@ -90,9 +90,8 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
             public void onClick(View v) {
                 try {
                     listActions.buyItem(listActions.getGroceryItem(position));
-                    items.remove(items.get(position));
-                    notifyItemRemoved(position);
-                    notifyDataSetChanged();
+                    Intent intent = new Intent(mContext, GroceryListActivity.class);
+                    mContext.startActivity(intent);
                 } catch (Exception e) {
                     Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }

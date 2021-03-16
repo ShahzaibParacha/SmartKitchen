@@ -46,7 +46,8 @@ public class AlertMessage {
                     //Take the input and modify item object
                     item.setQuantityToBuy(Integer.parseInt(input.getText().toString()));
                     //If the item is not in the grocery list yet, add it in
-                    if (!listActions.isInGrocery(item)) {
+                    Item duplicate = listActions.getDuplicateByName(item, listActions.getGroceryList());
+                    if (duplicate == null) {
                         try {
                             listActions.addToGrocery(item);
                         } catch (Exception e) {
