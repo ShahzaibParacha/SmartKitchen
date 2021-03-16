@@ -7,7 +7,7 @@ import com.smartkitchen.tests.business.*;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        //ListActionsIT.class,
+        ListActionsIT.class,
         ListValidationIT.class,
 })
 public class IntegrationTests { }

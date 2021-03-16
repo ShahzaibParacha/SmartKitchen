@@ -163,7 +163,6 @@ public class ListActionsTest {
 
         assertEquals(listActions.getInventoryItem(0), testItem);
 
-
         System.out.println("Finished buyAllTest");
     }
 
