@@ -95,7 +95,8 @@ public class AddInventoryItemActivity extends ParentActivity {
                             startActivity(intent);
                         }
                     }
-                    else{
+                    else {
+                        System.out.println("Duplicate exists");
                         Toast.makeText(AddInventoryItemActivity.this, "An Item with this name already exists in Inventory.", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {

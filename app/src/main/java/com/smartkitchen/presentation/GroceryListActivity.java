@@ -15,7 +15,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartkitchen.R;
 import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.ListActions;
+import com.smartkitchen.objects.Item;
 import com.smartkitchen.persistence.DBManager;
+
+import java.util.ArrayList;
 
 public class GroceryListActivity extends ParentActivity {
 
@@ -43,6 +46,8 @@ public class GroceryListActivity extends ParentActivity {
 
         totalSum.setText("$" + listActions.getGroceryListTotal());
 
+        ArrayList<Item> groceryList = listActions.getGroceryList();
+
         //Moves to add grocery item screen
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +56,10 @@ public class GroceryListActivity extends ParentActivity {
                 startActivity(intent);
             }
         });
+
+        if(groceryList.size() == 0){
+            btnBuyAll.setEnabled(false);
+        }
 
         btnBuyAll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +81,7 @@ public class GroceryListActivity extends ParentActivity {
         groceryListRecView.setAdapter(adapter);
         groceryListRecView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter.setItems(listActions.getGroceryList());
+        adapter.setItems(groceryList);
 
 
     }
