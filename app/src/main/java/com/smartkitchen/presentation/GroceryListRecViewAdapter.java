@@ -16,6 +16,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartkitchen.R;
+import com.smartkitchen.business.GroceryActions;
+import com.smartkitchen.business.IGroceryActions;
 import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Item;
@@ -26,8 +28,8 @@ import java.util.ArrayList;
 import static com.smartkitchen.presentation.EditInventoryItemActivity.POSITION_KEY;
 
 public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListRecViewAdapter.ViewHolder> {
-
-    IListActions listActions = new ListActions();
+    
+    IGroceryActions groceryActions = new GroceryActions();
     //List to be displayed
     private ArrayList<Item> items = new ArrayList<>();
     private Context mContext;
@@ -68,7 +70,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
             @Override
             public void onClick(View v) {
                 Item item = items.get(position);
-                listActions.removeFromGrocery(item);
+                groceryActions.removeFromGrocery(item);
                 items.remove(item);
                 notifyItemRemoved(position);
                 Intent intent = new Intent(mContext, GroceryListActivity.class);
@@ -92,7 +94,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
             @Override
             public void onClick(View v) {
                 try {
-                    listActions.buyItem(listActions.getGroceryItem(position));
+                    groceryActions.buyItem(groceryActions.getGroceryItem(position));
                     Intent intent = new Intent(mContext, GroceryListActivity.class);
                     mContext.startActivity(intent);
                 } catch (Exception e) {

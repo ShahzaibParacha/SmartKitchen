@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartkitchen.R;
+import com.smartkitchen.business.GroceryActions;
+import com.smartkitchen.business.IGroceryActions;
 import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Item;
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 
 public class GroceryListActivity extends ParentActivity {
 
-    private IListActions listActions = new ListActions();
+    private IGroceryActions groceryActions = new GroceryActions();
 
     //The list view of the grocery list and its adapter
     private RecyclerView groceryListRecView;
@@ -44,9 +46,9 @@ public class GroceryListActivity extends ParentActivity {
         btnBuyAll = findViewById(R.id.btnBuyAll);
         totalSum = findViewById(R.id.groceryListTotalSum);
 
-        totalSum.setText("$" + listActions.getGroceryListTotal());
+        totalSum.setText("$" + groceryActions.getGroceryListTotal());
 
-        ArrayList<Item> groceryList = listActions.getGroceryList();
+        ArrayList<Item> groceryList = groceryActions.getGroceryList();
 
         //Moves to add grocery item screen
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +67,7 @@ public class GroceryListActivity extends ParentActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    listActions.buyAll();
+                    groceryActions.buyAll();
                     Intent intent = getIntent();
                     finish();
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

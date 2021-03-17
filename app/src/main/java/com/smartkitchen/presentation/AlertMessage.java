@@ -11,12 +11,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.smartkitchen.business.GroceryActions;
+import com.smartkitchen.business.IGroceryActions;
 import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Item;
 
 public class AlertMessage {
     private static IListActions listActions = new ListActions();
+    private static IGroceryActions groceryActions = new GroceryActions();
 
     //Builds, displays and takes input
     public static void showDialog(Context context, Item item, boolean returnToMain){
@@ -46,13 +49,17 @@ public class AlertMessage {
                     //Take the input and modify item object
                     item.setQuantityToBuy(Integer.parseInt(input.getText().toString()));
                     //If the item is not in the grocery list yet, add it in
-                    Item duplicate = listActions.getDuplicateByName(item, listActions.getGroceryList());
+                    Item duplicate = listActions.getDuplicateByName(item, groceryActions.getGroceryList());
                     if (duplicate == null) {
                         try {
-                            listActions.addToGrocery(item);
+                            groceryActions.addToGrocery(item);
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
+                    }
+                    else{
+                        duplicate.setQuantityToBuy(duplicate.getQuantityToBuy()+item.getQuantityToBuy());
+                        groceryActions.updateGroceryItem(duplicate);
                     }
                     //If the function needs to return to the inventory screen, do that here
                     if (returnToMain) {

@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.smartkitchen.business.GroceryActions;
+import com.smartkitchen.business.IGroceryActions;
 import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Allergies;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 public class AddGroceryItemActivity extends ParentActivity {
 
     IListActions listActions = new ListActions();
+    IGroceryActions groceryActions = new GroceryActions();
     //Input Fields for item information
     private EditText inputName, inputQuantityToBuy, inputUnits, inputPrice, inputCalories;
 
@@ -58,8 +61,8 @@ public class AddGroceryItemActivity extends ParentActivity {
                 Item newItem = initItem();
                 try {
                     //If an item with this name does not exist yet, then add it in
-                    if(listActions.getDuplicateByName(newItem, listActions.getGroceryList()) == null) {
-                        listActions.addToGrocery(newItem);
+                    if(listActions.getDuplicateByName(newItem, groceryActions.getGroceryList()) == null) {
+                        groceryActions.addToGrocery(newItem);
                         //Once the item is added, return to grocery list screen
                         Intent intent = new Intent(AddGroceryItemActivity.this, GroceryListActivity.class);
                         startActivity(intent);

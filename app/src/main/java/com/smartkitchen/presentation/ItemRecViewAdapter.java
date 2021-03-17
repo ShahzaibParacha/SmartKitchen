@@ -17,7 +17,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartkitchen.R;
+import com.smartkitchen.business.IInventoryActions;
 import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.InventoryActions;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.persistence.DBManager;
@@ -28,7 +30,7 @@ import static com.smartkitchen.presentation.EditInventoryItemActivity.POSITION_K
 
 public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.ViewHolder> {
 
-    IListActions listActions = new ListActions();
+    IInventoryActions inventoryActions = new InventoryActions();
     //List to be displayed
     private ArrayList<Item> items = new ArrayList<>();
     private Context mContext;
@@ -69,7 +71,7 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
             @Override
             public void onClick(View v) {
                 Item item = items.get(position);
-                listActions.removeFromInventory(item);
+                inventoryActions.removeFromInventory(item);
                 items.remove(item);
                 notifyItemRemoved(position);
             }
@@ -90,7 +92,7 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
             @Override
             public void onClick(View v) {
                 //Calls the prompt for user to enter quantity to buy (doesn't need to return to main because it is already on main)
-                AlertMessage.showDialog(mContext, listActions.getInventoryItem(position), false);
+                AlertMessage.showDialog(mContext, inventoryActions.getInventoryItem(position), false);
             }
         });
 

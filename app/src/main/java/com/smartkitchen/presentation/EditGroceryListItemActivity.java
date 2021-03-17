@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.smartkitchen.business.GroceryActions;
+import com.smartkitchen.business.IGroceryActions;
 import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Allergies;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 public class EditGroceryListItemActivity extends ParentActivity {
 
     IListActions listActions = new ListActions();
+    IGroceryActions groceryActions = new GroceryActions();
     public static final String POSITION_KEY = "position";
 
     //Fields for user input
@@ -41,7 +44,7 @@ public class EditGroceryListItemActivity extends ParentActivity {
         //Gets the item that has been selected to be edited
         Intent intent = getIntent();
         int itemPosition = intent.getIntExtra(POSITION_KEY, -1);
-        Item item = listActions.getGroceryItem(itemPosition);
+        Item item = groceryActions.getGroceryItem(itemPosition);
 
         setTitle("Edit " + item.getName());
 
@@ -100,7 +103,7 @@ public class EditGroceryListItemActivity extends ParentActivity {
         else
             item.setCaloriesPerUnit(0);
         item.setAllergies(getAllergies());
-        listActions.updateGroceryItem(item);
+        groceryActions.updateGroceryItem(item);
     }
 
     //Grabs the info from the text field and stores in an Item object

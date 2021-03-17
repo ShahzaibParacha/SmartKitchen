@@ -12,7 +12,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.smartkitchen.business.GroceryActions;
+import com.smartkitchen.business.IGroceryActions;
+import com.smartkitchen.business.IInventoryActions;
 import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.InventoryActions;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Allergies;
 import com.smartkitchen.objects.Item;
@@ -24,6 +28,8 @@ import java.util.ArrayList;
 public class AddInventoryItemActivity extends ParentActivity {
 
     IListActions listActions = new ListActions();
+    IInventoryActions inventoryActions = new InventoryActions();
+    IGroceryActions groceryActions = new GroceryActions();
     //Input Fields for item information
     private EditText inputName, inputQuantity, inputUnits, inputThreshold, inputPrice, inputCalories;
     //Checkbox to enable/disable threshold
@@ -85,10 +91,10 @@ public class AddInventoryItemActivity extends ParentActivity {
                 Item newItem = initItem();
                 try {
                     //If an item with this name does not exist yet, then add it in
-                    if(listActions.getDuplicateByName(newItem, listActions.getInventoryList()) == null) {
-                        listActions.addToInventory(newItem);
+                    if(listActions.getDuplicateByName(newItem, inventoryActions.getInventoryList()) == null) {
+                        inventoryActions.addToInventory(newItem);
                         //Checks if the item will be added to grocery because of quantity<threshold
-                        boolean enteredThreshold = listActions.thresholdAddToGrocery(newItem, AddInventoryItemActivity.this, true);
+                        boolean enteredThreshold = groceryActions.thresholdAddToGrocery(newItem, AddInventoryItemActivity.this, true);
                         //If not, just return to the main list as usual
                         if (!enteredThreshold) {
                             Intent intent = new Intent(AddInventoryItemActivity.this, CurrentInventoryActivity.class);
@@ -96,7 +102,6 @@ public class AddInventoryItemActivity extends ParentActivity {
                         }
                     }
                     else {
-                        System.out.println("Duplicate exists");
                         Toast.makeText(AddInventoryItemActivity.this, "An Item with this name already exists in Inventory.", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {

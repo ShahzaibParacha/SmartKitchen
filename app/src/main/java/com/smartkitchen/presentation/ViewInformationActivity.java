@@ -10,7 +10,11 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.smartkitchen.R;
+import com.smartkitchen.business.GroceryActions;
+import com.smartkitchen.business.IGroceryActions;
+import com.smartkitchen.business.IInventoryActions;
 import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.InventoryActions;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Allergies;
 import com.smartkitchen.objects.Item;
@@ -19,6 +23,8 @@ import java.util.ArrayList;
 
 public class ViewInformationActivity extends ParentActivity {
 
+    IInventoryActions inventoryActions = new InventoryActions();
+    IGroceryActions groceryActions = new GroceryActions();
     //Only Used for Debugging purposes
     private TextView txtID;
 
@@ -38,9 +44,9 @@ public class ViewInformationActivity extends ParentActivity {
         int itemPosition = intent.getIntExtra("Position", -1);
         Item item = null;
         if(origin.equals("Inventory"))
-            item = listActions.getInventoryItem(itemPosition);
+            item = inventoryActions.getInventoryItem(itemPosition);
         else if(origin.equals("Grocery"))
-            item = listActions.getGroceryItem(itemPosition);
+            item = groceryActions.getGroceryItem(itemPosition);
 
         setTitle("View " + item.getName() + " Information");
         title.setText("View " + item.getName() + " Information");
