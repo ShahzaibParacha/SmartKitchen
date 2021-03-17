@@ -1,4 +1,4 @@
-package com.smartkitchen.tests;
+package com.smartkitchen.tests.business;
 
 import org.junit.Test;
 
@@ -7,7 +7,10 @@ import com.smartkitchen.objects.Item;
 
 import static org.junit.Assert.*;
 
-public class ListValidationTest{
+
+//just copied over the unit test since this layer does not interact with the persistence layer
+//reason: code coverage for Integration Tests automation
+public class ListValidationIT{
 
     @Test
     public void testListValidation(){
