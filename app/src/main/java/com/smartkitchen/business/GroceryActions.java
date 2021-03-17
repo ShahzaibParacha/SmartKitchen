@@ -5,6 +5,7 @@ import android.content.Context;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.persistence.DBManager;
 import com.smartkitchen.persistence.IDBGrocery;
+import com.smartkitchen.persistence.IDBInventory;
 import com.smartkitchen.presentation.AlertMessage;
 
 import java.util.ArrayList;
@@ -17,8 +18,9 @@ public class GroceryActions implements IGroceryActions{
 
     public GroceryActions(){}
 
-    public GroceryActions(IDBGrocery groceryDB){
+    public GroceryActions(IDBGrocery groceryDB, IDBInventory inventoryDB){
         this.groceryDB = groceryDB;
+        inventoryActions = new InventoryActions(inventoryDB);
     }
 
     //Simple adds to either list
