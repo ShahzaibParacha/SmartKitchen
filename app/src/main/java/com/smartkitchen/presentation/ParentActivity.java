@@ -32,9 +32,10 @@ public class ParentActivity extends AppCompatActivity {
                 intent = new Intent(ParentActivity.this, GroceryListActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.menuRecipes:
-                Toast.makeText(this, "Recipe Feature Coming Soon!", Toast.LENGTH_SHORT).show();
-                return true;
+//            To be Implemented in Iteration 3
+//            case R.id.menuRecipes:
+//                Toast.makeText(this, "Recipe Feature Coming Soon!", Toast.LENGTH_SHORT).show();
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

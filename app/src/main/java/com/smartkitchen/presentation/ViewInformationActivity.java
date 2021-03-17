@@ -19,9 +19,12 @@ import java.util.ArrayList;
 
 public class ViewInformationActivity extends ParentActivity {
 
+    //Only Used for Debugging purposes
+    private TextView txtID;
+
     IListActions listActions = new ListActions();
     private TextView title;
-    private TextView txtID, txtName, txtQuantity, txtQuantityToBuy, txtUnits, txtThreshold, txtPrice, txtCalories;
+    private TextView txtName, txtQuantity, txtQuantityToBuy, txtUnits, txtThreshold, txtPrice, txtCalories;
     private CheckBox checkEgg, checkFish, checkGluten, checkLactose, checkSoy, checkNuts;
     private Button btnBackToList;
     @Override
@@ -57,7 +60,8 @@ public class ViewInformationActivity extends ParentActivity {
     }
 
     private void setData(Item item){
-        txtID.setText("" + item.getId());
+        //Only Used for Debugging purposes
+        //txtID.setText("" + item.getId());
         txtName.setText(item.getName());
         txtQuantity.setText("" + item.getQuantity());
         txtQuantityToBuy.setText("" + item.getQuantityToBuy());
@@ -88,7 +92,8 @@ public class ViewInformationActivity extends ParentActivity {
 
     //Initializes the views
     private void initViews(){
-        txtID = findViewById(R.id.idLabel);
+        //Only Used for Debugging purposes
+        //txtID = findViewById(R.id.idLabel);
         txtName = findViewById(R.id.txtViewName);
         txtQuantity = findViewById(R.id.txtViewQuantity);
         txtQuantityToBuy = findViewById(R.id.txtViewQuantityToBuy);

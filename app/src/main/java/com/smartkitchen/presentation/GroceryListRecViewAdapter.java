@@ -71,6 +71,9 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
                 listActions.removeFromGrocery(item);
                 items.remove(item);
                 notifyItemRemoved(position);
+                Intent intent = new Intent(mContext, GroceryListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                mContext.startActivity(intent);
             }
         });
 
