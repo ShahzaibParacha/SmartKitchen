@@ -10,12 +10,14 @@ import java.util.ArrayList;
 
 public class ListActions implements IListActions {
 
+    private IListValidation validation;
+
     //Simple adds to either list
     @Override
     public void addToGrocery(Item item) throws Exception {
         try{
-            ListValidation validation = new ListValidation(item);
-            validation.containsItemInputs();
+            //ListValidation validation = new ListValidation(item);
+            validation.containsItemInputs(item);
             Item existingItem = getDuplicateByName(item, DBManager.getGroceryDB().getGroceryList());
             if(existingItem == null)
                 DBManager.getGroceryDB().addToGrocery(item);
@@ -31,8 +33,8 @@ public class ListActions implements IListActions {
     @Override
     public void addToInventory(Item item) throws Exception {
         try{
-            ListValidation validation = new ListValidation(item);
-            validation.containsItemInputs();
+            //ListValidation validation = new ListValidation(item);
+            validation.containsItemInputs(item);
             Item existingItem = getDuplicateByName(item, DBManager.getInventoryDB().getInventoryList());
             if(existingItem == null)
                 DBManager.getInventoryDB().addToInventory(item);
@@ -58,8 +60,8 @@ public class ListActions implements IListActions {
     @Override
     public void editValidation(Item item) throws Exception {
         try{
-            ListValidation validation = new ListValidation(item);
-            validation.containsItemInputs();
+            //ListValidation validation = new ListValidation(item);
+            validation.containsItemInputs(item);
         }
         catch(Exception e){
             throw e;
@@ -146,9 +148,9 @@ public class ListActions implements IListActions {
     @Override
     public boolean thresholdAddToGrocery(Item item, Context context, boolean returnToMain) {
         boolean enteredThreshold = false;
-        ListValidation validation = new ListValidation(item);
+        //ListValidation validation = new ListValidation(item);
         // Check if quantity<threshold
-        if (validation.thresholdStatus()) {
+        if (validation.thresholdStatus(item)) {
             //If not already in grocery list, add to the grocery list
             if (getDuplicateByName(item, DBManager.getGroceryDB().getGroceryList()) == null) {
                 //Pull up prompt for quantity to buy

@@ -57,7 +57,7 @@ public class ViewInformationActivity extends ParentActivity {
     }
 
     private void setData(Item item){
-        txtID.setText("" + item.getId());
+        //txtID.setText("" + item.getId());
         txtName.setText(item.getName());
         txtQuantity.setText("" + item.getQuantity());
         txtQuantityToBuy.setText("" + item.getQuantityToBuy());
@@ -88,7 +88,7 @@ public class ViewInformationActivity extends ParentActivity {
 
     //Initializes the views
     private void initViews(){
-        txtID = findViewById(R.id.idLabel);
+        //txtID = findViewById(R.id.idLabel);
         txtName = findViewById(R.id.txtViewName);
         txtQuantity = findViewById(R.id.txtViewQuantity);
         txtQuantityToBuy = findViewById(R.id.txtViewQuantityToBuy);

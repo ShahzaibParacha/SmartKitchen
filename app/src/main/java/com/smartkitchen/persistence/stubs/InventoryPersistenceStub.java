@@ -1,17 +1,22 @@
-package com.smartkitchen.persistence;
+package com.smartkitchen.persistence.stubs;
 
+import com.smartkitchen.business.IListValidation;
 import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Item;
+import com.smartkitchen.persistence.IDBInventory;
+
 import java.util.ArrayList;
 
-public class FakeDBInventory implements IDBInventory{
-
+public class InventoryPersistenceStub implements IDBInventory {
     private ArrayList<Item> inventoryList;
-    private ListValidation validation;
+    private IListValidation validation;
 
-    // Constructor instantiating grocery list
-    public FakeDBInventory(){
-        inventoryList = new ArrayList<Item>();
+    public InventoryPersistenceStub() {
+        this.inventoryList = new ArrayList<>();
+
+        inventoryList.add(new Item("Milk", 4, "L", 0, 2, null, 0, 0));
+        inventoryList.add(new Item("Sugar", 100, "g", 0, 2, null, 0, 0));
+        inventoryList.add(new Item("Pizza", 10, "Boxes", 0, 2, null, 0, 0));
     }
 
     // Overriding the methods provided by the interface (parent class)
@@ -20,13 +25,13 @@ public class FakeDBInventory implements IDBInventory{
     // If proper parameters are in place, add item to the grocery list
     @Override
     public void addToInventory(Item item) {
-        validation = new ListValidation(item);
+        //validation = new ListValidation(item);
         try {
-            validation.containsItemInputs();
+            validation.containsItemInputs(item);
             inventoryList.add(item);
         }
         catch (Exception e) {
-            // this is where UI can pop a new layer which notifies user of error input
+            // This is where UI can pop a new layer which notifies user of error input
             System.out.println(e.getMessage());
         }
     }
