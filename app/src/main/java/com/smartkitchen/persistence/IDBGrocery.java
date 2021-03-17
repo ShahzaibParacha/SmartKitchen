@@ -15,5 +15,5 @@ public interface IDBGrocery {
 
     ArrayList<Item> getGroceryList();
 
-    Item getGroceryItemByName(String name);
+//    Item getGroceryItemById(int itemId);
 }

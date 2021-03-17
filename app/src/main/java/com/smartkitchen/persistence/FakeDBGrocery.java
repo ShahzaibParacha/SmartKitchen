@@ -50,16 +50,8 @@ public class FakeDBGrocery implements IDBGrocery {
         return groceryList;
     }
 
-    // Method which takes in an item's name and searches the list. If it is in there, then return
-    // that item with the same name
-    @Override
-    public Item getGroceryItemByName(String name) {
-        Item item = null;
-        for (Item x:groceryList) {
-            if(x.getName().equals(name)){
-                item = x;
-            }
-        }
-        return item;
-    }
+//    @Override
+//    public Item getGroceryItemById(int itemId) {
+//        return null;
+//    }
 }

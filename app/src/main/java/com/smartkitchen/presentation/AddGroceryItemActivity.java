@@ -57,6 +57,7 @@ public class AddGroceryItemActivity extends ParentActivity {
                 //Creates item based on inputted values and adds
                 Item newItem = initItem();
                 try {
+                    //If an item with this name does not exist yet, then add it in
                     if(listActions.getDuplicateByName(newItem, listActions.getGroceryList()) == null) {
                         listActions.addToGrocery(newItem);
                         //Once the item is added, return to grocery list screen
@@ -73,7 +74,7 @@ public class AddGroceryItemActivity extends ParentActivity {
         });
     }
 
-    //Initialize new item with the inputted information
+    //Initialize new item with the inputted information, sets default values for empty fields
     private Item initItem(){
         String name = inputName.getText().toString();
         int quantityToBuy = -1;
@@ -90,6 +91,7 @@ public class AddGroceryItemActivity extends ParentActivity {
         return new Item(name, 0, units, quantityToBuy, 0, allergies, calories, price);
     }
 
+    //Finds which allergies are checked off and puts them in an array list
     private ArrayList<String> getAllergies(){
         ArrayList<String> allergies = new ArrayList<String>();
         if(checkNuts.isChecked())

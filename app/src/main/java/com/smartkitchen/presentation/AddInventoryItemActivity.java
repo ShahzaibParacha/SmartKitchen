@@ -84,6 +84,7 @@ public class AddInventoryItemActivity extends ParentActivity {
                 //Initializes new item based on inputted information
                 Item newItem = initItem();
                 try {
+                    //If an item with this name does not exist yet, then add it in
                     if(listActions.getDuplicateByName(newItem, listActions.getInventoryList()) == null) {
                         listActions.addToInventory(newItem);
                         //Checks if the item will be added to grocery because of quantity<threshold

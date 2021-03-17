@@ -100,7 +100,7 @@ public class EditGroceryListItemActivity extends ParentActivity {
         else
             item.setCaloriesPerUnit(0);
         item.setAllergies(getAllergies());
-        listActions.updateItem(item);
+        listActions.updateGroceryItem(item);
     }
 
     //Grabs the info from the text field and stores in an Item object

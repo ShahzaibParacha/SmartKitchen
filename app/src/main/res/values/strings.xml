@@ -9,6 +9,7 @@
 
     <!--Titles-->
     <string name="defaultEditTitle">Edit Item</string>
+    <string name="defaultViewInfoTitle">Item Information</string>
     <string name="titleAddToInv">Add New Item to Inventory</string>
     <string name="titleAddToGrocery">Add New Item to Grocery List</string>
 
@@ -52,6 +53,7 @@
     <string name="btnEdit">Edit</string>
     <string name="btnRemove">Remove</string>
     <string name="btnAddToGrocery">Add to Grocery List</string>
+    <string name="btnBackToList">Back to List</string>
 
     <!--Other-->
     <string name="enableThresholdText">Enable automatic adding of item to grocery list below given threshold?</string>

@@ -45,12 +45,15 @@ public class ListActions implements IListActions {
     }
 
     @Override
-    public void updateItem(Item item) {
-        if(isInInventory(item))
-            DBManager.getInventoryDB().updateItem(item);
-        if(isInGrocery(item))
-            DBManager.getGroceryDB().updateItem(item);
+    public void updateInventoryItem(Item item) {
+        DBManager.getInventoryDB().updateItem(item);
     }
+
+    @Override
+    public void updateGroceryItem(Item item) {
+        DBManager.getGroceryDB().updateItem(item);
+    }
+
 
     @Override
     public void editValidation(Item item) throws Exception {
@@ -86,25 +89,37 @@ public class ListActions implements IListActions {
         return DBManager.getInventoryDB().getInventoryList();
     }
 
-    //Get an item via their name string
-    @Override
-    public Item getGroceryItemByName(String name) {
-        Item item = DBManager.getGroceryDB().getGroceryItemByName(name);
-        return item;
-    }
+//    @Override
+//    public Item getInventoryItemById(int itemId) {
+//        return DBManager.getInventoryDB().getInventoryItemById(itemId);
+//    }
+//
+//    @Override
+//    public Item getGroceryItemById(int itemId) {
+//        return DBManager.getGroceryDB().getGroceryItemById(itemId);
+//    }
 
-    @Override
-    public Item getInventoryItemByName(String name) {
-        Item item = DBManager.getInventoryDB().getInventoryItemByName(name);
-        return item;
-    }
+//    //Get an item via their name string
+//    @Override
+//    public Item getGroceryItemByName(String name) {
+//        Item item = DBManager.getGroceryDB().getGroceryItemByName(name);
+//        return item;
+//    }
+//
+//    @Override
+//    public Item getInventoryItemByName(String name) {
+//        Item item = DBManager.getInventoryDB().getInventoryItemByName(name);
+//        return item;
+//    }
 
     //"Buys" an item, i.e. moves it into inventory
     @Override
     public void buyItem(Item item) throws Exception {
         //If the item is already in inventory, sum current quantity and quantity to buy
-        if(isInInventory(item)){
-            item.setQuantity(item.getQuantity()+item.getQuantityToBuy());
+        Item duplicate = getDuplicateByName(item, DBManager.getInventoryDB().getInventoryList());
+        if(duplicate != null){
+            duplicate.setQuantity(duplicate.getQuantity()+item.getQuantityToBuy());
+            updateInventoryItem(duplicate);
         }
         //If not, set the quantity as quantity to buy and add it
         else {
@@ -119,6 +134,14 @@ public class ListActions implements IListActions {
         removeFromGrocery(item);
     }
 
+    @Override
+    public void buyAll() throws Exception {
+        ArrayList<Item> groceryList = DBManager.getGroceryDB().getGroceryList();
+        for (Item item : groceryList) {
+            buyItem(item);
+        }
+    }
+
     //Deals with adding an item to the grocery list via the threshold method
     @Override
     public boolean thresholdAddToGrocery(Item item, Context context, boolean returnToMain) {
@@ -127,7 +150,7 @@ public class ListActions implements IListActions {
         // Check if quantity<threshold
         if (validation.thresholdStatus()) {
             //If not already in grocery list, add to the grocery list
-            if (!isInGrocery(item)) {
+            if (getDuplicateByName(item, DBManager.getGroceryDB().getGroceryList()) == null) {
                 //Pull up prompt for quantity to buy
                 AlertMessage.showDialog(context, item, returnToMain);
                 enteredThreshold = true;
@@ -147,28 +170,28 @@ public class ListActions implements IListActions {
         DBManager.getInventoryDB().removeFromInventory(item);
     }
 
-    //Checks for if an item is in the inventory/grocery list
-    @Override
-    public boolean isInInventory(Item item) {
-        boolean exists = false;
-        for(Item x:DBManager.getInventoryDB().getInventoryList()){
-            if(x.equals(item)){
-                exists = true;
-            }
-        }
-        return exists;
-    }
-
-    @Override
-    public boolean isInGrocery(Item item) {
-        boolean exists = false;
-        for(Item x:DBManager.getGroceryDB().getGroceryList()){
-            if(x.equals(item)){
-                exists = true;
-            }
-        }
-        return exists;
-    }
+//    //Checks for if an item is in the inventory/grocery list
+//    @Override
+//    public boolean isInInventory(Item item) {
+//        boolean exists = false;
+//        for(Item x:DBManager.getInventoryDB().getInventoryList()){
+//            if(x.equals(item)){
+//                exists = true;
+//            }
+//        }
+//        return exists;
+//    }
+//
+//    @Override
+//    public boolean isInGrocery(Item item) {
+//        boolean exists = false;
+//        for(Item x:DBManager.getGroceryDB().getGroceryList()){
+//            if(x.equals(item)){
+//                exists = true;
+//            }
+//        }
+//        return exists;
+//    }
 
     @Override
     public Item getDuplicateByName(Item item, ArrayList<Item> items) {
@@ -188,5 +211,15 @@ public class ListActions implements IListActions {
                 inList = true;
         }
         return inList;
+    }
+
+    @Override
+    public double getGroceryListTotal() {
+        ArrayList<Item> groceryList = DBManager.getGroceryDB().getGroceryList();
+        double total = 0.0;
+        for (Item item : groceryList) {
+            total += item.getPricePerUnit() * (double)item.getQuantityToBuy();
+        }
+        return total;
     }
 }
