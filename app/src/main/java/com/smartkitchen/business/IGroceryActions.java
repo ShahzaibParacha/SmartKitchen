@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public interface IGroceryActions {
 
-    void addToGrocery(Item item) throws Exception;
+    void addToGrocery(Item item) throws InvalidInputException;
 
     void updateGroceryItem(Item item);
 
@@ -20,8 +20,8 @@ public interface IGroceryActions {
 
     boolean thresholdAddToGrocery(Item item, Context context, boolean returnToMain);
 
-    void buyItem(Item item) throws Exception;
-    void buyAll() throws Exception;
+    void buyItem(Item item) throws InvalidInputException;
+    void buyAll() throws InvalidInputException;
 
     void removeFromGrocery(Item item);
 

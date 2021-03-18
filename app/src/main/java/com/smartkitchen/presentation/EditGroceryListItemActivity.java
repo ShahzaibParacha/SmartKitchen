@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.smartkitchen.business.GroceryActions;
 import com.smartkitchen.business.IGroceryActions;
 import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Allergies;
 import com.smartkitchen.objects.Item;
@@ -72,7 +73,7 @@ public class EditGroceryListItemActivity extends ParentActivity {
                     updateData(item);
                     Intent intent = new Intent(EditGroceryListItemActivity.this, GroceryListActivity.class);
                     startActivity(intent);
-                } catch (Exception e) {
+                } catch (InvalidInputException e) {
                     Toast.makeText(EditGroceryListItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }

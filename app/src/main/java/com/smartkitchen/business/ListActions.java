@@ -11,12 +11,12 @@ public class ListActions implements IListActions {
     } // empty constructor: do nothing
 
     @Override
-    public void editValidation(Item item) throws Exception {
+    public void editValidation(Item item) throws InvalidInputException {
         try{
             ListValidation validation = new ListValidation(item);
             validation.containsItemInputs();
         }
-        catch(Exception e){
+        catch(InvalidInputException e){
             throw e;
         }
     }

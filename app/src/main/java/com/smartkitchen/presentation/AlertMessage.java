@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.smartkitchen.business.GroceryActions;
 import com.smartkitchen.business.IGroceryActions;
 import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Item;
 
@@ -53,7 +54,7 @@ public class AlertMessage {
                     if (duplicate == null) {
                         try {
                             groceryActions.addToGrocery(item);
-                        } catch (Exception e) {
+                        } catch (InvalidInputException e) {
                             System.out.println(e.getMessage());
                         }
                     }

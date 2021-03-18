@@ -16,6 +16,7 @@ import com.smartkitchen.business.GroceryActions;
 import com.smartkitchen.business.IGroceryActions;
 import com.smartkitchen.business.IInventoryActions;
 import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.business.InventoryActions;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Allergies;
@@ -104,7 +105,7 @@ public class AddInventoryItemActivity extends ParentActivity {
                     else {
                         Toast.makeText(AddInventoryItemActivity.this, "An Item with this name already exists in Inventory.", Toast.LENGTH_SHORT).show();
                     }
-                } catch (Exception e) {
+                } catch (InvalidInputException e) {
                     Toast.makeText(AddInventoryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 

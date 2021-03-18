@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.smartkitchen.business.GroceryActions;
 import com.smartkitchen.business.IGroceryActions;
 import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Allergies;
 import com.smartkitchen.objects.Item;
@@ -70,7 +71,7 @@ public class AddGroceryItemActivity extends ParentActivity {
                     else{
                         Toast.makeText(AddGroceryItemActivity.this, "An item with this name already exists in Grocery List.", Toast.LENGTH_SHORT).show();
                     }
-                } catch (Exception e) {
+                } catch (InvalidInputException e) {
                     Toast.makeText(AddGroceryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }

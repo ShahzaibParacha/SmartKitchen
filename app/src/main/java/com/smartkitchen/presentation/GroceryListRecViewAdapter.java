@@ -19,6 +19,7 @@ import com.smartkitchen.R;
 import com.smartkitchen.business.GroceryActions;
 import com.smartkitchen.business.IGroceryActions;
 import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.persistence.DBManager;
@@ -97,7 +98,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
                     groceryActions.buyItem(groceryActions.getGroceryItem(position));
                     Intent intent = new Intent(mContext, GroceryListActivity.class);
                     mContext.startActivity(intent);
-                } catch (Exception e) {
+                } catch (InvalidInputException e) {
                     Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }

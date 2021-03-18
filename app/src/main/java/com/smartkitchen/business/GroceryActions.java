@@ -25,13 +25,13 @@ public class GroceryActions implements IGroceryActions{
 
     //Simple adds to either list
     @Override
-    public void addToGrocery(Item item) throws Exception {
+    public void addToGrocery(Item item) throws InvalidInputException {
         try{
             ListValidation validation = new ListValidation(item);
             validation.containsItemInputs();
             groceryDB.addToGrocery(item);
         }
-        catch(Exception e){
+        catch(InvalidInputException e){
             throw e;
         }
     }
@@ -85,7 +85,7 @@ public class GroceryActions implements IGroceryActions{
 
     //"Buys" an item, i.e. moves it into inventory
     @Override
-    public void buyItem(Item item) throws Exception {
+    public void buyItem(Item item) throws InvalidInputException {
         //If the item is already in inventory, sum current quantity and quantity to buy
         Item duplicate = listActions.getDuplicateByName(item, inventoryActions.getInventoryList());
         if(duplicate != null){
@@ -97,7 +97,7 @@ public class GroceryActions implements IGroceryActions{
             item.setQuantity(item.getQuantityToBuy());
             try {
                 inventoryActions.addToInventory(item);
-            } catch (Exception e) {
+            } catch (InvalidInputException e) {
                 throw e;
             }
         }
@@ -106,7 +106,7 @@ public class GroceryActions implements IGroceryActions{
     }
 
     @Override
-    public void buyAll() throws Exception {
+    public void buyAll() throws InvalidInputException {
         ArrayList<Item> groceryList = groceryDB.getGroceryList();
         for (Item item : groceryList) {
             buyItem(item);

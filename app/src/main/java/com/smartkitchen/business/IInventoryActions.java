@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public interface IInventoryActions {
 
-    void addToInventory(Item item) throws Exception;
+    void addToInventory(Item item) throws InvalidInputException;
 
     void updateInventoryItem(Item item);
 

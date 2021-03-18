@@ -18,13 +18,13 @@ public class InventoryActions implements IInventoryActions {
     }
 
     @Override
-    public void addToInventory(Item item) throws Exception {
+    public void addToInventory(Item item) throws InvalidInputException {
         try{
             ListValidation validation = new ListValidation(item);
             validation.containsItemInputs();
             inventoryDB.addToInventory(item);
         }
-        catch(Exception e){
+        catch(InvalidInputException e){
             throw e;
         }
     }

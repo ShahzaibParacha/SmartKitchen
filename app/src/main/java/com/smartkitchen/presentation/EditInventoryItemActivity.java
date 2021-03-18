@@ -15,6 +15,7 @@ import com.smartkitchen.business.GroceryActions;
 import com.smartkitchen.business.IGroceryActions;
 import com.smartkitchen.business.IInventoryActions;
 import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.business.InventoryActions;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.business.ListValidation;
@@ -83,7 +84,7 @@ public class EditInventoryItemActivity extends ParentActivity {
                         Intent intent = new Intent(EditInventoryItemActivity.this, CurrentInventoryActivity.class);
                         startActivity(intent);
                     }
-                } catch (Exception e) {
+                } catch (InvalidInputException e) {
                     Toast.makeText(EditInventoryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }

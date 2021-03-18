@@ -1,5 +1,6 @@
 package com.smartkitchen.persistence;
 
+import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Item;
 
@@ -26,7 +27,7 @@ public class FakeDBGrocery implements IDBGrocery {
             validation.containsItemInputs();
             groceryList.add(item);
         }
-        catch (Exception e) {
+        catch (InvalidInputException e) {
             // This is where UI can pop a new layer which notifies user of error input
             System.out.println(e.getMessage());
         }

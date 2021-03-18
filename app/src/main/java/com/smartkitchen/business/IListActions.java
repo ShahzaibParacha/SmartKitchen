@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public interface IListActions {
 
-    void editValidation(Item item) throws Exception;
+    void editValidation(Item item) throws InvalidInputException;
 
     Item getDuplicateByName(Item item, ArrayList<Item> items);
 
