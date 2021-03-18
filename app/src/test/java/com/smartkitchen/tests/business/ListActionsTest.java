@@ -25,7 +25,7 @@ public class ListActionsTest {
     public void setUp(){
         listActions = new ListActions();
         inventoryActions = new InventoryActions(testindb);
-        groceryActions = new GroceryActions(testgrdb, testindb);
+        groceryActions = new GroceryActions(testgrdb, inventoryActions);
     }
 
     @Test
