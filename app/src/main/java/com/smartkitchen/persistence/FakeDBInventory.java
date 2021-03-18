@@ -1,5 +1,6 @@
 package com.smartkitchen.persistence;
 
+import com.smartkitchen.business.IListValidation;
 import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Item;
@@ -8,11 +9,12 @@ import java.util.ArrayList;
 public class FakeDBInventory implements IDBInventory{
 
     private ArrayList<Item> inventoryList;
-    private ListValidation validation;
+    private IListValidation validation;
 
     // Constructor instantiating grocery list
     public FakeDBInventory(){
-        inventoryList = new ArrayList<Item>();
+        this.inventoryList = new ArrayList<>();
+        this.validation = new ListValidation();
     }
 
     // Overriding the methods provided by the interface (parent class)
@@ -21,9 +23,8 @@ public class FakeDBInventory implements IDBInventory{
     // If proper parameters are in place, add item to the grocery list
     @Override
     public void addToInventory(Item item) {
-        validation = new ListValidation(item);
         try {
-            validation.containsItemInputs();
+            validation.containsItemInputs(item);
             inventoryList.add(item);
         }
         catch (InvalidInputException e) {

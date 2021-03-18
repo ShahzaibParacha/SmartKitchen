@@ -1,29 +1,18 @@
 package com.smartkitchen.business;
 
 import com.smartkitchen.objects.Item;
-import com.smartkitchen.persistence.DBManager;
 
-import java.util.ArrayList;
-
-public class ListValidation {
-
-    // validating item entries
-    private Item item;
-
-    // item is instantiated
-    public ListValidation(Item item) {
-        this.item = item;
-    }
+public class ListValidation implements IListValidation {
 
     // logic for threshold checks
-    public boolean thresholdStatus() {
+    public boolean thresholdStatus(Item item) {
         if (item.getQuantity() < item.getThresholdQuantity())
             return true;
         return false;
     }
 
     // logic to check if entry for items are valid (name, quantity, units, threshold)
-    public void containsItemInputs() throws InvalidInputException {
+    public void containsItemInputs(Item item) throws InvalidInputException {
         if (item.getName().length() <= 0)
             throw new InvalidInputException("Please enter a valid input for name.");
         if (item.getQuantity() < 0)

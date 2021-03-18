@@ -1,19 +1,22 @@
 package com.smartkitchen.persistence;
 
+import com.smartkitchen.business.IListValidation;
 import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Item;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FakeDBGrocery implements IDBGrocery {
 
     private ArrayList<Item> groceryList;
-    private ListValidation validation;
+    private IListValidation validation;
 
     // Constructor instantiating grocery list
     public FakeDBGrocery(){
-        groceryList = new ArrayList<Item>();
+        this.groceryList = new ArrayList<>();
+        this.validation = new ListValidation();
     }
 
     // Overriding the methods provided by the interface (parent class)
@@ -22,9 +25,8 @@ public class FakeDBGrocery implements IDBGrocery {
     // If proper parameters are in place, add item to the grocery list
     @Override
     public void addToGrocery(Item item) {
-        validation = new ListValidation(item);
         try {
-            validation.containsItemInputs();
+            validation.containsItemInputs(item);
             groceryList.add(item);
         }
         catch (InvalidInputException e) {

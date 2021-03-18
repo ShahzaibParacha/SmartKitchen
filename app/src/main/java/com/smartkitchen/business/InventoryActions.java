@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class InventoryActions implements IInventoryActions {
 
     private IDBInventory inventoryDB = DBManager.getInventoryDB();
-    private IListActions listActions = new ListActions();
+    private IListValidation validation = new ListValidation();
 
     public InventoryActions(){}
 
@@ -20,8 +20,7 @@ public class InventoryActions implements IInventoryActions {
     @Override
     public void addToInventory(Item item) throws InvalidInputException {
         try{
-            ListValidation validation = new ListValidation(item);
-            validation.containsItemInputs();
+            validation.containsItemInputs(item);
             inventoryDB.addToInventory(item);
         }
         catch(InvalidInputException e){

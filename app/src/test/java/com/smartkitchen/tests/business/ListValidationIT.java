@@ -2,6 +2,7 @@ package com.smartkitchen.tests.business;
 
 import org.junit.Test;
 
+import com.smartkitchen.business.IListValidation;
 import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Item;
 
@@ -12,13 +13,14 @@ import static org.junit.Assert.*;
 //reason: code coverage for Integration Tests automation
 public class ListValidationIT{
 
+    private IListValidation testListValidation = new ListValidation();
+
     @Test
     public void testListValidation(){
         System.out.println("\nStarting testListValidation constructor.");
 
         //Act
         Item testItem = new Item("sampleItem", 1, "sampleUnit", 1, 1);
-        ListValidation testListValidation = new ListValidation(testItem);
 
         //Assert
         assertNotNull(testListValidation);
@@ -31,10 +33,9 @@ public class ListValidationIT{
 
         //Act
         Item testItem = new Item("sampleItem", 1, "sampleUnit", 1, 1);
-        ListValidation testListValidation = new ListValidation(testItem);
 
         //Assert
-        assertFalse(testListValidation.thresholdStatus());
+        assertFalse(testListValidation.thresholdStatus(testItem));
         System.out.println("Finished testThresholdStatus.");
     }
 
@@ -44,10 +45,9 @@ public class ListValidationIT{
 
         //Act
         Item testItem = new Item("sampleItem", 1, "sampleUnit", 1, 5);
-        ListValidation testListValidation = new ListValidation(testItem);
 
         //Assert
-        assertTrue(testListValidation.thresholdStatus());
+        assertTrue(testListValidation.thresholdStatus(testItem));
         System.out.println("Finished testThresholdStatus.");
     }
 
@@ -57,7 +57,6 @@ public class ListValidationIT{
 
         //Act
         Item testItem = new Item("sampleItem", 1, "sampleUnit", 1, 1);
-        ListValidation testListValidation = new ListValidation(testItem);
 
         //Assert
         System.out.println("Finished testThresholdStatus.");
@@ -69,45 +68,40 @@ public class ListValidationIT{
 
         //Act 1 -- getName
         Item testItem = new Item("", -1, "", -1, -1);
-        ListValidation testListValidation = new ListValidation(testItem);
         try {
-            testListValidation.containsItemInputs();
+            testListValidation.containsItemInputs(testItem);
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
         // Act 2 -- getQuantity
         Item testItem1 = new Item(" ", -1, "", -1, -1);
-        ListValidation testListValidation1 = new ListValidation(testItem1);
         try {
-            testListValidation1.containsItemInputs();
+            testListValidation.containsItemInputs(testItem1);
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
         // Act 3 -- getLength
         Item testItem2 = new Item(" ", 1, "", -1, -1);
-        ListValidation testListValidation2 = new ListValidation(testItem2);
         try {
-            testListValidation2.containsItemInputs();
+            testListValidation.containsItemInputs(testItem2);
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
         // Act 4 -- threshold
         Item testItem3 = new Item(" ", 1, " ", 0, -1);
-        ListValidation testListValidation3 = new ListValidation(testItem3);
         try {
-            testListValidation3.containsItemInputs();
+            testListValidation.containsItemInputs(testItem3);
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
         // Act 5 -- full true
         Item testItem4 = new Item("sampleItem", 1, "sampleItem", 1, 1);
-        ListValidation testListValidation4 = new ListValidation(testItem4);
         try {
-            testListValidation3.containsItemInputs();
+            testListValidation.containsItemInputs(testItem4);
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }
