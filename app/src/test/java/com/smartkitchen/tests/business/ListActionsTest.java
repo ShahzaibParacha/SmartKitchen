@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import com.smartkitchen.business.GroceryActions;
+import com.smartkitchen.business.InventoryActions;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.persistence.FakeDBGrocery;
@@ -13,13 +15,17 @@ import java.util.ArrayList;
 
 public class ListActionsTest {
     private ListActions listActions;
+    private InventoryActions inventoryActions;
+    private GroceryActions groceryActions;
     private FakeDBGrocery testgrdb = new FakeDBGrocery();
     private FakeDBInventory testindb = new FakeDBInventory();
 
 
     @Before
     public void setUp(){
-        listActions = new ListActions(testgrdb, testindb);
+        listActions = new ListActions();
+        inventoryActions = new InventoryActions(testindb);
+        groceryActions = new GroceryActions(testgrdb, inventoryActions);
     }
 
     @Test
@@ -31,21 +37,21 @@ public class ListActionsTest {
         Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 1);
 
         try {
-            listActions.addToGrocery(testItem);
-            listActions.addToInventory(testItem);
-            listActions.addToGrocery(testItem); // add existing
+            groceryActions.addToGrocery(testItem);
+            inventoryActions.addToInventory(testItem);
+            groceryActions.addToGrocery(testItem); // add existing
 
         }catch(Exception e){System.out.println(e.getMessage());}
 
-        assertEquals(listActions.getGroceryItem(0), testItem);
-        assertEquals(listActions.getInventoryItem(0), testItem);
+        assertEquals(groceryActions.getGroceryItem(0), testItem);
+        assertEquals(inventoryActions.getInventoryItem(0), testItem);
 
 
         Item testItem2 = new Item("sampleItem", 1, "", 1, 1, testAllergies, 1, 1);
 
         try{
-            listActions.addToGrocery(testItem2);
-            listActions.addToInventory(testItem2);
+            groceryActions.addToGrocery(testItem2);
+            inventoryActions.addToInventory(testItem2);
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
@@ -61,12 +67,12 @@ public class ListActionsTest {
 
         Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 1);
         try {
-            listActions.addToGrocery(testItem);
-            listActions.addToInventory(testItem);
+            groceryActions.addToGrocery(testItem);
+            inventoryActions.addToInventory(testItem);
         }catch(Exception e){System.out.println(e.getMessage());}
 
-        listActions.updateGroceryItem(testItem);
-        listActions.updateInventoryItem(testItem);
+        groceryActions.updateGroceryItem(testItem);
+        inventoryActions.updateInventoryItem(testItem);
 
         System.out.println("Finished updateItemTest");
     }
@@ -97,12 +103,12 @@ public class ListActionsTest {
         Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 1);
 
         try {
-            listActions.addToGrocery(testItem);
-            listActions.addToInventory(testItem);
+            groceryActions.addToGrocery(testItem);
+            inventoryActions.addToInventory(testItem);
         }catch(Exception e){System.out.println(e.getMessage());}
 
-        assertEquals(listActions.getGroceryList().get(0), testItem);
-        assertEquals(listActions.getInventoryList().get(0), testItem);
+        assertEquals(groceryActions.getGroceryList().get(0), testItem);
+        assertEquals(inventoryActions.getInventoryList().get(0), testItem);
 
         System.out.println("Finished getListTest");
     }
@@ -118,12 +124,12 @@ public class ListActionsTest {
         testItem.setId(1);
 
         try {
-            listActions.addToGrocery(testItem);
-            listActions.addToInventory(testItem);
+            groceryActions.addToGrocery(testItem);
+            inventoryActions.addToInventory(testItem);
         }catch(Exception e){System.out.println(e.getMessage());}
 
-        assertEquals(listActions.getGroceryItemById(1), null);
-        assertEquals(listActions.getInventoryItemById(1), null);
+        assertEquals(groceryActions.getGroceryItemById(1), null);
+        assertEquals(inventoryActions.getInventoryItemById(1), null);
 
         System.out.println("Finished getItemByIdTest");
     }
@@ -141,10 +147,10 @@ public class ListActionsTest {
         Item testItem3 = new Item("sampleItem2", 1, "", 1, 1, testAllergies, 1, 1);
 
         try {
-            listActions.addToInventory(testItem);
-            listActions.buyItem(testItem);
-            listActions.buyItem(testItem2);
-            listActions.buyItem(testItem3);
+            inventoryActions.addToInventory(testItem);
+            groceryActions.buyItem(testItem);
+            groceryActions.buyItem(testItem2);
+            groceryActions.buyItem(testItem3);
         }catch(Exception e){System.out.println(e.getMessage());}
 
         System.out.println("Starting buyItemTest");
@@ -159,11 +165,11 @@ public class ListActionsTest {
         Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 1);
 
         try {
-            listActions.addToGrocery(testItem);
-            listActions.buyAll();
+            groceryActions.addToGrocery(testItem);
+            groceryActions.buyAll();
         }catch(Exception e){System.out.println(e.getMessage());}
 
-        assertEquals(listActions.getInventoryItem(0), testItem);
+        assertEquals(inventoryActions.getInventoryItem(0), testItem);
 
         System.out.println("Finished buyAllTest");
     }
@@ -176,36 +182,17 @@ public class ListActionsTest {
         Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 1);
 
         try {
-            listActions.addToGrocery(testItem);
-            listActions.addToInventory(testItem);
-            listActions.removeFromGrocery(testItem);
-            listActions.removeFromInventory(testItem);
+            groceryActions.addToGrocery(testItem);
+            inventoryActions.addToInventory(testItem);
+            groceryActions.removeFromGrocery(testItem);
+            inventoryActions.removeFromInventory(testItem);
         }catch(Exception e){System.out.println(e.getMessage());}
 
-        assertTrue(listActions.getGroceryList().isEmpty());
-        assertTrue(listActions.getInventoryList().isEmpty());
+        assertTrue(groceryActions.getGroceryList().isEmpty());
+        assertTrue(inventoryActions.getInventoryList().isEmpty());
 
         System.out.println("Finished removeTest");
     }
-/*
-    @Test
-    public void isInTest(){
-        System.out.println("\nStarting isInTest");
-        ArrayList<String> testAllergies = new ArrayList<String>();
-        testAllergies.add("testAllergy");
-        Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 1);
-
-        try {
-            listActions.addToGrocery(testItem);
-            listActions.addToInventory(testItem);
-        }catch(Exception e){System.out.println(e.getMessage());}
-
-        assertTrue(listActions.isInGrocery(testItem));
-        assertTrue(listActions.isInInventory(testItem));
-
-        System.out.println("Finished isInTest");
-    }
- */
 
     @Test
     public void isInListTest(){
@@ -226,11 +213,11 @@ public class ListActionsTest {
         Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 50);
 
         try {
-            listActions.addToGrocery(testItem);
-            listActions.addToInventory(testItem);
+            groceryActions.addToGrocery(testItem);
+            inventoryActions.addToInventory(testItem);
         }catch(Exception e){System.out.println(e.getMessage());}
 
-        assertTrue(listActions.getGroceryListTotal() == 50);
+        assertTrue(groceryActions.getGroceryListTotal() == 50);
 
         System.out.println("Finished getGroceryListTotal");
     }

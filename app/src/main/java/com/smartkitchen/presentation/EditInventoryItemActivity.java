@@ -11,7 +11,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.smartkitchen.business.GroceryActions;
+import com.smartkitchen.business.IGroceryActions;
+import com.smartkitchen.business.IInventoryActions;
 import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.InvalidInputException;
+import com.smartkitchen.business.InventoryActions;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Allergies;
@@ -24,6 +29,8 @@ import java.util.ArrayList;
 public class EditInventoryItemActivity extends ParentActivity {
 
     IListActions listActions = new ListActions();
+    IInventoryActions inventoryActions = new InventoryActions();
+    IGroceryActions groceryActions = new GroceryActions();
     public static final String POSITION_KEY = "position";
 
     //Fields for user input
@@ -43,7 +50,7 @@ public class EditInventoryItemActivity extends ParentActivity {
         //Gets the item that has been selected to be edited
         Intent intent = getIntent();
         int itemPosition = intent.getIntExtra(POSITION_KEY, -1);
-        Item item = listActions.getInventoryItem(itemPosition);
+        Item item = inventoryActions.getInventoryItem(itemPosition);
 
         setTitle("Edit " + item.getName());
 
@@ -71,13 +78,13 @@ public class EditInventoryItemActivity extends ParentActivity {
                     listActions.editValidation(checkData(item));
                     updateData(item);
                     //Checks if the item needed to be added to grocery list because quantity<threshold
-                    boolean enteredThreshold = listActions.thresholdAddToGrocery(item, EditInventoryItemActivity.this, true);
+                    boolean enteredThreshold = groceryActions.thresholdAddToGrocery(item, EditInventoryItemActivity.this, true);
                     //If not, return to the inventory screen as usual
                     if(!enteredThreshold){
                         Intent intent = new Intent(EditInventoryItemActivity.this, CurrentInventoryActivity.class);
                         startActivity(intent);
                     }
-                } catch (Exception e) {
+                } catch (InvalidInputException e) {
                     Toast.makeText(EditInventoryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -113,7 +120,7 @@ public class EditInventoryItemActivity extends ParentActivity {
         else
             item.setCaloriesPerUnit(0);
         item.setAllergies(getAllergies());
-        listActions.updateInventoryItem(item);
+        inventoryActions.updateInventoryItem(item);
     }
 
     //Grabs the info from the text field and stores in an Item object
