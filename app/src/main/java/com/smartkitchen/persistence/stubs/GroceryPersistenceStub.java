@@ -1,6 +1,7 @@
 package com.smartkitchen.persistence.stubs;
 
 import com.smartkitchen.business.IListValidation;
+import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.persistence.IDBGrocery;
 
@@ -11,7 +12,8 @@ public class GroceryPersistenceStub implements IDBGrocery {
     private IListValidation validation;
 
     public GroceryPersistenceStub() {
-        this.groceryList = new ArrayList<>();
+        groceryList = new ArrayList<>();
+        validation = new ListValidation();
 
         groceryList.add(new Item("Sugar", 100, "g", 200, 2, null, 0, 0));
         groceryList.add(new Item("Pizza", 10, "Boxes", 5, 2, null, 0, 0));

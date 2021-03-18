@@ -7,14 +7,6 @@ import java.util.ArrayList;
 
 public class ListValidation implements IListValidation{
 
-//    // validating item entries
-//    private Item item;
-//
-//    // item is instantiated
-//    public ListValidation(Item item) {
-//        this.item = item;
-//    }
-
     // logic for threshold checks
     @Override
     public boolean thresholdStatus(Item item) {

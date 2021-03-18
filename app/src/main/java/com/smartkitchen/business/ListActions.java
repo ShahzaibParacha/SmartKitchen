@@ -12,11 +12,14 @@ public class ListActions implements IListActions {
 
     private IListValidation validation;
 
+    public ListActions() {
+        validation = new ListValidation();
+    }
+
     //Simple adds to either list
     @Override
     public void addToGrocery(Item item) throws Exception {
         try{
-            //ListValidation validation = new ListValidation(item);
             validation.containsItemInputs(item);
             Item existingItem = getDuplicateByName(item, DBManager.getGroceryDB().getGroceryList());
             if(existingItem == null)
@@ -33,7 +36,6 @@ public class ListActions implements IListActions {
     @Override
     public void addToInventory(Item item) throws Exception {
         try{
-            //ListValidation validation = new ListValidation(item);
             validation.containsItemInputs(item);
             Item existingItem = getDuplicateByName(item, DBManager.getInventoryDB().getInventoryList());
             if(existingItem == null)
@@ -60,7 +62,6 @@ public class ListActions implements IListActions {
     @Override
     public void editValidation(Item item) throws Exception {
         try{
-            //ListValidation validation = new ListValidation(item);
             validation.containsItemInputs(item);
         }
         catch(Exception e){
@@ -148,7 +149,6 @@ public class ListActions implements IListActions {
     @Override
     public boolean thresholdAddToGrocery(Item item, Context context, boolean returnToMain) {
         boolean enteredThreshold = false;
-        //ListValidation validation = new ListValidation(item);
         // Check if quantity<threshold
         if (validation.thresholdStatus(item)) {
             //If not already in grocery list, add to the grocery list

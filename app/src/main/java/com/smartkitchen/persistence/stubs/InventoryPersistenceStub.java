@@ -12,7 +12,8 @@ public class InventoryPersistenceStub implements IDBInventory {
     private IListValidation validation;
 
     public InventoryPersistenceStub() {
-        this.inventoryList = new ArrayList<>();
+        inventoryList = new ArrayList<>();
+        validation = new ListValidation();
 
         inventoryList.add(new Item("Milk", 4, "L", 0, 2, null, 0, 0));
         inventoryList.add(new Item("Sugar", 100, "g", 0, 2, null, 0, 0));
