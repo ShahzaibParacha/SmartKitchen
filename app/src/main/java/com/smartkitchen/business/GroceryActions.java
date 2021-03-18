@@ -18,9 +18,9 @@ public class GroceryActions implements IGroceryActions{
 
     public GroceryActions(){}
 
-    public GroceryActions(IDBGrocery groceryDB, IDBInventory inventoryDB){
+    public GroceryActions(IDBGrocery groceryDB, IInventoryActions inventoryActions){
         this.groceryDB = groceryDB;
-        inventoryActions = new InventoryActions(inventoryDB);
+        this.inventoryActions = inventoryActions;
     }
 
     //Simple adds to either list

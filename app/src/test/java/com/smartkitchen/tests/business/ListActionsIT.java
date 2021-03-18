@@ -33,7 +33,7 @@ public class ListActionsIT{
         final InventoryPersistenceDB inventoryPersistence = new InventoryPersistenceDB(this.tempDB.getAbsolutePath().replace(".script", ""));
         this.listTestTarget = new ListActions();
         this.invTestTarget = new InventoryActions(inventoryPersistence);
-        this.groceryTestTarget = new GroceryActions(groceryPersistence, inventoryPersistence);
+        this.groceryTestTarget = new GroceryActions(groceryPersistence, invTestTarget);
     }
 
     @Test
