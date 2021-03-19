@@ -15,8 +15,10 @@ public class GroceryActions implements IGroceryActions{
     private IDBGrocery groceryDB = DBManager.getGroceryDB();
     private IInventoryActions inventoryActions = new InventoryActions();
     private IListActions listActions = new ListActions();
+    private IListValidation validation = new ListValidation();
 
-    public GroceryActions(){}
+    public GroceryActions(){
+    }
 
     public GroceryActions(IDBGrocery groceryDB, IInventoryActions inventoryActions){
         this.groceryDB = groceryDB;
@@ -27,8 +29,7 @@ public class GroceryActions implements IGroceryActions{
     @Override
     public void addToGrocery(Item item) throws InvalidInputException {
         try{
-            ListValidation validation = new ListValidation(item);
-            validation.containsItemInputs();
+            validation.containsItemInputs(item);
             groceryDB.addToGrocery(item);
         }
         catch(InvalidInputException e){
@@ -73,9 +74,8 @@ public class GroceryActions implements IGroceryActions{
     @Override
     public boolean thresholdAddToGrocery(Item item, Context context, boolean returnToMain) {
         boolean enteredThreshold = false;
-        ListValidation validation = new ListValidation(item);
         // Check if quantity<threshold
-        if (validation.thresholdStatus()) {
+        if (validation.thresholdStatus(item)) {
             //Pull up prompt for quantity to buy
             AlertMessage.showDialog(context, item, returnToMain);
             enteredThreshold = true;

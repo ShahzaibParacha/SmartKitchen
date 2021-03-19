@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.smartkitchen.business.IListValidation;
+import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.persistence.IDBGrocery;
@@ -17,13 +19,14 @@ import com.smartkitchen.persistence.IDBGrocery;
 public class GroceryPersistenceDB implements IDBGrocery {
 
     private final String dbPath;
-    private ListValidation validation;
+    private IListValidation validation;
     private static List<Item> grocery;
 
 
     public GroceryPersistenceDB(final String dbPath) {
         this.dbPath = dbPath;
-        grocery = new ArrayList<>();
+        this.grocery = new ArrayList<>();
+        this.validation = new ListValidation();
     }
 
     private Connection connection() throws SQLException {
@@ -71,9 +74,8 @@ public class GroceryPersistenceDB implements IDBGrocery {
 
     @Override
     public void addToGrocery(Item item) {
-        validation = new ListValidation(item);
         try {
-            validation.containsItemInputs();
+            validation.containsItemInputs(item);
             try (final Connection c = connection()) {
                 final PreparedStatement st = c.prepareStatement("INSERT INTO GROCERY_ITEMS VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?)");
                 st.setString(1, item.getName());
@@ -94,7 +96,7 @@ public class GroceryPersistenceDB implements IDBGrocery {
                 System.out.println(e.getMessage());
             }
         }
-        catch (Exception e) {
+        catch (InvalidInputException e) {
             System.out.println(e.getMessage());
         }
     }

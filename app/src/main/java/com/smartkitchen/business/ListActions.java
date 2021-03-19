@@ -3,18 +3,20 @@ package com.smartkitchen.business;
 import com.smartkitchen.objects.Item;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListActions implements IListActions {
 
-    public ListActions(){
+    private IListValidation validation;
 
+    public ListActions(){
+        validation = new ListValidation();
     } // empty constructor: do nothing
 
     @Override
     public void editValidation(Item item) throws InvalidInputException {
         try{
-            ListValidation validation = new ListValidation(item);
-            validation.containsItemInputs();
+            validation.containsItemInputs(item);
         }
         catch(InvalidInputException e){
             throw e;
