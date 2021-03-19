@@ -20,5 +20,5 @@ The branching strategy for the iteration can be found [here](branching_strategy.
 ![Architecure](architecture.png "Architecture")
 
 ### Worksheet
-The worksheet to iteration 1 can be found [here](worksheet.md).
+The worksheet to iteration 1 can be found [here](worksheet.md).      
 The worksheet to the current iteration can be found [here](Worksheet2.md).
