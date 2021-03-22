@@ -64,8 +64,7 @@ public class EditInventoryItemActivity extends ParentActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EditInventoryItemActivity.this, CurrentInventoryActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -81,8 +80,7 @@ public class EditInventoryItemActivity extends ParentActivity {
                     boolean enteredThreshold = groceryActions.thresholdAddToGrocery(item, EditInventoryItemActivity.this, true);
                     //If not, return to the inventory screen as usual
                     if(!enteredThreshold){
-                        Intent intent = new Intent(EditInventoryItemActivity.this, CurrentInventoryActivity.class);
-                        startActivity(intent);
+                        finish();
                     }
                 } catch (InvalidInputException e) {
                     Toast.makeText(EditInventoryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();

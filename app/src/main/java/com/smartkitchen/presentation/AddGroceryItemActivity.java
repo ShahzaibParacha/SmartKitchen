@@ -49,8 +49,7 @@ public class AddGroceryItemActivity extends ParentActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddGroceryItemActivity.this, GroceryListActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -65,8 +64,7 @@ public class AddGroceryItemActivity extends ParentActivity {
                     if(listActions.getDuplicateByName(newItem, groceryActions.getGroceryList()) == null) {
                         groceryActions.addToGrocery(newItem);
                         //Once the item is added, return to grocery list screen
-                        Intent intent = new Intent(AddGroceryItemActivity.this, GroceryListActivity.class);
-                        startActivity(intent);
+                        finish();
                     }
                     else{
                         Toast.makeText(AddGroceryItemActivity.this, "An item with this name already exists in Grocery List.", Toast.LENGTH_SHORT).show();

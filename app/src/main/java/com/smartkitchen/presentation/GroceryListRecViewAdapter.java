@@ -72,11 +72,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
             public void onClick(View v) {
                 Item item = items.get(position);
                 groceryActions.removeFromGrocery(item);
-                items.remove(item);
-                notifyItemRemoved(position);
-                Intent intent = new Intent(mContext, GroceryListActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                mContext.startActivity(intent);
+                ((GroceryListActivity)mContext).onResume();
             }
         });
 
@@ -96,8 +92,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
             public void onClick(View v) {
                 try {
                     groceryActions.buyItem(groceryActions.getGroceryItem(position));
-                    Intent intent = new Intent(mContext, GroceryListActivity.class);
-                    mContext.startActivity(intent);
+                    ((GroceryListActivity)mContext).onResume();
                 } catch (InvalidInputException e) {
                     Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }

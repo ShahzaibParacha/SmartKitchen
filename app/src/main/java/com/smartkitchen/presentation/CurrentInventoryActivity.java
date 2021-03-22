@@ -13,6 +13,8 @@ import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartkitchen.R;
+import com.smartkitchen.business.IInventoryActions;
+import com.smartkitchen.business.InventoryActions;
 import com.smartkitchen.persistence.DBManager;
 
 public class CurrentInventoryActivity extends ParentActivity {
@@ -22,6 +24,7 @@ public class CurrentInventoryActivity extends ParentActivity {
     private ItemRecViewAdapter adapter;
     //Navigation button to add screen
     private FloatingActionButton btnAdd;
+    private IInventoryActions inventoryActions = new InventoryActions();
 
 
     @Override
@@ -48,6 +51,12 @@ public class CurrentInventoryActivity extends ParentActivity {
         itemsRecView.setAdapter(adapter);
         itemsRecView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter.setItems(DBManager.getInventoryDB().getInventoryList());
+        adapter.setItems(inventoryActions.getInventoryList());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.setItems(inventoryActions.getInventoryList());
     }
 }

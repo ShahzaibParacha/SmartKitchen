@@ -63,16 +63,16 @@ public class GroceryListActivity extends ParentActivity {
         if(groceryList.size() == 0){
             btnBuyAll.setEnabled(false);
         }
+        else{
+            btnBuyAll.setEnabled(true);
+        }
 
         btnBuyAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     groceryActions.buyAll();
-                    Intent intent = getIntent();
-                    finish();
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    startActivity(intent);
+                    onResume();
                 }
                 catch (InvalidInputException e){
                     Toast.makeText(GroceryListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -85,7 +85,19 @@ public class GroceryListActivity extends ParentActivity {
         groceryListRecView.setLayoutManager(new LinearLayoutManager(this));
 
         adapter.setItems(groceryList);
-
-
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.setItems(groceryActions.getGroceryList());
+        totalSum.setText("$" + groceryActions.getGroceryListTotal());
+        if(groceryActions.getGroceryList().size() == 0){
+            btnBuyAll.setEnabled(false);
+        }
+        else{
+            btnBuyAll.setEnabled(true);
+        }
+    }
+
 }

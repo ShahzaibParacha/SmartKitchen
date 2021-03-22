@@ -59,8 +59,7 @@ public class EditGroceryListItemActivity extends ParentActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EditGroceryListItemActivity.this, GroceryListActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -71,8 +70,7 @@ public class EditGroceryListItemActivity extends ParentActivity {
                 try {
                     listActions.editValidation(checkData(item));
                     updateData(item);
-                    Intent intent = new Intent(EditGroceryListItemActivity.this, GroceryListActivity.class);
-                    startActivity(intent);
+                    finish();
                 } catch (InvalidInputException e) {
                     Toast.makeText(EditGroceryListItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }

@@ -79,8 +79,7 @@ public class AddInventoryItemActivity extends ParentActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddInventoryItemActivity.this, CurrentInventoryActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -98,8 +97,7 @@ public class AddInventoryItemActivity extends ParentActivity {
                         boolean enteredThreshold = groceryActions.thresholdAddToGrocery(newItem, AddInventoryItemActivity.this, true);
                         //If not, just return to the main list as usual
                         if (!enteredThreshold) {
-                            Intent intent = new Intent(AddInventoryItemActivity.this, CurrentInventoryActivity.class);
-                            startActivity(intent);
+                            finish();
                         }
                     }
                     else {

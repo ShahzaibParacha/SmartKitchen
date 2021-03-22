@@ -55,12 +55,7 @@ public class ViewInformationActivity extends ParentActivity {
         btnBackToList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = null;
-                if(origin.equals("Inventory"))
-                    intent = new Intent(ViewInformationActivity.this, CurrentInventoryActivity.class);
-                else if(origin.equals("Grocery"))
-                    intent = new Intent(ViewInformationActivity.this, GroceryListActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
     }
