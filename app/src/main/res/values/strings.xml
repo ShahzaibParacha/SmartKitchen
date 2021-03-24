@@ -17,6 +17,8 @@
     <string name="defaultName">Item Name</string>
     <string name="defaultQuantity">Quantity</string>
     <string name="defaultPrice">Item Price</string>
+    <string name="defaultIsPossible">Have All Ingredients: </string>
+    <string name="defaultPossibleAnswer">Yes</string>
 
     <!--Field Labels-->
     <string name="labelName">Name:</string>
@@ -54,6 +56,7 @@
     <string name="btnRemove">Remove</string>
     <string name="btnAddToGrocery">Add to Grocery List</string>
     <string name="btnBackToList">Back to List</string>
+    <string name="btnMakeRecipe">Make</string>
 
     <!--Other-->
     <string name="enableThresholdText">Enable automatic adding of item to grocery list below given threshold?</string>

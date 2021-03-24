@@ -12,6 +12,8 @@ public interface IInventoryActions {
 
     Item getInventoryItem(int position);
 
+    Item getItemByName(String name);
+
     ArrayList<Item> getInventoryList();
 
     void removeFromInventory(Item item);

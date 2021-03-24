@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blueColour1">
+    android:background="@color/redColour1">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/itemRecView"
+        android:id="@+id/recipesRecView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
@@ -18,13 +18,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnGoToAddInvActivity"
+        android:id="@+id/btnGoToAddRecipeActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:contentDescription="@string/contentDescAddInv"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/blueColour3"
+        app:backgroundTint="@color/redColour3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
