@@ -151,9 +151,9 @@
 
     <EditText
         android:id="@+id/editGroceryItemName"
+        android:transitionName="itemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:ems="10"
         android:hint="@string/hintName"
         android:importantForAutofill="no"
@@ -165,6 +165,7 @@
 
     <EditText
         android:id="@+id/editGroceryQuantity"
+        android:transitionName="itemQuantityToBuy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -191,6 +192,7 @@
 
     <EditText
         android:id="@+id/editGroceryPrice"
+        android:transitionName="itemPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"

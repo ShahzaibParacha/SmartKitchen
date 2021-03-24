@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartkitchen.R;
@@ -55,7 +56,8 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
             Intent intent = new Intent(mContext, ViewInformationActivity.class);
             intent.putExtra("Position", position);
             intent.putExtra("Origin", "Inventory");
-            mContext.startActivity(intent);
+            ActivityOptionsCompat options = getTransition(holder);
+            mContext.startActivity(intent, options.toBundle());
         });
 
         //Creates on click listener, removes the item from the list
@@ -70,7 +72,8 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
         holder.btnEdit.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, EditInventoryItemActivity.class);
             intent.putExtra(POSITION_KEY, position);
-            mContext.startActivity(intent);
+            ActivityOptionsCompat options = getTransition(holder);
+            mContext.startActivity(intent, options.toBundle());
         });
 
         //Button to quickly add items to the grocery list
@@ -114,6 +117,14 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
     public void setItems(ArrayList<Item> items){
         this.items = items;
         notifyDataSetChanged();
+    }
+
+    private ActivityOptionsCompat getTransition(ViewHolder holder){
+        androidx.core.util.Pair<View, String> p1 = androidx.core.util.Pair.create(holder.name, "itemName");
+        androidx.core.util.Pair<View, String> p2 = androidx.core.util.Pair.create(holder.quantity, "itemQuantity");
+        androidx.core.util.Pair<View, String> p3 = androidx.core.util.Pair.create(holder.price, "itemPrice");
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((CurrentInventoryActivity)mContext, p1, p2, p3);
+        return options;
     }
 
     //Holds and assigns the card view information

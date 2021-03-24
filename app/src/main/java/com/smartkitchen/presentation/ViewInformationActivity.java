@@ -61,12 +61,7 @@ public class ViewInformationActivity extends ParentActivity {
         title.setText("View " + item.getName() + " Information");
         setData(item);
 
-        btnBackToList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        btnBackToList.setOnClickListener(v -> supportFinishAfterTransition());
     }
 
     private void setColourBlue(){
@@ -87,11 +82,11 @@ public class ViewInformationActivity extends ParentActivity {
         //Only Used for Debugging purposes
         //txtID.setText("" + item.getId());
         txtName.setText(item.getName());
-        txtQuantity.setText("" + item.getQuantity());
-        txtQuantityToBuy.setText("" + item.getQuantityToBuy());
+        txtQuantity.setText("" + item.getQuantity() + " " + item.getUnits());
+        txtQuantityToBuy.setText("" + item.getQuantityToBuy() + " " + item.getUnits());
         txtUnits.setText(item.getUnits());
         txtThreshold.setText("" + item.getThresholdQuantity());
-        txtPrice.setText("" + item.getPricePerUnit());
+        txtPrice.setText("" + item.getPricePerUnit() + "/" + item.getUnits());
         txtCalories.setText("" + item.getCaloriesPerUnit());
         setAllergies(item);
     }
