@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     app:cardCornerRadius="7dp"
-    app:cardElevation="7dp">
+    app:cardElevation="7dp"
+    android:backgroundTint="@color/blueColour2">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,6 +21,7 @@
 
         <TextView
             android:id="@+id/txtInvItemName"
+            android:transitionName="itemName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -28,6 +30,7 @@
 
         <TextView
             android:id="@+id/txtInvQuantity"
+            android:transitionName="itemQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -36,6 +39,7 @@
 
         <TextView
             android:id="@+id/txtInvPrice"
+            android:transitionName="itemPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -77,7 +81,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="33"
-            android:text="@string/btnAddToGrocery"/>
+            android:text="@string/btnAddToGrocery"
+            android:backgroundTint="@color/blueColour3"/>
 
         <Button
             android:id="@+id/btnEditInvItem"
@@ -85,7 +90,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="33"
-            android:text="@string/btnEdit"/>
+            android:text="@string/btnEdit"
+            android:backgroundTint="@color/blueColour3"/>
 
         <Button
             android:id="@+id/btnRemoveInvItem"
@@ -93,7 +99,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="33"
-            android:text="@string/btnRemove"/>
+            android:text="@string/btnRemove"
+            android:backgroundTint="@color/blueColour3"/>
     </LinearLayout>
 
     </RelativeLayout>

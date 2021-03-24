@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/greenColour1">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/groceryListRecView"
@@ -46,7 +47,8 @@
         app:layout_constraintTop_toBottomOf="@id/groceryListTotalSum"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/greenColour3"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnGoToAddGroceryActivity"
@@ -55,7 +57,7 @@
         android:layout_margin="20dp"
         android:contentDescription="@string/contentDescAddGrocery"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/purple_500"
+        app:backgroundTint="@color/greenColour3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

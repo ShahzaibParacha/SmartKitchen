@@ -1,10 +1,9 @@
 package com.smartkitchen.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -19,7 +18,6 @@ import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Allergies;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
-import com.smartkitchen.persistence.DBManager;
 
 import java.util.ArrayList;
 
@@ -48,6 +46,7 @@ public class EditGroceryListItemActivity extends ParentActivity {
         Item item = groceryActions.getGroceryItem(itemPosition);
 
         setTitle("Edit " + item.getName());
+        setColour(ContextCompat.getColor(this, R.color.greenColour3));
 
         //Initializes the UI views
         initViews();
@@ -56,26 +55,16 @@ public class EditGroceryListItemActivity extends ParentActivity {
         title.setText("Edit " + item.getName());
 
         //Creates on click listener, just return to grocery list screen
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(EditGroceryListItemActivity.this, GroceryListActivity.class);
-                startActivity(intent);
-            }
-        });
+        btnCancel.setOnClickListener(v -> finish());
 
         //Creates on click listener, updates the item information and returns to grocery list screen
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    listActions.editValidation(checkData(item));
-                    updateData(item);
-                    Intent intent = new Intent(EditGroceryListItemActivity.this, GroceryListActivity.class);
-                    startActivity(intent);
-                } catch (InvalidInputException e) {
-                    Toast.makeText(EditGroceryListItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+        btnSubmit.setOnClickListener(v -> {
+            try {
+                listActions.editValidation(checkData(item));
+                updateData(item);
+                finish();
+            } catch (InvalidInputException e) {
+                Toast.makeText(EditGroceryListItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -146,7 +135,7 @@ public class EditGroceryListItemActivity extends ParentActivity {
     }
 
     private ArrayList<String> getAllergies(){
-        ArrayList<String> allergies = new ArrayList<String>();
+        ArrayList<String> allergies = new ArrayList<>();
         if(checkNuts.isChecked())
             allergies.add(Allergies.NUTS);
         if(checkSoy.isChecked())

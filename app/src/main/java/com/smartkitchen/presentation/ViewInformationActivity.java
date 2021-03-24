@@ -1,6 +1,9 @@
 package com.smartkitchen.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +32,8 @@ public class ViewInformationActivity extends ParentActivity {
     private TextView txtID;
 
     IListActions listActions = new ListActions();
+    private ConstraintLayout background;
+    private CardView cardView;
     private TextView title;
     private TextView txtName, txtQuantity, txtQuantityToBuy, txtUnits, txtThreshold, txtPrice, txtCalories;
     private CheckBox checkEgg, checkFish, checkGluten, checkLactose, checkSoy, checkNuts;
@@ -43,37 +48,45 @@ public class ViewInformationActivity extends ParentActivity {
         String origin = intent.getStringExtra("Origin");
         int itemPosition = intent.getIntExtra("Position", -1);
         Item item = null;
-        if(origin.equals("Inventory"))
+        if(origin.equals("Inventory")) {
             item = inventoryActions.getInventoryItem(itemPosition);
-        else if(origin.equals("Grocery"))
+            setColourBlue();
+        }
+        else if(origin.equals("Grocery")) {
             item = groceryActions.getGroceryItem(itemPosition);
+            setColourRed();
+        }
 
         setTitle("View " + item.getName() + " Information");
         title.setText("View " + item.getName() + " Information");
         setData(item);
 
-        btnBackToList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = null;
-                if(origin.equals("Inventory"))
-                    intent = new Intent(ViewInformationActivity.this, CurrentInventoryActivity.class);
-                else if(origin.equals("Grocery"))
-                    intent = new Intent(ViewInformationActivity.this, GroceryListActivity.class);
-                startActivity(intent);
-            }
-        });
+        btnBackToList.setOnClickListener(v -> supportFinishAfterTransition());
+    }
+
+    private void setColourBlue(){
+        setColour(ContextCompat.getColor(this, R.color.blueColour3));
+        btnBackToList.setBackgroundColor(ContextCompat.getColor(this, R.color.blueColour3));
+        background.setBackgroundColor(ContextCompat.getColor(this, R.color.blueColour1));
+        cardView.setCardBackgroundColor(ContextCompat.getColor(this, R.color.blueColour2));
+    }
+
+    private void setColourRed(){
+        setColour(ContextCompat.getColor(this, R.color.greenColour3));
+        btnBackToList.setBackgroundColor(ContextCompat.getColor(this, R.color.greenColour3));
+        background.setBackgroundColor(ContextCompat.getColor(this, R.color.greenColour1));
+        cardView.setCardBackgroundColor(ContextCompat.getColor(this, R.color.greenColour2));
     }
 
     private void setData(Item item){
         //Only Used for Debugging purposes
         //txtID.setText("" + item.getId());
         txtName.setText(item.getName());
-        txtQuantity.setText("" + item.getQuantity());
-        txtQuantityToBuy.setText("" + item.getQuantityToBuy());
+        txtQuantity.setText("" + item.getQuantity() + " " + item.getUnits());
+        txtQuantityToBuy.setText("" + item.getQuantityToBuy() + " " + item.getUnits());
         txtUnits.setText(item.getUnits());
         txtThreshold.setText("" + item.getThresholdQuantity());
-        txtPrice.setText("" + item.getPricePerUnit());
+        txtPrice.setText("" + item.getPricePerUnit() + "/" + item.getUnits());
         txtCalories.setText("" + item.getCaloriesPerUnit());
         setAllergies(item);
     }
@@ -100,6 +113,10 @@ public class ViewInformationActivity extends ParentActivity {
     private void initViews(){
         //Only Used for Debugging purposes
         //txtID = findViewById(R.id.idLabel);
+
+        background = findViewById(R.id.background);
+        cardView = findViewById(R.id.infoCardView);
+
         txtName = findViewById(R.id.txtViewName);
         txtQuantity = findViewById(R.id.txtViewQuantity);
         txtQuantityToBuy = findViewById(R.id.txtViewQuantityToBuy);

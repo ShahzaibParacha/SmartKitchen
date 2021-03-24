@@ -2,8 +2,6 @@ package com.smartkitchen.presentation;
 
 import android.content.Context;
 import android.content.Intent;
-import android.transition.AutoTransition;
-import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +12,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartkitchen.R;
 import com.smartkitchen.business.IInventoryActions;
-import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.InventoryActions;
-import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Item;
-import com.smartkitchen.persistence.DBManager;
 
 import java.util.ArrayList;
 
@@ -56,61 +52,45 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
         holder.quantity.setText(items.get(position).getQuantityString());
         holder.price.setText("$" + items.get(position).getPricePerUnit() + "/" + items.get(position).getUnits());
 
-        holder.parent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, ViewInformationActivity.class);
-                intent.putExtra("Position", position);
-                intent.putExtra("Origin", "Inventory");
-                mContext.startActivity(intent);
-            }
+        holder.parent.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, ViewInformationActivity.class);
+            intent.putExtra("Position", position);
+            intent.putExtra("Origin", "Inventory");
+            ActivityOptionsCompat options = getTransition(holder);
+            mContext.startActivity(intent, options.toBundle());
         });
 
         //Creates on click listener, removes the item from the list
-        holder.btnRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Item item = items.get(position);
-                inventoryActions.removeFromInventory(item);
-                items.remove(item);
-                notifyItemRemoved(position);
-            }
+        holder.btnRemove.setOnClickListener(v -> {
+            Item item = items.get(position);
+            inventoryActions.removeFromInventory(item);
+            items.remove(item);
+            notifyItemRemoved(position);
         });
 
         //Creates on click listener, moves to edit item screen, passes the item identifier
-        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, EditInventoryItemActivity.class);
-                intent.putExtra(POSITION_KEY, position);
-                mContext.startActivity(intent);
-            }
+        holder.btnEdit.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, EditInventoryItemActivity.class);
+            intent.putExtra(POSITION_KEY, position);
+            ActivityOptionsCompat options = getTransition(holder);
+            mContext.startActivity(intent, options.toBundle());
         });
 
         //Button to quickly add items to the grocery list
-        holder.btnAddToGrocery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Calls the prompt for user to enter quantity to buy (doesn't need to return to main because it is already on main)
-                AlertMessage.showDialog(mContext, inventoryActions.getInventoryItem(position), false);
-            }
+        holder.btnAddToGrocery.setOnClickListener(v -> {
+            //Calls the prompt for user to enter quantity to buy (doesn't need to return to main because it is already on main)
+            AlertMessage.showDialog(mContext, inventoryActions.getInventoryItem(position), false);
         });
 
         //On Click Listeners to expand/collapse the cardview
-        holder.downArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                items.get(position).setInvIsExpanded(true);
-                notifyItemChanged(position);
-            }
+        holder.downArrow.setOnClickListener(v -> {
+            items.get(position).setInvIsExpanded(true);
+            notifyItemChanged(position);
         });
 
-        holder.upArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                items.get(position).setInvIsExpanded(false);
-                notifyItemChanged(position);
-            }
+        holder.upArrow.setOnClickListener(v -> {
+            items.get(position).setInvIsExpanded(false);
+            notifyItemChanged(position);
         });
 
         //Set up expanded/collapsed view
@@ -137,6 +117,14 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
     public void setItems(ArrayList<Item> items){
         this.items = items;
         notifyDataSetChanged();
+    }
+
+    private ActivityOptionsCompat getTransition(ViewHolder holder){
+        androidx.core.util.Pair<View, String> p1 = androidx.core.util.Pair.create(holder.name, "itemName");
+        androidx.core.util.Pair<View, String> p2 = androidx.core.util.Pair.create(holder.quantity, "itemQuantity");
+        androidx.core.util.Pair<View, String> p3 = androidx.core.util.Pair.create(holder.price, "itemPrice");
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((CurrentInventoryActivity)mContext, p1, p2, p3);
+        return options;
     }
 
     //Holds and assigns the card view information
