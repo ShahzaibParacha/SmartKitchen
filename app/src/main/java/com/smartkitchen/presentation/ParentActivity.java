@@ -1,17 +1,28 @@
 package com.smartkitchen.presentation;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.Window;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.smartkitchen.R;
 
 public class ParentActivity extends AppCompatActivity {
+
+
+    public void setColour(int colour){
+        ActionBar actionbar = getSupportActionBar();
+        ColorDrawable drawable = new ColorDrawable(colour);
+        actionbar.setBackgroundDrawable(drawable);
+        Window window = getWindow();
+        window.setStatusBarColor(colour);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

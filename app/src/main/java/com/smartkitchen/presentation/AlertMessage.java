@@ -3,11 +3,9 @@ package com.smartkitchen.presentation;
 import android.app.AlertDialog;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,8 +17,8 @@ import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Item;
 
 public class AlertMessage {
-    private static IListActions listActions = new ListActions();
-    private static IGroceryActions groceryActions = new GroceryActions();
+    private static final IListActions listActions = new ListActions();
+    private static final IGroceryActions groceryActions = new GroceryActions();
 
     //Builds, displays and takes input
     public static void showDialog(Context context, Item item, boolean returnToMain){
@@ -42,38 +40,35 @@ public class AlertMessage {
         dialog.show();
 
         //Implements the submit button
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Checks for valid input before continuing
-                if(!input.getText().toString().equals("")) {
-                    //Take the input and modify item object
-                    item.setQuantityToBuy(Integer.parseInt(input.getText().toString()));
-                    //If the item is not in the grocery list yet, add it in
-                    Item duplicate = listActions.getDuplicateByName(item, groceryActions.getGroceryList());
-                    if (duplicate == null) {
-                        try {
-                            groceryActions.addToGrocery(item);
-                        } catch (InvalidInputException e) {
-                            System.out.println(e.getMessage());
-                        }
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+            //Checks for valid input before continuing
+            if(!input.getText().toString().equals("")) {
+                //Take the input and modify item object
+                item.setQuantityToBuy(Integer.parseInt(input.getText().toString()));
+                //If the item is not in the grocery list yet, add it in
+                Item duplicate = listActions.getDuplicateByName(item, groceryActions.getGroceryList());
+                if (duplicate == null) {
+                    try {
+                        groceryActions.addToGrocery(item);
+                    } catch (InvalidInputException e) {
+                        System.out.println(e.getMessage());
                     }
-                    else{
-                        duplicate.setQuantityToBuy(duplicate.getQuantityToBuy()+item.getQuantityToBuy());
-                        groceryActions.updateGroceryItem(duplicate);
-                    }
-                    //If the function needs to return to the inventory screen, do that here
-                    if (returnToMain) {
-                        Intent intent = new Intent(context, CurrentInventoryActivity.class);
-                        context.startActivity(intent);
-                    }
-                    //Closes the dialog
-                    dialog.dismiss();
                 }
-                //If not valid input, show toast message
                 else{
-                    Toast.makeText(context, "Please enter valid quantity", Toast.LENGTH_SHORT).show();
+                    duplicate.setQuantityToBuy(duplicate.getQuantityToBuy()+item.getQuantityToBuy());
+                    groceryActions.updateGroceryItem(duplicate);
                 }
+                //If the function needs to return to the inventory screen, do that here
+                if (returnToMain) {
+                    Intent intent = new Intent(context, CurrentInventoryActivity.class);
+                    context.startActivity(intent);
+                }
+                //Closes the dialog
+                dialog.dismiss();
+            }
+            //If not valid input, show toast message
+            else{
+                Toast.makeText(context, "Please enter valid quantity", Toast.LENGTH_SHORT).show();
             }
         });
     }

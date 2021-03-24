@@ -18,11 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.smartkitchen.R;
 import com.smartkitchen.business.GroceryActions;
 import com.smartkitchen.business.IGroceryActions;
-import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.InvalidInputException;
-import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Item;
-import com.smartkitchen.persistence.DBManager;
 
 import java.util.ArrayList;
 
@@ -56,64 +53,46 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
         holder.quantityToBuy.setText(items.get(position).getQuantityToBuyString());
         holder.price.setText("$" + items.get(position).getPricePerUnit() + "/" + items.get(position).getUnits());
 
-        holder.parent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, ViewInformationActivity.class);
-                intent.putExtra("Position", position);
-                intent.putExtra("Origin", "Grocery");
-                mContext.startActivity(intent);
-            }
+        holder.parent.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, ViewInformationActivity.class);
+            intent.putExtra("Position", position);
+            intent.putExtra("Origin", "Grocery");
+            mContext.startActivity(intent);
         });
 
         //Creates on click listener, removes the item from the list
-        holder.btnRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Item item = items.get(position);
-                groceryActions.removeFromGrocery(item);
-                ((GroceryListActivity)mContext).onResume();
-            }
+        holder.btnRemove.setOnClickListener(v -> {
+            Item item = items.get(position);
+            groceryActions.removeFromGrocery(item);
+            ((GroceryListActivity)mContext).onResume();
         });
 
         //Creates on click listener, moves to the edit screen, passes the item identifier
-        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, EditGroceryListItemActivity.class);
-                intent.putExtra(POSITION_KEY, position);
-                mContext.startActivity(intent);
-            }
+        holder.btnEdit.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, EditGroceryListItemActivity.class);
+            intent.putExtra(POSITION_KEY, position);
+            mContext.startActivity(intent);
         });
 
         //Buy button for quickly adding an item to the inventory
-        holder.btnBuyItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    groceryActions.buyItem(groceryActions.getGroceryItem(position));
-                    ((GroceryListActivity)mContext).onResume();
-                } catch (InvalidInputException e) {
-                    Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+        holder.btnBuyItem.setOnClickListener(v -> {
+            try {
+                groceryActions.buyItem(groceryActions.getGroceryItem(position));
+                ((GroceryListActivity)mContext).onResume();
+            } catch (InvalidInputException e) {
+                Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
         //On Click Listeners to expand/collapse the cardview
-        holder.downArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                items.get(position).setGroceryIsExpanded(true);
-                notifyItemChanged(position);
-            }
+        holder.downArrow.setOnClickListener(v -> {
+            items.get(position).setGroceryIsExpanded(true);
+            notifyItemChanged(position);
         });
 
-        holder.upArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                items.get(position).setGroceryIsExpanded(false);
-                notifyItemChanged(position);
-            }
+        holder.upArrow.setOnClickListener(v -> {
+            items.get(position).setGroceryIsExpanded(false);
+            notifyItemChanged(position);
         });
 
         //Set up expanded/collapsed view

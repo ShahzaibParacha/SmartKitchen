@@ -1,10 +1,9 @@
 package com.smartkitchen.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -18,11 +17,9 @@ import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.business.InventoryActions;
 import com.smartkitchen.business.ListActions;
-import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Allergies;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
-import com.smartkitchen.persistence.DBManager;
 
 import java.util.ArrayList;
 
@@ -53,6 +50,7 @@ public class EditInventoryItemActivity extends ParentActivity {
         Item item = inventoryActions.getInventoryItem(itemPosition);
 
         setTitle("Edit " + item.getName());
+        setColour(ContextCompat.getColor(this, R.color.blueColour3));
 
         //Initializes the UI elements
         initViews();
@@ -61,30 +59,22 @@ public class EditInventoryItemActivity extends ParentActivity {
         title.setText("Edit " + item.getName());
 
         //Creates on click listener, just returns to inventory list screen
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        btnCancel.setOnClickListener(v -> finish());
 
         //Creates on click listener
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Updates the item information
-                try {
-                    listActions.editValidation(checkData(item));
-                    updateData(item);
-                    //Checks if the item needed to be added to grocery list because quantity<threshold
-                    boolean enteredThreshold = groceryActions.thresholdAddToGrocery(item, EditInventoryItemActivity.this, true);
-                    //If not, return to the inventory screen as usual
-                    if(!enteredThreshold){
-                        finish();
-                    }
-                } catch (InvalidInputException e) {
-                    Toast.makeText(EditInventoryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        btnSubmit.setOnClickListener(v -> {
+            //Updates the item information
+            try {
+                listActions.editValidation(checkData(item));
+                updateData(item);
+                //Checks if the item needed to be added to grocery list because quantity<threshold
+                boolean enteredThreshold = groceryActions.thresholdAddToGrocery(item, EditInventoryItemActivity.this, true);
+                //If not, return to the inventory screen as usual
+                if(!enteredThreshold){
+                    finish();
                 }
+            } catch (InvalidInputException e) {
+                Toast.makeText(EditInventoryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -163,7 +153,7 @@ public class EditInventoryItemActivity extends ParentActivity {
     }
 
     private ArrayList<String> getAllergies(){
-        ArrayList<String> allergies = new ArrayList<String>();
+        ArrayList<String> allergies = new ArrayList<>();
         if(checkNuts.isChecked())
             allergies.add(Allergies.NUTS);
         if(checkSoy.isChecked())

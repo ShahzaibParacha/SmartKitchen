@@ -1,16 +1,14 @@
 package com.smartkitchen.presentation;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.smartkitchen.business.GroceryActions;
 import com.smartkitchen.business.IGroceryActions;
@@ -22,7 +20,6 @@ import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Allergies;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
-import com.smartkitchen.persistence.DBManager;
 
 import java.util.ArrayList;
 
@@ -50,64 +47,54 @@ public class AddInventoryItemActivity extends ParentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_item_screen);
         setTitle("Add New Inventory Item");
+        setColour(ContextCompat.getColor(this, R.color.blueColour3));
 
         //Initializes the views, defaults threshold to false
         initViews();
         thresholdEnabled = false;
 
         //Create on checked listener for checkbox
-        enableThreshold.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                //Enabling threshold sets text and input fields to visible
-                if(isChecked){
-                    txtThreshold.setVisibility(View.VISIBLE);
-                    inputThreshold.setVisibility(View.VISIBLE);
-                    thresholdEnabled = true;
-                }
-                //Disabling threshold sets text and input fields to gone, sets threshold to 0
-                else{
-                    inputThreshold.setText("" + 0);
-                    txtThreshold.setVisibility(View.GONE);
-                    inputThreshold.setVisibility(View.GONE);
-                    thresholdEnabled = false;
-                }
+        enableThreshold.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            //Enabling threshold sets text and input fields to visible
+            if(isChecked){
+                txtThreshold.setVisibility(View.VISIBLE);
+                inputThreshold.setVisibility(View.VISIBLE);
+                thresholdEnabled = true;
+            }
+            //Disabling threshold sets text and input fields to gone, sets threshold to 0
+            else{
+                inputThreshold.setText("" + 0);
+                txtThreshold.setVisibility(View.GONE);
+                inputThreshold.setVisibility(View.GONE);
+                thresholdEnabled = false;
             }
         });
 
         //Creates on click listener for cancel button, just returns to inventory list
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        btnCancel.setOnClickListener(v -> finish());
 
         //Creates on click listener for add button
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Initializes new item based on inputted information
-                Item newItem = initItem();
-                try {
-                    //If an item with this name does not exist yet, then add it in
-                    if(listActions.getDuplicateByName(newItem, inventoryActions.getInventoryList()) == null) {
-                        inventoryActions.addToInventory(newItem);
-                        //Checks if the item will be added to grocery because of quantity<threshold
-                        boolean enteredThreshold = groceryActions.thresholdAddToGrocery(newItem, AddInventoryItemActivity.this, true);
-                        //If not, just return to the main list as usual
-                        if (!enteredThreshold) {
-                            finish();
-                        }
+        btnAdd.setOnClickListener(v -> {
+            //Initializes new item based on inputted information
+            Item newItem = initItem();
+            try {
+                //If an item with this name does not exist yet, then add it in
+                if(listActions.getDuplicateByName(newItem, inventoryActions.getInventoryList()) == null) {
+                    inventoryActions.addToInventory(newItem);
+                    //Checks if the item will be added to grocery because of quantity<threshold
+                    boolean enteredThreshold = groceryActions.thresholdAddToGrocery(newItem, AddInventoryItemActivity.this, true);
+                    //If not, just return to the main list as usual
+                    if (!enteredThreshold) {
+                        finish();
                     }
-                    else {
-                        Toast.makeText(AddInventoryItemActivity.this, "An Item with this name already exists in Inventory.", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (InvalidInputException e) {
-                    Toast.makeText(AddInventoryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-
+                else {
+                    Toast.makeText(AddInventoryItemActivity.this, "An Item with this name already exists in Inventory.", Toast.LENGTH_SHORT).show();
+                }
+            } catch (InvalidInputException e) {
+                Toast.makeText(AddInventoryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
+
         });
     }
 
@@ -137,7 +124,7 @@ public class AddInventoryItemActivity extends ParentActivity {
     }
 
     private ArrayList<String> getAllergies(){
-        ArrayList<String> allergies = new ArrayList<String>();
+        ArrayList<String> allergies = new ArrayList<>();
         if(checkNuts.isChecked())
             allergies.add(Allergies.NUTS);
         if(checkSoy.isChecked())

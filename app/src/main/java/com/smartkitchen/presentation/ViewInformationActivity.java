@@ -1,6 +1,9 @@
 package com.smartkitchen.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +32,8 @@ public class ViewInformationActivity extends ParentActivity {
     private TextView txtID;
 
     IListActions listActions = new ListActions();
+    private ConstraintLayout background;
+    private CardView cardView;
     private TextView title;
     private TextView txtName, txtQuantity, txtQuantityToBuy, txtUnits, txtThreshold, txtPrice, txtCalories;
     private CheckBox checkEgg, checkFish, checkGluten, checkLactose, checkSoy, checkNuts;
@@ -43,10 +48,14 @@ public class ViewInformationActivity extends ParentActivity {
         String origin = intent.getStringExtra("Origin");
         int itemPosition = intent.getIntExtra("Position", -1);
         Item item = null;
-        if(origin.equals("Inventory"))
+        if(origin.equals("Inventory")) {
             item = inventoryActions.getInventoryItem(itemPosition);
-        else if(origin.equals("Grocery"))
+            setColourBlue();
+        }
+        else if(origin.equals("Grocery")) {
             item = groceryActions.getGroceryItem(itemPosition);
+            setColourRed();
+        }
 
         setTitle("View " + item.getName() + " Information");
         title.setText("View " + item.getName() + " Information");
@@ -58,6 +67,20 @@ public class ViewInformationActivity extends ParentActivity {
                 finish();
             }
         });
+    }
+
+    private void setColourBlue(){
+        setColour(ContextCompat.getColor(this, R.color.blueColour3));
+        btnBackToList.setBackgroundColor(ContextCompat.getColor(this, R.color.blueColour3));
+        background.setBackgroundColor(ContextCompat.getColor(this, R.color.blueColour1));
+        cardView.setCardBackgroundColor(ContextCompat.getColor(this, R.color.blueColour2));
+    }
+
+    private void setColourRed(){
+        setColour(ContextCompat.getColor(this, R.color.greenColour3));
+        btnBackToList.setBackgroundColor(ContextCompat.getColor(this, R.color.greenColour3));
+        background.setBackgroundColor(ContextCompat.getColor(this, R.color.greenColour1));
+        cardView.setCardBackgroundColor(ContextCompat.getColor(this, R.color.greenColour2));
     }
 
     private void setData(Item item){
@@ -95,6 +118,10 @@ public class ViewInformationActivity extends ParentActivity {
     private void initViews(){
         //Only Used for Debugging purposes
         //txtID = findViewById(R.id.idLabel);
+
+        background = findViewById(R.id.background);
+        cardView = findViewById(R.id.infoCardView);
+
         txtName = findViewById(R.id.txtViewName);
         txtQuantity = findViewById(R.id.txtViewQuantity);
         txtQuantityToBuy = findViewById(R.id.txtViewQuantityToBuy);

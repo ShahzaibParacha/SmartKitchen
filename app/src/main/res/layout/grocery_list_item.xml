@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     app:cardCornerRadius="7dp"
-    app:cardElevation="7dp">
+    app:cardElevation="7dp"
+    android:backgroundTint="@color/greenColour2">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -76,7 +77,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="33"
-                android:text="@string/btnBuy"/>
+                android:text="@string/btnBuy"
+                android:backgroundTint="@color/greenColour3"/>
 
             <Button
                 android:id="@+id/btnEditGroceryItem"
@@ -84,7 +86,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="33"
-                android:text="@string/btnEdit"/>
+                android:text="@string/btnEdit"
+                android:backgroundTint="@color/greenColour3"/>
 
             <Button
                 android:id="@+id/btnRemoveGroceryItem"
@@ -92,7 +95,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="33"
-                android:text="@string/btnRemove"/>
+                android:text="@string/btnRemove"
+                android:backgroundTint="@color/greenColour3"/>
         </LinearLayout>
 
     </RelativeLayout>

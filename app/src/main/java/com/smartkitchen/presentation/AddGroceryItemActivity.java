@@ -1,14 +1,12 @@
 package com.smartkitchen.presentation;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.smartkitchen.business.GroceryActions;
 import com.smartkitchen.business.IGroceryActions;
@@ -18,7 +16,6 @@ import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Allergies;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
-import com.smartkitchen.persistence.DBManager;
 
 import java.util.ArrayList;
 
@@ -40,38 +37,30 @@ public class AddGroceryItemActivity extends ParentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_item_to_grocery_screen);
         setTitle("Add New Grocery List Item");
-
+        setColour(ContextCompat.getColor(this, R.color.greenColour3));
 
         //Initializes the UI elements
         initViews();
 
         //Creates on click listener for cancel button, just returns to grocery list screen
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        btnCancel.setOnClickListener(v -> finish());
 
         //Creates on click listener for add button
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Creates item based on inputted values and adds
-                Item newItem = initItem();
-                try {
-                    //If an item with this name does not exist yet, then add it in
-                    if(listActions.getDuplicateByName(newItem, groceryActions.getGroceryList()) == null) {
-                        groceryActions.addToGrocery(newItem);
-                        //Once the item is added, return to grocery list screen
-                        finish();
-                    }
-                    else{
-                        Toast.makeText(AddGroceryItemActivity.this, "An item with this name already exists in Grocery List.", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (InvalidInputException e) {
-                    Toast.makeText(AddGroceryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        btnAdd.setOnClickListener(v -> {
+            //Creates item based on inputted values and adds
+            Item newItem = initItem();
+            try {
+                //If an item with this name does not exist yet, then add it in
+                if(listActions.getDuplicateByName(newItem, groceryActions.getGroceryList()) == null) {
+                    groceryActions.addToGrocery(newItem);
+                    //Once the item is added, return to grocery list screen
+                    finish();
                 }
+                else{
+                    Toast.makeText(AddGroceryItemActivity.this, "An item with this name already exists in Grocery List.", Toast.LENGTH_SHORT).show();
+                }
+            } catch (InvalidInputException e) {
+                Toast.makeText(AddGroceryItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -95,7 +84,7 @@ public class AddGroceryItemActivity extends ParentActivity {
 
     //Finds which allergies are checked off and puts them in an array list
     private ArrayList<String> getAllergies(){
-        ArrayList<String> allergies = new ArrayList<String>();
+        ArrayList<String> allergies = new ArrayList<>();
         if(checkNuts.isChecked())
             allergies.add(Allergies.NUTS);
         if(checkSoy.isChecked())
