@@ -1,6 +1,7 @@
 package com.smartkitchen.presentation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,12 @@ public class RecipeRecViewAdapter extends RecyclerView.Adapter<RecipeRecViewAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.name.setText(recipes.get(position).getName());
         holder.isPossible.setText("" + recipes.get(position).haveAllIngredients());
+
+        holder.parent.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, ViewRecipeInfoActivity.class);
+            intent.putExtra("Position", position);
+            mContext.startActivity(intent);
+        });
 
         //On Click Listeners to expand/collapse the cardview
         holder.downArrow.setOnClickListener(v -> {
