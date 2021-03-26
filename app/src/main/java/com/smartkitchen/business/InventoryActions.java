@@ -60,8 +60,4 @@ public class InventoryActions implements IInventoryActions {
         inventoryDB.removeFromInventory(item);
     }
 
-//    @Override
-//    public Item getInventoryItemById(int itemId) {
-//        return inventoryDB.getInventoryItemById(itemId);
-//    }
 }

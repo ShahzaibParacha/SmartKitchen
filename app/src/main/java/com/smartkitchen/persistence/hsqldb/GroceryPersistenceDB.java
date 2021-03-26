@@ -92,7 +92,6 @@ public class GroceryPersistenceDB implements IDBGrocery {
 
                 //this should return a boolean or the object it self so we can display the result of the operation in a toast
             } catch (final SQLException e) {
-                //throw new PersistenceException(e);
                 System.out.println(e.getMessage());
             }
         }
@@ -112,7 +111,6 @@ public class GroceryPersistenceDB implements IDBGrocery {
 
             return item;
         } catch (final SQLException e) {
-            //throw new PersistenceException(e);
             System.out.println(e.getMessage());
         }
         return null;
@@ -139,7 +137,6 @@ public class GroceryPersistenceDB implements IDBGrocery {
         }
         catch (final SQLException e)
         {
-            //throw new PersistenceException(e);
             System.out.println(e.getMessage());
         }
         return groceryList;
@@ -167,24 +164,5 @@ public class GroceryPersistenceDB implements IDBGrocery {
             System.out.println(e.getMessage());
         }
     }
-
-//    @Override
-//    public Item getGroceryItemById(int itemId) {
-//        Item item = null;
-//        try (Connection c = connection()) {
-//            final PreparedStatement st = c.prepareStatement("SELECT * FROM GROCERY_ITEMS WHERE GROCERY_ITEMS.ITEM_ID = ?");
-//            st.setInt(1, itemId);
-//            final ResultSet rs = st.executeQuery();
-//
-//            if (rs.next()) {
-//                item = constructItem(rs);
-//            }
-//
-//        } catch (final SQLException e) {
-//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
-//            System.out.println(e.getMessage());
-//        }
-//        return item;
-//    }
 }
 

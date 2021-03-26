@@ -18,5 +18,4 @@ public interface IInventoryActions {
 
     void removeFromInventory(Item item);
 
-    //Item getInventoryItemById(int itemId);
 }

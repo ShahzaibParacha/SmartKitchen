@@ -112,9 +112,4 @@ public class GroceryActions implements IGroceryActions{
             buyItem(item);
         }
     }
-
-//    @Override
-//    public Item getGroceryItemById(int itemId) {
-//        return groceryDB.getGroceryItemById(itemId);
-//    }
 }

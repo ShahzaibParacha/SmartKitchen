@@ -14,3 +14,5 @@ INSERT INTO GROCERY_ITEMS VALUES(1, 'Sugar', 200, 'g', 100, 2, "Nuts", 0, 0.05)
 INSERT INTO GROCERY_ITEMS VALUES(2, 'Cookies', 6, 'Boxes', 4, 2, "Nuts", 0, 1.50)
 INSERT INTO INVENTORY_ITEMS VALUES(3, 'Cheese', 12, 'Packs', 0, 2, "Nuts", 0, 1.00)
 INSERT INTO INVENTORY_ITEMS VALUES(4, 'Butter', 4, 'Packs', 0, 2, "Nuts", 0, 1.25)
+INSERT INTO RECIPE_ITEMS VALUES(5, "Macaroni & Cheese", "Macaroni, Cheese", "1, 2", "Pack, g", "Step 1: add mac, Step 2: add cheese")
+
