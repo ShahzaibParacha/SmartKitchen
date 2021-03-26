@@ -4,7 +4,7 @@ import com.smartkitchen.objects.Recipe;
 
 import java.util.ArrayList;
 
-public class FakeDBRecipe implements IDBRecipe{
+public class FakeDBRecipe implements IDBRecipe {
 
     private ArrayList<Recipe> recipes;
 
