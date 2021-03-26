@@ -13,6 +13,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartkitchen.R;
 import com.smartkitchen.business.IRecipeActions;
 import com.smartkitchen.business.RecipeActions;
+import com.smartkitchen.objects.Recipe;
+
+import java.util.ArrayList;
 
 public class RecipeListActivity extends ParentActivity {
 
@@ -22,6 +25,8 @@ public class RecipeListActivity extends ParentActivity {
     private FloatingActionButton btnAdd;
     private IRecipeActions recipeActions = new RecipeActions();
 
+    private ArrayList<Recipe> recipes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +34,8 @@ public class RecipeListActivity extends ParentActivity {
         setTitle("Recipes");
         setColour(ContextCompat.getColor(this, R.color.redColour3));
 
-        recipeActions.refreshAvailability(recipeActions.getRecipeList());
+        recipes = recipeActions.getRecipeList();
+        recipeActions.refreshAvailability(recipes);
 
         adapter = new RecipeRecViewAdapter(this);
         recipesRecView = findViewById(R.id.recipesRecView);
@@ -43,14 +49,15 @@ public class RecipeListActivity extends ParentActivity {
         recipesRecView.setAdapter(adapter);
         recipesRecView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter.setItems(recipeActions.getRecipeList());
+        adapter.setItems(recipes);
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        recipeActions.refreshAvailability(recipeActions.getRecipeList());
-        adapter.setItems(recipeActions.getRecipeList());
+        recipes = recipeActions.getRecipeList();
+        recipeActions.refreshAvailability(recipes);
+        adapter.setItems(recipes);
     }
 }
