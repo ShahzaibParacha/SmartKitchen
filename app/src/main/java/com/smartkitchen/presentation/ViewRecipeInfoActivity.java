@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -54,6 +55,15 @@ public class ViewRecipeInfoActivity extends ParentActivity {
         instructionsAdapter.setItems(recipe.getInstructions());
 
         btnBackToList.setOnClickListener(v -> finish());
+
+//        btnBackToList.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                recipe.getIngredients().add("test");
+//                recipe.getIngredientQuantities().add("45");
+//                ingredientsAdapter.notifyItemInserted(recipe.getIngredients().size()-1);
+//            }
+//        });
     }
 
     private void initViews(){

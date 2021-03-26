@@ -1,6 +1,8 @@
 package com.smartkitchen.presentation;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +55,23 @@ public class InstructionRecViewAdapter extends RecyclerView.Adapter<InstructionR
         holder.btnRemove.setOnClickListener(v -> {
             instructions.remove(instructions.get(position));
             notifyItemRemoved(position);
+        });
+
+        holder.edtInstruction.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                instructions.set(position, holder.edtInstruction.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
     }
 

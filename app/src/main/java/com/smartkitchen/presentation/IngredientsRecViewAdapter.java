@@ -1,6 +1,8 @@
 package com.smartkitchen.presentation;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +56,40 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
             ingredientNames.remove(ingredientNames.get(position));
             ingredientQuantities.remove(ingredientQuantities.get(position));
             notifyItemRemoved(position);
+        });
+
+        holder.edtName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                ingredientNames.set(position, holder.edtName.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        holder.edtQuantity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                ingredientQuantities.set(position, holder.edtQuantity.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
     }
 

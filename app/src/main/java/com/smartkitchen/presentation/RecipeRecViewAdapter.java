@@ -15,6 +15,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartkitchen.R;
+import com.smartkitchen.business.IRecipeActions;
+import com.smartkitchen.business.RecipeActions;
+import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.Recipe;
 
 import java.util.ArrayList;
@@ -24,6 +27,8 @@ public class RecipeRecViewAdapter extends RecyclerView.Adapter<RecipeRecViewAdap
 
     private ArrayList<Recipe> recipes = new ArrayList<>();
     private Context mContext;
+
+    private IRecipeActions recipeActions = new RecipeActions();
 
     public RecipeRecViewAdapter(Context mContext){
         this.mContext = mContext;
@@ -47,6 +52,12 @@ public class RecipeRecViewAdapter extends RecyclerView.Adapter<RecipeRecViewAdap
             mContext.startActivity(intent);
         });
 
+        holder.btnRemove.setOnClickListener(v -> {
+            Recipe recipe = recipes.get(position);
+            recipeActions.removeRecipe(recipe);
+            ((RecipeListActivity)mContext).onResume();
+        });
+
         //On Click Listeners to expand/collapse the cardview
         holder.downArrow.setOnClickListener(v -> {
             recipes.get(position).setExpanded(true);
@@ -68,6 +79,13 @@ public class RecipeRecViewAdapter extends RecyclerView.Adapter<RecipeRecViewAdap
             holder.expandedLayout.setVisibility(View.GONE);
             holder.downArrow.setVisibility(View.VISIBLE);
             holder.upArrow.setVisibility(View.GONE);
+        }
+
+        if(!recipes.get(position).haveAllIngredients()){
+            holder.btnMake.setEnabled(false);
+        }
+        else{
+            holder.btnMake.setEnabled(true);
         }
     }
 
