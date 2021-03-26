@@ -47,7 +47,7 @@ public class ViewRecipeInfoActivity extends ParentActivity {
         ingredientsAdapter = new IngredientsRecViewAdapter(this, false);
         ingredientsRecView.setAdapter(ingredientsAdapter);
         ingredientsRecView.setLayoutManager(new LinearLayoutManager(this));
-        ingredientsAdapter.setItems(recipe.getIngredients(), recipe.getIngredientQuantities());
+        ingredientsAdapter.setItems(recipe.getIngredients(), recipe.getIngredientQuantities(), recipe.getIngredientUnits());
 
         instructionsAdapter = new InstructionRecViewAdapter(this, false);
         instructionsRecView.setAdapter(instructionsAdapter);
@@ -55,15 +55,6 @@ public class ViewRecipeInfoActivity extends ParentActivity {
         instructionsAdapter.setItems(recipe.getInstructions());
 
         btnBackToList.setOnClickListener(v -> finish());
-
-//        btnBackToList.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                recipe.getIngredients().add("test");
-//                recipe.getIngredientQuantities().add("45");
-//                ingredientsAdapter.notifyItemInserted(recipe.getIngredients().size()-1);
-//            }
-//        });
     }
 
     private void initViews(){

@@ -84,7 +84,7 @@ public class RecipePersistenceDB implements IDBRecipe {
                 st.setString(2, listToString(recipe.getIngredients()));
                 st.setString(3, listToString(recipe.getIngredientQuantities()));
                 st.setString(4, listToString(recipe.getIngredientUnits()));
-                st.setString(5, listToString(recipe.getSteps()));
+                st.setString(5, listToString(recipe.getInstructions()));
 
                 st.executeUpdate();
                 recipes.add(recipe);
@@ -152,7 +152,7 @@ public class RecipePersistenceDB implements IDBRecipe {
             st.setString(2, listToString(recipe.getIngredients()));
             st.setString(3, listToString(recipe.getIngredientQuantities()));
             st.setString(4, listToString(recipe.getIngredientUnits()));
-            st.setString(5, listToString(recipe.getSteps()));
+            st.setString(5, listToString(recipe.getInstructions()));
 
             st.executeUpdate();
             st.close();

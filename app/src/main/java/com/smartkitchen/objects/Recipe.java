@@ -10,16 +10,16 @@ public class Recipe {
     private ArrayList<String> ingredientQuantities;
     private ArrayList<String> ingredientUnits;
     private int totalCalories;
-    private ArrayList<String> steps;
+    private ArrayList<String> instructions;
     private boolean haveAllIngredients;
     private boolean isExpanded = false;
 
-    public Recipe(String name, ArrayList<String> ingredients, ArrayList<String> ingredientQuantities, ArrayList<String> ingredientUnits, ArrayList<String> steps) {
+    public Recipe(String name, ArrayList<String> ingredients, ArrayList<String> ingredientQuantities, ArrayList<String> ingredientUnits, ArrayList<String> instructions) {
         this.name = name;
         this.ingredients = ingredients;
         this.ingredientQuantities = ingredientQuantities;
         this.ingredientUnits = ingredientUnits;
-        this.steps = steps;
+        this.instructions = instructions;
     }
 
     public int getId() {
@@ -70,12 +70,12 @@ public class Recipe {
         this.ingredientUnits = ingredientUnits;
     }
 
-    public ArrayList<String> getSteps() {
-        return steps;
+    public ArrayList<String> getInstructions() {
+        return instructions;
     }
 
-    public void setSteps(ArrayList<String> steps) {
-        this.steps = steps;
+    public void setInstructions(ArrayList<String> instructions) {
+        this.instructions = instructions;
     }
 
     public boolean haveAllIngredients() {

@@ -23,6 +23,7 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
 
     ArrayList<String> ingredientNames = new ArrayList<>();
     ArrayList<String> ingredientQuantities = new ArrayList<>();
+    ArrayList<String> ingredientUnits = new ArrayList<>();
     Context mContext;
     boolean isEditable;
 
@@ -91,6 +92,23 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
 
             }
         });
+
+        holder.edtUnits.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                ingredientUnits.set(position, holder.edtUnits.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -98,9 +116,10 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
         return ingredientNames.size();
     }
 
-    public void setItems(ArrayList<String> ingredientNames, ArrayList<String> ingredientQuantities){
+    public void setItems(ArrayList<String> ingredientNames, ArrayList<String> ingredientQuantities, ArrayList<String> ingredientUnits){
         this.ingredientNames = ingredientNames;
         this.ingredientQuantities = ingredientQuantities;
+        this.ingredientUnits = ingredientUnits;
     }
 
     public ArrayList<String> getIngredientNames(){
@@ -111,10 +130,14 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
         return ingredientQuantities;
     }
 
+    public ArrayList<String> getIngredientUnits(){
+        return ingredientUnits;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView name, quantity;
-        private EditText edtName, edtQuantity;
+        private EditText edtName, edtQuantity, edtUnits;
         private LinearLayout editable, notEditable;
         private Button btnRemove;
 
@@ -126,6 +149,7 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
 
             edtName = itemView.findViewById(R.id.inputIngredientName);
             edtQuantity = itemView.findViewById(R.id.inputIngredientQuantity);
+            edtUnits = itemView.findViewById(R.id.inputIngredientUnits);
 
             editable = itemView.findViewById(R.id.ingredientEditable);
             notEditable = itemView.findViewById(R.id.ingredientNonEditable);

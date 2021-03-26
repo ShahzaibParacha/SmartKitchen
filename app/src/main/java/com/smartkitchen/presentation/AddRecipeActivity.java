@@ -41,15 +41,17 @@ public class AddRecipeActivity extends ParentActivity {
 
         ArrayList<String> ingredients = new ArrayList<>();
         ArrayList<String> ingredientQuantities = new ArrayList<>();
+        ArrayList<String> ingredientUnits = new ArrayList<>();
         ArrayList<String> instructions = new ArrayList<>();
 
-        newRecipe = new Recipe("", ingredients, ingredientQuantities, instructions);
+
+        newRecipe = new Recipe("", ingredients, ingredientQuantities, ingredientUnits, instructions);
 
         initViews();
         ingredientsAdapter = new IngredientsRecViewAdapter(this, true);
         ingredientsRecView.setAdapter(ingredientsAdapter);
         ingredientsRecView.setLayoutManager(new LinearLayoutManager(this));
-        ingredientsAdapter.setItems(ingredients, ingredientQuantities);
+        ingredientsAdapter.setItems(ingredients, ingredientQuantities, ingredientUnits);
 
         instructionsAdapter = new InstructionRecViewAdapter(this, true);
         instructionsRecView.setAdapter(instructionsAdapter);
@@ -59,6 +61,7 @@ public class AddRecipeActivity extends ParentActivity {
         btnAddIngredient.setOnClickListener(v -> {
             newRecipe.getIngredients().add("");
             newRecipe.getIngredientQuantities().add("");
+            newRecipe.getIngredientUnits().add("");
             ingredientsAdapter.notifyItemInserted(newRecipe.getIngredients().size()-1);
         });
 
@@ -94,8 +97,9 @@ public class AddRecipeActivity extends ParentActivity {
         String name = inputName.getText().toString();
         ArrayList<String> ingredientNames = ingredientsAdapter.getIngredientNames();
         ArrayList<String> ingredientQuantities = ingredientsAdapter.getIngredientQuantities();
+        ArrayList<String> ingredientUnits = ingredientsAdapter.getIngredientUnits();
         ArrayList<String> instructions = instructionsAdapter.getInstructions();
-        Recipe recipe = new Recipe(name, ingredientNames, ingredientQuantities, instructions);
+        Recipe recipe = new Recipe(name, ingredientNames, ingredientQuantities, ingredientUnits, instructions);
         recipeActions.addToRecipes(recipe);
     }
 }

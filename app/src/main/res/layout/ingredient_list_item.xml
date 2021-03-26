@@ -25,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_weight="50"
+            android:layout_weight="40"
             android:text="@string/defaultName"
             android:textAlignment="center"/>
 
@@ -34,8 +34,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_weight="50"
+            android:layout_weight="40"
             android:text="@string/defaultQuantity"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/txtIngredientUnits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="20"
+            android:text="@string/hintUnits"
             android:textAlignment="center"/>
 
     </LinearLayout>
@@ -54,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_weight="40"
+            android:layout_weight="30"
             android:hint="@string/hintName"
             android:inputType="text"
             android:maxLength="20"/>
@@ -64,10 +73,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_weight="40"
+            android:layout_weight="30"
             android:hint="@string/hintQuantity"
             android:inputType="number"
             android:maxLength="9"/>
+
+        <EditText
+            android:id="@+id/inputIngredientUnits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="20"
+            android:hint="@string/hintUnits"
+            android:inputType="text"
+            android:maxLength="20"/>
 
         <Button
             android:layout_height="wrap_content"
