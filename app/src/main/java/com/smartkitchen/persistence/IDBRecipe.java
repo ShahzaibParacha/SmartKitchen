@@ -13,4 +13,5 @@ public interface IDBRecipe {
     Recipe removeRecipe(Recipe recipe);
 
     ArrayList<Recipe> getRecipeList();
+    
 }

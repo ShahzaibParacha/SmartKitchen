@@ -15,7 +15,4 @@ public interface IDBInventory {
     void updateItem(Item item);
 
     ArrayList<Item> getInventoryList();
-
-//    Item getInventoryItemById(int itemId);
-
 }

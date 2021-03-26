@@ -91,7 +91,6 @@ public class RecipePersistenceDB implements IDBRecipe {
 
                 //this should return a boolean or the object it self so we can display the result of the operation in a toast
             } catch (final SQLException e) {
-                //throw new PersistenceException(e);
                 System.out.println(e.getMessage());
             }
         }
@@ -111,7 +110,6 @@ public class RecipePersistenceDB implements IDBRecipe {
 
             return recipe;
         } catch (final SQLException e) {
-            //throw new PersistenceException(e);
             System.out.println(e.getMessage());
         }
         return null;
@@ -138,7 +136,6 @@ public class RecipePersistenceDB implements IDBRecipe {
         }
         catch (final SQLException e)
         {
-            //throw new PersistenceException(e);
             System.out.println(e.getMessage());
         }
         return recipeList;

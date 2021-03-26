@@ -92,7 +92,6 @@ public class InventoryPersistenceDB implements IDBInventory {
 
                 //this should return a boolean or the object it self so we can display the result of the operation in a toast
             } catch (final SQLException e) {
-                //throw new PersistenceException(e);
                 System.out.println(e.getMessage());
             }
         }
@@ -112,7 +111,6 @@ public class InventoryPersistenceDB implements IDBInventory {
 
             return item;
         } catch (final SQLException e) {
-            //throw new PersistenceException(e);
             System.out.println(e.getMessage());
         }
         return null;
@@ -138,7 +136,6 @@ public class InventoryPersistenceDB implements IDBInventory {
         }
         catch (final SQLException e)
         {
-            //throw new PersistenceException(e);
             System.out.println(e.getMessage());
         }
         return inventoryList;
@@ -166,25 +163,5 @@ public class InventoryPersistenceDB implements IDBInventory {
             System.out.println(e.getMessage());
         }
     }
-
-//    @Override
-//    public Item getInventoryItemById(int itemId) {
-//        Item item = null;
-//        try (Connection c = connection()) {
-//            final PreparedStatement st = c.prepareStatement("SELECT * FROM INVENTORY_ITEMS WHERE INVENTORY_ITEMS.ITEM_ID = ?");
-//            st.setInt(1, itemId);
-//            final ResultSet rs = st.executeQuery();
-//
-//            if (rs.next()) {
-//                item = constructItem(rs);
-//            }
-//
-//        } catch (final SQLException e) {
-//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
-//            System.out.println(e.getMessage());
-//        }
-//        return item;
-//    }
-
 }
 

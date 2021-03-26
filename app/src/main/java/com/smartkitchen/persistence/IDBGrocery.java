@@ -14,6 +14,4 @@ public interface IDBGrocery {
     void updateItem(Item item);
 
     ArrayList<Item> getGroceryList();
-
-//    Item getGroceryItemById(int itemId);
 }
