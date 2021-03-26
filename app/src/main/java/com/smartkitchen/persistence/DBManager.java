@@ -7,6 +7,7 @@ import com.smartkitchen.objects.Recipe;
 import com.smartkitchen.persistence.hsqldb.GroceryPersistenceDB;
 import com.smartkitchen.persistence.hsqldb.InventoryPersistenceDB;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DBManager {
@@ -35,8 +36,12 @@ public class DBManager {
         ArrayList<String> ingredientQuantities1 = new ArrayList<>();
         ingredientQuantities1.add("1");
         ingredientQuantities1.add("2");
-        recipeDB.addToRecipes(new Recipe("Mac&Cheese", ingredients1, ingredientQuantities1,
-                "Step 1: add Mac\nStep 2: add cheese"));
+        ArrayList<String> instructions1 = new ArrayList<>();
+        instructions1.add("Boil Water");
+        instructions1.add("Add Macaroni, stir for 10 minutes");
+        instructions1.add("Add Milk, Butter and Cheese");
+        instructions1.add("Yuuuuuuuuummmmmmmmm");
+        recipeDB.addToRecipes(new Recipe("Macaroni & Cheese", ingredients1, ingredientQuantities1, instructions1));
     }
 
     //Getters

@@ -17,12 +17,13 @@ import com.smartkitchen.objects.Recipe;
 
 public class ViewRecipeInfoActivity extends ParentActivity {
 
-    private RecyclerView ingredientsRecView;
-    private IngredientsRecViewAdapter adapter;
+    private RecyclerView ingredientsRecView, instructionsRecView;
+    private IngredientsRecViewAdapter ingredientsAdapter;
+    private InstructionRecViewAdapter instructionsAdapter;
 
     IRecipeActions recipeActions = new RecipeActions();
 
-    private TextView txtTitle, txtName, txtTotalCalories, txtInstructions;
+    private TextView txtTitle, txtName, txtTotalCalories;
     private Button btnBackToList;
 
     @Override
@@ -38,15 +39,19 @@ public class ViewRecipeInfoActivity extends ParentActivity {
 
         initViews();
         setTitle("View " + recipe.getName() + " Information");
-        txtTitle.setText("View " + recipe.getName() + " Information");
+        txtTitle.setText(recipe.getName());
         txtName.setText(recipe.getName());
         txtTotalCalories.setText("" + recipeActions.calculateTotalCalories(recipe));
-        txtInstructions.setText(recipe.getSteps());
-        adapter = new IngredientsRecViewAdapter(this, false);
-        ingredientsRecView.setAdapter(adapter);
-        ingredientsRecView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter.setItems(recipe.getIngredients(), recipe.getIngredientQuantities());
+        ingredientsAdapter = new IngredientsRecViewAdapter(this, false);
+        ingredientsRecView.setAdapter(ingredientsAdapter);
+        ingredientsRecView.setLayoutManager(new LinearLayoutManager(this));
+        ingredientsAdapter.setItems(recipe.getIngredients(), recipe.getIngredientQuantities());
+
+        instructionsAdapter = new InstructionRecViewAdapter(this, false);
+        instructionsRecView.setAdapter(instructionsAdapter);
+        instructionsRecView.setLayoutManager(new LinearLayoutManager(this));
+        instructionsAdapter.setItems(recipe.getInstructions());
 
         btnBackToList.setOnClickListener(v -> finish());
     }
@@ -55,10 +60,10 @@ public class ViewRecipeInfoActivity extends ParentActivity {
         txtTitle = findViewById(R.id.txtViewRecipeTitle);
         txtName = findViewById(R.id.txtRecipeName);
         txtTotalCalories = findViewById(R.id.txtRecipeTotalCalories);
-        txtInstructions = findViewById(R.id.txtViewRecipeInstructions);
 
         btnBackToList = findViewById(R.id.btnBackToList);
 
         ingredientsRecView = findViewById(R.id.ingredientsRecView);
+        instructionsRecView = findViewById(R.id.instructionsRecView);
     }
 }
