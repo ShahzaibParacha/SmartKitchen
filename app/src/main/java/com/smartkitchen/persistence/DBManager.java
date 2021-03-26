@@ -7,6 +7,7 @@ import com.smartkitchen.objects.Recipe;
 import com.smartkitchen.persistence.hsqldb.GroceryPersistenceDB;
 import com.smartkitchen.persistence.hsqldb.InventoryPersistenceDB;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DBManager {

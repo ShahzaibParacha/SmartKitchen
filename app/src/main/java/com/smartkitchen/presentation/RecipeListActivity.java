@@ -36,7 +36,8 @@ public class RecipeListActivity extends ParentActivity {
         btnAdd = findViewById(R.id.btnGoToAddRecipeActivity);
 
         btnAdd.setOnClickListener(v -> {
-            Toast.makeText(this, "To be Implemented", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(RecipeListActivity.this, AddRecipeActivity.class);
+            startActivity(intent);
         });
 
         recipesRecView.setAdapter(adapter);
@@ -49,5 +50,6 @@ public class RecipeListActivity extends ParentActivity {
     protected void onResume() {
         super.onResume();
         recipeActions.refreshAvailability();
+        adapter.setItems(recipeActions.getRecipeList());
     }
 }

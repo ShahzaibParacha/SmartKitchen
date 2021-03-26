@@ -19,7 +19,7 @@ public class RecipeActions implements IRecipeActions{
     }
 
     @Override
-    public void addToRecipes(Recipe recipe) throws InvalidInputException {
+    public void addToRecipes(Recipe recipe){
         recipeDB.addToRecipes(recipe);
         recipe.setTotalCalories(calculateTotalCalories(recipe));
         recipe.setHaveAllIngredients(hasAllIngredients(recipe));
