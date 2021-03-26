@@ -1,6 +1,7 @@
 package com.smartkitchen.business;
 
 import com.smartkitchen.objects.Item;
+import com.smartkitchen.objects.Recipe;
 
 public class ListValidation implements IListValidation {
 
@@ -27,5 +28,11 @@ public class ListValidation implements IListValidation {
             throw new InvalidInputException("Please enter a valid input for price per unit.");
         if (item.getCaloriesPerUnit() < 0)
             throw new InvalidInputException("Please enter a valid input for calories per unit.");
+    }
+
+    public void containsRecipeInputs(Recipe recipe) throws InvalidInputException {
+        if (recipe.getName().length() <= 0)
+            throw new InvalidInputException("Please enter a valid input for name.");
+        // other conditions
     }
 }

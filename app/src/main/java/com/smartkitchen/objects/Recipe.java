@@ -8,15 +8,17 @@ public class Recipe {
     private String name;
     private ArrayList<String> ingredients;
     private ArrayList<String> ingredientQuantities;
+    private ArrayList<String> ingredientUnits;
     private int totalCalories;
-    private String steps;
+    private ArrayList<String> steps;
     private boolean haveAllIngredients;
     private boolean isExpanded = false;
 
-    public Recipe(String name, ArrayList<String> ingredients, ArrayList<String> ingredientQuantities, String steps) {
+    public Recipe(String name, ArrayList<String> ingredients, ArrayList<String> ingredientQuantities, ArrayList<String> ingredientUnits, ArrayList<String> steps) {
         this.name = name;
         this.ingredients = ingredients;
         this.ingredientQuantities = ingredientQuantities;
+        this.ingredientUnits = ingredientUnits;
         this.steps = steps;
     }
 
@@ -60,11 +62,19 @@ public class Recipe {
         this.totalCalories = totalCalories;
     }
 
-    public String getSteps() {
+    public ArrayList<String> getIngredientUnits() {
+        return ingredientUnits;
+    }
+
+    public void setIngredientUnits(ArrayList<String> ingredientUnits) {
+        this.ingredientUnits = ingredientUnits;
+    }
+
+    public ArrayList<String> getSteps() {
         return steps;
     }
 
-    public void setSteps(String steps) {
+    public void setSteps(ArrayList<String> steps) {
         this.steps = steps;
     }
 

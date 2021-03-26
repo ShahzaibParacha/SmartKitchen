@@ -16,7 +16,7 @@ public class DBManager {
 //    static final IDBGrocery groceryDB = new FakeDBGrocery();
     static final IDBInventory inventoryDB = Services.getInventoryPersistence();
     static final IDBGrocery groceryDB = Services.getGroceryPersistence();
-    static final IDBRecipe recipeDB = new FakeDBRecipe();
+    static final IDBRecipe recipeDB = Services.getRecipePersistence();
 
     //Initial items to test
 //    public static void initialize(){
@@ -35,8 +35,14 @@ public class DBManager {
         ArrayList<String> ingredientQuantities1 = new ArrayList<>();
         ingredientQuantities1.add("1");
         ingredientQuantities1.add("2");
+        ArrayList<String> ingredientUnits1 = new ArrayList<>();
+        ingredientUnits1.add("Pack");
+        ingredientUnits1.add("g");
+        ArrayList<String> steps1 = new ArrayList<>();
+        steps1.add("Step 1: add Mac");
+        steps1.add("Step 2: add cheese");
         recipeDB.addToRecipes(new Recipe("Mac&Cheese", ingredients1, ingredientQuantities1,
-                "Step 1: add Mac\nStep 2: add cheese"));
+                ingredientUnits1, steps1));
     }
 
     //Getters
