@@ -20,5 +20,7 @@ public interface IRecipeActions {
 
     boolean hasAllIngredients(Recipe recipe);
 
-    void refreshAvailability();
+    ArrayList<Boolean> checkIngredients(Recipe recipe);
+
+    void refreshAvailability(ArrayList<Recipe> recipes);
 }

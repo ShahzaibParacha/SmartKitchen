@@ -94,17 +94,17 @@ public class ViewInformationActivity extends ParentActivity {
     private void setAllergies(Item item){
         ArrayList<String> allergies = item.getAllergies();
         if(allergies != null) {
-            if (listActions.isInList(allergies, Allergies.NUTS))
+            if (listActions.isInList(allergies, Allergies.NUTS.getText()))
                 checkNuts.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.SOY))
+            if (listActions.isInList(allergies, Allergies.SOY.getText()))
                 checkSoy.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.LACTOSE))
+            if (listActions.isInList(allergies, Allergies.LACTOSE.getText()))
                 checkLactose.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.GLUTEN))
+            if (listActions.isInList(allergies, Allergies.GLUTEN.getText()))
                 checkGluten.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.FISH))
+            if (listActions.isInList(allergies, Allergies.FISH.getText()))
                 checkFish.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.EGGS))
+            if (listActions.isInList(allergies, Allergies.EGGS.getText()))
                 checkEgg.setChecked(true);
         }
     }

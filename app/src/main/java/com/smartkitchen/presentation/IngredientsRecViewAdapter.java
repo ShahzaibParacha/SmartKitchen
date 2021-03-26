@@ -1,6 +1,7 @@
 package com.smartkitchen.presentation;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -10,8 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartkitchen.R;
@@ -24,6 +28,7 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
     ArrayList<String> ingredientNames = new ArrayList<>();
     ArrayList<String> ingredientQuantities = new ArrayList<>();
     ArrayList<String> ingredientUnits = new ArrayList<>();
+    ArrayList<Boolean> hasIngredient = new ArrayList<>();
     Context mContext;
     boolean isEditable;
 
@@ -51,11 +56,15 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
         else{
             holder.editable.setVisibility(View.GONE);
             holder.notEditable.setVisibility(View.VISIBLE);
+            if(!hasIngredient.get(position)) {
+                holder.parent.getBackground().setTint(ContextCompat.getColor(mContext, R.color.redColour1Disabled));
+            }
         }
 
         holder.btnRemove.setOnClickListener(v -> {
             ingredientNames.remove(ingredientNames.get(position));
             ingredientQuantities.remove(ingredientQuantities.get(position));
+            ingredientUnits.remove(ingredientUnits.get(position));
             notifyItemRemoved(position);
         });
 
@@ -116,10 +125,11 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
         return ingredientNames.size();
     }
 
-    public void setItems(ArrayList<String> ingredientNames, ArrayList<String> ingredientQuantities, ArrayList<String> ingredientUnits){
+    public void setItems(ArrayList<String> ingredientNames, ArrayList<String> ingredientQuantities, ArrayList<String> ingredientUnits, ArrayList<Boolean> hasIngredient){
         this.ingredientNames = ingredientNames;
         this.ingredientQuantities = ingredientQuantities;
         this.ingredientUnits = ingredientUnits;
+        this.hasIngredient = hasIngredient;
     }
 
     public ArrayList<String> getIngredientNames(){
@@ -136,6 +146,7 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
+        private CardView parent;
         private TextView name, quantity;
         private EditText edtName, edtQuantity, edtUnits;
         private LinearLayout editable, notEditable;
@@ -143,6 +154,8 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            parent = itemView.findViewById(R.id.ingredientCardView);
 
             name = itemView.findViewById(R.id.txtIngredientName);
             quantity = itemView.findViewById(R.id.txtIngredientQuantity);

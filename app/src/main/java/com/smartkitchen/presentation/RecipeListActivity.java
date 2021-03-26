@@ -29,7 +29,7 @@ public class RecipeListActivity extends ParentActivity {
         setTitle("Recipes");
         setColour(ContextCompat.getColor(this, R.color.redColour3));
 
-        recipeActions.refreshAvailability();
+        recipeActions.refreshAvailability(recipeActions.getRecipeList());
 
         adapter = new RecipeRecViewAdapter(this);
         recipesRecView = findViewById(R.id.recipesRecView);
@@ -44,12 +44,13 @@ public class RecipeListActivity extends ParentActivity {
         recipesRecView.setLayoutManager(new LinearLayoutManager(this));
 
         adapter.setItems(recipeActions.getRecipeList());
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        recipeActions.refreshAvailability();
+        recipeActions.refreshAvailability(recipeActions.getRecipeList());
         adapter.setItems(recipeActions.getRecipeList());
     }
 }

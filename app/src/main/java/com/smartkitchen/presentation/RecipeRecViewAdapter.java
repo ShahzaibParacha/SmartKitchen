@@ -60,26 +60,16 @@ public class RecipeRecViewAdapter extends RecyclerView.Adapter<RecipeRecViewAdap
 
         //On Click Listeners to expand/collapse the cardview
         holder.downArrow.setOnClickListener(v -> {
-            recipes.get(position).setExpanded(true);
-            notifyItemChanged(position);
-        });
-
-        holder.upArrow.setOnClickListener(v -> {
-            recipes.get(position).setExpanded(false);
-            notifyItemChanged(position);
-        });
-
-        //Set up expanded/collapsed view
-        if(recipes.get(position).isExpanded()){
             holder.expandedLayout.setVisibility(View.VISIBLE);
             holder.downArrow.setVisibility(View.GONE);
             holder.upArrow.setVisibility(View.VISIBLE);
-        }
-        else{
+        });
+
+        holder.upArrow.setOnClickListener(v -> {
             holder.expandedLayout.setVisibility(View.GONE);
             holder.downArrow.setVisibility(View.VISIBLE);
             holder.upArrow.setVisibility(View.GONE);
-        }
+        });
 
         if(!recipes.get(position).haveAllIngredients()){
             holder.btnMake.setEnabled(false);

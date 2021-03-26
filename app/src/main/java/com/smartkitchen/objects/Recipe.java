@@ -12,7 +12,7 @@ public class Recipe {
     private int totalCalories;
     private ArrayList<String> instructions;
     private boolean haveAllIngredients;
-    private boolean isExpanded = false;
+    private ArrayList<Boolean> hasIngredient;
 
     public Recipe(String name, ArrayList<String> ingredients, ArrayList<String> ingredientQuantities, ArrayList<String> ingredientUnits, ArrayList<String> instructions) {
         this.name = name;
@@ -86,11 +86,11 @@ public class Recipe {
         this.haveAllIngredients = haveAllIngredients;
     }
 
-    public boolean isExpanded() {
-        return isExpanded;
+    public ArrayList<Boolean> getHasIngredient() {
+        return hasIngredient;
     }
 
-    public void setExpanded(boolean expanded) {
-        isExpanded = expanded;
+    public void setHasIngredient(ArrayList<Boolean> hasIngredient) {
+        this.hasIngredient = hasIngredient;
     }
 }

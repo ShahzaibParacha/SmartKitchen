@@ -43,7 +43,7 @@ public class AddRecipeActivity extends ParentActivity {
         ArrayList<String> ingredientQuantities = new ArrayList<>();
         ArrayList<String> ingredientUnits = new ArrayList<>();
         ArrayList<String> instructions = new ArrayList<>();
-
+        ArrayList<Boolean> hasIngredient = new ArrayList<>();
 
         newRecipe = new Recipe("", ingredients, ingredientQuantities, ingredientUnits, instructions);
 
@@ -51,7 +51,7 @@ public class AddRecipeActivity extends ParentActivity {
         ingredientsAdapter = new IngredientsRecViewAdapter(this, true);
         ingredientsRecView.setAdapter(ingredientsAdapter);
         ingredientsRecView.setLayoutManager(new LinearLayoutManager(this));
-        ingredientsAdapter.setItems(ingredients, ingredientQuantities, ingredientUnits);
+        ingredientsAdapter.setItems(ingredients, ingredientQuantities, ingredientUnits, hasIngredient);
 
         instructionsAdapter = new InstructionRecViewAdapter(this, true);
         instructionsRecView.setAdapter(instructionsAdapter);
@@ -62,6 +62,7 @@ public class AddRecipeActivity extends ParentActivity {
             newRecipe.getIngredients().add("");
             newRecipe.getIngredientQuantities().add("");
             newRecipe.getIngredientUnits().add("");
+            //newRecipe.getHasIngredient().add(true);
             ingredientsAdapter.notifyItemInserted(newRecipe.getIngredients().size()-1);
         });
 

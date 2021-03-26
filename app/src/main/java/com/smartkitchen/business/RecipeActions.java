@@ -22,6 +22,7 @@ public class RecipeActions implements IRecipeActions{
     public void addToRecipes(Recipe recipe){
         recipeDB.addToRecipes(recipe);
         recipe.setTotalCalories(calculateTotalCalories(recipe));
+        recipe.setHasIngredient(checkIngredients(recipe));
         recipe.setHaveAllIngredients(hasAllIngredients(recipe));
     }
 
@@ -58,18 +59,37 @@ public class RecipeActions implements IRecipeActions{
     }
 
     @Override
+    public ArrayList<Boolean> checkIngredients(Recipe recipe) {
+        ArrayList<Boolean> hasIngredient = new ArrayList<>();
+        for(int i = 0; i < recipe.getIngredients().size(); i++){
+            hasIngredient.add(true);
+            Item currIngredient = inventoryActions.getItemByName(recipe.getIngredients().get(i));
+            if(currIngredient == null){
+                hasIngredient.set(i, false);
+            }
+            else if(Integer.parseInt(recipe.getIngredientQuantities().get(i)) > currIngredient.getQuantity()){
+                hasIngredient.set(i, false);
+            }
+        }
+        return hasIngredient;
+    }
+
+    @Override
     public boolean hasAllIngredients(Recipe recipe) {
         boolean hasAllIngredients = true;
-        for (String s:recipe.getIngredients()) {
-            if(inventoryActions.getItemByName(s) == null)
+        for (Boolean b:recipe.getHasIngredient()) {
+            if (!b) {
                 hasAllIngredients = false;
+                break;
+            }
         }
         return hasAllIngredients;
     }
 
     @Override
-    public void refreshAvailability() {
-        for (Recipe r:getRecipeList()) {
+    public void refreshAvailability(ArrayList<Recipe> recipes) {
+        for (Recipe r:recipes) {
+            r.setHasIngredient(checkIngredients(r));
             r.setHaveAllIngredients(hasAllIngredients(r));
         }
     }
