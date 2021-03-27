@@ -25,8 +25,6 @@ public class RecipeListActivity extends ParentActivity {
     private FloatingActionButton btnAdd;
     private IRecipeActions recipeActions = new RecipeActions();
 
-    private ArrayList<Recipe> recipes;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +32,7 @@ public class RecipeListActivity extends ParentActivity {
         setTitle("Recipes");
         setColour(ContextCompat.getColor(this, R.color.redColour3));
 
-        recipes = recipeActions.getRecipeList();
+        ArrayList<Recipe> recipes = recipeActions.getRecipeList();
         recipeActions.refreshAvailability(recipes);
 
         adapter = new RecipeRecViewAdapter(this);
@@ -56,7 +54,7 @@ public class RecipeListActivity extends ParentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        recipes = recipeActions.getRecipeList();
+        ArrayList<Recipe> recipes = recipeActions.getRecipeList();
         recipeActions.refreshAvailability(recipes);
         adapter.setItems(recipes);
     }

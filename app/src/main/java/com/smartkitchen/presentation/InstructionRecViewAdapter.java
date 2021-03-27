@@ -56,6 +56,7 @@ public class InstructionRecViewAdapter extends RecyclerView.Adapter<InstructionR
         holder.btnRemove.setOnClickListener(v -> {
             instructions.remove(instructions.get(position));
             notifyItemRemoved(position);
+            notifyDataSetChanged();
         });
 
         holder.edtInstruction.addTextChangedListener(new TextWatcher() {

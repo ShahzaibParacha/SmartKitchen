@@ -70,6 +70,7 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
             ingredientQuantities.remove(ingredientQuantities.get(position));
             ingredientUnits.remove(ingredientUnits.get(position));
             notifyItemRemoved(position);
+            notifyDataSetChanged();
         });
 
         holder.edtName.addTextChangedListener(new TextWatcher() {

@@ -151,6 +151,7 @@ public class RecipePersistenceDB implements IDBRecipe {
             st.setString(3, listToString(recipe.getIngredientQuantities()));
             st.setString(4, listToString(recipe.getIngredientUnits()));
             st.setString(5, listToString(recipe.getInstructions()));
+            st.setInt(6, recipe.getId());
 
             st.executeUpdate();
             st.close();
