@@ -41,10 +41,10 @@ public class RecipeListActivity extends ParentActivity {
         recipesRecView = findViewById(R.id.recipesRecView);
         btnAdd = findViewById(R.id.btnGoToAddRecipeActivity);
 
-//        btnAdd.setOnClickListener(v -> {
-//            Intent intent = new Intent(RecipeListActivity.this, AddRecipeActivity.class);
-//            startActivity(intent);
-//        });
+        btnAdd.setOnClickListener(v -> {
+            Intent intent = new Intent(RecipeListActivity.this, AddRecipeActivity.class);
+            startActivity(intent);
+        });
 
         recipesRecView.setAdapter(adapter);
         recipesRecView.setLayoutManager(new LinearLayoutManager(this));
