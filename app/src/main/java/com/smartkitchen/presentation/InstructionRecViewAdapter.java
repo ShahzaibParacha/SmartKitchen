@@ -42,6 +42,7 @@ public class InstructionRecViewAdapter extends RecyclerView.Adapter<InstructionR
         holder.numberLabel1.setText("" + (position+1) + ".");
         holder.numberLabel2.setText("" + (position+1) + ".");
         holder.instruction.setText(instructions.get(position));
+        holder.edtInstruction.setText(instructions.get(position));
 
         if(isEditable){
             holder.editable.setVisibility(View.VISIBLE);

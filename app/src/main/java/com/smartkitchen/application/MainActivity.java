@@ -13,7 +13,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         DBCopier.copyDatabaseToDevice(MainActivity.this);
-
         Intent intent = new Intent(MainActivity.this, CurrentInventoryActivity.class);
         startActivity(intent);
     }

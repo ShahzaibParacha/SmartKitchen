@@ -58,6 +58,12 @@ public class RecipeRecViewAdapter extends RecyclerView.Adapter<RecipeRecViewAdap
             ((RecipeListActivity)mContext).onResume();
         });
 
+        holder.btnEdit.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, EditRecipeActivity.class);
+            intent.putExtra("Position", position);
+            mContext.startActivity(intent);
+        });
+
         //On Click Listeners to expand/collapse the cardview
         holder.downArrow.setOnClickListener(v -> {
             holder.expandedLayout.setVisibility(View.VISIBLE);

@@ -22,8 +22,8 @@ public class RecipeActions implements IRecipeActions{
     public void addToRecipes(Recipe recipe){
         recipeDB.addToRecipes(recipe);
         recipe.setTotalCalories(calculateTotalCalories(recipe));
-        recipe.setHasIngredient(checkIngredients(recipe));
-        recipe.setHaveAllIngredients(hasAllIngredients(recipe));
+        //recipe.setHasIngredient(checkIngredients(recipe));
+        //recipe.setHaveAllIngredients(hasAllIngredients(recipe));
     }
 
     @Override

@@ -49,6 +49,10 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
         holder.name.setText(ingredientNames.get(position));
         holder.quantity.setText(ingredientQuantities.get(position));
 
+        holder.edtName.setText(ingredientNames.get(position));
+        holder.edtQuantity.setText(ingredientQuantities.get(position));
+        holder.edtUnits.setText(ingredientUnits.get(position));
+
         if(isEditable){
             holder.editable.setVisibility(View.VISIBLE);
             holder.notEditable.setVisibility(View.GONE);
