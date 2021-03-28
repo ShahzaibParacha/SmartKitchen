@@ -1,6 +1,7 @@
 package com.smartkitchen.presentation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
     Recipe recipe;
     Context mContext;
     boolean isEditable;
+    IngredientsRecViewAdapter adapter = this;
 
     public IngredientsRecViewAdapter(Context mContext, boolean isEditable){
         this.mContext = mContext;
@@ -71,8 +73,7 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditIngredientPopUp.showDialog(mContext, recipe, position, false);
-                notifyItemChanged(position);
+                EditIngredientPopUp.showDialog(mContext, recipe, position, false, adapter);
             }
         });
     }

@@ -35,4 +35,15 @@ public class ListValidation implements IListValidation {
         if (recipe.getName().length() <= 0)
             throw new InvalidInputException("Please enter a valid input for name.");
     }
+
+    public void checkIngredientInputs(String name, String quantity, String units) throws InvalidInputException{
+        if(name.length() <= 0)
+            throw new InvalidInputException("Please enter a valid input for name.");
+        if(quantity.length() <= 0)
+            throw new InvalidInputException("Please enter a valid input for quantity.");
+        if(Integer.parseInt(quantity) < 0)
+            throw new InvalidInputException("Please enter a valid input for quantity.");
+        if(units.length() <= 0)
+            throw new InvalidInputException("Please enter a valid input for units." );
+    }
 }

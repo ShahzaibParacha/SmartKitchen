@@ -7,7 +7,14 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.smartkitchen.business.IListValidation;
+import com.smartkitchen.business.InvalidInputException;
+import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.objects.Recipe;
 
 public class EditIngredientPopUp {
@@ -15,7 +22,9 @@ public class EditIngredientPopUp {
     final static int stringMaxLength = 20;
     final static int intMaxLength = 9;
 
-    public static void showDialog(Context context, Recipe recipe, int position, boolean isAdding){
+    static IListValidation validation = new ListValidation();
+
+    public static void showDialog(Context context, Recipe recipe, int position, boolean isAdding, RecyclerView.Adapter<IngredientsRecViewAdapter.ViewHolder> adapter){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         if(isAdding){
@@ -60,6 +69,12 @@ public class EditIngredientPopUp {
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(isAdding){
+                    recipe.getIngredients().remove(recipe.getIngredients().size()-1);
+                    recipe.getIngredientQuantities().remove(recipe.getIngredientQuantities().size()-1);
+                    recipe.getIngredientUnits().remove(recipe.getIngredientUnits().size()-1);
+                    adapter.notifyItemRemoved(recipe.getIngredients().size());
+                }
                 dialog.dismiss();
             }
         });
@@ -67,10 +82,17 @@ public class EditIngredientPopUp {
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recipe.getIngredients().set(position, editName.getText().toString());
-                recipe.getIngredientQuantities().set(position, editQuantity.getText().toString());
-                recipe.getIngredientUnits().set(position, editUnit.getText().toString());
-                dialog.dismiss();
+                try{
+                    validation.checkIngredientInputs(editName.getText().toString(), editQuantity.getText().toString(), editUnit.getText().toString());
+                    recipe.getIngredients().set(position, editName.getText().toString());
+                    recipe.getIngredientQuantities().set(position, editQuantity.getText().toString());
+                    recipe.getIngredientUnits().set(position, editUnit.getText().toString());
+                    adapter.notifyDataSetChanged();
+                    dialog.dismiss();
+                } catch(InvalidInputException e){
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }

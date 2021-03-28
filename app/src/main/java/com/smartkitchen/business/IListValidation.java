@@ -11,4 +11,5 @@ public interface IListValidation {
 
     void containsRecipeInputs(Recipe recipe) throws InvalidInputException;
 
+    void checkIngredientInputs(String name, String quantity, String units) throws InvalidInputException;
 }

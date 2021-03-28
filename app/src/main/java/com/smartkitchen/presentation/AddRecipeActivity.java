@@ -84,6 +84,11 @@ public class AddRecipeActivity extends ParentActivity {
         });
     }
 
+    public void refresh(Recipe recipe) {
+        ingredientsAdapter.setItems(recipe, recipe.getIngredients(), recipe.getIngredientQuantities(), recipe.getIngredientUnits(), recipe.getHasIngredient());
+        instructionsAdapter.setItems(recipe.getInstructions());
+    }
+
     private void initViews(){
         inputName = findViewById(R.id.addRecipeName);
 

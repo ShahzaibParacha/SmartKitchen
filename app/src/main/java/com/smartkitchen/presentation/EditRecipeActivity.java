@@ -35,6 +35,8 @@ public class EditRecipeActivity extends ParentActivity {
     private EditText inputName;
     private Button btnCancel, btnSubmit, btnAddIngredient, btnAddInstruction;
 
+    private Recipe recipe;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +47,7 @@ public class EditRecipeActivity extends ParentActivity {
 
         Intent intent = getIntent();
         int itemPosition = intent.getIntExtra("Position", -1);
-        Recipe recipe = recipeActions.getRecipeList().get(itemPosition);
+        recipe = recipeActions.getRecipeList().get(itemPosition);
 
         title.setText("Edit " + recipe.getName() + " Recipe");
         setTitle("Edit " + recipe.getName() + " Recipe");
@@ -68,11 +70,11 @@ public class EditRecipeActivity extends ParentActivity {
             recipe.getIngredientUnits().add("");
             //newRecipe.getHasIngredient().add(true);
             ingredientsAdapter.notifyItemInserted(recipe.getIngredients().size()-1);
+            EditIngredientPopUp.showDialog(this, recipe, recipe.getIngredients().size()-1, true, ingredientsAdapter);
         });
 
         btnAddInstruction.setOnClickListener(v -> {
             recipe.getInstructions().add("");
-            EditIngredientPopUp.showDialog(this, recipe, recipe.getInstructions().size(), true);
             instructionsAdapter.notifyItemInserted(recipe.getInstructions().size()-1);
         });
 
