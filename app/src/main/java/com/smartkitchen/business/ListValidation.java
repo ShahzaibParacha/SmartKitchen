@@ -30,10 +30,9 @@ public class ListValidation implements IListValidation {
             throw new InvalidInputException("Please enter a valid input for calories per unit.");
     }
 
+    // logic to check if entry for recipes are valid (name)
     public void containsRecipeInputs(Recipe recipe) throws InvalidInputException {
         if (recipe.getName().length() <= 0)
             throw new InvalidInputException("Please enter a valid input for name.");
-        // other conditions
     }
-
 }

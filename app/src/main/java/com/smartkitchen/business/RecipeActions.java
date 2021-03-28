@@ -11,6 +11,7 @@ public class RecipeActions implements IRecipeActions{
 
     private IDBRecipe recipeDB = DBManager.getRecipeDB();
     private IInventoryActions inventoryActions = new InventoryActions();
+    private IListValidation validation = new ListValidation();
 
     public RecipeActions(){}
 
@@ -19,11 +20,17 @@ public class RecipeActions implements IRecipeActions{
     }
 
     @Override
-    public void addToRecipes(Recipe recipe){
-        recipeDB.addToRecipes(recipe);
-        recipe.setTotalCalories(calculateTotalCalories(recipe));
-        //recipe.setHasIngredient(checkIngredients(recipe));
-        //recipe.setHaveAllIngredients(hasAllIngredients(recipe));
+    public void addToRecipes(Recipe recipe) throws InvalidInputException {
+        try {
+            validation.containsRecipeInputs(recipe);
+            recipeDB.addToRecipes(recipe);
+            recipe.setTotalCalories(calculateTotalCalories(recipe));
+            //recipe.setHasIngredient(checkIngredients(recipe));
+            //recipe.setHaveAllIngredients(hasAllIngredients(recipe));
+        }
+        catch (InvalidInputException e) {
+            throw e;
+        }
     }
 
     @Override

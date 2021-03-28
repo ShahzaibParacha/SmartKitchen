@@ -1,13 +1,11 @@
 package com.smartkitchen.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -28,8 +26,6 @@ public class ViewInformationActivity extends ParentActivity {
 
     IInventoryActions inventoryActions = new InventoryActions();
     IGroceryActions groceryActions = new GroceryActions();
-    //Only Used for Debugging purposes
-    private TextView txtID;
 
     IListActions listActions = new ListActions();
     private ConstraintLayout background;
@@ -79,8 +75,6 @@ public class ViewInformationActivity extends ParentActivity {
     }
 
     private void setData(Item item){
-        //Only Used for Debugging purposes
-        //txtID.setText("" + item.getId());
         txtName.setText(item.getName());
         txtQuantity.setText("" + item.getQuantity() + " " + item.getUnits());
         txtQuantityToBuy.setText("" + item.getQuantityToBuy() + " " + item.getUnits());
@@ -111,9 +105,6 @@ public class ViewInformationActivity extends ParentActivity {
 
     //Initializes the views
     private void initViews(){
-        //Only Used for Debugging purposes
-        //txtID = findViewById(R.id.idLabel);
-
         background = findViewById(R.id.background);
         cardView = findViewById(R.id.infoCardView);
 

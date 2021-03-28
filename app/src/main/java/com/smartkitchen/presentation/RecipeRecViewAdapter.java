@@ -15,7 +15,14 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartkitchen.R;
+import com.smartkitchen.business.GroceryActions;
+import com.smartkitchen.business.IGroceryActions;
+import com.smartkitchen.business.IInventoryActions;
+import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.IRecipeActions;
+import com.smartkitchen.business.InvalidInputException;
+import com.smartkitchen.business.InventoryActions;
+import com.smartkitchen.business.ListActions;
 import com.smartkitchen.business.RecipeActions;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.Recipe;
@@ -24,6 +31,9 @@ import java.util.ArrayList;
 
 public class RecipeRecViewAdapter extends RecyclerView.Adapter<RecipeRecViewAdapter.ViewHolder> {
 
+    private static final IListActions listActions = new ListActions();
+    private static final IInventoryActions inventoryActions = new InventoryActions();
+    private static final IGroceryActions groceryActions = new GroceryActions();
 
     private ArrayList<Recipe> recipes = new ArrayList<>();
     private Context mContext;
@@ -79,6 +89,8 @@ public class RecipeRecViewAdapter extends RecyclerView.Adapter<RecipeRecViewAdap
 
         if(!recipes.get(position).haveAllIngredients()){
             holder.btnMake.setEnabled(false);
+//            Recipe recipe = recipes.get(position);
+//            addToGrocery(recipe);
         }
         else{
             holder.btnMake.setEnabled(true);
@@ -94,6 +106,27 @@ public class RecipeRecViewAdapter extends RecyclerView.Adapter<RecipeRecViewAdap
         this.recipes = recipes;
         notifyDataSetChanged();
     }
+
+//    public void addToGrocery(Recipe recipe) {
+//        for (int i = 0; i < recipe.getIngredients().size(); i++) {
+//            Item currIngredient = inventoryActions.getItemByName(recipe.getIngredients().get(i));
+//            //Take the input and modify item object
+//            currIngredient.setQuantityToBuy(Integer.parseInt(recipe.getIngredientQuantities().get(i)));
+//            //If the item is not in the grocery list yet, add it in
+//            Item duplicate = listActions.getDuplicateByName(currIngredient, groceryActions.getGroceryList());
+//            if (duplicate == null) {
+//                try {
+//                    groceryActions.addToGrocery(currIngredient);
+//                } catch (InvalidInputException e) {
+//                    System.out.println(e.getMessage());
+//                }
+//            }
+//            else{
+//                duplicate.setQuantityToBuy(duplicate.getQuantityToBuy()+currIngredient.getQuantityToBuy());
+//                groceryActions.updateGroceryItem(duplicate);
+//            }
+//        }
+//    }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 

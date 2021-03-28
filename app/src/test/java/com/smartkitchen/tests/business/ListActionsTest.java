@@ -8,8 +8,8 @@ import com.smartkitchen.business.GroceryActions;
 import com.smartkitchen.business.InventoryActions;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Item;
-import com.smartkitchen.persistence.FakeDBGrocery;
-import com.smartkitchen.persistence.FakeDBInventory;
+import com.smartkitchen.persistence.stubs.FakeDBGrocery;
+import com.smartkitchen.persistence.stubs.FakeDBInventory;
 
 import java.util.ArrayList;
 

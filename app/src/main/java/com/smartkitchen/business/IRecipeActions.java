@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public interface IRecipeActions {
 
-    void addToRecipes(Recipe recipe);
+    void addToRecipes(Recipe recipe) throws InvalidInputException;
 
     void updateRecipe(Recipe recipe);
 

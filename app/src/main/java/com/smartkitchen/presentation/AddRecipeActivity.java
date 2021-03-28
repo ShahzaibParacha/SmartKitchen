@@ -1,6 +1,5 @@
 package com.smartkitchen.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,14 +11,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.smartkitchen.R;
+import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.IRecipeActions;
 import com.smartkitchen.business.InvalidInputException;
+import com.smartkitchen.business.ListActions;
 import com.smartkitchen.business.RecipeActions;
 import com.smartkitchen.objects.Recipe;
 
 import java.util.ArrayList;
 
 public class AddRecipeActivity extends ParentActivity {
+
+    IListActions listActions = new ListActions();
 
     private RecyclerView ingredientsRecView, instructionsRecView;
     private IngredientsRecViewAdapter ingredientsAdapter;
@@ -77,7 +80,6 @@ public class AddRecipeActivity extends ParentActivity {
             @Override
             public void onClick(View v) {
                 addItem();
-                finish();
             }
         });
     }
@@ -100,7 +102,18 @@ public class AddRecipeActivity extends ParentActivity {
         ArrayList<String> ingredientQuantities = ingredientsAdapter.getIngredientQuantities();
         ArrayList<String> ingredientUnits = ingredientsAdapter.getIngredientUnits();
         ArrayList<String> instructions = instructionsAdapter.getInstructions();
-        Recipe recipe = new Recipe(name, ingredientNames, ingredientQuantities, ingredientUnits, instructions);
-        recipeActions.addToRecipes(recipe);
+        Recipe newRecipe = new Recipe(name, ingredientNames, ingredientQuantities, ingredientUnits, instructions);
+        try {
+            if(listActions.getDuplicateByName(newRecipe, recipeActions.getRecipeList()) == null) {
+                recipeActions.addToRecipes(newRecipe);
+                finish();
+            }
+            else {
+                Toast.makeText(AddRecipeActivity.this, "A Recipe with this name already exists in Inventory.", Toast.LENGTH_SHORT).show();
+            }
+        }
+        catch (InvalidInputException e) {
+            Toast.makeText(AddRecipeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

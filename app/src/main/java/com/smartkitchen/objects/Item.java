@@ -122,6 +122,7 @@ public class Item {
         this.pricePerUnit = pricePerUnit;
     }
 
+    // method could be used as the default value for when user doesn't input a threshold value
     public int calculateDefaultThreshold(){
         return (int)(quantity*DEFAULT_THRESHOLD_CONST);
     }

@@ -50,26 +50,26 @@ public class InventoryPersistenceDB implements IDBInventory {
         return item;
     }
 
-    private ArrayList<String> stringToList(String allergies) {
-        ArrayList<String> allergiesList = new ArrayList<>();
-        if (!allergies.equals("")) {
-            String[] parsedAllergies = allergies.split(",");
+    private ArrayList<String> stringToList(String strings) {
+        ArrayList<String> stringsList = new ArrayList<>();
+        if (!strings.equals("")) {
+            String[] parsedAllergies = strings.split(",");
             for (String s : parsedAllergies) {
-                allergiesList.add(s);
+                stringsList.add(s);
             }
         }
-        return allergiesList;
+        return stringsList;
     }
 
-    private String listToString(ArrayList<String> allergiesList) {
-        String allergies = "";
-        for (int i = 0; i < allergiesList.size(); i++) {
-            if (i < allergiesList.size()-1)
-                allergies += allergiesList.get(i) + ",";
+    private String listToString(ArrayList<String> stringsList) {
+        String strings = "";
+        for (int i = 0; i < stringsList.size(); i++) {
+            if (i < stringsList.size()-1)
+                strings += stringsList.get(i) + ",";
             else
-                allergies += allergiesList.get(i);
+                strings += stringsList.get(i);
         }
-        return allergies;
+        return strings;
     }
 
     @Override
@@ -92,7 +92,6 @@ public class InventoryPersistenceDB implements IDBInventory {
 
                 //this should return a boolean or the object it self so we can display the result of the operation in a toast
             } catch (final SQLException e) {
-                //throw new PersistenceException(e);
                 System.out.println(e.getMessage());
             }
         }
@@ -112,7 +111,6 @@ public class InventoryPersistenceDB implements IDBInventory {
 
             return item;
         } catch (final SQLException e) {
-            //throw new PersistenceException(e);
             System.out.println(e.getMessage());
         }
         return null;
@@ -138,7 +136,6 @@ public class InventoryPersistenceDB implements IDBInventory {
         }
         catch (final SQLException e)
         {
-            //throw new PersistenceException(e);
             System.out.println(e.getMessage());
         }
         return inventoryList;
@@ -166,25 +163,6 @@ public class InventoryPersistenceDB implements IDBInventory {
             System.out.println(e.getMessage());
         }
     }
-
-//    @Override
-//    public Item getInventoryItemById(int itemId) {
-//        Item item = null;
-//        try (Connection c = connection()) {
-//            final PreparedStatement st = c.prepareStatement("SELECT * FROM INVENTORY_ITEMS WHERE INVENTORY_ITEMS.ITEM_ID = ?");
-//            st.setInt(1, itemId);
-//            final ResultSet rs = st.executeQuery();
-//
-//            if (rs.next()) {
-//                item = constructItem(rs);
-//            }
-//
-//        } catch (final SQLException e) {
-//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
-//            System.out.println(e.getMessage());
-//        }
-//        return item;
-//    }
 
 }
 

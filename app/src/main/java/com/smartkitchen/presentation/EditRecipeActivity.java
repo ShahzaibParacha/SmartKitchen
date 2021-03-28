@@ -1,6 +1,5 @@
 package com.smartkitchen.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,11 +10,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.smartkitchen.R;
+import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.IRecipeActions;
+import com.smartkitchen.business.InvalidInputException;
+import com.smartkitchen.business.ListActions;
 import com.smartkitchen.business.RecipeActions;
 import com.smartkitchen.objects.Recipe;
+
+import java.util.ArrayList;
 
 public class EditRecipeActivity extends ParentActivity {
 
@@ -24,6 +29,7 @@ public class EditRecipeActivity extends ParentActivity {
     private InstructionRecViewAdapter instructionsAdapter;
 
     IRecipeActions recipeActions = new RecipeActions();
+    IListActions listActions = new ListActions();
 
     private TextView title;
     private EditText inputName;
@@ -74,8 +80,14 @@ public class EditRecipeActivity extends ParentActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateRecipe(recipe);
-                finish();
+                try {
+                    listActions.editValidation(checkData());
+                    updateRecipe(recipe);
+                    finish();
+                }
+                catch (InvalidInputException e) {
+                    Toast.makeText(EditRecipeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -101,5 +113,18 @@ public class EditRecipeActivity extends ParentActivity {
         recipe.setIngredientUnits(ingredientsAdapter.getIngredientUnits());
         recipe.setInstructions(instructionsAdapter.getInstructions());
         recipeActions.updateRecipe(recipe);
+    }
+
+    //Grabs the info from the text field and stores in an Item object
+    private Recipe checkData() {
+        //Temporary parameter until edit button is created
+        String checkName = inputName.getText().toString();
+        ArrayList<String> checkIngredients = ingredientsAdapter.getIngredientNames();
+        ArrayList<String> checkQuantities = ingredientsAdapter.getIngredientQuantities();
+        ArrayList<String> checkUnits = ingredientsAdapter.getIngredientUnits();
+        ArrayList<String> checkInstructions = instructionsAdapter.getInstructions();
+
+        Recipe checkRecipe = new Recipe(checkName, checkIngredients, checkQuantities, checkUnits, checkInstructions);
+        return checkRecipe;
     }
 }
