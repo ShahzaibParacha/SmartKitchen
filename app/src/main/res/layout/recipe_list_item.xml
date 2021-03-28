@@ -78,8 +78,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_weight="33"
+                android:layout_weight="25"
                 android:text="@string/btnMakeRecipe"
+                android:backgroundTint="@color/redColour3"/>
+
+            <Button
+                android:id="@+id/btnAddToGroceryList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="25"
+                android:text="Add To Grocery List"
                 android:backgroundTint="@color/redColour3"/>
 
             <Button
@@ -87,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_weight="33"
+                android:layout_weight="25"
                 android:text="@string/btnEdit"
                 android:backgroundTint="@color/redColour3"/>
 
@@ -96,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_weight="33"
+                android:layout_weight="25"
                 android:text="@string/btnRemove"
                 android:backgroundTint="@color/redColour3"/>
         </LinearLayout>
