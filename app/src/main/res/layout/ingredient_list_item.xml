@@ -58,39 +58,45 @@
             android:id="@+id/ingredientEditable"
             android:visibility="gone">
 
-            <EditText
-                android:id="@+id/inputIngredientName"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/txtEditIngredientName"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_weight="30"
-                android:hint="@string/hintName"
-                android:inputType="text"
-                android:maxLength="20"/>
+                android:layout_weight="40"
+                android:text="@string/defaultName"
+                android:textAlignment="center"/>
 
-            <EditText
-                android:id="@+id/inputIngredientQuantity"
+            <TextView
+                android:id="@+id/txtEditIngredientQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_weight="30"
-                android:hint="@string/hintQuantity"
-                android:inputType="number"
-                android:maxLength="9"/>
+                android:layout_weight="10"
+                android:text="@string/defaultQuantity"
+                android:textAlignment="center"/>
 
-            <EditText
-                android:id="@+id/inputIngredientUnits"
+            <TextView
+                android:id="@+id/txtEditIngredientUnits"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_weight="20"
-                android:hint="@string/hintUnits"
-                android:inputType="text"
-                android:maxLength="20"/>
+                android:layout_weight="10"
+                android:text="@string/hintUnits"
+                android:textAlignment="center"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/btnEdit"
+                android:backgroundTint="@color/redColour3"
+                android:layout_margin="5dp"
+                android:id="@+id/btnEditIngredient"
+                android:layout_weight="25"/>
 
             <Button
                 android:layout_height="wrap_content"
-                android:layout_weight="20"
+                android:layout_weight="15"
                 android:text="-"
                 android:backgroundTint="@color/redColour3"
                 android:layout_margin="5dp"

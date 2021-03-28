@@ -47,7 +47,7 @@ public class ViewRecipeInfoActivity extends ParentActivity {
         ingredientsRecView.setLayoutManager(new LinearLayoutManager(this));
         System.out.println("Before ingredient set item");
         recipe.setHasIngredient(recipeActions.checkIngredients(recipe));
-        ingredientsAdapter.setItems(recipe.getIngredients(), recipe.getIngredientQuantities(), recipe.getIngredientUnits(), recipe.getHasIngredient());
+        ingredientsAdapter.setItems(recipe, recipe.getIngredients(), recipe.getIngredientQuantities(), recipe.getIngredientUnits(), recipe.getHasIngredient());
 
         instructionsAdapter = new InstructionRecViewAdapter(this, false);
         instructionsRecView.setAdapter(instructionsAdapter);

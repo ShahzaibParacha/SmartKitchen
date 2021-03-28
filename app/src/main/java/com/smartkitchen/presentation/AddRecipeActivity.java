@@ -54,7 +54,7 @@ public class AddRecipeActivity extends ParentActivity {
         ingredientsAdapter = new IngredientsRecViewAdapter(this, true);
         ingredientsRecView.setAdapter(ingredientsAdapter);
         ingredientsRecView.setLayoutManager(new LinearLayoutManager(this));
-        ingredientsAdapter.setItems(ingredients, ingredientQuantities, ingredientUnits, hasIngredient);
+        ingredientsAdapter.setItems(newRecipe, ingredients, ingredientQuantities, ingredientUnits, hasIngredient);
 
         instructionsAdapter = new InstructionRecViewAdapter(this, true);
         instructionsRecView.setAdapter(instructionsAdapter);

@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartkitchen.R;
+import com.smartkitchen.objects.Recipe;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
     ArrayList<String> ingredientQuantities = new ArrayList<>();
     ArrayList<String> ingredientUnits = new ArrayList<>();
     ArrayList<Boolean> hasIngredient = new ArrayList<>();
+    Recipe recipe;
     Context mContext;
     boolean isEditable;
 
@@ -43,12 +45,8 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.name.setText(ingredientNames.get(position));
-        holder.quantity.setText(ingredientQuantities.get(position));
 
-        holder.edtName.setText(ingredientNames.get(position));
-        holder.edtQuantity.setText(ingredientQuantities.get(position));
-        holder.edtUnits.setText(ingredientUnits.get(position));
+        setData(holder, position);
 
         if(isEditable){
             holder.editable.setVisibility(View.VISIBLE);
@@ -70,56 +68,23 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
             notifyDataSetChanged();
         });
 
-        holder.edtName.addTextChangedListener(new TextWatcher() {
+        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ingredientNames.set(position, holder.edtName.getText().toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+            public void onClick(View v) {
+                EditIngredientPopUp.showDialog(mContext, recipe, position, false);
+                notifyItemChanged(position);
             }
         });
+    }
 
-        holder.edtQuantity.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    private void setData(ViewHolder holder, int position){
+        holder.name.setText(ingredientNames.get(position));
+        holder.quantity.setText(ingredientQuantities.get(position));
+        holder.units.setText(ingredientUnits.get(position));
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ingredientQuantities.set(position, holder.edtQuantity.getText().toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        holder.edtUnits.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ingredientUnits.set(position, holder.edtUnits.getText().toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        holder.edtName.setText(ingredientNames.get(position));
+        holder.edtQuantity.setText(ingredientQuantities.get(position));
+        holder.edtUnits.setText(ingredientUnits.get(position));
     }
 
     @Override
@@ -127,7 +92,8 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
         return ingredientNames.size();
     }
 
-    public void setItems(ArrayList<String> ingredientNames, ArrayList<String> ingredientQuantities, ArrayList<String> ingredientUnits, ArrayList<Boolean> hasIngredient){
+    public void setItems(Recipe recipe, ArrayList<String> ingredientNames, ArrayList<String> ingredientQuantities, ArrayList<String> ingredientUnits, ArrayList<Boolean> hasIngredient){
+        this.recipe = recipe;
         this.ingredientNames = ingredientNames;
         this.ingredientQuantities = ingredientQuantities;
         this.ingredientUnits = ingredientUnits;
@@ -149,10 +115,10 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private CardView parent;
-        private TextView name, quantity;
-        private EditText edtName, edtQuantity, edtUnits;
+        private TextView name, quantity, units;
+        private TextView edtName, edtQuantity, edtUnits;
         private LinearLayout editable, notEditable;
-        private Button btnRemove;
+        private Button btnRemove, btnEdit;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -161,15 +127,17 @@ public class IngredientsRecViewAdapter extends RecyclerView.Adapter<IngredientsR
 
             name = itemView.findViewById(R.id.txtIngredientName);
             quantity = itemView.findViewById(R.id.txtIngredientQuantity);
+            units = itemView.findViewById(R.id.txtIngredientUnits);
 
-            edtName = itemView.findViewById(R.id.inputIngredientName);
-            edtQuantity = itemView.findViewById(R.id.inputIngredientQuantity);
-            edtUnits = itemView.findViewById(R.id.inputIngredientUnits);
+            edtName = itemView.findViewById(R.id.txtEditIngredientName);
+            edtQuantity = itemView.findViewById(R.id.txtEditIngredientQuantity);
+            edtUnits = itemView.findViewById(R.id.txtEditIngredientUnits);
 
             editable = itemView.findViewById(R.id.ingredientEditable);
             notEditable = itemView.findViewById(R.id.ingredientNonEditable);
 
             btnRemove = itemView.findViewById(R.id.btnRemoveIngredient);
+            btnEdit = itemView.findViewById(R.id.btnEditIngredient);
         }
     }
 }
