@@ -19,10 +19,6 @@ public class Item {
     private double pricePerUnit;
     private int id;
 
-    //Flags for if the cardview should be expanded in either list
-    private boolean invIsExpanded = false;
-    private boolean groceryIsExpanded = false;
-
     //Constructor
     public Item(String name, int quantity, String units, int quantityToBuy, int thresholdQuantity,
                 ArrayList<String> allergies, int caloriesPerUnit, double pricePerUnit) {
@@ -125,21 +121,5 @@ public class Item {
     // method could be used as the default value for when user doesn't input a threshold value
     public int calculateDefaultThreshold(){
         return (int)(quantity*DEFAULT_THRESHOLD_CONST);
-    }
-
-    public boolean invIsExpanded() {
-        return invIsExpanded;
-    }
-
-    public void setInvIsExpanded(boolean invIsExpanded) {
-        this.invIsExpanded = invIsExpanded;
-    }
-
-    public boolean groceryIsExpanded() {
-        return groceryIsExpanded;
-    }
-
-    public void setGroceryIsExpanded(boolean groceryIsExpanded) {
-        this.groceryIsExpanded = groceryIsExpanded;
     }
 }

@@ -84,27 +84,16 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
 
         //On Click Listeners to expand/collapse the cardview
         holder.downArrow.setOnClickListener(v -> {
-            items.get(position).setInvIsExpanded(true);
-            notifyItemChanged(position);
-        });
-
-        holder.upArrow.setOnClickListener(v -> {
-            items.get(position).setInvIsExpanded(false);
-            notifyItemChanged(position);
-        });
-
-        //Set up expanded/collapsed view
-        if(items.get(position).invIsExpanded()){
             holder.expandedLayout.setVisibility(View.VISIBLE);
             holder.downArrow.setVisibility(View.GONE);
             holder.upArrow.setVisibility(View.VISIBLE);
-        }
-        else{
+        });
+
+        holder.upArrow.setOnClickListener(v -> {
             holder.expandedLayout.setVisibility(View.GONE);
             holder.downArrow.setVisibility(View.VISIBLE);
             holder.upArrow.setVisibility(View.GONE);
-        }
-
+        });
     }
 
     //Returns the size of the list

@@ -119,17 +119,17 @@ public class EditGroceryListItemActivity extends ParentActivity {
     private void setAllergies(Item item){
         ArrayList<String> allergies = item.getAllergies();
         if(allergies != null) {
-            if (listActions.isInList(allergies, Allergies.NUTS))
+            if (listActions.isInList(allergies, Allergies.NUTS.getText()))
                 checkNuts.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.SOY))
+            if (listActions.isInList(allergies, Allergies.SOY.getText()))
                 checkSoy.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.LACTOSE))
+            if (listActions.isInList(allergies, Allergies.LACTOSE.getText()))
                 checkLactose.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.GLUTEN))
+            if (listActions.isInList(allergies, Allergies.GLUTEN.getText()))
                 checkGluten.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.FISH))
+            if (listActions.isInList(allergies, Allergies.FISH.getText()))
                 checkFish.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.EGGS))
+            if (listActions.isInList(allergies, Allergies.EGGS.getText()))
                 checkEggs.setChecked(true);
         }
     }
@@ -137,17 +137,17 @@ public class EditGroceryListItemActivity extends ParentActivity {
     private ArrayList<String> getAllergies(){
         ArrayList<String> allergies = new ArrayList<>();
         if(checkNuts.isChecked())
-            allergies.add(Allergies.NUTS);
+            allergies.add(Allergies.NUTS.getText());
         if(checkSoy.isChecked())
-            allergies.add(Allergies.SOY);
+            allergies.add(Allergies.SOY.getText());
         if(checkLactose.isChecked())
-            allergies.add(Allergies.LACTOSE);
+            allergies.add(Allergies.LACTOSE.getText());
         if(checkGluten.isChecked())
-            allergies.add(Allergies.GLUTEN);
+            allergies.add(Allergies.GLUTEN.getText());
         if(checkFish.isChecked())
-            allergies.add(Allergies.FISH);
+            allergies.add(Allergies.FISH.getText());
         if(checkEggs.isChecked())
-            allergies.add(Allergies.EGGS);
+            allergies.add(Allergies.EGGS.getText());
         return allergies;
     }
 
