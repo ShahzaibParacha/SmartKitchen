@@ -12,9 +12,11 @@ import android.widget.Toast;
 
 import com.smartkitchen.R;
 import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.IListValidation;
 import com.smartkitchen.business.IRecipeActions;
 import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.business.ListActions;
+import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.business.RecipeActions;
 import com.smartkitchen.objects.Recipe;
 
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 public class AddRecipeActivity extends ParentActivity {
 
     IListActions listActions = new ListActions();
+    IListValidation validation = new ListValidation();
 
     private RecyclerView ingredientsRecView, instructionsRecView;
     private IngredientsRecViewAdapter ingredientsAdapter;
@@ -59,7 +62,7 @@ public class AddRecipeActivity extends ParentActivity {
         instructionsAdapter = new InstructionRecViewAdapter(this, true);
         instructionsRecView.setAdapter(instructionsAdapter);
         instructionsRecView.setLayoutManager(new LinearLayoutManager(this));
-        instructionsAdapter.setItems(instructions);
+        instructionsAdapter.setItems(newRecipe, instructions);
 
         btnAddIngredient.setOnClickListener(v -> {
             newRecipe.getIngredients().add("");
@@ -67,11 +70,13 @@ public class AddRecipeActivity extends ParentActivity {
             newRecipe.getIngredientUnits().add("");
             //newRecipe.getHasIngredient().add(true);
             ingredientsAdapter.notifyItemInserted(newRecipe.getIngredients().size()-1);
+            EditIngredientPopUp.showDialog(this, newRecipe, newRecipe.getIngredients().size()-1, true, ingredientsAdapter);
         });
 
         btnAddInstruction.setOnClickListener(v -> {
             newRecipe.getInstructions().add("");
             instructionsAdapter.notifyItemInserted(newRecipe.getInstructions().size()-1);
+            EditInstructionPopUp.showDialog(this, newRecipe, newRecipe.getInstructions().size()-1, true, instructionsAdapter);
         });
 
         btnCancel.setOnClickListener(v -> finish());
@@ -82,11 +87,6 @@ public class AddRecipeActivity extends ParentActivity {
                 addItem();
             }
         });
-    }
-
-    public void refresh(Recipe recipe) {
-        ingredientsAdapter.setItems(recipe, recipe.getIngredients(), recipe.getIngredientQuantities(), recipe.getIngredientUnits(), recipe.getHasIngredient());
-        instructionsAdapter.setItems(recipe.getInstructions());
     }
 
     private void initViews(){

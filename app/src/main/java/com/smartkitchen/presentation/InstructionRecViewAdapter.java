@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartkitchen.R;
+import com.smartkitchen.objects.Recipe;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,8 @@ public class InstructionRecViewAdapter extends RecyclerView.Adapter<InstructionR
     ArrayList<String> instructions = new ArrayList<>();
     Context mContext;
     boolean isEditable;
+    Recipe recipe;
+    InstructionRecViewAdapter adapter = this;
 
     public InstructionRecViewAdapter(Context mContext, boolean isEditable){
         this.mContext = mContext;
@@ -59,20 +62,10 @@ public class InstructionRecViewAdapter extends RecyclerView.Adapter<InstructionR
             notifyDataSetChanged();
         });
 
-        holder.edtInstruction.addTextChangedListener(new TextWatcher() {
+        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                instructions.set(position, holder.edtInstruction.getText().toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+            public void onClick(View v) {
+                EditInstructionPopUp.showDialog(mContext, recipe, position, false, adapter);
             }
         });
     }
@@ -82,7 +75,8 @@ public class InstructionRecViewAdapter extends RecyclerView.Adapter<InstructionR
         return instructions.size();
     }
 
-    public void setItems(ArrayList<String> instructions){
+    public void setItems(Recipe recipe, ArrayList<String> instructions){
+        this.recipe = recipe;
         this.instructions = instructions;
     }
 
@@ -93,9 +87,9 @@ public class InstructionRecViewAdapter extends RecyclerView.Adapter<InstructionR
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView instruction, numberLabel1, numberLabel2;
-        private EditText edtInstruction;
+        private TextView edtInstruction;
         private LinearLayout editable, notEditable;
-        private Button btnRemove;
+        private Button btnRemove, btnEdit;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -103,12 +97,13 @@ public class InstructionRecViewAdapter extends RecyclerView.Adapter<InstructionR
             instruction = itemView.findViewById(R.id.txtInstruction);
             numberLabel1 = itemView.findViewById(R.id.txtInstructionNumber);
             numberLabel2 = itemView.findViewById(R.id.txtInstructionNumber2);
-            edtInstruction = itemView.findViewById(R.id.inputInstruction);
+            edtInstruction = itemView.findViewById(R.id.txtEditInstruction);
 
             editable = itemView.findViewById(R.id.instructionEditable);
             notEditable = itemView.findViewById(R.id.instructionNonEditable);
 
             btnRemove = itemView.findViewById(R.id.btnRemoveInstruction);
+            btnEdit = itemView.findViewById(R.id.btnEditInstruction);
         }
     }
 }

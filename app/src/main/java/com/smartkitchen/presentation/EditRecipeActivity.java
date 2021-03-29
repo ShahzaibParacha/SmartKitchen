@@ -62,7 +62,7 @@ public class EditRecipeActivity extends ParentActivity {
         instructionsAdapter = new InstructionRecViewAdapter(this, true);
         instructionsRecView.setAdapter(instructionsAdapter);
         instructionsRecView.setLayoutManager(new LinearLayoutManager(this));
-        instructionsAdapter.setItems(recipe.getInstructions());
+        instructionsAdapter.setItems(recipe, recipe.getInstructions());
 
         btnAddIngredient.setOnClickListener(v -> {
             recipe.getIngredients().add("");
@@ -76,6 +76,7 @@ public class EditRecipeActivity extends ParentActivity {
         btnAddInstruction.setOnClickListener(v -> {
             recipe.getInstructions().add("");
             instructionsAdapter.notifyItemInserted(recipe.getInstructions().size()-1);
+            EditInstructionPopUp.showDialog(this, recipe, recipe.getInstructions().size()-1, true, instructionsAdapter);
         });
 
         btnCancel.setOnClickListener(v -> finish());

@@ -52,7 +52,7 @@ public class ViewRecipeInfoActivity extends ParentActivity {
         instructionsAdapter = new InstructionRecViewAdapter(this, false);
         instructionsRecView.setAdapter(instructionsAdapter);
         instructionsRecView.setLayoutManager(new LinearLayoutManager(this));
-        instructionsAdapter.setItems(recipe.getInstructions());
+        instructionsAdapter.setItems(recipe, recipe.getInstructions());
 
         btnBackToList.setOnClickListener(v -> finish());
     }

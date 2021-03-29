@@ -24,7 +24,7 @@ public class EditIngredientPopUp {
 
     static IListValidation validation = new ListValidation();
 
-    public static void showDialog(Context context, Recipe recipe, int position, boolean isAdding, RecyclerView.Adapter<IngredientsRecViewAdapter.ViewHolder> adapter){
+    public static void showDialog(Context context, Recipe recipe, int position, boolean isAdding, IngredientsRecViewAdapter adapter){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         if(isAdding){
