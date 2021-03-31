@@ -17,6 +17,7 @@
     <color name="greenColour3">#90BE6D</color>
 
     <color name="redColour1">#FFDCCC</color>
+    <color name="redColour1Disabled">#CFBBAE</color>
     <color name="redColour2">#FCB1A6</color>
     <color name="redColour3">#FB6376</color>
 </resources>

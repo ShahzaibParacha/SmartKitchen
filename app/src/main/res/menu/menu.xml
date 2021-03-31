@@ -6,8 +6,8 @@
 
     <item android:id="@+id/menuGroceryList"
         android:title="Grocery List"/>
-<!--    To be Implemented in Iteration 3
+
     <item android:id="@+id/menuRecipes"
         android:title="Recipes"/>
-        -->
+
 </menu>

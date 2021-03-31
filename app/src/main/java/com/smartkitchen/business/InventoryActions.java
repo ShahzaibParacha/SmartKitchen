@@ -40,6 +40,17 @@ public class InventoryActions implements IInventoryActions {
     }
 
     @Override
+    public Item getItemByName(String name){
+        Item item = null;
+        for (Item x: getInventoryList()) {
+            if(x.getName().equals(name)){
+                item = x;
+            }
+        }
+        return item;
+    }
+
+    @Override
     public ArrayList<Item> getInventoryList() {
         return inventoryDB.getInventoryList();
     }
@@ -49,8 +60,4 @@ public class InventoryActions implements IInventoryActions {
         inventoryDB.removeFromInventory(item);
     }
 
-//    @Override
-//    public Item getInventoryItemById(int itemId) {
-//        return inventoryDB.getInventoryItemById(itemId);
-//    }
 }

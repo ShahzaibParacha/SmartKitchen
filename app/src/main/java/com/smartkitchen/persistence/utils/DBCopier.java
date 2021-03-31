@@ -67,6 +67,8 @@ public class DBCopier {
             }
         }
     }
+
+    // could be used for implementing expiration dates for the items
     public static String getSQLDateString(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         return dateFormat.format(date);
