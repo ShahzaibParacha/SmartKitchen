@@ -39,9 +39,11 @@ import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.action.ViewActions.swipeDown;
 import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
+import static androidx.test.espresso.matcher.ViewMatchers.isChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.IsAnything.anything;
@@ -148,32 +150,89 @@ public class InventoryTest{
         onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.btnRemoveInvItem)));
     }
 
+    /*
     @Test
-    public void askQuantityTest(){ // User Story: Ask User for Quantity to Buy
+    public void askQuantityTest() throws InterruptedException{ // User Story: Ask User for Quantity to Buy
+        onView(withId(R.id.btnGoToAddInvActivity)).perform(click());
 
+        // add new item
+        onView(withId(R.id.inputInventoryItemName)).perform(typeText("testItem"));
+        onView(withId(R.id.inputInventoryItemQuantity)).perform(typeText("1"));
+        onView(withId(R.id.inputInventoryItemUnits)).perform(typeText("testUnits"));
+        onView(withId(R.id.btnAddInventoryItem)).perform(scrollTo(), click());
+
+        // add to Grocery List
+        //onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.itemDownArrow)));
+        //onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.btnAddInvItemToGrocery)));
+        //onView(withId(R.id.))
+
+
+        // remove the newly added item
+        onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.itemDownArrow)));
+        Thread.sleep(1000);
+        onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.btnRemoveInvItem)));
+        Thread.sleep(1000);
     }
+     */
 
     @Test
-    public void editPriceTest(){ // User Story: Edit and View Price of Items
+    public void editValuesTest() throws InterruptedException{
+        // User Story: Edit and View Price of Items
+        // User Story: Add/Edit Amount of Calories
+        // User Story: Add/Edit Allergy Information
+        // User Story: Edit the Thresholds
 
+        onView(withId(R.id.btnGoToAddInvActivity)).perform(click());
+
+        // add new item
+        onView(withId(R.id.inputInventoryItemName)).perform(typeText("testItem"));
+        onView(withId(R.id.inputInventoryItemQuantity)).perform(typeText("10"));
+        onView(withId(R.id.inputInventoryItemUnits)).perform(typeText("testUnits"));
+        onView(withId(R.id.btnAddInventoryItem)).perform(scrollTo(), click());
+
+        // click edit button
+        onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.itemDownArrow)));
+        onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.btnEditInvItem)));
+
+        // edit price
+        onView(withId(R.id.editInvPrice)).perform(clearText());
+        onView(withId(R.id.editInvPrice)).perform(typeText("50"));
+
+        // edit threshold
+        Thread.sleep(2000);
+        onView(withId(R.id.editInvThreshold)).perform(clearText());
+        onView(withId(R.id.editInvThreshold)).perform(typeText("3"));
+
+        onView(withId(R.id.btnEditInvSubmit)).perform(scrollTo());
+        // edit calories
+        Thread.sleep(2000);
+        onView(withId(R.id.editInvCalories)).perform(clearText());
+        onView(withId(R.id.editInvCalories)).perform(typeText("50"));
+
+        // edit allergies
+        onView(withText("Contains Lactose")).perform(click());
+        onView(withText("Contains Gluten")).perform(click());
+        onView(withText("Contains Eggs")).perform(click());
+        onView(withText("Contains Nuts")).perform(click());
+        onView(withText("Contains Fish")).perform(click());
+        onView(withText("Contains Soy")).perform(click());
+
+        // submit
+        onView(withId(R.id.btnEditInvSubmit)).perform(scrollTo(), click());
+
+        // view edited item information
+        onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), click()));
+        onView(withId(R.id.btnBackToList)).perform(scrollTo());
+        Thread.sleep(3000);
+        pressBack();
+
+        Thread.sleep(2000);
+        // remove the newly added item
+        onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.itemDownArrow)));
+        Thread.sleep(1000);
+        onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.btnRemoveInvItem)));
+        Thread.sleep(1000);
     }
-
-    @Test
-    public void editCaloriesTest(){ // User Story: Add/Edit Amount of Calories
-
-    }
-
-    @Test
-    public void editAllergyTest(){ // User Story: Add/Edit Allergy Information
-
-    }
-
-    @Test
-    public void editThresholdTest(){ // User Story: Edit the Thresholds
-
-    }
-
-
 
     // --------------------------------------------------------------------
 
