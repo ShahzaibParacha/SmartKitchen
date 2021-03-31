@@ -8,7 +8,11 @@ import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.RootMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
+import android.app.AlertDialog;
+import android.widget.EditText;
+
 
 import org.hamcrest.Matcher;
 import org.junit.After;
@@ -35,6 +39,7 @@ import com.smartkitchen.TestHelpers.TestViewAction;
 
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -43,9 +48,13 @@ import static androidx.test.espresso.action.ViewActions.swipeDown;
 import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isChecked;
+import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withInputType;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.core.IsAnything.anything;
 import static org.junit.Assert.*;
 
@@ -53,12 +62,8 @@ import static org.junit.Assert.*;
 @LargeTest
 
 public class InventoryTest{
-    private final int TEST_ITEM = 2;
-
-    private GroceryPersistenceDB grocerydb;
     private InventoryPersistenceDB inventorydb;
     List<Item> inventoryList;
-    private Item testItem;
 
     @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
@@ -66,20 +71,11 @@ public class InventoryTest{
 
     @Before
     public void setupDatabase(){
-        grocerydb = (GroceryPersistenceDB) Services.getGroceryPersistence();
         inventorydb = (InventoryPersistenceDB) Services.getInventoryPersistence();
         inventoryList = inventorydb.getInventoryList();
     }
 
     // ---------------- AUTOMATED ACCEPTANCE TESTS ----------------------
-
-    @Test
-    public void viewInventoryTest(){ // User Story: View Current Inventory
-        // default view
-        assertEquals(inventorydb.getInventoryList().get(0).getName(), "Cheese"); // just check to see if we get the right item on the list
-
-    }
-
     @Test
     public void addRemoveInventoryItemTest() throws InterruptedException{ // User Story: Add Items to the Current Inventory AND Remove Items from the Current Inventory
         onView(withId(R.id.btnGoToAddInvActivity)).perform(click());
@@ -150,9 +146,19 @@ public class InventoryTest{
         onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.btnRemoveInvItem)));
     }
 
-    /*
+
     @Test
-    public void askQuantityTest() throws InterruptedException{ // User Story: Ask User for Quantity to Buy
+    public void buyTest() throws InterruptedException { // User Story: Ask User for Quantity to Buy
+        // navigate to Grocery List screen -- TO VERIFY THAT THE TEST ITEM IS NOT IN GROCERY LIST
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
+        onView(withText("Grocery List")).perform(click());
+        Thread.sleep(3000);
+
+        // navigate to Inventory List screen
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
+        onView(withText("Current Inventory")).perform(click());
+        Thread.sleep(3000);
+
         onView(withId(R.id.btnGoToAddInvActivity)).perform(click());
 
         // add new item
@@ -162,10 +168,26 @@ public class InventoryTest{
         onView(withId(R.id.btnAddInventoryItem)).perform(scrollTo(), click());
 
         // add to Grocery List
-        //onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.itemDownArrow)));
-        //onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.btnAddInvItemToGrocery)));
-        //onView(withId(R.id.))
+        onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.itemDownArrow)));
+        onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.btnAddInvItemToGrocery)));
+        onView(allOf(isAssignableFrom(EditText.class))).perform(typeText("1"));
+        onView(withId(android.R.id.button1)).perform(click());
 
+        // navigate to Grocery List screen
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
+        onView(withText("Grocery List")).perform(click());
+        Thread.sleep(3000);
+
+        // remove the bought item from grocery
+        onView(withId(R.id.groceryListRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.groceryDownArrow)));
+        Thread.sleep(1000);
+        onView(withId(R.id.groceryListRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.btnRemoveGroceryItem)));
+        Thread.sleep(1000);
+
+        // navigate to Inventory List screen
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
+        onView(withText("Current Inventory")).perform(click());
+        Thread.sleep(3000);
 
         // remove the newly added item
         onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.itemDownArrow)));
@@ -173,7 +195,6 @@ public class InventoryTest{
         onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.btnRemoveInvItem)));
         Thread.sleep(1000);
     }
-     */
 
     @Test
     public void editValuesTest() throws InterruptedException{
@@ -233,7 +254,6 @@ public class InventoryTest{
         onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.btnRemoveInvItem)));
         Thread.sleep(1000);
     }
-
     // --------------------------------------------------------------------
 
 }
