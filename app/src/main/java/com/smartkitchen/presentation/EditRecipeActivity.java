@@ -1,6 +1,5 @@
 package com.smartkitchen.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,11 +10,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.smartkitchen.R;
+import com.smartkitchen.business.IListActions;
 import com.smartkitchen.business.IRecipeActions;
+import com.smartkitchen.business.InvalidInputException;
+import com.smartkitchen.business.ListActions;
 import com.smartkitchen.business.RecipeActions;
 import com.smartkitchen.objects.Recipe;
+
+import java.util.ArrayList;
 
 public class EditRecipeActivity extends ParentActivity {
 
@@ -24,10 +29,13 @@ public class EditRecipeActivity extends ParentActivity {
     private InstructionRecViewAdapter instructionsAdapter;
 
     IRecipeActions recipeActions = new RecipeActions();
+    IListActions listActions = new ListActions();
 
     private TextView title;
     private EditText inputName;
     private Button btnCancel, btnSubmit, btnAddIngredient, btnAddInstruction;
+
+    private Recipe recipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +47,7 @@ public class EditRecipeActivity extends ParentActivity {
 
         Intent intent = getIntent();
         int itemPosition = intent.getIntExtra("Position", -1);
-        Recipe recipe = recipeActions.getRecipeList().get(itemPosition);
+        recipe = recipeActions.getRecipeList().get(itemPosition);
 
         title.setText("Edit " + recipe.getName() + " Recipe");
         setTitle("Edit " + recipe.getName() + " Recipe");
@@ -49,12 +57,12 @@ public class EditRecipeActivity extends ParentActivity {
         ingredientsAdapter = new IngredientsRecViewAdapter(this, true);
         ingredientsRecView.setAdapter(ingredientsAdapter);
         ingredientsRecView.setLayoutManager(new LinearLayoutManager(this));
-        ingredientsAdapter.setItems(recipe.getIngredients(), recipe.getIngredientQuantities(), recipe.getIngredientUnits(), recipe.getHasIngredient());
+        ingredientsAdapter.setItems(recipe, recipe.getIngredients(), recipe.getIngredientQuantities(), recipe.getIngredientUnits(), recipe.getHasIngredient());
 
         instructionsAdapter = new InstructionRecViewAdapter(this, true);
         instructionsRecView.setAdapter(instructionsAdapter);
         instructionsRecView.setLayoutManager(new LinearLayoutManager(this));
-        instructionsAdapter.setItems(recipe.getInstructions());
+        instructionsAdapter.setItems(recipe, recipe.getInstructions());
 
         btnAddIngredient.setOnClickListener(v -> {
             recipe.getIngredients().add("");
@@ -62,11 +70,13 @@ public class EditRecipeActivity extends ParentActivity {
             recipe.getIngredientUnits().add("");
             //newRecipe.getHasIngredient().add(true);
             ingredientsAdapter.notifyItemInserted(recipe.getIngredients().size()-1);
+            EditIngredientPopUp.showDialog(this, recipe, recipe.getIngredients().size()-1, true, ingredientsAdapter);
         });
 
         btnAddInstruction.setOnClickListener(v -> {
             recipe.getInstructions().add("");
             instructionsAdapter.notifyItemInserted(recipe.getInstructions().size()-1);
+            EditInstructionPopUp.showDialog(this, recipe, recipe.getInstructions().size()-1, true, instructionsAdapter);
         });
 
         btnCancel.setOnClickListener(v -> finish());
@@ -74,8 +84,14 @@ public class EditRecipeActivity extends ParentActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateRecipe(recipe);
-                finish();
+                try {
+                    listActions.editValidation(checkData());
+                    updateRecipe(recipe);
+                    finish();
+                }
+                catch (InvalidInputException e) {
+                    Toast.makeText(EditRecipeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -101,5 +117,18 @@ public class EditRecipeActivity extends ParentActivity {
         recipe.setIngredientUnits(ingredientsAdapter.getIngredientUnits());
         recipe.setInstructions(instructionsAdapter.getInstructions());
         recipeActions.updateRecipe(recipe);
+    }
+
+    //Grabs the info from the text field and stores in an Item object
+    private Recipe checkData() {
+        //Temporary parameter until edit button is created
+        String checkName = inputName.getText().toString();
+        ArrayList<String> checkIngredients = ingredientsAdapter.getIngredientNames();
+        ArrayList<String> checkQuantities = ingredientsAdapter.getIngredientQuantities();
+        ArrayList<String> checkUnits = ingredientsAdapter.getIngredientUnits();
+        ArrayList<String> checkInstructions = instructionsAdapter.getInstructions();
+
+        Recipe checkRecipe = new Recipe(checkName, checkIngredients, checkQuantities, checkUnits, checkInstructions);
+        return checkRecipe;
     }
 }

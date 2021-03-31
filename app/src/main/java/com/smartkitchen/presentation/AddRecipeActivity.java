@@ -1,6 +1,5 @@
 package com.smartkitchen.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,14 +11,21 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.smartkitchen.R;
+import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.IListValidation;
 import com.smartkitchen.business.IRecipeActions;
 import com.smartkitchen.business.InvalidInputException;
+import com.smartkitchen.business.ListActions;
+import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.business.RecipeActions;
 import com.smartkitchen.objects.Recipe;
 
 import java.util.ArrayList;
 
 public class AddRecipeActivity extends ParentActivity {
+
+    IListActions listActions = new ListActions();
+    IListValidation validation = new ListValidation();
 
     private RecyclerView ingredientsRecView, instructionsRecView;
     private IngredientsRecViewAdapter ingredientsAdapter;
@@ -51,12 +57,12 @@ public class AddRecipeActivity extends ParentActivity {
         ingredientsAdapter = new IngredientsRecViewAdapter(this, true);
         ingredientsRecView.setAdapter(ingredientsAdapter);
         ingredientsRecView.setLayoutManager(new LinearLayoutManager(this));
-        ingredientsAdapter.setItems(ingredients, ingredientQuantities, ingredientUnits, hasIngredient);
+        ingredientsAdapter.setItems(newRecipe, ingredients, ingredientQuantities, ingredientUnits, hasIngredient);
 
         instructionsAdapter = new InstructionRecViewAdapter(this, true);
         instructionsRecView.setAdapter(instructionsAdapter);
         instructionsRecView.setLayoutManager(new LinearLayoutManager(this));
-        instructionsAdapter.setItems(instructions);
+        instructionsAdapter.setItems(newRecipe, instructions);
 
         btnAddIngredient.setOnClickListener(v -> {
             newRecipe.getIngredients().add("");
@@ -64,11 +70,13 @@ public class AddRecipeActivity extends ParentActivity {
             newRecipe.getIngredientUnits().add("");
             //newRecipe.getHasIngredient().add(true);
             ingredientsAdapter.notifyItemInserted(newRecipe.getIngredients().size()-1);
+            EditIngredientPopUp.showDialog(this, newRecipe, newRecipe.getIngredients().size()-1, true, ingredientsAdapter);
         });
 
         btnAddInstruction.setOnClickListener(v -> {
             newRecipe.getInstructions().add("");
             instructionsAdapter.notifyItemInserted(newRecipe.getInstructions().size()-1);
+            EditInstructionPopUp.showDialog(this, newRecipe, newRecipe.getInstructions().size()-1, true, instructionsAdapter);
         });
 
         btnCancel.setOnClickListener(v -> finish());
@@ -77,7 +85,6 @@ public class AddRecipeActivity extends ParentActivity {
             @Override
             public void onClick(View v) {
                 addItem();
-                finish();
             }
         });
     }
@@ -100,7 +107,18 @@ public class AddRecipeActivity extends ParentActivity {
         ArrayList<String> ingredientQuantities = ingredientsAdapter.getIngredientQuantities();
         ArrayList<String> ingredientUnits = ingredientsAdapter.getIngredientUnits();
         ArrayList<String> instructions = instructionsAdapter.getInstructions();
-        Recipe recipe = new Recipe(name, ingredientNames, ingredientQuantities, ingredientUnits, instructions);
-        recipeActions.addToRecipes(recipe);
+        Recipe newRecipe = new Recipe(name, ingredientNames, ingredientQuantities, ingredientUnits, instructions);
+        try {
+            if(listActions.getDuplicateByName(newRecipe, recipeActions.getRecipeList()) == null) {
+                recipeActions.addToRecipes(newRecipe);
+                finish();
+            }
+            else {
+                Toast.makeText(AddRecipeActivity.this, "A Recipe with this name already exists in Inventory.", Toast.LENGTH_SHORT).show();
+            }
+        }
+        catch (InvalidInputException e) {
+            Toast.makeText(AddRecipeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

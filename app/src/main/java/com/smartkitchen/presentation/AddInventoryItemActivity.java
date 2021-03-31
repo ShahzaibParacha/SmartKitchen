@@ -126,17 +126,17 @@ public class AddInventoryItemActivity extends ParentActivity {
     private ArrayList<String> getAllergies(){
         ArrayList<String> allergies = new ArrayList<>();
         if(checkNuts.isChecked())
-            allergies.add(Allergies.NUTS);
+            allergies.add(Allergies.NUTS.getText());
         if(checkSoy.isChecked())
-            allergies.add(Allergies.SOY);
+            allergies.add(Allergies.SOY.getText());
         if(checkLactose.isChecked())
-            allergies.add(Allergies.LACTOSE);
+            allergies.add(Allergies.LACTOSE.getText());
         if(checkGluten.isChecked())
-            allergies.add(Allergies.GLUTEN);
+            allergies.add(Allergies.GLUTEN.getText());
         if(checkFish.isChecked())
-            allergies.add(Allergies.FISH);
+            allergies.add(Allergies.FISH.getText());
         if(checkEgg.isChecked())
-            allergies.add(Allergies.EGGS);
+            allergies.add(Allergies.EGGS.getText());
         return allergies;
     }
 

@@ -9,13 +9,23 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartkitchen.R;
+import com.smartkitchen.business.GroceryActions;
+import com.smartkitchen.business.IGroceryActions;
+import com.smartkitchen.business.IInventoryActions;
+import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.IListValidation;
 import com.smartkitchen.business.IRecipeActions;
+import com.smartkitchen.business.InvalidInputException;
+import com.smartkitchen.business.InventoryActions;
+import com.smartkitchen.business.ListActions;
+import com.smartkitchen.business.ListValidation;
 import com.smartkitchen.business.RecipeActions;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.Recipe;
@@ -24,6 +34,10 @@ import java.util.ArrayList;
 
 public class RecipeRecViewAdapter extends RecyclerView.Adapter<RecipeRecViewAdapter.ViewHolder> {
 
+    private static final IListActions listActions = new ListActions();
+    private static final IInventoryActions inventoryActions = new InventoryActions();
+    private static final IGroceryActions groceryActions = new GroceryActions();
+    private static final IListValidation validation = new ListValidation();
 
     private ArrayList<Recipe> recipes = new ArrayList<>();
     private Context mContext;
@@ -64,6 +78,25 @@ public class RecipeRecViewAdapter extends RecyclerView.Adapter<RecipeRecViewAdap
             mContext.startActivity(intent);
         });
 
+        holder.btnMake.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Recipe recipe = recipes.get(position);
+                make(recipe);
+                Toast.makeText(mContext, "Removed Ingredients From Inventory", Toast.LENGTH_SHORT).show();
+                ((RecipeListActivity)mContext).onResume();
+            }
+        });
+
+        holder.btnAddToGrocery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Recipe recipe = recipes.get(position);
+                addToGrocery(recipe);
+                Toast.makeText(mContext, "Added Missing Ingredients To Grocery List", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         //On Click Listeners to expand/collapse the cardview
         holder.downArrow.setOnClickListener(v -> {
             holder.expandedLayout.setVisibility(View.VISIBLE);
@@ -79,9 +112,11 @@ public class RecipeRecViewAdapter extends RecyclerView.Adapter<RecipeRecViewAdap
 
         if(!recipes.get(position).haveAllIngredients()){
             holder.btnMake.setEnabled(false);
+            holder.btnAddToGrocery.setEnabled(true);
         }
         else{
             holder.btnMake.setEnabled(true);
+            holder.btnAddToGrocery.setEnabled(false);
         }
     }
 
@@ -95,6 +130,45 @@ public class RecipeRecViewAdapter extends RecyclerView.Adapter<RecipeRecViewAdap
         notifyDataSetChanged();
     }
 
+    public void addToGrocery(Recipe recipe) {
+        for (int i = 0; i < recipe.getIngredients().size(); i++) {
+            if (!recipe.getHasIngredient().get(i)) {
+                Item currIngredient = inventoryActions.getItemByName(recipe.getIngredients().get(i));
+                //Take the input and modify item object
+                if (currIngredient == null) {
+                    currIngredient = new Item(recipe.getIngredients().get(i), 0, recipe.getIngredientUnits().get(i),
+                            Integer.parseInt(recipe.getIngredientQuantities().get(i)), 0, new ArrayList<String>(),
+                            0, 0.0);
+                } else {
+                    currIngredient.setQuantityToBuy(Integer.parseInt(recipe.getIngredientQuantities().get(i)));
+                }
+                //If the item is not in the grocery list yet, add it in
+                Item duplicate = listActions.getDuplicateByName(currIngredient, groceryActions.getGroceryList());
+                if (duplicate == null) {
+                    try {
+                        groceryActions.addToGrocery(currIngredient);
+                    } catch (InvalidInputException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else {
+                    duplicate.setQuantityToBuy(duplicate.getQuantityToBuy() + currIngredient.getQuantityToBuy());
+                    groceryActions.updateGroceryItem(duplicate);
+                }
+            }
+        }
+    }
+
+    public void make(Recipe recipe){
+        for(int i = 0; i < recipe.getIngredients().size(); i++){
+            Item currIngredient = inventoryActions.getItemByName(recipe.getIngredients().get(i));
+            currIngredient.setQuantity(currIngredient.getQuantity()-Integer.parseInt(recipe.getIngredientQuantities().get(i)));
+            inventoryActions.updateInventoryItem(currIngredient);
+            if(validation.thresholdStatus(currIngredient)){
+                AlertMessage.showDialog(mContext, currIngredient, false);
+            }
+        }
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private CardView parent;
@@ -102,7 +176,7 @@ public class RecipeRecViewAdapter extends RecyclerView.Adapter<RecipeRecViewAdap
         private TextView isPossible;
         private ImageView upArrow, downArrow;
         private LinearLayout expandedLayout;
-        private Button btnEdit, btnRemove, btnMake;
+        private Button btnEdit, btnRemove, btnMake, btnAddToGrocery;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -120,6 +194,7 @@ public class RecipeRecViewAdapter extends RecyclerView.Adapter<RecipeRecViewAdap
             btnEdit = itemView.findViewById(R.id.btnEditRecipe);
             btnRemove = itemView.findViewById(R.id.btnRemoveRecipe);
             btnMake = itemView.findViewById(R.id.btnMakeRecipe);
+            btnAddToGrocery = itemView.findViewById(R.id.btnAddToGroceryList);
         }
     }
 }

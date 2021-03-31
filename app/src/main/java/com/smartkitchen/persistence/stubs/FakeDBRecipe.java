@@ -1,6 +1,7 @@
-package com.smartkitchen.persistence;
+package com.smartkitchen.persistence.stubs;
 
 import com.smartkitchen.objects.Recipe;
+import com.smartkitchen.persistence.IDBRecipe;
 
 import java.util.ArrayList;
 

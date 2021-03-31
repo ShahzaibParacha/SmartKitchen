@@ -1,13 +1,11 @@
 package com.smartkitchen.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -49,12 +47,12 @@ public class ViewRecipeInfoActivity extends ParentActivity {
         ingredientsRecView.setLayoutManager(new LinearLayoutManager(this));
         System.out.println("Before ingredient set item");
         recipe.setHasIngredient(recipeActions.checkIngredients(recipe));
-        ingredientsAdapter.setItems(recipe.getIngredients(), recipe.getIngredientQuantities(), recipe.getIngredientUnits(), recipe.getHasIngredient());
+        ingredientsAdapter.setItems(recipe, recipe.getIngredients(), recipe.getIngredientQuantities(), recipe.getIngredientUnits(), recipe.getHasIngredient());
 
         instructionsAdapter = new InstructionRecViewAdapter(this, false);
         instructionsRecView.setAdapter(instructionsAdapter);
         instructionsRecView.setLayoutManager(new LinearLayoutManager(this));
-        instructionsAdapter.setItems(recipe.getInstructions());
+        instructionsAdapter.setItems(recipe, recipe.getInstructions());
 
         btnBackToList.setOnClickListener(v -> finish());
     }

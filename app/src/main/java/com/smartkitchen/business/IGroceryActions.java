@@ -25,5 +25,4 @@ public interface IGroceryActions {
 
     void removeFromGrocery(Item item);
 
-    //Item getGroceryItemById(int itemId);
 }

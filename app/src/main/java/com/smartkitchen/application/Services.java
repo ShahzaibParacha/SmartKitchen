@@ -18,7 +18,6 @@ public class Services
     {
         if (groceryPersistence == null)
         {
-            //studentPersistence = new StudentPersistenceStub();
             groceryPersistence = new GroceryPersistenceDB(Initialize.getDBPathName());
         }
 
@@ -29,7 +28,6 @@ public class Services
     {
         if (inventoryPersistence == null)
         {
-            //studentPersistence = new StudentPersistenceStub();
             inventoryPersistence = new InventoryPersistenceDB(Initialize.getDBPathName());
         }
 

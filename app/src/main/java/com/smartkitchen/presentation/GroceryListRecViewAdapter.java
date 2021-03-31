@@ -2,7 +2,6 @@ package com.smartkitchen.presentation;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,26 +90,16 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
 
         //On Click Listeners to expand/collapse the cardview
         holder.downArrow.setOnClickListener(v -> {
-            items.get(position).setGroceryIsExpanded(true);
-            notifyItemChanged(position);
-        });
-
-        holder.upArrow.setOnClickListener(v -> {
-            items.get(position).setGroceryIsExpanded(false);
-            notifyItemChanged(position);
-        });
-
-        //Set up expanded/collapsed view
-        if(items.get(position).groceryIsExpanded()){
             holder.expandedLayout.setVisibility(View.VISIBLE);
             holder.downArrow.setVisibility(View.GONE);
             holder.upArrow.setVisibility(View.VISIBLE);
-        }
-        else{
+        });
+
+        holder.upArrow.setOnClickListener(v -> {
             holder.expandedLayout.setVisibility(View.GONE);
             holder.downArrow.setVisibility(View.VISIBLE);
             holder.upArrow.setVisibility(View.GONE);
-        }
+        });
     }
 
     //Returns size of the list
