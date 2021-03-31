@@ -52,18 +52,12 @@ public class ItemTest{
         testItem.setAllergies(testAllergies2);
         testItem.setCaloriesPerUnit(2);
         testItem.setPricePerUnit(2);
-        testItem.setInvIsExpanded(false);
-        testItem.setGroceryIsExpanded(false);
 
         assertEquals(testItem.getAllergies(), testAllergies2);
         assertEquals(testItem.getCaloriesPerUnit(), 2);
         assertTrue(testItem.getPricePerUnit() == 2);
-        assertFalse(testItem.invIsExpanded());
-        assertFalse(testItem.groceryIsExpanded());
-
 
         System.out.println("Finished testItemConstructor2.");
-
     }
 
     @Test 

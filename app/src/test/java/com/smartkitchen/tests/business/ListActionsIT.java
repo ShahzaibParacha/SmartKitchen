@@ -123,18 +123,6 @@ public class ListActionsIT{
         System.out.println("Finished getListTest");
     }
 
-    /*
-    @Test
-    public void getItemByIdTest(){
-        System.out.println("\nStarting getItemByIdTest");
-
-        assertEquals(testTarget.getGroceryItemById(1).getName(),"Sugar");
-        assertEquals(testTarget.getInventoryItemById(4).getName(), "Butter");
-
-        System.out.println("Finished getItemByIdTest");
-    }
-     */
-
     @Test
     public void buyItemTest(){
         ListActions testmp = new ListActions();
