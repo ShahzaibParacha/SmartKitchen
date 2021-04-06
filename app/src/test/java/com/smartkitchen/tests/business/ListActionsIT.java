@@ -12,6 +12,7 @@ import com.smartkitchen.business.GroceryActions;
 import com.smartkitchen.business.InventoryActions;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Item;
+import com.smartkitchen.objects.Recipe;
 import com.smartkitchen.persistence.hsqldb.GroceryPersistenceDB;
 import com.smartkitchen.persistence.hsqldb.InventoryPersistenceDB;
 import com.smartkitchen.tests.utils.TestUtils;
@@ -101,7 +102,65 @@ public class ListActionsIT{
             System.out.println(e.getMessage());
         }
 
+        String TEST_NAME = "testName";
+        ArrayList<String> TEST_INGREDIENTS = new ArrayList<String>();
+        ArrayList<String> TEST_INGREDIENT_QUANT = new ArrayList<String>();
+        ArrayList<String> TEST_INGREDIENT_UNITS = new ArrayList<String>();
+        ArrayList<String> TEST_INSTRUCTIONS = new ArrayList<String>();
+        ArrayList<Boolean> TEST_HAS_INGREDIENT = new ArrayList<Boolean>();
+
+        TEST_INGREDIENTS.add("test1");
+        TEST_INGREDIENT_QUANT.add("1");
+        TEST_INGREDIENT_UNITS.add("testUnits");
+        TEST_INSTRUCTIONS.add("testInstruction");
+        TEST_HAS_INGREDIENT.add(true);
+
+        Recipe testRecipe = new Recipe(TEST_NAME, TEST_INGREDIENTS, TEST_INGREDIENT_QUANT, TEST_INGREDIENT_UNITS, TEST_INSTRUCTIONS);
+        Recipe testRecipe2 = new Recipe("", TEST_INGREDIENTS, TEST_INGREDIENT_QUANT, TEST_INGREDIENT_UNITS, TEST_INSTRUCTIONS);
+
+        try{
+            listTestTarget.editValidation(testRecipe);
+            listTestTarget.editValidation(testRecipe2);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            listTestTarget.editValidation(testRecipe2);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
         System.out.print("Finished editValidationTest");
+
+        System.out.print("Finished editValidationTest");
+    }
+
+    @Test
+    public void getDuplicateByNameTest(){
+        System.out.println("\nStarting getDuplicateByNameTest");
+
+        String TEST_NAME = "testName";
+        ArrayList<String> TEST_INGREDIENTS = new ArrayList<String>();
+        ArrayList<String> TEST_INGREDIENT_QUANT = new ArrayList<String>();
+        ArrayList<String> TEST_INGREDIENT_UNITS = new ArrayList<String>();
+        ArrayList<String> TEST_INSTRUCTIONS = new ArrayList<String>();
+        ArrayList<Boolean> TEST_HAS_INGREDIENT = new ArrayList<Boolean>();
+
+        TEST_INGREDIENTS.add("test1");
+        TEST_INGREDIENT_QUANT.add("1");
+        TEST_INGREDIENT_UNITS.add("testUnits");
+        TEST_INSTRUCTIONS.add("testInstruction");
+        TEST_HAS_INGREDIENT.add(true);
+
+        Recipe testRecipe = new Recipe(TEST_NAME, TEST_INGREDIENTS, TEST_INGREDIENT_QUANT, TEST_INGREDIENT_UNITS, TEST_INSTRUCTIONS);
+
+        ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
+        recipeList.add(testRecipe);
+
+        assertEquals(listTestTarget.getDuplicateByName(testRecipe, recipeList), testRecipe);
+
+        System.out.println("Send getDuplicateByNameTest");
     }
 
     @Test

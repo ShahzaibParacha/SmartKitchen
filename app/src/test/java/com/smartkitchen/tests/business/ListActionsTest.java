@@ -8,6 +8,7 @@ import com.smartkitchen.business.GroceryActions;
 import com.smartkitchen.business.InventoryActions;
 import com.smartkitchen.business.ListActions;
 import com.smartkitchen.objects.Item;
+import com.smartkitchen.objects.Recipe;
 import com.smartkitchen.persistence.stubs.FakeDBGrocery;
 import com.smartkitchen.persistence.stubs.FakeDBInventory;
 
@@ -91,7 +92,63 @@ public class ListActionsTest {
             System.out.println(e.getMessage());
         }
 
+        String TEST_NAME = "testName";
+        ArrayList<String> TEST_INGREDIENTS = new ArrayList<String>();
+        ArrayList<String> TEST_INGREDIENT_QUANT = new ArrayList<String>();
+        ArrayList<String> TEST_INGREDIENT_UNITS = new ArrayList<String>();
+        ArrayList<String> TEST_INSTRUCTIONS = new ArrayList<String>();
+        ArrayList<Boolean> TEST_HAS_INGREDIENT = new ArrayList<Boolean>();
+
+        TEST_INGREDIENTS.add("test1");
+        TEST_INGREDIENT_QUANT.add("1");
+        TEST_INGREDIENT_UNITS.add("testUnits");
+        TEST_INSTRUCTIONS.add("testInstruction");
+        TEST_HAS_INGREDIENT.add(true);
+
+        Recipe testRecipe = new Recipe(TEST_NAME, TEST_INGREDIENTS, TEST_INGREDIENT_QUANT, TEST_INGREDIENT_UNITS, TEST_INSTRUCTIONS);
+        Recipe testRecipe2 = new Recipe("", TEST_INGREDIENTS, TEST_INGREDIENT_QUANT, TEST_INGREDIENT_UNITS, TEST_INSTRUCTIONS);
+
+        try{
+            listActions.editValidation(testRecipe);
+            listActions.editValidation(testRecipe2);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            listActions.editValidation(testRecipe2);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
         System.out.print("Finished editValidationTest");
+    }
+
+    @Test
+    public void getDuplicateByNameTest(){
+        System.out.println("\nStarting getDuplicateByNameTest");
+
+        String TEST_NAME = "testName";
+        ArrayList<String> TEST_INGREDIENTS = new ArrayList<String>();
+        ArrayList<String> TEST_INGREDIENT_QUANT = new ArrayList<String>();
+        ArrayList<String> TEST_INGREDIENT_UNITS = new ArrayList<String>();
+        ArrayList<String> TEST_INSTRUCTIONS = new ArrayList<String>();
+        ArrayList<Boolean> TEST_HAS_INGREDIENT = new ArrayList<Boolean>();
+
+        TEST_INGREDIENTS.add("test1");
+        TEST_INGREDIENT_QUANT.add("1");
+        TEST_INGREDIENT_UNITS.add("testUnits");
+        TEST_INSTRUCTIONS.add("testInstruction");
+        TEST_HAS_INGREDIENT.add(true);
+
+        Recipe testRecipe = new Recipe(TEST_NAME, TEST_INGREDIENTS, TEST_INGREDIENT_QUANT, TEST_INGREDIENT_UNITS, TEST_INSTRUCTIONS);
+
+        ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
+        recipeList.add(testRecipe);
+
+        assertEquals(listActions.getDuplicateByName(testRecipe, recipeList), testRecipe);
+
+        System.out.println("Send getDuplicateByNameTest");
     }
 
     @Test
@@ -112,28 +169,6 @@ public class ListActionsTest {
 
         System.out.println("Finished getListTest");
     }
-
-    /*
-    @Test
-    public void getItemByIdTest(){
-        System.out.println("\nStarting getItemByIdTest");
-
-        ArrayList<String> testAllergies = new ArrayList<String>();
-        testAllergies.add("testAllergy");
-        Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 1);
-        testItem.setId(1);
-
-        try {
-            groceryActions.addToGrocery(testItem);
-            inventoryActions.addToInventory(testItem);
-        }catch(Exception e){System.out.println(e.getMessage());}
-
-        assertEquals(groceryActions.getGroceryItemById(1), null);
-        assertEquals(inventoryActions.getInventoryItemById(1), null);
-
-        System.out.println("Finished getItemByIdTest");
-    }
-     */
 
     @Test
     public void buyItemTest(){
