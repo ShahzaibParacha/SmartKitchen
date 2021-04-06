@@ -1,7 +1,10 @@
 package com.smartkitchen.application;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
+
 import com.smartkitchen.R;
 import com.smartkitchen.persistence.utils.DBCopier;
 import com.smartkitchen.presentation.inventory.CurrentInventoryActivity;

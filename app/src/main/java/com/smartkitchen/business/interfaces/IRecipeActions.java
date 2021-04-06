@@ -5,13 +5,12 @@ import com.smartkitchen.objects.Recipe;
 
 import java.util.ArrayList;
 
+//Interface to recipe methods
 public interface IRecipeActions {
 
     void addToRecipes(Recipe recipe) throws InvalidInputException;
 
     void updateRecipe(Recipe recipe);
-
-    Recipe getRecipe(int position);
 
     ArrayList<Recipe> getRecipeList();
 

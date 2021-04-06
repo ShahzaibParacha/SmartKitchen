@@ -1,14 +1,12 @@
 package com.smartkitchen.business.interfaces;
 
-import android.content.Context;
-
 import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.Recipe;
-import com.smartkitchen.persistence.DBManager;
 
 import java.util.ArrayList;
 
+//Interface to generic list methods
 public interface IListActions {
 
     void editValidation(Item item) throws InvalidInputException;

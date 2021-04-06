@@ -4,6 +4,7 @@ import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.Recipe;
 
+//Interface to validation methods
 public interface IListValidation {
 
     boolean thresholdStatus(Item item);

@@ -2,10 +2,9 @@ package com.smartkitchen.application;
 
 //Class to initialize the path for the database
 public class Initialize {
-    private static String dbName="SC";
+    private static String dbName = "SC";
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         System.out.println("All done");
     }
 

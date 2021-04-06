@@ -5,6 +5,7 @@ import com.smartkitchen.objects.Item;
 
 import java.util.ArrayList;
 
+//Interface to inventory methods
 public interface IInventoryActions {
 
     void addToInventory(Item item) throws InvalidInputException;
