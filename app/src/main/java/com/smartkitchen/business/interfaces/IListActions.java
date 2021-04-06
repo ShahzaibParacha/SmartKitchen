@@ -19,4 +19,8 @@ public interface IListActions {
 
     boolean isInList(ArrayList<String> list, String s);
 
+    ArrayList<String> stringToList(String string);
+
+    String listToString(ArrayList<String> list);
+
 }

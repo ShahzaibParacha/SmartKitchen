@@ -8,38 +8,35 @@ import com.smartkitchen.persistence.IDBInventory;
 
 import java.util.ArrayList;
 
+//Fake DB implementation of the inventory Database, used for testing purposes
 public class FakeDBInventory implements IDBInventory {
 
-    private ArrayList<Item> inventoryList;
-    private IListValidation validation;
+    private final ArrayList<Item> inventoryList;
+    private final IListValidation validation;
 
     // Constructor instantiating grocery list
-    public FakeDBInventory(){
+    public FakeDBInventory() {
         this.inventoryList = new ArrayList<>();
         this.validation = new ListValidation();
     }
 
-    // Overriding the methods provided by the interface (parent class)
-
-    // Method instantiates validation object and checks whether the items contains proper parameters
+    // Method validates input and checks whether the item contains proper parameters
     // If proper parameters are in place, add item to the grocery list
     @Override
     public void addToInventory(Item item) {
         try {
             validation.containsItemInputs(item);
             inventoryList.add(item);
-        }
-        catch (InvalidInputException e) {
-            // this is where UI can pop a new layer which notifies user of error input
+        } catch (InvalidInputException e) {
+            // this is where UI can display a toast message with a warning for the user
             System.out.println(e.getMessage());
         }
     }
 
-    // Method removes specified item from grocery list
+    // Method removes specified item from inventory
     @Override
-    public Item removeFromInventory(Item item) {
+    public void removeFromInventory(Item item) {
         inventoryList.remove(item);
-        return item;
     }
 
     @Override
@@ -53,8 +50,4 @@ public class FakeDBInventory implements IDBInventory {
         return inventoryList;
     }
 
-//    @Override
-//    public Item getInventoryItemById(int itemId) {
-//        return null;
-//    }
 }

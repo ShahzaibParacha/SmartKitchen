@@ -7,6 +7,7 @@ import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.Recipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 //Generic functions used for all lists
 public class ListActions implements IListActions {
@@ -62,5 +63,29 @@ public class ListActions implements IListActions {
             }
         }
         return inList;
+    }
+
+    //Converts a string to an array list, separates by commas
+    @Override
+    public ArrayList<String> stringToList(String string) {
+        ArrayList<String> list = new ArrayList<>();
+        if (!string.equals("")) {
+            String[] parsedString = string.split(",");
+            list.addAll(Arrays.asList(parsedString));
+        }
+        return list;
+    }
+
+    //Converts an array list to a string
+    @Override
+    public String listToString(ArrayList<String> list) {
+        StringBuilder string = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            if (i < list.size() - 1)
+                string.append(list.get(i)).append(",");
+            else
+                string.append(list.get(i));
+        }
+        return string.toString();
     }
 }
