@@ -3,6 +3,7 @@ package com.smartkitchen.business;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.Recipe;
 import com.smartkitchen.persistence.DBManager;
+import com.smartkitchen.persistence.IDBInventory;
 import com.smartkitchen.persistence.IDBRecipe;
 
 import java.util.ArrayList;
@@ -17,6 +18,12 @@ public class RecipeActions implements IRecipeActions{
 
     public RecipeActions(IDBRecipe recipeDB){
         this.recipeDB = recipeDB;
+    }
+
+    // special constructor to test check ingredients logic
+    public RecipeActions(IDBRecipe recipeDB, IDBInventory inventorydb){
+        this.recipeDB = recipeDB;
+        this.inventoryActions = new InventoryActions(inventorydb);
     }
 
     @Override
