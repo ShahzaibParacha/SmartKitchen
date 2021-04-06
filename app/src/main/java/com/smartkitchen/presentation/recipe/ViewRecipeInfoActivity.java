@@ -14,6 +14,8 @@ import com.smartkitchen.business.interfaces.IRecipeActions;
 import com.smartkitchen.business.implementation.RecipeActions;
 import com.smartkitchen.objects.Recipe;
 import com.smartkitchen.presentation.ParentActivity;
+import com.smartkitchen.presentation.recipe.ingredient.IngredientsRecViewAdapter;
+import com.smartkitchen.presentation.recipe.instruction.InstructionRecViewAdapter;
 
 public class ViewRecipeInfoActivity extends ParentActivity {
 
