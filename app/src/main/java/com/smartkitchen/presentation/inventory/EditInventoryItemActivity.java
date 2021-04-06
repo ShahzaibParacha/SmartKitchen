@@ -10,31 +10,38 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.smartkitchen.business.implementation.AllergyActions;
 import com.smartkitchen.business.implementation.GroceryActions;
+import com.smartkitchen.business.interfaces.IAllergyActions;
 import com.smartkitchen.business.interfaces.IGroceryActions;
 import com.smartkitchen.business.interfaces.IInventoryActions;
 import com.smartkitchen.business.interfaces.IListActions;
 import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.business.implementation.InventoryActions;
 import com.smartkitchen.business.implementation.ListActions;
-import com.smartkitchen.objects.Allergies;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
 import com.smartkitchen.presentation.ParentActivity;
 
 import java.util.ArrayList;
 
+//Screen for editing an item in the inventory
 public class EditInventoryItemActivity extends ParentActivity {
 
+    //Access to relevant business layer methods
     IListActions listActions = new ListActions();
     IInventoryActions inventoryActions = new InventoryActions();
     IGroceryActions groceryActions = new GroceryActions();
+    IAllergyActions allergyActions;
+
+    //String used for getting the item passed in to the screen
     public static final String POSITION_KEY = "position";
 
     //Fields for user input
     private EditText editName, editQuantity, editUnits, editThreshold, editPrice, editCalories;
     private TextView title;
-    private CheckBox checkLactose, checkGluten, checkNuts, checkFish, checkEgg, checkSoy;
+    //Checkboxes for allergy information
+    private CheckBox checkLactose, checkGluten, checkNuts, checkFish, checkEggs, checkSoy;
     //Buttons to cancel edit screen and submit changes
     private Button btnCancel, btnSubmit;
 
@@ -44,17 +51,18 @@ public class EditInventoryItemActivity extends ParentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_inventory_item);
 
-
         //Gets the item that has been selected to be edited
         Intent intent = getIntent();
         int itemPosition = intent.getIntExtra(POSITION_KEY, -1);
         Item item = inventoryActions.getInventoryItem(itemPosition);
 
+        //Sets the text and colour of the taskbar
         setTitle("Edit " + item.getName());
         setColour(ContextCompat.getColor(this, R.color.blueColour3));
 
         //Initializes the UI elements
         initViews();
+        allergyActions = new AllergyActions(checkNuts, checkSoy, checkLactose, checkGluten, checkFish, checkEggs);
         setData(item);
 
         title.setText("Edit " + item.getName());
@@ -88,7 +96,7 @@ public class EditInventoryItemActivity extends ParentActivity {
         editThreshold.setText("" + item.getThresholdQuantity());
         editPrice.setText("" + item.getPricePerUnit());
         editCalories.setText("" + item.getCaloriesPerUnit());
-        setAllergies(item);
+        allergyActions.setAllergies(item);
     }
 
     //Updates the information in the item
@@ -108,7 +116,7 @@ public class EditInventoryItemActivity extends ParentActivity {
             item.setCaloriesPerUnit(Integer.parseInt(editCalories.getText().toString()));
         else
             item.setCaloriesPerUnit(0);
-        item.setAllergies(getAllergies());
+        item.setAllergies(allergyActions.getAllergies());
         inventoryActions.updateInventoryItem(item);
     }
 
@@ -129,45 +137,9 @@ public class EditInventoryItemActivity extends ParentActivity {
         int checkCalories = 0;
         if(!editCalories.getText().toString().equals(""))
             checkCalories = Integer.parseInt(editCalories.getText().toString());
-        Item checkItem = new Item(checkName, checkQuantity, checkUnit,
+        return new Item(checkName, checkQuantity, checkUnit,
                 item.getQuantityToBuy(), checkThreshold,
                 item.getAllergies(), checkCalories, checkPrice);
-        return checkItem;
-    }
-
-    private void setAllergies(Item item){
-        ArrayList<String> allergies = item.getAllergies();
-        if(allergies != null) {
-            if (listActions.isInList(allergies, Allergies.NUTS.getText()))
-                checkNuts.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.SOY.getText()))
-                checkSoy.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.LACTOSE.getText()))
-                checkLactose.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.GLUTEN.getText()))
-                checkGluten.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.FISH.getText()))
-                checkFish.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.EGGS.getText()))
-                checkEgg.setChecked(true);
-        }
-    }
-
-    private ArrayList<String> getAllergies(){
-        ArrayList<String> allergies = new ArrayList<>();
-        if(checkNuts.isChecked())
-            allergies.add(Allergies.NUTS.getText());
-        if(checkSoy.isChecked())
-            allergies.add(Allergies.SOY.getText());
-        if(checkLactose.isChecked())
-            allergies.add(Allergies.LACTOSE.getText());
-        if(checkGluten.isChecked())
-            allergies.add(Allergies.GLUTEN.getText());
-        if(checkFish.isChecked())
-            allergies.add(Allergies.FISH.getText());
-        if(checkEgg.isChecked())
-            allergies.add(Allergies.EGGS.getText());
-        return allergies;
     }
 
     //Initializes the views
@@ -184,7 +156,7 @@ public class EditInventoryItemActivity extends ParentActivity {
         btnCancel = findViewById(R.id.btnInvEditCancel);
         btnSubmit = findViewById(R.id.btnEditInvSubmit);
 
-        checkEgg = findViewById(R.id.checkInvEggs);
+        checkEggs = findViewById(R.id.checkInvEggs);
         checkFish = findViewById(R.id.checkInvFish);
         checkGluten = findViewById(R.id.checkInvGluten);
         checkLactose = findViewById(R.id.checkInvLactose);

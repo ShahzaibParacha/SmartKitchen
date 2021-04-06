@@ -1,4 +1,4 @@
-package com.smartkitchen.presentation.recipe;
+package com.smartkitchen.presentation.recipe.instruction;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,6 +16,7 @@ import com.smartkitchen.objects.Recipe;
 
 import java.util.ArrayList;
 
+//Adapter for displaying the instruction list
 public class InstructionRecViewAdapter extends RecyclerView.Adapter<InstructionRecViewAdapter.ViewHolder> {
 
     ArrayList<String> instructions = new ArrayList<>();
@@ -24,69 +25,73 @@ public class InstructionRecViewAdapter extends RecyclerView.Adapter<InstructionR
     Recipe recipe;
     InstructionRecViewAdapter adapter = this;
 
-    public InstructionRecViewAdapter(Context mContext, boolean isEditable){
+    //Constructor
+    public InstructionRecViewAdapter(Context mContext, boolean isEditable) {
         this.mContext = mContext;
         this.isEditable = isEditable;
     }
 
+    //Creates the list view
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //Passes in the instruction card view as the item to be placed in the list
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.instruction_list_item, parent, false);
         return new ViewHolder(view);
     }
 
+    //Sets the information inside the holder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.numberLabel1.setText("" + (position+1) + ".");
-        holder.numberLabel2.setText("" + (position+1) + ".");
+        holder.numberLabel1.setText("" + (position + 1) + ".");
+        holder.numberLabel2.setText("" + (position + 1) + ".");
         holder.instruction.setText(instructions.get(position));
         holder.edtInstruction.setText(instructions.get(position));
 
-        if(isEditable){
+        //Determines if the editable or noneditable version should be displayed
+        if (isEditable) {
             holder.editable.setVisibility(View.VISIBLE);
             holder.notEditable.setVisibility(View.GONE);
-        }
-        else{
+        } else {
             holder.editable.setVisibility(View.GONE);
             holder.notEditable.setVisibility(View.VISIBLE);
         }
 
+        //Removes an instruction from the list
         holder.btnRemove.setOnClickListener(v -> {
             instructions.remove(instructions.get(position));
             notifyItemRemoved(position);
             notifyDataSetChanged();
         });
 
-        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditInstructionPopUp.showDialog(mContext, recipe, position, false, adapter);
-            }
-        });
+        //Calls the popup to take user input
+        holder.btnEdit.setOnClickListener(v -> EditInstructionPopUp.showDialog(mContext, recipe, position, false, adapter));
     }
 
+    //Returns the size of the list
     @Override
     public int getItemCount() {
         return instructions.size();
     }
 
-    public void setItems(Recipe recipe, ArrayList<String> instructions){
+    //Pass in the input list
+    public void setItems(Recipe recipe, ArrayList<String> instructions) {
         this.recipe = recipe;
         this.instructions = instructions;
     }
 
-    public ArrayList<String> getInstructions(){
+    //Get the instruction list
+    public ArrayList<String> getInstructions() {
         return instructions;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView instruction, numberLabel1, numberLabel2;
-        private TextView edtInstruction;
-        private LinearLayout editable, notEditable;
-        private Button btnRemove, btnEdit;
+        private final TextView instruction, numberLabel1, numberLabel2;
+        private final TextView edtInstruction;
+        private final LinearLayout editable, notEditable;
+        private final Button btnRemove, btnEdit;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

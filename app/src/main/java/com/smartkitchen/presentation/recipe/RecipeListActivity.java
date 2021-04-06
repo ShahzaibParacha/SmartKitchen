@@ -16,33 +16,39 @@ import com.smartkitchen.presentation.ParentActivity;
 
 import java.util.ArrayList;
 
+//Main screen for viewing all the recipes
 public class RecipeListActivity extends ParentActivity {
 
-    private RecyclerView recipesRecView;
+    //Adapter for the recipes list
     private RecipeRecViewAdapter adapter;
-
-    private FloatingActionButton btnAdd;
-    private IRecipeActions recipeActions = new RecipeActions();
+    //Access to relevant business layer methods
+    private final IRecipeActions recipeActions = new RecipeActions();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list);
+
+        //Set text and colour for the taskbar
         setTitle("Recipes");
         setColour(ContextCompat.getColor(this, R.color.redColour3));
 
+        //Refresh the availability information of the recipes list
         ArrayList<Recipe> recipes = recipeActions.getRecipeList();
         recipeActions.refreshAvailability(recipes);
 
+        //Set up the list and button
         adapter = new RecipeRecViewAdapter(this);
-        recipesRecView = findViewById(R.id.recipesRecView);
-        btnAdd = findViewById(R.id.btnGoToAddRecipeActivity);
+        RecyclerView recipesRecView = findViewById(R.id.recipesRecView);
+        FloatingActionButton btnAdd = findViewById(R.id.btnGoToAddRecipeActivity);
 
+        //Navigate to add screen
         btnAdd.setOnClickListener(v -> {
             Intent intent = new Intent(RecipeListActivity.this, AddRecipeActivity.class);
             startActivity(intent);
         });
 
+        //Set up the list adapter
         recipesRecView.setAdapter(adapter);
         recipesRecView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -50,6 +56,7 @@ public class RecipeListActivity extends ParentActivity {
 
     }
 
+    //Refreshes the page
     @Override
     protected void onResume() {
         super.onResume();

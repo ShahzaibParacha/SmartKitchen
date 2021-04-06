@@ -11,70 +11,83 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.smartkitchen.R;
+import com.smartkitchen.business.implementation.AllergyActions;
 import com.smartkitchen.business.implementation.GroceryActions;
+import com.smartkitchen.business.interfaces.IAllergyActions;
 import com.smartkitchen.business.interfaces.IGroceryActions;
 import com.smartkitchen.business.interfaces.IInventoryActions;
-import com.smartkitchen.business.interfaces.IListActions;
 import com.smartkitchen.business.implementation.InventoryActions;
-import com.smartkitchen.business.implementation.ListActions;
-import com.smartkitchen.objects.Allergies;
 import com.smartkitchen.objects.Item;
 
-import java.util.ArrayList;
-
+//Screen for viewing information of inventory or grocery list items
 public class ViewInformationActivity extends ParentActivity {
 
+    //Access to relevant business layer methods
     IInventoryActions inventoryActions = new InventoryActions();
     IGroceryActions groceryActions = new GroceryActions();
+    IAllergyActions allergyActions;
 
-    IListActions listActions = new ListActions();
+    //Views to display item information
     private ConstraintLayout background;
     private CardView cardView;
     private TextView title;
     private TextView txtName, txtQuantity, txtQuantityToBuy, txtUnits, txtThreshold, txtPrice, txtCalories;
     private CheckBox checkEgg, checkFish, checkGluten, checkLactose, checkSoy, checkNuts;
     private Button btnBackToList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_information);
 
+        //Initializes the views
         initViews();
+        allergyActions = new AllergyActions(checkNuts, checkSoy, checkLactose, checkGluten, checkFish, checkEgg);
+
+        //Gets the item to be displayed
         Intent intent = getIntent();
         String origin = intent.getStringExtra("Origin");
         int itemPosition = intent.getIntExtra("Position", -1);
+
+        //Gets the item from correct list and sets the relevant colour
         Item item = null;
-        if(origin.equals("Inventory")) {
+        if (origin.equals("Inventory")) {
             item = inventoryActions.getInventoryItem(itemPosition);
             setColourBlue();
-        }
-        else if(origin.equals("Grocery")) {
+        } else if (origin.equals("Grocery")) {
             item = groceryActions.getGroceryItem(itemPosition);
-            setColourRed();
+            setColourGreen();
         }
 
+        //Sets the title of the taskbar and screen
         setTitle("View " + item.getName() + " Information");
         title.setText("View " + item.getName() + " Information");
+
+        //Sets the data to be displayed
         setData(item);
 
+        //Navigation back to list screen
         btnBackToList.setOnClickListener(v -> supportFinishAfterTransition());
     }
 
-    private void setColourBlue(){
+    //Sets the colour scheme to blue when in inventory
+    private void setColourBlue() {
         setColour(ContextCompat.getColor(this, R.color.blueColour3));
         btnBackToList.setBackgroundColor(ContextCompat.getColor(this, R.color.blueColour3));
         background.setBackgroundColor(ContextCompat.getColor(this, R.color.blueColour1));
         cardView.setCardBackgroundColor(ContextCompat.getColor(this, R.color.blueColour2));
     }
 
-    private void setColourRed(){
+    //Sets the colour scheme to green when in grocery
+    private void setColourGreen() {
         setColour(ContextCompat.getColor(this, R.color.greenColour3));
         btnBackToList.setBackgroundColor(ContextCompat.getColor(this, R.color.greenColour3));
         background.setBackgroundColor(ContextCompat.getColor(this, R.color.greenColour1));
         cardView.setCardBackgroundColor(ContextCompat.getColor(this, R.color.greenColour2));
     }
 
-    private void setData(Item item){
+    //Sets the data to be displayed
+    private void setData(Item item) {
         txtName.setText(item.getName());
         txtQuantity.setText("" + item.getQuantity() + " " + item.getUnits());
         txtQuantityToBuy.setText("" + item.getQuantityToBuy() + " " + item.getUnits());
@@ -82,29 +95,11 @@ public class ViewInformationActivity extends ParentActivity {
         txtThreshold.setText("" + item.getThresholdQuantity());
         txtPrice.setText("" + item.getPricePerUnit() + "/" + item.getUnits());
         txtCalories.setText("" + item.getCaloriesPerUnit());
-        setAllergies(item);
-    }
-
-    private void setAllergies(Item item){
-        ArrayList<String> allergies = item.getAllergies();
-        if(allergies != null) {
-            if (listActions.isInList(allergies, Allergies.NUTS.getText()))
-                checkNuts.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.SOY.getText()))
-                checkSoy.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.LACTOSE.getText()))
-                checkLactose.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.GLUTEN.getText()))
-                checkGluten.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.FISH.getText()))
-                checkFish.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.EGGS.getText()))
-                checkEgg.setChecked(true);
-        }
+        allergyActions.setAllergies(item);
     }
 
     //Initializes the views
-    private void initViews(){
+    private void initViews() {
         background = findViewById(R.id.background);
         cardView = findViewById(R.id.infoCardView);
 
