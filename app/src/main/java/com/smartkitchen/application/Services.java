@@ -7,13 +7,14 @@ import com.smartkitchen.persistence.IDBInventory;
 import com.smartkitchen.persistence.hsqldb.InventoryPersistenceDB;
 import com.smartkitchen.persistence.hsqldb.RecipePersistenceDB;
 
-
+//Class to initialize the database
 public class Services
 {
     private static IDBGrocery groceryPersistence = null;
     private static IDBInventory inventoryPersistence = null;
     private static IDBRecipe recipePersistence = null;
 
+    //Each method returns the database, if it hasn't been created then initialize it first
     public static synchronized IDBGrocery getGroceryPersistence()
     {
         if (groceryPersistence == null)

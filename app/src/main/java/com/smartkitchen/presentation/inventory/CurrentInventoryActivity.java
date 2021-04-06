@@ -1,4 +1,4 @@
-package com.smartkitchen.presentation;
+package com.smartkitchen.presentation.inventory;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,8 +9,9 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartkitchen.R;
-import com.smartkitchen.business.IInventoryActions;
-import com.smartkitchen.business.InventoryActions;
+import com.smartkitchen.business.interfaces.IInventoryActions;
+import com.smartkitchen.business.implementation.InventoryActions;
+import com.smartkitchen.presentation.ParentActivity;
 
 public class CurrentInventoryActivity extends ParentActivity {
 

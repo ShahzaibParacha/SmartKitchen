@@ -1,7 +1,8 @@
-package com.smartkitchen.business;
+package com.smartkitchen.business.interfaces;
 
 import android.content.Context;
 
+import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.objects.Item;
 
 import java.util.ArrayList;

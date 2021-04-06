@@ -12,7 +12,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.smartkitchen.R;
-import com.smartkitchen.objects.Recipe;
+import com.smartkitchen.presentation.grocery.GroceryListActivity;
+import com.smartkitchen.presentation.inventory.CurrentInventoryActivity;
+import com.smartkitchen.presentation.recipe.RecipeListActivity;
 
 public class ParentActivity extends AppCompatActivity {
 

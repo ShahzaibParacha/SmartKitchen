@@ -1,4 +1,4 @@
-package com.smartkitchen.presentation;
+package com.smartkitchen.presentation.recipe;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,19 +16,20 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartkitchen.R;
-import com.smartkitchen.business.GroceryActions;
-import com.smartkitchen.business.IGroceryActions;
-import com.smartkitchen.business.IInventoryActions;
-import com.smartkitchen.business.IListActions;
-import com.smartkitchen.business.IListValidation;
-import com.smartkitchen.business.IRecipeActions;
+import com.smartkitchen.business.implementation.GroceryActions;
+import com.smartkitchen.business.interfaces.IGroceryActions;
+import com.smartkitchen.business.interfaces.IInventoryActions;
+import com.smartkitchen.business.interfaces.IListActions;
+import com.smartkitchen.business.interfaces.IListValidation;
+import com.smartkitchen.business.interfaces.IRecipeActions;
 import com.smartkitchen.business.InvalidInputException;
-import com.smartkitchen.business.InventoryActions;
-import com.smartkitchen.business.ListActions;
-import com.smartkitchen.business.ListValidation;
-import com.smartkitchen.business.RecipeActions;
+import com.smartkitchen.business.implementation.InventoryActions;
+import com.smartkitchen.business.implementation.ListActions;
+import com.smartkitchen.business.implementation.ListValidation;
+import com.smartkitchen.business.implementation.RecipeActions;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.Recipe;
+import com.smartkitchen.presentation.AlertMessage;
 
 import java.util.ArrayList;
 

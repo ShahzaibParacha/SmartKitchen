@@ -1,4 +1,4 @@
-package com.smartkitchen.presentation;
+package com.smartkitchen.presentation.grocery;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,10 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartkitchen.R;
-import com.smartkitchen.business.GroceryActions;
-import com.smartkitchen.business.IGroceryActions;
+import com.smartkitchen.business.implementation.GroceryActions;
+import com.smartkitchen.business.interfaces.IGroceryActions;
 import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.objects.Item;
+import com.smartkitchen.presentation.ParentActivity;
 
 import java.util.ArrayList;
 

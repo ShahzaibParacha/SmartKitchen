@@ -1,4 +1,4 @@
-package com.smartkitchen.presentation;
+package com.smartkitchen.presentation.recipe;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,12 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smartkitchen.R;
-import com.smartkitchen.business.IListActions;
-import com.smartkitchen.business.IRecipeActions;
+import com.smartkitchen.business.interfaces.IListActions;
+import com.smartkitchen.business.interfaces.IRecipeActions;
 import com.smartkitchen.business.InvalidInputException;
-import com.smartkitchen.business.ListActions;
-import com.smartkitchen.business.RecipeActions;
+import com.smartkitchen.business.implementation.ListActions;
+import com.smartkitchen.business.implementation.RecipeActions;
 import com.smartkitchen.objects.Recipe;
+import com.smartkitchen.presentation.ParentActivity;
 
 import java.util.ArrayList;
 

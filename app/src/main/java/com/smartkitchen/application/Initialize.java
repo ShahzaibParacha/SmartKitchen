@@ -1,5 +1,6 @@
 package com.smartkitchen.application;
 
+//Class to initialize the path for the database
 public class Initialize {
     private static String dbName="SC";
 

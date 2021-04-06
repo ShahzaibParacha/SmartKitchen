@@ -1,13 +1,12 @@
 package com.smartkitchen.persistence.stubs;
 
-import com.smartkitchen.business.IListValidation;
+import com.smartkitchen.business.interfaces.IListValidation;
 import com.smartkitchen.business.InvalidInputException;
-import com.smartkitchen.business.ListValidation;
+import com.smartkitchen.business.implementation.ListValidation;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.persistence.IDBGrocery;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FakeDBGrocery implements IDBGrocery {
 

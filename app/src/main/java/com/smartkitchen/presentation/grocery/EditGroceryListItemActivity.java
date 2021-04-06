@@ -1,4 +1,4 @@
-package com.smartkitchen.presentation;
+package com.smartkitchen.presentation.grocery;
 
 import androidx.core.content.ContextCompat;
 
@@ -10,14 +10,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.smartkitchen.business.GroceryActions;
-import com.smartkitchen.business.IGroceryActions;
-import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.implementation.GroceryActions;
+import com.smartkitchen.business.interfaces.IGroceryActions;
+import com.smartkitchen.business.interfaces.IListActions;
 import com.smartkitchen.business.InvalidInputException;
-import com.smartkitchen.business.ListActions;
+import com.smartkitchen.business.implementation.ListActions;
 import com.smartkitchen.objects.Allergies;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
+import com.smartkitchen.presentation.ParentActivity;
 
 import java.util.ArrayList;
 

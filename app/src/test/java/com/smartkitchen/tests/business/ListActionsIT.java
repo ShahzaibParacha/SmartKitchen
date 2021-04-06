@@ -8,9 +8,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.smartkitchen.business.GroceryActions;
-import com.smartkitchen.business.InventoryActions;
-import com.smartkitchen.business.ListActions;
+import com.smartkitchen.business.implementation.GroceryActions;
+import com.smartkitchen.business.implementation.InventoryActions;
+import com.smartkitchen.business.implementation.ListActions;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.persistence.hsqldb.GroceryPersistenceDB;
 import com.smartkitchen.persistence.hsqldb.InventoryPersistenceDB;

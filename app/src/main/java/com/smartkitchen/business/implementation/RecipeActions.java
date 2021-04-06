@@ -1,5 +1,11 @@
-package com.smartkitchen.business;
+package com.smartkitchen.business.implementation;
 
+import com.smartkitchen.business.InvalidInputException;
+import com.smartkitchen.business.implementation.InventoryActions;
+import com.smartkitchen.business.implementation.ListValidation;
+import com.smartkitchen.business.interfaces.IInventoryActions;
+import com.smartkitchen.business.interfaces.IListValidation;
+import com.smartkitchen.business.interfaces.IRecipeActions;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.Recipe;
 import com.smartkitchen.persistence.DBManager;
@@ -7,7 +13,7 @@ import com.smartkitchen.persistence.IDBRecipe;
 
 import java.util.ArrayList;
 
-public class RecipeActions implements IRecipeActions{
+public class RecipeActions implements IRecipeActions {
 
     private IDBRecipe recipeDB = DBManager.getRecipeDB();
     private IInventoryActions inventoryActions = new InventoryActions();

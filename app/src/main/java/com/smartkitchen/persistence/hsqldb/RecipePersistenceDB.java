@@ -2,9 +2,9 @@ package com.smartkitchen.persistence.hsqldb;
 
 import android.util.Log;
 
-import com.smartkitchen.business.IListValidation;
+import com.smartkitchen.business.interfaces.IListValidation;
 import com.smartkitchen.business.InvalidInputException;
-import com.smartkitchen.business.ListValidation;
+import com.smartkitchen.business.implementation.ListValidation;
 import com.smartkitchen.objects.Recipe;
 import com.smartkitchen.persistence.IDBRecipe;
 

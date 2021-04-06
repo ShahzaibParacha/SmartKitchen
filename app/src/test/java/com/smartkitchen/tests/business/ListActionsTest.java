@@ -4,9 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import com.smartkitchen.business.GroceryActions;
-import com.smartkitchen.business.InventoryActions;
-import com.smartkitchen.business.ListActions;
+import com.smartkitchen.business.implementation.GroceryActions;
+import com.smartkitchen.business.implementation.InventoryActions;
+import com.smartkitchen.business.implementation.ListActions;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.persistence.stubs.FakeDBGrocery;
 import com.smartkitchen.persistence.stubs.FakeDBInventory;

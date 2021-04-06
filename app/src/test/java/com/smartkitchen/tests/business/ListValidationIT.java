@@ -2,8 +2,8 @@ package com.smartkitchen.tests.business;
 
 import org.junit.Test;
 
-import com.smartkitchen.business.IListValidation;
-import com.smartkitchen.business.ListValidation;
+import com.smartkitchen.business.interfaces.IListValidation;
+import com.smartkitchen.business.implementation.ListValidation;
 import com.smartkitchen.objects.Item;
 
 import static org.junit.Assert.*;

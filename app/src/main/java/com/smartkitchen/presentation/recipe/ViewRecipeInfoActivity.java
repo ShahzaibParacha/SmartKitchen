@@ -1,4 +1,4 @@
-package com.smartkitchen.presentation;
+package com.smartkitchen.presentation.recipe;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,9 +10,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.smartkitchen.R;
-import com.smartkitchen.business.IRecipeActions;
-import com.smartkitchen.business.RecipeActions;
+import com.smartkitchen.business.interfaces.IRecipeActions;
+import com.smartkitchen.business.implementation.RecipeActions;
 import com.smartkitchen.objects.Recipe;
+import com.smartkitchen.presentation.ParentActivity;
 
 public class ViewRecipeInfoActivity extends ParentActivity {
 

@@ -1,15 +1,16 @@
-package com.smartkitchen.business;
+package com.smartkitchen.business.implementation;
 
+import com.smartkitchen.business.InvalidInputException;
+import com.smartkitchen.business.interfaces.IListValidation;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.Recipe;
 
+// Methods for validating user input
 public class ListValidation implements IListValidation {
 
     // logic for threshold checks
     public boolean thresholdStatus(Item item) {
-        if (item.getQuantity() < item.getThresholdQuantity())
-            return true;
-        return false;
+        return item.getQuantity() < item.getThresholdQuantity();
     }
 
     // logic to check if entry for items are valid (name, quantity, units, threshold)
@@ -30,7 +31,7 @@ public class ListValidation implements IListValidation {
             throw new InvalidInputException("Please enter a valid input for calories per unit.");
     }
 
-    // logic to check if entry for recipes are valid (name)
+    // logic to check if entry for recipes are valid (name, at least 1 ingredient and instruction)
     public void containsRecipeInputs(Recipe recipe) throws InvalidInputException {
         if (recipe.getName().length() <= 0)
             throw new InvalidInputException("Please enter a valid input for name.");
@@ -40,6 +41,7 @@ public class ListValidation implements IListValidation {
             throw new InvalidInputException("A recipe must have at least one instruction.");
     }
 
+    // logic to check if input for ingredients is valid
     public void checkIngredientInputs(String name, String quantity, String units) throws InvalidInputException{
         if(name.length() <= 0)
             throw new InvalidInputException("Please enter a valid input for name.");
@@ -51,6 +53,7 @@ public class ListValidation implements IListValidation {
             throw new InvalidInputException("Please enter a valid input for units." );
     }
 
+    // logic to check if input for instructions is valid
     public void checkInstructionInput(String instruction) throws InvalidInputException{
         if(instruction.length() <= 0){
             throw new InvalidInputException("Please enter a valid input for instruction.");

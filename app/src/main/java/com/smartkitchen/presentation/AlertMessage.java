@@ -9,12 +9,13 @@ import android.text.InputType;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.smartkitchen.business.GroceryActions;
-import com.smartkitchen.business.IGroceryActions;
-import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.implementation.GroceryActions;
+import com.smartkitchen.business.interfaces.IGroceryActions;
+import com.smartkitchen.business.interfaces.IListActions;
 import com.smartkitchen.business.InvalidInputException;
-import com.smartkitchen.business.ListActions;
+import com.smartkitchen.business.implementation.ListActions;
 import com.smartkitchen.objects.Item;
+import com.smartkitchen.presentation.inventory.CurrentInventoryActivity;
 
 public class AlertMessage {
     private static final IListActions listActions = new ListActions();

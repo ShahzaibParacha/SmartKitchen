@@ -1,4 +1,4 @@
-package com.smartkitchen.presentation;
+package com.smartkitchen.presentation.recipe;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -7,14 +7,11 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.smartkitchen.business.IListValidation;
+import com.smartkitchen.business.interfaces.IListValidation;
 import com.smartkitchen.business.InvalidInputException;
-import com.smartkitchen.business.ListValidation;
+import com.smartkitchen.business.implementation.ListValidation;
 import com.smartkitchen.objects.Recipe;
 
 public class EditIngredientPopUp {

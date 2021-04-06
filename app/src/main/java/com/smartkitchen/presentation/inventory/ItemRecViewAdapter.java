@@ -1,4 +1,4 @@
-package com.smartkitchen.presentation;
+package com.smartkitchen.presentation.inventory;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,13 +16,15 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartkitchen.R;
-import com.smartkitchen.business.IInventoryActions;
-import com.smartkitchen.business.InventoryActions;
+import com.smartkitchen.business.interfaces.IInventoryActions;
+import com.smartkitchen.business.implementation.InventoryActions;
 import com.smartkitchen.objects.Item;
+import com.smartkitchen.presentation.AlertMessage;
+import com.smartkitchen.presentation.ViewInformationActivity;
 
 import java.util.ArrayList;
 
-import static com.smartkitchen.presentation.EditInventoryItemActivity.POSITION_KEY;
+import static com.smartkitchen.presentation.inventory.EditInventoryItemActivity.POSITION_KEY;
 
 public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.ViewHolder> {
 
