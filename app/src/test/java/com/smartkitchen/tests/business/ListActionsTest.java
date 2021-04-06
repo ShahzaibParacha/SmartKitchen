@@ -2,11 +2,12 @@ package com.smartkitchen.tests.business;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
-import com.smartkitchen.business.GroceryActions;
-import com.smartkitchen.business.InventoryActions;
-import com.smartkitchen.business.ListActions;
+import com.smartkitchen.business.implementation.GroceryActions;
+import com.smartkitchen.business.implementation.InventoryActions;
+import com.smartkitchen.business.implementation.ListActions;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.Recipe;
 import com.smartkitchen.persistence.stubs.FakeDBGrocery;
@@ -15,24 +16,26 @@ import com.smartkitchen.persistence.stubs.FakeDBInventory;
 import java.util.ArrayList;
 
 public class ListActionsTest {
+    //The three classes to be tested
     private ListActions listActions;
     private InventoryActions inventoryActions;
     private GroceryActions groceryActions;
-    private FakeDBGrocery testgrdb = new FakeDBGrocery();
-    private FakeDBInventory testindb = new FakeDBInventory();
+    //Fake databases used for testing
+    private final FakeDBGrocery testgrdb = new FakeDBGrocery();
+    private final FakeDBInventory testindb = new FakeDBInventory();
 
-
+    //Sets up the testing environment
     @Before
-    public void setUp(){
+    public void setUp() {
         listActions = new ListActions();
         inventoryActions = new InventoryActions(testindb);
         groceryActions = new GroceryActions(testgrdb, inventoryActions);
     }
 
     @Test
-    public void addTest(){
+    public void addTest() {
         System.out.println("\nStarting addTest");
-        ArrayList<String> testAllergies = new ArrayList<String>();
+        ArrayList<String> testAllergies = new ArrayList<>();
         testAllergies.add("testAllergy");
 
         Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 1);
@@ -42,7 +45,9 @@ public class ListActionsTest {
             inventoryActions.addToInventory(testItem);
             groceryActions.addToGrocery(testItem); // add existing
 
-        }catch(Exception e){System.out.println(e.getMessage());}
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         assertEquals(groceryActions.getGroceryItem(0), testItem);
         assertEquals(inventoryActions.getInventoryItem(0), testItem);
@@ -50,10 +55,10 @@ public class ListActionsTest {
 
         Item testItem2 = new Item("sampleItem", 1, "", 1, 1, testAllergies, 1, 1);
 
-        try{
+        try {
             groceryActions.addToGrocery(testItem2);
             inventoryActions.addToInventory(testItem2);
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -61,16 +66,18 @@ public class ListActionsTest {
     }
 
     @Test
-    public void updateItemTest(){
+    public void updateItemTest() {
         System.out.println("\nStarting updateItemTest");
-        ArrayList<String> testAllergies = new ArrayList<String>();
+        ArrayList<String> testAllergies = new ArrayList<>();
         testAllergies.add("testAllergy");
 
         Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 1);
         try {
             groceryActions.addToGrocery(testItem);
             inventoryActions.addToInventory(testItem);
-        }catch(Exception e){System.out.println(e.getMessage());}
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         groceryActions.updateGroceryItem(testItem);
         inventoryActions.updateInventoryItem(testItem);
@@ -79,16 +86,16 @@ public class ListActionsTest {
     }
 
     @Test
-    public void editValidationTest(){
+    public void editValidationTest() {
         System.out.println("\nStarting editValidationTest");
 
-        ArrayList<String> testAllergies = new ArrayList<String>();
+        ArrayList<String> testAllergies = new ArrayList<>();
         testAllergies.add("testAllergy");
         Item testItem = new Item("sampleItem", 1, "", 1, 1, testAllergies, 1, 1);
 
-        try{
+        try {
             listActions.editValidation(testItem);
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -125,7 +132,7 @@ public class ListActionsTest {
     }
 
     @Test
-    public void getDuplicateByNameTest(){
+    public void getDuplicateByNameTest() {
         System.out.println("\nStarting getDuplicateByNameTest");
 
         String TEST_NAME = "testName";
@@ -170,11 +177,12 @@ public class ListActionsTest {
         System.out.println("Finished getListTest");
     }
 
+
+
     @Test
-    public void buyItemTest(){
-        ListActions testmp = new ListActions();
+    public void buyItemTest() {
         System.out.println("\nStarting buyItemTest");
-        ArrayList<String> testAllergies = new ArrayList<String>();
+        ArrayList<String> testAllergies = new ArrayList<>();
         testAllergies.add("testAllergy");
 
         Item testItem = new Item("sampleItem", 1, "testUnit", 5, 2, testAllergies, 1, 1);
@@ -186,23 +194,27 @@ public class ListActionsTest {
             groceryActions.buyItem(testItem);
             groceryActions.buyItem(testItem2);
             groceryActions.buyItem(testItem3);
-        }catch(Exception e){System.out.println(e.getMessage());}
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         System.out.println("Starting buyItemTest");
     }
 
     @Test
-    public void buyAllTest(){
+    public void buyAllTest() {
         System.out.println("\nStarting buyAllTest");
 
-        ArrayList<String> testAllergies = new ArrayList<String>();
+        ArrayList<String> testAllergies = new ArrayList<>();
         testAllergies.add("testAllergy");
         Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 1);
 
         try {
             groceryActions.addToGrocery(testItem);
             groceryActions.buyAll();
-        }catch(Exception e){System.out.println(e.getMessage());}
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         assertEquals(inventoryActions.getInventoryItem(0), testItem);
 
@@ -210,9 +222,9 @@ public class ListActionsTest {
     }
 
     @Test
-    public void removeTest(){
+    public void removeTest() {
         System.out.println("\nStarting removeTest");
-        ArrayList<String> testAllergies = new ArrayList<String>();
+        ArrayList<String> testAllergies = new ArrayList<>();
         testAllergies.add("testAllergy");
         Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 1);
 
@@ -221,7 +233,9 @@ public class ListActionsTest {
             inventoryActions.addToInventory(testItem);
             groceryActions.removeFromGrocery(testItem);
             inventoryActions.removeFromInventory(testItem);
-        }catch(Exception e){System.out.println(e.getMessage());}
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         assertTrue(groceryActions.getGroceryList().isEmpty());
         assertTrue(inventoryActions.getInventoryList().isEmpty());
@@ -230,9 +244,9 @@ public class ListActionsTest {
     }
 
     @Test
-    public void isInListTest(){
+    public void isInListTest() {
         System.out.println("\nStarting isInListTest");
-        ArrayList<String> testAllergies = new ArrayList<String>();
+        ArrayList<String> testAllergies = new ArrayList<>();
         testAllergies.add("testAllergy");
 
         assertTrue(listActions.isInList(testAllergies, "testAllergy"));
@@ -241,18 +255,20 @@ public class ListActionsTest {
     }
 
     @Test
-    public void getGroceryListTotalTest(){
+    public void getGroceryListTotalTest() {
         System.out.println("\nStarting getGroceryListTotal");
-        ArrayList<String> testAllergies = new ArrayList<String>();
+        ArrayList<String> testAllergies = new ArrayList<>();
         testAllergies.add("testAllergy");
         Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 50);
 
         try {
             groceryActions.addToGrocery(testItem);
             inventoryActions.addToInventory(testItem);
-        }catch(Exception e){System.out.println(e.getMessage());}
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
-        assertTrue(groceryActions.getGroceryListTotal() == 50);
+        assertEquals(50, groceryActions.getGroceryListTotal(), 0.0);
 
         System.out.println("Finished getGroceryListTotal");
     }

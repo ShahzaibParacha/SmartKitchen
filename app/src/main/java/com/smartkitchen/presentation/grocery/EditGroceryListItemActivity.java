@@ -1,4 +1,4 @@
-package com.smartkitchen.presentation;
+package com.smartkitchen.presentation.grocery;
 
 import androidx.core.content.ContextCompat;
 
@@ -10,26 +10,32 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.smartkitchen.business.GroceryActions;
-import com.smartkitchen.business.IGroceryActions;
-import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.implementation.AllergyActions;
+import com.smartkitchen.business.implementation.GroceryActions;
+import com.smartkitchen.business.interfaces.IAllergyActions;
+import com.smartkitchen.business.interfaces.IGroceryActions;
+import com.smartkitchen.business.interfaces.IListActions;
 import com.smartkitchen.business.InvalidInputException;
-import com.smartkitchen.business.ListActions;
-import com.smartkitchen.objects.Allergies;
+import com.smartkitchen.business.implementation.ListActions;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.R;
+import com.smartkitchen.presentation.ParentActivity;
 
-import java.util.ArrayList;
-
+//Screen for editing an item in the grocery list
 public class EditGroceryListItemActivity extends ParentActivity {
 
+    //Access to relevant business methods
     IListActions listActions = new ListActions();
     IGroceryActions groceryActions = new GroceryActions();
+    IAllergyActions allergyActions;
+
+    //String used for getting the item passed in to the screen
     public static final String POSITION_KEY = "position";
 
     //Fields for user input
     private EditText editName, editQuantity, editUnits, editPrice, editCalories;
     private TextView title;
+    //Checkboxes for allergies
     private CheckBox checkLactose, checkFish, checkEggs, checkGluten, checkNuts, checkSoy;
     //Button to cancel edit activity and submit edits
     private Button btnCancel, btnSubmit;
@@ -45,11 +51,13 @@ public class EditGroceryListItemActivity extends ParentActivity {
         int itemPosition = intent.getIntExtra(POSITION_KEY, -1);
         Item item = groceryActions.getGroceryItem(itemPosition);
 
+        //Sets the title and colour of the taskbar
         setTitle("Edit " + item.getName());
         setColour(ContextCompat.getColor(this, R.color.greenColour3));
 
         //Initializes the UI views
         initViews();
+        allergyActions = new AllergyActions(checkNuts, checkSoy, checkLactose, checkGluten, checkFish, checkEggs);
         setData(item);
 
         title.setText("Edit " + item.getName());
@@ -70,89 +78,52 @@ public class EditGroceryListItemActivity extends ParentActivity {
     }
 
     //Sets the default field values to the current values in item
-    private void setData(Item item){
+    private void setData(Item item) {
         editName.setText(item.getName());
         editQuantity.setText("" + item.getQuantityToBuy());
         editUnits.setText(item.getUnits());
         editPrice.setText("" + item.getPricePerUnit());
         editCalories.setText("" + item.getCaloriesPerUnit());
-        setAllergies(item);
+        allergyActions.setAllergies(item);
     }
 
     //Updates the information in the item being edited
-    private void updateData(Item item){
+    private void updateData(Item item) {
         item.setName(editName.getText().toString());
         item.setQuantityToBuy(Integer.parseInt(editQuantity.getText().toString()));
         item.setUnits(editUnits.getText().toString());
-        if(!editPrice.getText().toString().equals(""))
+        if (!editPrice.getText().toString().equals(""))
             item.setPricePerUnit(Double.parseDouble(editPrice.getText().toString()));
         else
             item.setPricePerUnit(0);
-        if(!editCalories.getText().toString().equals(""))
+        if (!editCalories.getText().toString().equals(""))
             item.setCaloriesPerUnit(Integer.parseInt(editCalories.getText().toString()));
         else
             item.setCaloriesPerUnit(0);
-        item.setAllergies(getAllergies());
+        item.setAllergies(allergyActions.getAllergies());
         groceryActions.updateGroceryItem(item);
     }
 
     //Grabs the info from the text field and stores in an Item object
     private Item checkData(Item item) {
-        //Temporary parameter until edit button is created
         String checkName = editName.getText().toString();
         int checkQuantity = -1;
-        if(!editQuantity.getText().toString().equals(""))
+        if (!editQuantity.getText().toString().equals(""))
             checkQuantity = Integer.parseInt(editQuantity.getText().toString());
         String checkUnit = editUnits.getText().toString();
         double checkPrice = 0;
-        if(!editPrice.getText().toString().equals(""))
+        if (!editPrice.getText().toString().equals(""))
             checkPrice = Double.parseDouble(editPrice.getText().toString());
         int checkCalories = 0;
-        if(!editCalories.getText().toString().equals(""))
+        if (!editCalories.getText().toString().equals(""))
             checkCalories = Integer.parseInt(editCalories.getText().toString());
-        Item checkItem = new Item(checkName, item.getQuantity(), checkUnit,
+        return new Item(checkName, item.getQuantity(), checkUnit,
                 checkQuantity, item.getThresholdQuantity(),
                 item.getAllergies(), checkCalories, checkPrice);
-        return checkItem;
-    }
-
-    private void setAllergies(Item item){
-        ArrayList<String> allergies = item.getAllergies();
-        if(allergies != null) {
-            if (listActions.isInList(allergies, Allergies.NUTS.getText()))
-                checkNuts.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.SOY.getText()))
-                checkSoy.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.LACTOSE.getText()))
-                checkLactose.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.GLUTEN.getText()))
-                checkGluten.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.FISH.getText()))
-                checkFish.setChecked(true);
-            if (listActions.isInList(allergies, Allergies.EGGS.getText()))
-                checkEggs.setChecked(true);
-        }
-    }
-
-    private ArrayList<String> getAllergies(){
-        ArrayList<String> allergies = new ArrayList<>();
-        if(checkNuts.isChecked())
-            allergies.add(Allergies.NUTS.getText());
-        if(checkSoy.isChecked())
-            allergies.add(Allergies.SOY.getText());
-        if(checkLactose.isChecked())
-            allergies.add(Allergies.LACTOSE.getText());
-        if(checkGluten.isChecked())
-            allergies.add(Allergies.GLUTEN.getText());
-        if(checkFish.isChecked())
-            allergies.add(Allergies.FISH.getText());
-        if(checkEggs.isChecked())
-            allergies.add(Allergies.EGGS.getText());
-        return allergies;
     }
 
     //Initializes the UI elements
-    private void initViews(){
+    private void initViews() {
         editName = findViewById(R.id.editGroceryItemName);
         editQuantity = findViewById(R.id.editGroceryQuantity);
         editUnits = findViewById(R.id.editGroceryUnits);

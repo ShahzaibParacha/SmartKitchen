@@ -2,18 +2,22 @@ package com.smartkitchen.objects;
 
 import java.util.ArrayList;
 
+//Main recipe object
 public class Recipe {
 
+    //Basic fields
     private int id;
     private String name;
+    //Four array lists hold ingredient information, positions line up
     private ArrayList<String> ingredients;
     private ArrayList<String> ingredientQuantities;
     private ArrayList<String> ingredientUnits;
+    private ArrayList<Boolean> hasIngredient;
     private int totalCalories;
     private ArrayList<String> instructions;
     private boolean haveAllIngredients;
-    private ArrayList<Boolean> hasIngredient;
 
+    //Constructor
     public Recipe(String name, ArrayList<String> ingredients, ArrayList<String> ingredientQuantities, ArrayList<String> ingredientUnits, ArrayList<String> instructions) {
         this.name = name;
         this.ingredients = ingredients;

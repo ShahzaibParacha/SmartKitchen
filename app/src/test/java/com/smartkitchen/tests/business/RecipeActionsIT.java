@@ -1,21 +1,26 @@
 package com.smartkitchen.tests.business;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.After;
 import org.mockito.Mockito;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.smartkitchen.business.GroceryActions;
 import com.smartkitchen.business.InvalidInputException;
-import com.smartkitchen.business.InventoryActions;
-import com.smartkitchen.business.ListActions;
-import com.smartkitchen.business.RecipeActions;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.Recipe;
+
+import java.io.File;
+import java.io.IOException;
+
+import com.smartkitchen.business.implementation.GroceryActions;
+import com.smartkitchen.business.implementation.InventoryActions;
+import com.smartkitchen.business.implementation.ListActions;
+import com.smartkitchen.business.implementation.RecipeActions;
+
 import com.smartkitchen.persistence.hsqldb.GroceryPersistenceDB;
 import com.smartkitchen.persistence.hsqldb.InventoryPersistenceDB;
 import com.smartkitchen.persistence.hsqldb.RecipePersistenceDB;
@@ -59,8 +64,8 @@ public class RecipeActionsIT{
 
 
         testTarget.addToRecipes(testRecipe);
-        assertEquals(testTarget.getRecipe(1).getName(), testRecipe.getName());
-        testTarget.removeRecipe(testTarget.getRecipe(1));
+        assertEquals(testTarget.getRecipeList().get(1).getName(), testRecipe.getName());
+        //testTarget.removeRecipe(testTarget.getRecipe(1));
     }
 
     @Test
@@ -83,7 +88,7 @@ public class RecipeActionsIT{
         testTarget.addToRecipes(testRecipe);
         testTarget.updateRecipe(testRecipe);
 
-        assertEquals(testTarget.getRecipe(1).getName(), testRecipe.getName());
+        assertEquals(testTarget.getRecipeList().get(1).getName(), testRecipe.getName());
     }
 
     @Test

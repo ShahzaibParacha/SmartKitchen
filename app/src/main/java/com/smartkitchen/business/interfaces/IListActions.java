@@ -1,13 +1,12 @@
-package com.smartkitchen.business;
+package com.smartkitchen.business.interfaces;
 
-import android.content.Context;
-
+import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.Recipe;
-import com.smartkitchen.persistence.DBManager;
 
 import java.util.ArrayList;
 
+//Interface to generic list methods
 public interface IListActions {
 
     void editValidation(Item item) throws InvalidInputException;
@@ -19,5 +18,9 @@ public interface IListActions {
     Recipe getDuplicateByName(Recipe recipe, ArrayList<Recipe> recipes);
 
     boolean isInList(ArrayList<String> list, String s);
+
+    ArrayList<String> stringToList(String string);
+
+    String listToString(ArrayList<String> list);
 
 }

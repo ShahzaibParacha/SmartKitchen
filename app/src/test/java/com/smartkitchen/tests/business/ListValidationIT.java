@@ -2,9 +2,11 @@ package com.smartkitchen.tests.business;
 
 import org.junit.Test;
 
-import com.smartkitchen.business.IListValidation;
+
 import com.smartkitchen.business.InvalidInputException;
-import com.smartkitchen.business.ListValidation;
+
+import com.smartkitchen.business.interfaces.IListValidation;
+import com.smartkitchen.business.implementation.ListValidation;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.Recipe;
 
@@ -15,12 +17,12 @@ import static org.junit.Assert.*;
 
 //just copied over the unit test since this layer does not interact with the persistence layer
 //reason: code coverage for Integration Tests automation
-public class ListValidationIT{
+public class ListValidationIT {
 
-    private IListValidation testListValidation = new ListValidation();
+    private final IListValidation testListValidation = new ListValidation();
 
     @Test
-    public void testListValidation(){
+    public void testListValidation() {
         System.out.println("\nStarting testListValidation constructor.");
 
         //Act
@@ -32,7 +34,7 @@ public class ListValidationIT{
     }
 
     @Test
-    public void testThresholdStatus(){
+    public void testThresholdStatus() {
         System.out.println("\nStarting testThresholdStatus.");
 
         //Act
@@ -44,7 +46,7 @@ public class ListValidationIT{
     }
 
     @Test
-    public void testThresholdStatusTrue(){
+    public void testThresholdStatusTrue() {
         System.out.println("\nStarting testThresholdStatus.");
 
         //Act
@@ -56,7 +58,7 @@ public class ListValidationIT{
     }
 
     @Test
-    public void testIsEmpty(){
+    public void testIsEmpty() {
         System.out.println("\nStarting testThresholdStatus.");
 
         //Act
@@ -67,14 +69,14 @@ public class ListValidationIT{
     }
 
     @Test
-    public void testContainsItemInput() throws Exception {
+    public void testContainsItemInput() {
         System.out.println("\nStarting testContainsItemInput.");
 
         //Act 1 -- getName
         Item testItem = new Item("", -1, "", -1, -1);
         try {
             testListValidation.containsItemInputs(testItem);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -82,7 +84,7 @@ public class ListValidationIT{
         Item testItem1 = new Item(" ", -1, "", -1, -1);
         try {
             testListValidation.containsItemInputs(testItem1);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -90,7 +92,7 @@ public class ListValidationIT{
         Item testItem2 = new Item(" ", 1, "", -1, -1);
         try {
             testListValidation.containsItemInputs(testItem2);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -98,7 +100,7 @@ public class ListValidationIT{
         Item testItem3 = new Item(" ", 1, " ", 0, -1);
         try {
             testListValidation.containsItemInputs(testItem3);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -106,7 +108,7 @@ public class ListValidationIT{
         Item testItem4 = new Item("sampleItem", 1, "sampleItem", 1, 1);
         try {
             testListValidation.containsItemInputs(testItem4);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 

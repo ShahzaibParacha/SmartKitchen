@@ -1,11 +1,13 @@
-package com.smartkitchen.business;
+package com.smartkitchen.business.interfaces;
 
 import android.content.Context;
 
+import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.objects.Item;
 
 import java.util.ArrayList;
 
+//Interface to grocery methods
 public interface IGroceryActions {
 
     void addToGrocery(Item item) throws InvalidInputException;
@@ -21,6 +23,7 @@ public interface IGroceryActions {
     boolean thresholdAddToGrocery(Item item, Context context, boolean returnToMain);
 
     void buyItem(Item item) throws InvalidInputException;
+
     void buyAll() throws InvalidInputException;
 
     void removeFromGrocery(Item item);

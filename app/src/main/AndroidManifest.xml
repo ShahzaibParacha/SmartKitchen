@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartKitchen">
-        <activity android:name=".presentation.EditRecipeActivity"></activity>
-        <activity android:name=".presentation.AddRecipeActivity" />
-        <activity android:name=".presentation.ViewRecipeInfoActivity" />
-        <activity android:name=".presentation.RecipeListActivity" />
+        <activity android:name=".presentation.recipe.EditRecipeActivity"></activity>
+        <activity android:name=".presentation.recipe.AddRecipeActivity" />
+        <activity android:name=".presentation.recipe.ViewRecipeInfoActivity" />
+        <activity android:name=".presentation.recipe.RecipeListActivity" />
         <activity android:name=".presentation.ViewInformationActivity" />
-        <activity android:name=".presentation.AddInventoryItemActivity" />
-        <activity android:name=".presentation.AddGroceryItemActivity" />
-        <activity android:name=".presentation.EditGroceryListItemActivity" />
-        <activity android:name=".presentation.EditInventoryItemActivity" />
-        <activity android:name=".presentation.CurrentInventoryActivity" />
-        <activity android:name=".presentation.GroceryListActivity" />
+        <activity android:name=".presentation.inventory.AddInventoryItemActivity" />
+        <activity android:name=".presentation.grocery.AddGroceryItemActivity" />
+        <activity android:name=".presentation.grocery.EditGroceryListItemActivity" />
+        <activity android:name=".presentation.inventory.EditInventoryItemActivity" />
+        <activity android:name=".presentation.inventory.CurrentInventoryActivity" />
+        <activity android:name=".presentation.grocery.GroceryListActivity" />
         <activity android:name=".application.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

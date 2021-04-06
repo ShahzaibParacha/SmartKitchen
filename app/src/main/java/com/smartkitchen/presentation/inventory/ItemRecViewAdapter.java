@@ -1,4 +1,4 @@
-package com.smartkitchen.presentation;
+package com.smartkitchen.presentation.inventory;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,23 +16,27 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartkitchen.R;
-import com.smartkitchen.business.IInventoryActions;
-import com.smartkitchen.business.InventoryActions;
+import com.smartkitchen.business.interfaces.IInventoryActions;
+import com.smartkitchen.business.implementation.InventoryActions;
 import com.smartkitchen.objects.Item;
+import com.smartkitchen.presentation.AlertMessage;
+import com.smartkitchen.presentation.ViewInformationActivity;
 
 import java.util.ArrayList;
 
-import static com.smartkitchen.presentation.EditInventoryItemActivity.POSITION_KEY;
+import static com.smartkitchen.presentation.inventory.EditInventoryItemActivity.POSITION_KEY;
 
+//Adapter for displaying the inventory items
 public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.ViewHolder> {
 
+    //Access to relevant business layer methods
     IInventoryActions inventoryActions = new InventoryActions();
     //List to be displayed
     private ArrayList<Item> items = new ArrayList<>();
-    private Context mContext;
+    private final Context mContext;
 
     //Constructor
-    public ItemRecViewAdapter(Context mContext){
+    public ItemRecViewAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
@@ -52,10 +56,14 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
         holder.quantity.setText(items.get(position).getQuantityString());
         holder.price.setText("$" + items.get(position).getPricePerUnit() + "/" + items.get(position).getUnits());
 
+        //When the item card is clicked, transition to more info screen
         holder.parent.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, ViewInformationActivity.class);
+            //Passes the current item that should be displayed and where the call came from
             intent.putExtra("Position", position);
             intent.putExtra("Origin", "Inventory");
+
+            //Move to next screen with transition
             ActivityOptionsCompat options = getTransition(holder);
             mContext.startActivity(intent, options.toBundle());
         });
@@ -103,30 +111,28 @@ public class ItemRecViewAdapter extends RecyclerView.Adapter<ItemRecViewAdapter.
     }
 
     //Use to pass in an array list
-    public void setItems(ArrayList<Item> items){
+    public void setItems(ArrayList<Item> items) {
         this.items = items;
         notifyDataSetChanged();
     }
 
-    private ActivityOptionsCompat getTransition(ViewHolder holder){
+    //Prepares the transition to next screen
+    private ActivityOptionsCompat getTransition(ViewHolder holder) {
         androidx.core.util.Pair<View, String> p1 = androidx.core.util.Pair.create(holder.name, "itemName");
         androidx.core.util.Pair<View, String> p2 = androidx.core.util.Pair.create(holder.quantity, "itemQuantity");
         androidx.core.util.Pair<View, String> p3 = androidx.core.util.Pair.create(holder.price, "itemPrice");
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((CurrentInventoryActivity)mContext, p1, p2, p3);
-        return options;
+        return ActivityOptionsCompat.makeSceneTransitionAnimation((CurrentInventoryActivity) mContext, p1, p2, p3);
     }
 
     //Holds and assigns the card view information
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         //Basic fields
-        private CardView parent;
-        private TextView name;
-        private TextView quantity;
-        private TextView price;
-        private ImageView upArrow, downArrow;
-        private LinearLayout expandedLayout;
-        private Button btnEdit, btnRemove, btnAddToGrocery;
+        private final CardView parent;
+        private final TextView name, quantity, price;
+        private final ImageView upArrow, downArrow;
+        private final LinearLayout expandedLayout;
+        private final Button btnEdit, btnRemove, btnAddToGrocery;
 
         //Finds and assigns the information
         public ViewHolder(@NonNull View itemView) {

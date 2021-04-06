@@ -1,65 +1,70 @@
-package com.smartkitchen.business;
+package com.smartkitchen.business.implementation;
 
 import android.content.Context;
 
+import com.smartkitchen.business.InvalidInputException;
+import com.smartkitchen.business.interfaces.IGroceryActions;
+import com.smartkitchen.business.interfaces.IInventoryActions;
+import com.smartkitchen.business.interfaces.IListActions;
+import com.smartkitchen.business.interfaces.IListValidation;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.persistence.DBManager;
 import com.smartkitchen.persistence.IDBGrocery;
-import com.smartkitchen.persistence.IDBInventory;
 import com.smartkitchen.presentation.AlertMessage;
 
 import java.util.ArrayList;
 
-public class GroceryActions implements IGroceryActions{
+//Functions used for managing the grocery list
+public class GroceryActions implements IGroceryActions {
 
+    //Access to grocery database and required access to other business classes
     private IDBGrocery groceryDB = DBManager.getGroceryDB();
     private IInventoryActions inventoryActions = new InventoryActions();
-    private IListActions listActions = new ListActions();
-    private IListValidation validation = new ListValidation();
+    private final IListActions listActions = new ListActions();
+    private final IListValidation validation = new ListValidation();
 
+    //Empty constructor for regular use
     public GroceryActions(){
     }
 
+    //Constructor used for testing purposes
     public GroceryActions(IDBGrocery groceryDB, IInventoryActions inventoryActions){
         this.groceryDB = groceryDB;
         this.inventoryActions = inventoryActions;
     }
 
-    //Simple adds to either list
+    //Adds an item to the grocery list, validates the input
     @Override
     public void addToGrocery(Item item) throws InvalidInputException {
-        try{
-            validation.containsItemInputs(item);
-            groceryDB.addToGrocery(item);
-        }
-        catch(InvalidInputException e){
-            throw e;
-        }
+        validation.containsItemInputs(item);
+        groceryDB.addToGrocery(item);
     }
 
+    //Updates the item in the grocery db
     @Override
     public void updateGroceryItem(Item item) {
         groceryDB.updateItem(item);
     }
 
-    //Simple gets from either list
+    //Gets an item from the grocery list based on the position
     @Override
     public Item getGroceryItem(int position) {
-        Item item = groceryDB.getGroceryList().get(position);
-        return item;
+        return groceryDB.getGroceryList().get(position);
     }
 
+    //Returns the entire grocery list in ArrayList form
     @Override
     public ArrayList<Item> getGroceryList() {
         return groceryDB.getGroceryList();
     }
 
-    //Simple removes from either list
+    //Removes an item from the grocery db
     @Override
     public void removeFromGrocery(Item item) {
         groceryDB.removeFromGrocery(item);
     }
 
+    //Determines the total cost of the items in the grocery list
     @Override
     public double getGroceryListTotal() {
         ArrayList<Item> groceryList = groceryDB.getGroceryList();
@@ -74,7 +79,7 @@ public class GroceryActions implements IGroceryActions{
     @Override
     public boolean thresholdAddToGrocery(Item item, Context context, boolean returnToMain) {
         boolean enteredThreshold = false;
-        // Check if quantity<threshold
+        // Check if quantity < threshold
         if (validation.thresholdStatus(item)) {
             //Pull up prompt for quantity to buy
             AlertMessage.showDialog(context, item, returnToMain);
@@ -95,16 +100,13 @@ public class GroceryActions implements IGroceryActions{
         //If not, set the quantity as quantity to buy and add it
         else {
             item.setQuantity(item.getQuantityToBuy());
-            try {
-                inventoryActions.addToInventory(item);
-            } catch (InvalidInputException e) {
-                throw e;
-            }
+            inventoryActions.addToInventory(item);
         }
         //Remove the item from the grocery list
         removeFromGrocery(item);
     }
 
+    //Buys all the items in the grocery list
     @Override
     public void buyAll() throws InvalidInputException {
         ArrayList<Item> groceryList = groceryDB.getGroceryList();

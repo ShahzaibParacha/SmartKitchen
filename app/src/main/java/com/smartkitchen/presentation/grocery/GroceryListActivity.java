@@ -1,4 +1,4 @@
-package com.smartkitchen.presentation;
+package com.smartkitchen.presentation.grocery;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,38 +12,44 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartkitchen.R;
-import com.smartkitchen.business.GroceryActions;
-import com.smartkitchen.business.IGroceryActions;
+import com.smartkitchen.business.implementation.GroceryActions;
+import com.smartkitchen.business.interfaces.IGroceryActions;
 import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.objects.Item;
+import com.smartkitchen.presentation.ParentActivity;
 
 import java.util.ArrayList;
 
+//Main screen that displays the grocery list
 public class GroceryListActivity extends ParentActivity {
 
+    //Access to relevant business layer methods
     private final IGroceryActions groceryActions = new GroceryActions();
 
-    //The list view of the grocery list and its adapter
-    private RecyclerView groceryListRecView;
     private GroceryListRecViewAdapter adapter;
+
+    //Total sum and buy all, and add button
     private TextView totalSum;
     private Button btnBuyAll;
-    private FloatingActionButton btnAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grocery_list_activity);
+
+        //Set the text and colour of the taskbar
         setTitle("Grocery List");
         setColour(ContextCompat.getColor(this, R.color.greenColour3));
 
         //Create the adapter and find the list view
         adapter = new GroceryListRecViewAdapter(this);
-        groceryListRecView = findViewById(R.id.groceryListRecView);
-        btnAdd = findViewById(R.id.btnGoToAddGroceryActivity);
+        //Get the list view of the grocery list and the buttons
+        RecyclerView groceryListRecView = findViewById(R.id.groceryListRecView);
+        FloatingActionButton btnAdd = findViewById(R.id.btnGoToAddGroceryActivity);
         btnBuyAll = findViewById(R.id.btnBuyAll);
         totalSum = findViewById(R.id.groceryListTotalSum);
 
+        //Get the total sum of the grocery list
         totalSum.setText("$" + groceryActions.getGroceryListTotal());
 
         ArrayList<Item> groceryList = groceryActions.getGroceryList();
@@ -54,14 +60,15 @@ public class GroceryListActivity extends ParentActivity {
             startActivity(intent);
         });
 
+        //If the grocery list is empty, disable the buy all button
         btnBuyAll.setEnabled(groceryList.size() != 0);
 
         btnBuyAll.setOnClickListener(v -> {
             try {
+                //Buy all items then refresh the page
                 groceryActions.buyAll();
                 onResume();
-            }
-            catch (InvalidInputException e){
+            } catch (InvalidInputException e) {
                 Toast.makeText(GroceryListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -73,9 +80,11 @@ public class GroceryListActivity extends ParentActivity {
         adapter.setItems(groceryList);
     }
 
+    //Refreshes the information on the page
     @Override
     protected void onResume() {
         super.onResume();
+        //Pass in updated grocery list, recalculate total sum, check if it should be enabled
         adapter.setItems(groceryActions.getGroceryList());
         totalSum.setText("$" + groceryActions.getGroceryListTotal());
         btnBuyAll.setEnabled(groceryActions.getGroceryList().size() != 0);

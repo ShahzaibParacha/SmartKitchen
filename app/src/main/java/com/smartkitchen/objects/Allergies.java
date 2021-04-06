@@ -1,5 +1,6 @@
 package com.smartkitchen.objects;
 
+//Holds the possible allergy types
 public enum Allergies {
 
     LACTOSE("Lactose"),

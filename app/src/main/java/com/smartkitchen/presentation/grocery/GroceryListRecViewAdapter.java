@@ -1,4 +1,4 @@
-package com.smartkitchen.presentation;
+package com.smartkitchen.presentation.grocery;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,24 +17,28 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartkitchen.R;
-import com.smartkitchen.business.GroceryActions;
-import com.smartkitchen.business.IGroceryActions;
+import com.smartkitchen.business.implementation.GroceryActions;
+import com.smartkitchen.business.interfaces.IGroceryActions;
 import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.objects.Item;
+import com.smartkitchen.presentation.ViewInformationActivity;
 
 import java.util.ArrayList;
 
-import static com.smartkitchen.presentation.EditInventoryItemActivity.POSITION_KEY;
+import static com.smartkitchen.presentation.inventory.EditInventoryItemActivity.POSITION_KEY;
 
+//Adapter used for displaying and interacting with grocery list items
 public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListRecViewAdapter.ViewHolder> {
-    
+
+    //Access to relevant business layer methods
     IGroceryActions groceryActions = new GroceryActions();
+
     //List to be displayed
     private ArrayList<Item> items = new ArrayList<>();
-    private Context mContext;
+    private final Context mContext;
 
     //Constructor
-    public GroceryListRecViewAdapter(Context mContext){
+    public GroceryListRecViewAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
@@ -54,11 +58,14 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
         holder.quantityToBuy.setText(items.get(position).getQuantityToBuyString());
         holder.price.setText("$" + items.get(position).getPricePerUnit() + "/" + items.get(position).getUnits());
 
+        //Clicking on the item card moves to the more info screen
         holder.parent.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, ViewInformationActivity.class);
+            //Passes the current item that should be displayed and where the call came from
             intent.putExtra("Position", position);
             intent.putExtra("Origin", "Grocery");
 
+            //Move to next screen with transition
             ActivityOptionsCompat options = getTransition(holder);
             mContext.startActivity(intent, options.toBundle());
         });
@@ -67,7 +74,8 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
         holder.btnRemove.setOnClickListener(v -> {
             Item item = items.get(position);
             groceryActions.removeFromGrocery(item);
-            ((GroceryListActivity)mContext).onResume();
+            //Refreshes the page
+            ((GroceryListActivity) mContext).onResume();
         });
 
         //Creates on click listener, moves to the edit screen, passes the item identifier
@@ -82,7 +90,7 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
         holder.btnBuyItem.setOnClickListener(v -> {
             try {
                 groceryActions.buyItem(groceryActions.getGroceryItem(position));
-                ((GroceryListActivity)mContext).onResume();
+                ((GroceryListActivity) mContext).onResume();
             } catch (InvalidInputException e) {
                 Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -109,30 +117,30 @@ public class GroceryListRecViewAdapter extends RecyclerView.Adapter<GroceryListR
     }
 
     //Use to pass in an array list
-    public void setItems(ArrayList<Item> items){
+    public void setItems(ArrayList<Item> items) {
         this.items = items;
         notifyDataSetChanged();
     }
 
-    private ActivityOptionsCompat getTransition(ViewHolder holder){
+    //Prepares the transition to next screen
+    private ActivityOptionsCompat getTransition(ViewHolder holder) {
         androidx.core.util.Pair<View, String> p1 = androidx.core.util.Pair.create(holder.name, "itemName");
         androidx.core.util.Pair<View, String> p2 = androidx.core.util.Pair.create(holder.quantityToBuy, "itemQuantityToBuy");
         androidx.core.util.Pair<View, String> p3 = androidx.core.util.Pair.create(holder.price, "itemPrice");
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((GroceryListActivity)mContext, p1, p2, p3);
-        return options;
+        return ActivityOptionsCompat.makeSceneTransitionAnimation((GroceryListActivity) mContext, p1, p2, p3);
     }
 
     //Holds and assigns the card view information
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         //Basic fields
-        private CardView parent;
-        private TextView name;
-        private TextView quantityToBuy;
-        private TextView price;
-        private ImageView downArrow, upArrow;
-        private LinearLayout expandedLayout;
-        private Button btnEdit, btnRemove, btnBuyItem;
+        private final CardView parent;
+        private final TextView name;
+        private final TextView quantityToBuy;
+        private final TextView price;
+        private final ImageView downArrow, upArrow;
+        private final LinearLayout expandedLayout;
+        private final Button btnEdit, btnRemove, btnBuyItem;
 
         //Finds and assigns the information
         public ViewHolder(@NonNull View itemView) {

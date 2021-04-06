@@ -2,23 +2,26 @@ package com.smartkitchen.tests.business;
 
 import org.junit.Test;
 
-import com.smartkitchen.business.IListValidation;
+
 import com.smartkitchen.business.InvalidInputException;
-import com.smartkitchen.business.ListValidation;
+
+import com.smartkitchen.business.interfaces.IListValidation;
+import com.smartkitchen.business.implementation.ListValidation;
+
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.Recipe;
 
 import java.util.ArrayList;
-import java.util.InvalidPropertiesFormatException;
+
 
 import static org.junit.Assert.*;
 
-public class ListValidationTest{
+public class ListValidationTest {
 
-    private IListValidation testListValidation = new ListValidation();
+    private final IListValidation testListValidation = new ListValidation();
 
     @Test
-    public void testListValidation(){
+    public void testListValidation() {
         System.out.println("\nStarting testListValidation constructor.");
 
         //Act
@@ -30,7 +33,7 @@ public class ListValidationTest{
     }
 
     @Test
-    public void testThresholdStatus(){
+    public void testThresholdStatus() {
         System.out.println("\nStarting testThresholdStatus.");
 
         //Act
@@ -42,7 +45,7 @@ public class ListValidationTest{
     }
 
     @Test
-    public void testThresholdStatusTrue(){
+    public void testThresholdStatusTrue() {
         System.out.println("\nStarting testThresholdStatus.");
 
         //Act
@@ -54,7 +57,7 @@ public class ListValidationTest{
     }
 
     @Test
-    public void testIsEmpty(){
+    public void testIsEmpty() {
         System.out.println("\nStarting testThresholdStatus.");
 
         //Act
@@ -65,16 +68,18 @@ public class ListValidationTest{
     }
 
     @Test
+
     public void testContainsItemInput() throws InvalidInputException {
+
         System.out.println("\nStarting testContainsItemInput.");
-        ArrayList<String> testAllergies = new ArrayList<String>();
+        ArrayList<String> testAllergies = new ArrayList<>();
         testAllergies.add("testAllergy");
 
         //Act 1 -- getName
         Item testItem = new Item("", -1, "", -1, -1);
         try {
             testListValidation.containsItemInputs(testItem);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -82,7 +87,7 @@ public class ListValidationTest{
         Item testItem1 = new Item(" ", -1, "", -1, -1);
         try {
             testListValidation.containsItemInputs(testItem1);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -90,7 +95,7 @@ public class ListValidationTest{
         Item testItem2 = new Item("sampleItem", 1, "", 1, 1, testAllergies, -1, 1);
         try {
             testListValidation.containsItemInputs(testItem2);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -98,7 +103,7 @@ public class ListValidationTest{
         Item testItem3 = new Item(" ", 1, " ", 0, -1);
         try {
             testListValidation.containsItemInputs(testItem3);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -106,14 +111,14 @@ public class ListValidationTest{
         Item testItem4 = new Item("sampleItem", 1, "sampleUnit", 1, 1, testAllergies, -1, 1);
         try {
             testListValidation.containsItemInputs(testItem4);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
         Item testItem5 = new Item("sampleItem", 1, "sampleUnit", 1, 1, testAllergies, 1, -1);
         try {
             testListValidation.containsItemInputs(testItem5);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -121,7 +126,7 @@ public class ListValidationTest{
         Item testItem6 = new Item("sampleItem", 1, "sampleUnit", 1, 1, testAllergies, 1, 1);
         try {
             testListValidation.containsItemInputs(testItem6);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
