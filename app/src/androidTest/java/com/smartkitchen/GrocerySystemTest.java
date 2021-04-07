@@ -20,6 +20,8 @@ import com.smartkitchen.objects.Item;
 import com.smartkitchen.persistence.hsqldb.GroceryPersistenceDB;
 import com.smartkitchen.persistence.hsqldb.InventoryPersistenceDB;
 
+import static org.junit.Assert.*;
+
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static androidx.test.espresso.Espresso.pressBack;
@@ -30,7 +32,6 @@ import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.core.IsAnything.anything;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -45,11 +46,15 @@ public class GrocerySystemTest{
 
     @Before
     public void setupDatabase(){
+        inventorydb = (InventoryPersistenceDB) Services.getInventoryPersistence();
+        grocerydb = (GroceryPersistenceDB) Services.getGroceryPersistence();
         groceryList = Services.getGroceryPersistence().getGroceryList();
     }
 
     @Test
     public void addRemoveGroceryTest() throws InterruptedException{ // User Story: Add Items to Grocery List
+        int beforeGrocerySize = 0;
+
         // navigate to Grocery List screen
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
         onView(withText("Grocery List")).perform(click());
@@ -62,12 +67,19 @@ public class GrocerySystemTest{
         onView(withId(R.id.inputGroceryItemUnits)).perform(typeText("testUnits"));
         onView(withId(R.id.btnAddGroceryItem)).perform(scrollTo(), click());
         Thread.sleep(3000);
+        beforeGrocerySize = grocerydb.getGroceryList().size();
+
+        // check if test grocery item got added
+        assertEquals(grocerydb.getGroceryList().get(2).getName(), "testItem");
 
         // remove newly added item
         onView(withId(R.id.groceryListRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.groceryDownArrow)));
         Thread.sleep(1000);
         onView(withId(R.id.groceryListRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.btnRemoveGroceryItem)));
         Thread.sleep(1000);
+
+        // check if testItem got removed from the db
+        assertEquals(beforeGrocerySize-1, grocerydb.getGroceryList().size());
     }
 
     @Test
@@ -93,6 +105,9 @@ public class GrocerySystemTest{
         onView(withId(R.id.editGroceryQuantity)).perform(clearText());
         onView(withId(R.id.editGroceryQuantity)).perform(typeText("100"));
         onView(withId(R.id.btnEditGrocerySubmit)).perform(scrollTo(), click());
+
+        // check if the item got edited
+        assertEquals(grocerydb.getGroceryList().get(2).getName(), "editedTestItem");
 
         // view edited item information
         onView(withId(R.id.groceryListRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("editedTestItem")), click()));
@@ -124,6 +139,9 @@ public class GrocerySystemTest{
         onView(withId(R.id.groceryListRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.groceryDownArrow)));
         onView(withId(R.id.groceryListRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.btnBuyItem)));
         Thread.sleep(3000);
+
+        // check inventorydb if testItem got added
+        assertEquals(inventorydb.getInventoryList().get(2).getName(), "testItem");
 
         // navigate to Inventory List screen
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
