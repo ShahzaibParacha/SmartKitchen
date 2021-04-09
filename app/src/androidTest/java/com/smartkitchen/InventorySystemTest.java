@@ -1,6 +1,5 @@
 package com.smartkitchen;
 
-import androidx.test.espresso.Espresso;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -8,7 +7,6 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
 import android.widget.EditText;
-
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -50,7 +48,6 @@ public class InventorySystemTest{
     @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
 
-
     @Before
     public void setupDatabase(){
         inventorydb = (InventoryPersistenceDB) Services.getInventoryPersistence();
@@ -58,13 +55,16 @@ public class InventorySystemTest{
         inventoryList = inventorydb.getInventoryList();
     }
 
-    // ---------------- AUTOMATED ACCEPTANCE TESTS ----------------------
     @Test
     public void addRemoveInventoryItemTest() throws InterruptedException{ // User Story: Add Items to the Current Inventory AND Remove Items from the Current Inventory
         int beforeInvSize = 0;
 
         onView(withId(R.id.btnGoToAddInvActivity)).perform(click());
 
+        // USER STORY: View Current Inventory
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/13
+        // USER STORY: Add Items to the Current Inventory
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/15
         // add new item
         onView(withId(R.id.inputInventoryItemName)).perform(typeText("testItem"));
         onView(withId(R.id.inputInventoryItemQuantity)).perform(typeText("1"));
@@ -75,6 +75,8 @@ public class InventorySystemTest{
         // check if our test item entry is actually added into the inventorydb
         assertEquals(inventorydb.getInventoryList().get(2).getName(), "testItem");
 
+        // USER STORY: Remove Items from the Current Inventory
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/16
         // remove the newly added item
         onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.itemDownArrow)));
         Thread.sleep(1000);
@@ -85,6 +87,9 @@ public class InventorySystemTest{
         assertEquals(beforeInvSize-1, inventorydb.getInventoryList().size());
     }
 
+
+    // USER STORY: Edit Items in the Current Inventory
+    // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/17
     @Test
     public void editInventoryItemTest() throws InterruptedException{ // User Story: Edit Items in the Current Inventory
         onView(withId(R.id.btnGoToAddInvActivity)).perform(click());
@@ -120,6 +125,8 @@ public class InventorySystemTest{
         onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("editedTestItem")), TestViewAction.clickChildviewWithId(R.id.btnRemoveInvItem)));
     }
 
+    // USER STORY: Set Automatic Adding Threshold
+    // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/21
     @Test
     public void setThresholdTest() throws InterruptedException{ // User Story: Set Automatic Adding Threshold
         onView(withId(R.id.btnGoToAddInvActivity)).perform(click());
@@ -150,8 +157,10 @@ public class InventorySystemTest{
     }
 
 
+    // USER STORY: Ask User for Quantity to Buy
+    // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/71
     @Test
-    public void buyTest() throws InterruptedException { // User Story: Ask User for Quantity to Buy
+    public void buyTest() throws InterruptedException {
         // navigate to Grocery List screen -- TO VERIFY THAT THE TEST ITEM IS NOT IN GROCERY LIST
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
         onView(withText("Grocery List")).perform(click());
@@ -170,6 +179,8 @@ public class InventorySystemTest{
         onView(withId(R.id.inputInventoryItemUnits)).perform(typeText("testUnits"));
         onView(withId(R.id.btnAddInventoryItem)).perform(scrollTo(), click());
 
+        // USER STORY: Add Item from Inventory List to Grocery List
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/69
         // add to Grocery List
         onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.itemDownArrow)));
         onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.btnAddInvItemToGrocery)));
@@ -205,9 +216,16 @@ public class InventorySystemTest{
     @Test
     public void editValuesTest() throws InterruptedException{
         // User Story: Edit and View Price of Items
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/67
+
         // User Story: Add/Edit Amount of Calories
+        //https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/73
+
         // User Story: Add/Edit Allergy Information
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/74
+
         // User Story: Edit the Thresholds
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/22
 
         onView(withId(R.id.btnGoToAddInvActivity)).perform(click());
 
@@ -251,6 +269,8 @@ public class InventorySystemTest{
         assertEquals(inventorydb.getInventoryList().get(2).getThresholdQuantity(), 3);
         assertEquals(inventorydb.getInventoryList().get(2).getCaloriesPerUnit(), 50);
 
+        // USER STORY: See More Information About the Item
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/75
         // view edited item information
         onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), click()));
         Thread.sleep(3000);
@@ -263,6 +283,4 @@ public class InventorySystemTest{
         onView(withId(R.id.itemRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testItem")), TestViewAction.clickChildviewWithId(R.id.btnRemoveInvItem)));
         Thread.sleep(1000);
     }
-    // --------------------------------------------------------------------
-
 }

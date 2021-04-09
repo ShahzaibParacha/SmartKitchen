@@ -50,11 +50,15 @@ public class RecipeSystemTest{
 
     @Test
     public void addRemoveRecipeTest() throws InterruptedException{
+        // USER STORY: View List of Recipes
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/122
         // navigate to Recipes screen
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
         onView(withText("Recipes")).perform(click());
         Thread.sleep(2000);
 
+        // USER STORY: Add Recipe
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/130
         // add new Recipe
         // add recipe name
         onView(withId(R.id.btnGoToAddRecipeActivity)).perform(click());
@@ -79,6 +83,8 @@ public class RecipeSystemTest{
         // assertions -- check if new recipe has been added
         assertEquals(recipedb.getRecipeList().get(1).getName(), "testRecipeName");
 
+        // USER STORY: Edit Recipe
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/138
         // edit recipe
         // name
         onView(withId(R.id.recipesRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testRecipeName")), TestViewAction.clickChildviewWithId(R.id.itemDownArrow)));
@@ -87,6 +93,8 @@ public class RecipeSystemTest{
         onView(withHint("Name")).perform(typeText("editedTestRecipe"));
         Espresso.closeSoftKeyboard();
 
+        // USER STORY: Add/Remove Ingredient
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/140
         // add/remove ingredient
         onView(withId(R.id.btnRemoveIngredient)).perform(click()); // remove ingredient
         onView(withId(R.id.btnAddIngredient)).perform(click());
@@ -96,6 +104,8 @@ public class RecipeSystemTest{
         Espresso.closeSoftKeyboard();
         onView(withId(android.R.id.button1)).perform(click());
 
+        // USER STORY: Edit Ingredient
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/143
         // edit ingredient
         onView(withId(R.id.btnEditIngredient)).perform(click());
         onView(withText("testIngredient")).perform(clearText());
@@ -103,6 +113,8 @@ public class RecipeSystemTest{
         Espresso.closeSoftKeyboard();
         onView(withId(android.R.id.button1)).perform(click());
 
+        // USER STORY: Add/Remove Instruction
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/144
         // add/remove instruction
         onView(withId(R.id.btnRemoveInstruction)).perform(scrollTo(), click()); // remove instruction
         onView(withId(R.id.btnAddInstruction)).perform(scrollTo(), click());
@@ -110,6 +122,8 @@ public class RecipeSystemTest{
         Espresso.closeSoftKeyboard();
         onView(withId(android.R.id.button1)).perform(click());
 
+        // USER STORY: Edit Instruction
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/145
         // edit instruction
         onView(withId(R.id.btnEditInstruction)).perform(click());
         onView(withText("testInstruction")).perform(clearText());
@@ -153,6 +167,8 @@ public class RecipeSystemTest{
         onView(withId(android.R.id.button1)).perform(click());
         onView(withId(R.id.btnSubmitAddRecipe)).perform(scrollTo(), click()); // click submit -- create recipe
 
+        // USER STORY: Add Missing Ingredients to Grocery List
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/148
         // at this point: not enough ingredients --> add them to grocery list
         onView(withId(R.id.recipesRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testRecipeName")), TestViewAction.clickChildviewWithId(R.id.itemDownArrow)));
         onView(withId(R.id.recipesRecView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("testRecipeName")), TestViewAction.clickChildviewWithId(R.id.btnAddToGroceryList)));
@@ -171,6 +187,10 @@ public class RecipeSystemTest{
         onView(withText("Current Inventory")).perform(click());
         Thread.sleep(2000);
 
+        // USER STORY: See Available Ingredients
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/152
+        // USER STORY: Make Recipe
+        // https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/issues/150
         // go back to Recipes to make the recipe
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
         onView(withText("Recipes")).perform(click());
