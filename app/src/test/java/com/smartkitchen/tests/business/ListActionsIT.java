@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.smartkitchen.business.implementation.AllergyActions;
 import com.smartkitchen.business.implementation.GroceryActions;
 import com.smartkitchen.business.implementation.InventoryActions;
 import com.smartkitchen.business.implementation.ListActions;
