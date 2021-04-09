@@ -46,13 +46,12 @@ public class RecipeActionsTest{
 
         Recipe testRecipe = new Recipe(TEST_NAME, TEST_INGREDIENTS, TEST_INGREDIENT_QUANT, TEST_INGREDIENT_UNITS, TEST_INSTRUCTIONS);
 
-        //Mockito.when(mockTarget.getRecipe(0)).thenReturn(testRecipe);
 
         testTarget.addToRecipes(testRecipe);
         mockTarget.addToRecipes(testRecipe);
         Mockito.verify(mockTarget).addToRecipes(testRecipe);
 
-        //assertEquals(testTarget.getRecipe(0), testRecipe);
+        assertEquals(testTarget.getRecipeList().get(0), testRecipe);
 
         testTarget.removeRecipe(testRecipe);
         mockTarget.removeRecipe(testRecipe);
@@ -76,8 +75,6 @@ public class RecipeActionsTest{
 
         Recipe testRecipe = new Recipe(TEST_NAME, TEST_INGREDIENTS, TEST_INGREDIENT_QUANT, TEST_INGREDIENT_UNITS, TEST_INSTRUCTIONS);
 
-        //Mockito.when(mockTarget.getRecipe(0)).thenReturn(testRecipe);
-
         testTarget.addToRecipes(testRecipe);
         mockTarget.addToRecipes(testRecipe);
         Mockito.verify(mockTarget).addToRecipes(testRecipe);
@@ -86,7 +83,7 @@ public class RecipeActionsTest{
         mockTarget.updateRecipe(testRecipe);
         Mockito.verify(mockTarget).updateRecipe(testRecipe);
 
-        //assertEquals(testTarget.getRecipe(0), testRecipe);
+        assertEquals(testTarget.getRecipeList().get(0), testRecipe);
     }
 
     @Test
@@ -107,14 +104,11 @@ public class RecipeActionsTest{
 
         Recipe testRecipe = new Recipe(TEST_NAME, TEST_INGREDIENTS, TEST_INGREDIENT_QUANT, TEST_INGREDIENT_UNITS, TEST_INSTRUCTIONS);
 
-        //Mockito.when(mockTarget.getRecipe(0)).thenReturn(testRecipe);
-
         testTarget.addToRecipes(testRecipe);
         mockTarget.addToRecipes(testRecipe);
         Mockito.verify(mockTarget).addToRecipes(testRecipe);
 
         assertEquals(testTarget.getRecipeList().get(0), testRecipe);
-        //assertEquals(testTarget.getRecipe(0), testRecipe);
     }
 
     @Test
