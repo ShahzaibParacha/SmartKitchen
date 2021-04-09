@@ -10,7 +10,9 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-public class AllergyActionsTest{
+//just copied over the unit test since this layer does not interact with the persistence layer
+//reason: code coverage for Integration Tests automation
+public class AllergyActionsIT{
     private AllergyActions testTarget;
     Object nuts, soy, lactose, gluten, fish, eggs;
 

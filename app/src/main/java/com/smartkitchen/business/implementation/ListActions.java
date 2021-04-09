@@ -14,9 +14,10 @@ public class ListActions implements IListActions {
 
     private final IListValidation validation;
 
+    // empty constructor: do nothing
     public ListActions(){
         validation = new ListValidation();
-    } // empty constructor: do nothing
+    }
 
     //Validates inputs when an inventory or grocery item is edited
     @Override

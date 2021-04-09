@@ -2,8 +2,6 @@ package com.smartkitchen.tests.business;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.After;
-import org.mockito.Mockito;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,23 +11,14 @@ import com.smartkitchen.business.InvalidInputException;
 import com.smartkitchen.objects.Item;
 import com.smartkitchen.objects.Recipe;
 
-import java.io.File;
-import java.io.IOException;
-
-import com.smartkitchen.business.implementation.GroceryActions;
 import com.smartkitchen.business.implementation.InventoryActions;
-import com.smartkitchen.business.implementation.ListActions;
 import com.smartkitchen.business.implementation.RecipeActions;
 
-import com.smartkitchen.persistence.hsqldb.GroceryPersistenceDB;
 import com.smartkitchen.persistence.hsqldb.InventoryPersistenceDB;
 import com.smartkitchen.persistence.hsqldb.RecipePersistenceDB;
 import com.smartkitchen.tests.utils.TestUtils;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 public class RecipeActionsIT{
     private InventoryActions inventoryActions;
@@ -62,14 +51,14 @@ public class RecipeActionsIT{
 
         Recipe testRecipe = new Recipe(TEST_NAME, TEST_INGREDIENTS, TEST_INGREDIENT_QUANT, TEST_INGREDIENT_UNITS, TEST_INSTRUCTIONS);
 
-
         testTarget.addToRecipes(testRecipe);
         assertEquals(testTarget.getRecipeList().get(1).getName(), testRecipe.getName());
-        //testTarget.removeRecipe(testTarget.getRecipe(1));
+        testTarget.removeRecipe(testTarget.getRecipeList().get(1));
     }
 
     @Test
     public void testUpdateRecipe() throws InvalidInputException{
+        RecipeActions testTarget1 = new RecipeActions();
         String TEST_NAME = "testName";
         ArrayList<String> TEST_INGREDIENTS = new ArrayList<String>();
         ArrayList<String> TEST_INGREDIENT_QUANT = new ArrayList<String>();
@@ -145,10 +134,5 @@ public class RecipeActionsIT{
         testTarget.refreshAvailability(testTarget.getRecipeList());
     }
 
-    @After
-    public void tearDown(){
-        //reset db
-        this.tempDB.delete();
-    }
 
 }

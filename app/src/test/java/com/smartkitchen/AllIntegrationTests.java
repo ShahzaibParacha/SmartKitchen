@@ -9,6 +9,7 @@ import com.smartkitchen.tests.business.*;
 @Suite.SuiteClasses({
         ListActionsIT.class,
         ListValidationIT.class,
+        AllergyActionsIT.class,
         RecipeActionsIT.class,
 })
 public class AllIntegrationTests { }

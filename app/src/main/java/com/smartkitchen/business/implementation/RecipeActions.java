@@ -35,9 +35,7 @@ public class RecipeActions implements IRecipeActions {
         inventoryActions = new InventoryActions(inventorydb);
     }
 
-
     //Adds a recipe to the db, also sets the total calories
-
     @Override
     public void addToRecipes(Recipe recipe) throws InvalidInputException {
         validation.containsRecipeInputs(recipe);

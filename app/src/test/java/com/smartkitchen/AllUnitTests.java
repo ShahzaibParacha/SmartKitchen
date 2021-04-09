@@ -13,5 +13,6 @@ import com.smartkitchen.tests.business.*;
         ListValidationTest.class,
         ListActionsTest.class,
         RecipeActionsTest.class,
+        AllergyActionsTest.class,
 })
 public class AllUnitTests { }

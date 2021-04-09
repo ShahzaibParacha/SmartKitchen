@@ -272,6 +272,23 @@ public class ListActionsTest {
 
         System.out.println("Finished getGroceryListTotal");
     }
+
+    @Test
+    public void testStringToList(){
+        System.out.println("\nStarting testStringToList");
+
+        String testString = "this, is, a, test, string";
+        String resultString;
+
+        ArrayList<String> testArray = listActions.stringToList(testString);
+
+        resultString = listActions.listToString(testArray);
+
+        assertEquals(resultString, testString);
+
+        System.out.println("end testStringToList");
+
+    }
 }
 
 

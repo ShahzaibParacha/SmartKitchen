@@ -1,5 +1,7 @@
 package com.smartkitchen.tests.business;
 
+import android.widget.CheckBox;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.smartkitchen.business.implementation.AllergyActions;
 import com.smartkitchen.business.implementation.GroceryActions;
 import com.smartkitchen.business.implementation.InventoryActions;
 import com.smartkitchen.business.implementation.ListActions;
@@ -62,7 +65,6 @@ public class ListActionsIT {
         assertEquals(groceryTestTarget.getGroceryItem(2).getName(), testItem.getName());
         assertEquals(invTestTarget.getInventoryItem(2).getName(), testItem.getName());
 
-
         Item testItem2 = new Item("sampleItem", 1, "", 1, 1, testAllergies, 1, 1);
 
         try {
@@ -87,7 +89,6 @@ public class ListActionsIT {
         testAllergies.add("testAllergy");
 
         Item testItem = new Item("sampleItem", 1, "testUnit", 1, 1, testAllergies, 1, 1);
-        //testItem.setId(2);
         try {
             groceryTestTarget.addToGrocery(testItem);
             invTestTarget.addToInventory(testItem);
@@ -155,7 +156,6 @@ public class ListActionsIT {
         System.out.print("Finished editValidationTest");
     }
 
-    //Tests the get list functionality
     @Test
     public void getDuplicateByNameTest(){
         System.out.println("\nStarting getDuplicateByNameTest");
@@ -227,7 +227,6 @@ public class ListActionsIT {
         System.out.println("Starting buyItemTest");
     }
 
-    //Testing the buy all items method
     @Test
     public void buyAllTest() {
         System.out.println("\nStarting buyAllTest");
@@ -248,7 +247,6 @@ public class ListActionsIT {
         System.out.println("Finished buyAllTest");
     }
 
-    //Testing removing an item from either list
     @Test
     public void removeTest() {
         System.out.println("\nStarting removeTest");
@@ -271,7 +269,6 @@ public class ListActionsIT {
         System.out.println("Finished removeTest");
     }
 
-    //Testing the is in list method
     @Test
     public void isInListTest() {
         System.out.println("\nStarting isInListTest");
@@ -283,9 +280,9 @@ public class ListActionsIT {
         System.out.println("Finished isInListTest");
     }
 
-    //Testing the get grocery list total method
     @Test
     public void getGroceryListTotalTest() {
+        GroceryActions testTarget1 = new GroceryActions();
         System.out.println("\nStarting getGroceryListTotal");
         ArrayList<String> testAllergies = new ArrayList<>();
         testAllergies.add("testAllergy");
