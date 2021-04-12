@@ -1,25 +1,24 @@
 package com.smartkitchen.objects;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+//Object class for food items, used in inventory and grocery list
 public class Item {
-    private final double DEFAULT_THRESHOLD_CONST = 0.2;
 
     //Basic fields
     private String name;
     private int quantity;               // quantity in inventory
     private String units;
     private int quantityToBuy;          // quantity in grocery
-    private int thresholdQuantity;
+    private int thresholdQuantity;      // quantity at which to restock
 
-    //ADDITIONS
+    //Additional Fields
     private ArrayList<String> allergies;
     private int caloriesPerUnit;
     private double pricePerUnit;
     private int id;
 
-    //Constructor
+    //Main Constructor
     public Item(String name, int quantity, String units, int quantityToBuy, int thresholdQuantity,
                 ArrayList<String> allergies, int caloriesPerUnit, double pricePerUnit) {
         this.name = name;
@@ -32,7 +31,7 @@ public class Item {
         this.pricePerUnit = pricePerUnit;
     }
 
-    //Secondary Constructor
+    //Simpler Constructor, used for tests
     public Item(String name, int quantity, String units, int quantityToBuy, int thresholdQuantity) {
         this.name = name;
         this.quantity = quantity;
@@ -54,7 +53,7 @@ public class Item {
         return quantity;
     }
 
-    public void setQuantity(int quantity){
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -67,8 +66,7 @@ public class Item {
     }
 
     //Returns a string of the quantity and units
-
-    public String getQuantityString(){
+    public String getQuantityString() {
         return "" + quantity + " " + units;
     }
 
@@ -80,19 +78,25 @@ public class Item {
         this.units = units;
     }
 
-    public int getQuantityToBuy(){
+    public int getQuantityToBuy() {
         return quantityToBuy;
     }
 
-    public void setQuantityToBuy(int quantityToBuy){
+    public void setQuantityToBuy(int quantityToBuy) {
         this.quantityToBuy = quantityToBuy;
     }
 
-    public String getQuantityToBuyString() { return "" + quantityToBuy + " " + units; }
+    public String getQuantityToBuyString() {
+        return "" + quantityToBuy + " " + units;
+    }
 
-    public int getThresholdQuantity() { return thresholdQuantity; }
+    public int getThresholdQuantity() {
+        return thresholdQuantity;
+    }
 
-    public void setThresholdQuantity(int thresholdQuantity) { this.thresholdQuantity = thresholdQuantity; }
+    public void setThresholdQuantity(int thresholdQuantity) {
+        this.thresholdQuantity = thresholdQuantity;
+    }
 
     public ArrayList<String> getAllergies() {
         return allergies;
@@ -119,7 +123,8 @@ public class Item {
     }
 
     // method could be used as the default value for when user doesn't input a threshold value
-    public int calculateDefaultThreshold(){
-        return (int)(quantity*DEFAULT_THRESHOLD_CONST);
+    public int calculateDefaultThreshold() {
+        double DEFAULT_THRESHOLD_CONST = 0.2;
+        return (int) (quantity * DEFAULT_THRESHOLD_CONST);
     }
 }

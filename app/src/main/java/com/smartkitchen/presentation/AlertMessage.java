@@ -9,19 +9,23 @@ import android.text.InputType;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.smartkitchen.business.GroceryActions;
-import com.smartkitchen.business.IGroceryActions;
-import com.smartkitchen.business.IListActions;
+import com.smartkitchen.business.implementation.GroceryActions;
+import com.smartkitchen.business.interfaces.IGroceryActions;
+import com.smartkitchen.business.interfaces.IListActions;
 import com.smartkitchen.business.InvalidInputException;
-import com.smartkitchen.business.ListActions;
+import com.smartkitchen.business.implementation.ListActions;
 import com.smartkitchen.objects.Item;
+import com.smartkitchen.presentation.inventory.CurrentInventoryActivity;
 
+//Takes user input when an item is automatically being added to grocery via threshold method
 public class AlertMessage {
+
+    //Access to relevant business layer methods
     private static final IListActions listActions = new ListActions();
     private static final IGroceryActions groceryActions = new GroceryActions();
 
     //Builds, displays and takes input
-    public static void showDialog(Context context, Item item, boolean returnToMain){
+    public static void showDialog(Context context, Item item, boolean returnToMain) {
 
         //Creates the object and sets the text
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -42,7 +46,7 @@ public class AlertMessage {
         //Implements the submit button
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
             //Checks for valid input before continuing
-            if(!input.getText().toString().equals("")) {
+            if (!input.getText().toString().equals("")) {
                 //Take the input and modify item object
                 item.setQuantityToBuy(Integer.parseInt(input.getText().toString()));
                 //If the item is not in the grocery list yet, add it in
@@ -53,9 +57,8 @@ public class AlertMessage {
                     } catch (InvalidInputException e) {
                         System.out.println(e.getMessage());
                     }
-                }
-                else{
-                    duplicate.setQuantityToBuy(duplicate.getQuantityToBuy()+item.getQuantityToBuy());
+                } else {
+                    duplicate.setQuantityToBuy(duplicate.getQuantityToBuy() + item.getQuantityToBuy());
                     groceryActions.updateGroceryItem(duplicate);
                 }
                 //If the function needs to return to the inventory screen, do that here
@@ -67,7 +70,7 @@ public class AlertMessage {
                 dialog.dismiss();
             }
             //If not valid input, show toast message
-            else{
+            else {
                 Toast.makeText(context, "Please enter valid quantity", Toast.LENGTH_SHORT).show();
             }
         });
