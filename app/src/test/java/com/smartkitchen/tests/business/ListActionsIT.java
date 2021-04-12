@@ -298,13 +298,4 @@ public class ListActionsIT {
 
         System.out.println("Finished getGroceryListTotal");
     }
-
-    //Dismantles the testing environment
-    @After
-    public void tearDown() {
-        //reset db
-        this.tempDB.delete();
-    }
-
-
 }
