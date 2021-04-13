@@ -12,6 +12,10 @@
     <string name="defaultViewInfoTitle">Item Information</string>
     <string name="titleAddToInv">Add New Item to Inventory</string>
     <string name="titleAddToGrocery">Add New Item to Grocery List</string>
+    <string name="titleAddRecipe">Add Recipe</string>
+    <string name="titleEditRecipe">Edit Recipe</string>
+    <string name="titleIngredients">Ingredients</string>
+    <string name="titleInstructions">Instructions</string>
 
     <!--Default List Values-->
     <string name="defaultName">Item Name</string>
@@ -19,6 +23,11 @@
     <string name="defaultPrice">Item Price</string>
     <string name="defaultIsPossible">Has All Ingredients:</string>
     <string name="defaultPossibleAnswer">Correct</string>
+    <string name="defaultTotalCalories">Total Calories</string>
+    <string name="defaultTotalGroceryPrice">Total Sum</string>
+    <string name="defaultIngredient">Ingredient</string>
+    <string name="defaultInstruction">Instruction</string>
+    <string name="defaultInstructionNumber">1.</string>
 
     <!--Field Labels-->
     <string name="labelName">Name:</string>
@@ -29,6 +38,8 @@
     <string name="labelPrice">Price per Unit:</string>
     <string name="labelCalories">Calories per Unit:</string>
     <string name="labelAllergies">Allergies:</string>
+    <string name="labelTotalCalories">Total Calories:</string>
+    <string name="labelTotalGroceryPrice">Total Price of Grocery List</string>
 
     <!--Checkbox Labels-->
     <string name="checkLactose">Contains Lactose</string>
@@ -57,6 +68,16 @@
     <string name="btnAddToGrocery">Add to Grocery List</string>
     <string name="btnBackToList">Back to List</string>
     <string name="btnMakeRecipe">Make</string>
+    <string name="btnAddIngredient">Add Ingredient</string>
+    <string name="btnAddInstruction">Add Instruction</string>
+    <string name="btnBuyAll">Buy All</string>
+    <string name="btnMinus">-</string>
+    <string name="btnAddToGroceryList">Add To Grocery List</string>
+
+    <!--Menu Items-->
+    <string name="menuInventory">Current Inventory</string>
+    <string name="menuGrocery">Grocery List</string>
+    <string name="menuRecipes">Recipes</string>
 
     <!--Other-->
     <string name="enableThresholdText">Enable automatic adding of item to grocery list below given threshold?</string>

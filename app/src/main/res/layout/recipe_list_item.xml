@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="25"
-                android:text="Add To Grocery List"
+                android:text="@string/btnAddToGroceryList"
                 android:backgroundTint="@color/redColour3"/>
 
             <Button

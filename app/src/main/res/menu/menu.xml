@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/menuCurrentInventory"
-        android:title="Current Inventory"/>
+        android:title="@string/menuInventory"/>
 
     <item android:id="@+id/menuGroceryList"
-        android:title="Grocery List"/>
+        android:title="@string/menuGrocery"/>
 
     <item android:id="@+id/menuRecipes"
-        android:title="Recipes"/>
+        android:title="@string/menuRecipes"/>
 
 </menu>

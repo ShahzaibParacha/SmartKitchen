@@ -97,7 +97,7 @@
             <Button
                 android:layout_height="wrap_content"
                 android:layout_weight="15"
-                android:text="-"
+                android:text="@string/btnMinus"
                 android:backgroundTint="@color/redColour3"
                 android:layout_margin="5dp"
                 android:layout_width="0dp"
