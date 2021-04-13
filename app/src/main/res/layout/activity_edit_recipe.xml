@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/redColour1">
     <ScrollView
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -32,7 +30,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Edit Recipe"
+                        android:text="@string/titleEditRecipe"
                         android:textSize="36sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +66,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
-                        android:text="Total Calories:"
+                        android:text="@string/labelTotalCalories"
                         android:textSize="18sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -76,7 +74,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total Calories"
+                        android:text="@string/defaultTotalCalories"
                         android:textSize="18sp"
                         app:layout_constraintTop_toTopOf="@id/textView2"
                         app:layout_constraintBottom_toBottomOf="@id/textView2"
@@ -109,7 +107,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ingredients"
+                        android:text="@string/titleIngredients"
                         android:textSize="36sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -129,7 +127,7 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Add Ingredient"
+                        android:text="@string/btnAddIngredient"
                         app:layout_constraintTop_toBottomOf="@id/ingredientsRecView"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -157,7 +155,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Instructions"
+                        android:text="@string/titleInstructions"
                         android:textSize="36sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -184,7 +182,7 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Add Instruction"
+                        android:text="@string/btnAddInstruction"
                         android:id="@+id/btnAddInstruction"
                         app:layout_constraintTop_toBottomOf="@id/relLayout"
                         app:layout_constraintStart_toStartOf="parent"
@@ -231,7 +229,6 @@
                     app:layout_constraintGuide_percent="0.5"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
