@@ -24,11 +24,10 @@ One of the features that was cut/re-prioritized was one of our features from ite
 Acceptance test/end-to-end
 ==========================
 
-One of the system tests we wrote was for adding an item to the inventory list. In that test, we made sure that the item was added to the persistent database. This was done by having assertions after the add functions to confirm the item was added properly. To avoid flakiness in the test, we made sure that the items we added were simple enough to pass as well as adding a cleanup portion to remove the added test item so as to not conflict with other tests.
+One of the system tests we wrote was for adding an item to the inventory list. In that test, we made sure that the item was added to the persistent database. This was done by having assertions after the add functions to confirm that the item was added properly. To avoid flakiness in the test, we made sure that the items we added were simple enough to pass as well as adding a cleanup portion to remove the added test item so as to not conflict with other tests.
 
 Link(s): 
-- https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/blob/master/app/src/test/java/com/smartkitchen/tests/business/RecipeActionsIT.java
-- https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/blob/master/app/src/test/java/com/smartkitchen/tests/business/RecipeActionsTest.java
+https://code.cs.umanitoba.ca/3350-winter-2021-a01/refrigator-tracker-group-10/-/blob/master/app/src/androidTest/java/com/smartkitchen/InventorySystemTest.java#L59
 
 Acceptance test, untestable
 ===============
