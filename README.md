@@ -32,7 +32,7 @@ The branching strategy for the iteration can be found [here](branching_strategy.
 
 ## Architecture
 
-The architecture diagram for the project can be found [here](ARCHITECTIRE.md).
+The architecture diagram for the project can be found [here](ARCHITECTURE.md).
 
 ### Worksheet
 The worksheet to iteration 1 can be found [here](worksheet.md).\
