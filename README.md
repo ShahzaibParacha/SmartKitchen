@@ -1,26 +1,38 @@
 # SmartKitchen Group 10
 
-# SmartKitchen Vision Statement
+## Purpose
+The Smart Kitchen application is a list management system for your food, grocery list, and recipes. It allows you to easily input and view all of the food you currently own, as well as add food to your grocery list or use it when making a recipe.
 
-SmartKitchen is a food inventory and grocery list manager for Android devices. This application will assist users in managing and tracking the food they currently have in their kitchen. In addition to tracking their kitchen's current inventory, the application will also assist the user in their next shopping trip by providing a simple, easy to use grocery list feature that will automatically add items as they run low in the user’s current inventory. The application aims to simplify and streamline average, day-to-day kitchen routines by providing users with functions to keep track of their current pantry, as well as options for a better and easier grocery shopping experience and recipe management.
- 
-SmartKitchen will have features that focus on assisting people in managing their inventory easily. The user will be able to add, remove and edit items with ease. The users will be able to set thresholds for when items should automatically be added to their grocery list, manage what quantities of an item they want to buy, and jot down any other information they might want about an item. The application will help users in managing their expenses by tracking the price of each individual item, keeping a running total of the current price of their grocery list, and alerting users when it might be time to go shopping. This will save a ton of time for users by removing the need to write down an entire list from scratch. In addition, users will be able to use the application as a virtual cookbook, enabling them to write, copy, and share recipes to other users. With all these features in one place, a user can easily check a recipe, determine if they have the ingredients they need, and if not; directly add them to the cart. 
+## How To Run
+The user needs Android Studio and the Emulator AVD Nexus 7 API 30. 
+- Open Android Studio
+- Import the project
+- Let Android Studio index all the files
+- Set the device to the Nexus 7 API 30
+- Build and run the application
 
-Users who are keeping track of their diet will also see use in the application. The application will have a feature of adding nutritional facts on its items (e.g. calories, fat, etc.) which may be used by the user when they are keeping track of their nutrient intake. This health information can also be found in the recipes that the users create, making health conscious eating simple and easy to manage.
- 
-SmartKitchen targets users who frequent the kitchen and make food on a regular basis. It is not focused on satisfying the needs of huge commercial establishments such as big restaurants. However, small scale restaurants may find benefit in using the application as it can assist them in keeping track of their inventory. For regular users, the application will be useful because it will provide an easier way to manage their pantry and save time when planning what to cook for the day or the week. SmartKitchen will be the centralized hub for any productive kitchen.
- 
-The main success criteria that we are looking at is the number of users that are accessing the app. Another measure of success is the number of total recipes that are being added to the app. This measure can give us an indication of the current state of the app’s progression. The number of times recipes are used and the total number of items that were added or removed from the pantry is another measure, as it lets us know that the users are using the app's features frequently. 
+The user can also just use the apk linked in the release. Just drag and drop the apk into the emulator to install the app.
 
-### Website
+## How To Use
+There are three main screens that can be accessed via the menu in the top right:
+- Current Inventory
+- Grocery List
+- Recipes
+
+All of these screens have very similar functionality. Press the ```+``` button in the bottom right of the screen to add an item to the list. Fill in the required fields then press submit, and the item will be added to the list. Items can then be edited or removed from the list screen. In the inventory screen, if the quantity is set less than the threshold, the app will prompt the user to add the item to the grocery list upon submitting.
+
+When adding a recipe, the app will try to match ingredients to current inventory items with matching names. This can then let the user know if enough of the ingredient is in the current inventory. The user can then add all ingredients to the grocery list, or deduct the ingredients from the inventory by clicking either the ```Add To Grocery``` or ```Make``` buttons.
+
+## Website
 Our website is hosted as an Heroku app here: https://smartkitchen-g10.herokuapp.com/. We suggest viewing it there for the beautiful CSS and Dynamic Routing experience. However, we have added all the relevant files in the website folder. To view the Homepage, navigate to ```website/out/index.html```.
 
-### Branching Strategy
+## Branching Strategy
 
 The branching strategy for the iteration can be found [here](branching_strategy.md).
 
-### Architecture
-![Architecure](architecture.png "Architecture")
+## Architecture
+
+The architecture diagram for the project can be found [here](ARCHITECTIRE.md).
 
 ### Worksheet
 The worksheet to iteration 1 can be found [here](worksheet.md).\
