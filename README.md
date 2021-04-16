@@ -28,7 +28,7 @@ Our website is hosted as an Heroku app here: https://smartkitchen-g10.herokuapp.
 
 ## Branching Strategy
 
-The branching strategy for the iteration can be found [here](branching_strategy.md).
+The branching strategy for the iteration can be found [here](Documents/branching_strategy.md).
 
 ## Architecture
 
